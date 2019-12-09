@@ -1,0 +1,129 @@
+body{
+	margin: 3px 3px 3px 3px;
+	color:#000000;
+	font-family: 'Hind','Avenir','Helvetica',arial; 
+	font-size: 21px;
+	font-stretch: ultra-condensed;
+	text-shadow: 0.05em 0.05em 0.05em #666;
+	width: 790px;
+
+}
+th{
+	color: #ffffff;
+}
+
+input{
+	max-width:80px;
+	
+}
+.diploma{
+	text-align: left; 
+	width:197px;
+	box-shadow: 5px 10px #888888;
+	font-size: 60%;
+}
+.diplomainside{
+	background-color:rgba(255,255,255,0.8);
+	width:197px;
+	height:100%;
+	padding: 25px 10px 25px 10px;
+	text-shadow: none;
+}
+.tit{
+	background:#A6F3AA;
+	padding: 3px 15px 0px 15px;"
+}
+
+.initl{
+	border-top-left-radius: 10px;
+}
+.fintr{
+	border-top-right-radius: 10px;
+}
+.tab1{
+	background: #FFFFFF;
+}
+
+.tab2{
+	background: #DFDFDF;
+}
+
+.inibl{
+	border-bottom-left-radius: 10px;
+}
+
+.finbr{
+	border-bottom-right-radius: 10px;
+}
+
+.fin{
+	padding-bottom:10px;
+}
+
+.nivel{
+	width:50px;
+	margin-right: 5px;
+}
+
+.selectorwrap{
+	margin-bottom:5px;
+	font-size: 80%;
+	color: #ffffff;
+}
+.botones{
+	font-size: 80%;
+	margin: 0px 0px 0px 5px;
+	border-radius: 10px;
+	padding: 5px 10px 5px 10px;
+	background: #dddddd; 
+	border: 3px solid #000000;
+	color: #ffffff;
+	
+}
+
+.importbtn{
+	visibility: hidden;
+	width: 100%;
+}
+
+.izquierda{
+	float:left;
+	width: 197px;
+}
+
+.derecha{
+	margin-top:10px;
+	float:right;
+	text-align: center;
+	width:570px;
+}
+
+.selector{
+	width:79px;
+}
+
+.rojo{
+	color: #DE0000;
+}
+
+.deco{
+	border-radius: 10px; 
+	background-color: #487361; 
+	border: 5px solid #3A3A3A;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+}
+.nat{
+	border-radius: 20px; 
+	background-color: #FFFFFF; 
+	text-align: center; 
+	margin: 10px 5px 0px 5px;
+	height: 30px;
+	font-size: 90%;
+}
+.footer{
+	margin-top: 15px; 
+	text-align:right;
+	width: 790px;
+}
