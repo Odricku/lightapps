@@ -13,7 +13,7 @@
 					<th class="tit initl">ESTADIS.</th>
 					<th class="tit">- IVs -</th>	
 					<th class="tit">- EVs -</th>
-					<th class="tit fintr">- BASE -</th>
+					<th class="tit fintr">BASE</th>
 					<th></th>
 					<th class="tit initl fintr">RESULT.</th>
 					<td class="diploma" rowspan="7"><div class="diplomainside" name="resultado"></div></td>
@@ -65,7 +65,7 @@
 			</tbody>
 		</table>
 			
-		<div style="margin-top: 15px; text-align:center;">
+		<div class="footer">
 			<div class= "izquierda deco">
 				<div class="selectorwrap">Nivel <input name="nivel" class="nivel" value="1"> ¿Shiny? <input type="checkbox" name="shiny" value="1"></input></div>			
 				+ <select class="selector" name="selplus" onchange="naturaleza()">
@@ -86,14 +86,13 @@
 					NATURALEZA: <span class="rojo" name="naturaleza">Fuerte</span>.
 				</div>
 			</div>
+			
 			<span class="botones" onclick="calculo();">CALCULAR</span>
 			<span class="botones" onclick="randomiz();">RANDOMIZAR</span>
 			<span class="botones" onclick="clean();">LIMPIAR</span>
-			<div class="derecha">
-				<span class="botones" onclick="exportar();">EXPORTAR</span>
-				<span class="botones" onclick="importar();">IMPORTAR</span>
-				<input class="importbtn" type="file" id="fileinput"></input>
-			</div>
+			<span class="botones" onclick="exportar();">EXPORT</span>
+			<span class="botones" onclick="importar();">IMPORT</span>
+			<input class="importbtn" type="file" id="fileinput"></input>
 		</div>
 	</body>
 </html>

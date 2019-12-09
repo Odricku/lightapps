@@ -2,28 +2,29 @@ body{
 	margin: 3px 3px 3px 3px;
 	color:#000000;
 	font-family: 'Hind','Avenir','Helvetica',arial; 
-	font-size: 26px;
+	font-size: 21px;
 	font-stretch: ultra-condensed;
 	text-shadow: 0.05em 0.05em 0.05em #666;
-	width: 950px;
+	width: 750px;
+
 }
 th{
 	color: #ffffff;
 }
 
 input{
-	max-width:100px;
+	max-width:80px;
 	
 }
 .diploma{
 	text-align: left; 
-	width:250px;
+	width:197px;
 	box-shadow: 5px 10px #888888;
 	font-size: 60%;
 }
 .diplomainside{
 	background-color:rgba(255,255,255,0.8);
-	width:250px;
+	width:197px;
 	height:100%;
 	padding: 25px 10px 25px 10px;
 	text-shadow: none;
@@ -87,16 +88,16 @@ input{
 
 .izquierda{
 	float:left;
-	width: 250px;
+	width: 197px;
 }
 
 .derecha{
 	float:right;
-	width: 250px;
+	text-align: right;
 }
 
 .selector{
-	width:100px;
+	width:79px;
 }
 
 .rojo{
@@ -117,4 +118,9 @@ input{
 	margin: 10px 5px 0px 5px;
 	height: 30px;
 	font-size: 90%;
+}
+.footer{
+	margin-top: 15px; 
+	text-align:right;
+	width: 750px;
 }
