@@ -5,7 +5,7 @@ body{
 	font-size: 21px;
 	font-stretch: ultra-condensed;
 	text-shadow: 0.05em 0.05em 0.05em #666;
-	width: 750px;
+	width: 790px;
 
 }
 th{
@@ -61,7 +61,7 @@ input{
 }
 
 .nivel{
-	width:70px;
+	width:50px;
 	margin-right: 5px;
 }
 
@@ -92,8 +92,10 @@ input{
 }
 
 .derecha{
+	margin-top:10px;
 	float:right;
-	text-align: right;
+	text-align: center;
+	width:570px;
 }
 
 .selector{
@@ -110,6 +112,7 @@ input{
 	border: 5px solid #3A3A3A;
 	padding-top: 5px;
 	padding-bottom: 5px;
+	text-align: center;
 }
 .nat{
 	border-radius: 20px; 
@@ -122,5 +125,5 @@ input{
 .footer{
 	margin-top: 15px; 
 	text-align:right;
-	width: 750px;
+	width: 790px;
 }
