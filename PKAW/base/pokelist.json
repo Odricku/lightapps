@@ -15122,8 +15122,12 @@
 				"volador"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					66
+				],
+				"oculta": [
+					94
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -16548,8 +16552,12 @@
 				"volador"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					14
+				],
+				"oculta": [
+					110
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -21845,8 +21853,12 @@
 				"eléctrico"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					9
+				],
+				"oculta": [
+					31
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -28657,8 +28669,13 @@
 				"normal"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					53,
+					101
+				],
+				"oculta": [
+					127
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -32591,8 +32608,13 @@
 				"lucha"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					62,
+					99
+				],
+				"oculta": [
+					80
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -39303,7 +39325,10 @@
 				"veneno"
 			],
 			"habs": {
-				"normal": [],
+				"normal": [
+					26,
+					130
+				],
 				"oculta": []
 			},
 			"stats": [],
@@ -40570,8 +40595,13 @@
 				"agua"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					52,
+					75
+				],
+				"oculta": [
+					125
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -48259,8 +48289,13 @@
 				"hielo"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					11,
+					75
+				],
+				"oculta": [
+					93
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -48717,8 +48752,13 @@
 				"normal"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					50,
+					91
+				],
+				"oculta": [
+					107
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -51070,8 +51110,13 @@
 				"normal"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					47,
+					17
+				],
+				"oculta": [
+					82
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -130163,8 +130208,13 @@
 				"veneno"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					1,
+					133
+				],
+				"oculta": [
+					106
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -146527,17 +146577,162 @@
 	[
 		{
 			"id": "678",
-			"title": "normal",
+			"title": "♂",
 			"name": "Meowstic",
 			"img": {
 				"sprite": "https://images.wikidexcdn.net/mwuploads/wikidex/7/7a/latest/20191121135606/Meowstic_icon.png",
 				"otros": [
 					"https://images.wikidexcdn.net/mwuploads/wikidex/b/b4/latest/20161127193043/Meowstic_XY.gif",
 					"https://images.wikidexcdn.net/mwuploads/wikidex/8/82/latest/20150321180236/Meowstic_espalda_G6.gif",
+					"https://images.wikidexcdn.net/mwuploads/wikidex/4/41/latest/20140107163150/Meowstic_XY_variocolor.gif",
+					"https://images.wikidexcdn.net/mwuploads/wikidex/3/38/latest/20161019213313/Meowstic_espalda_G6_variocolor.gif"
+				]
+			},
+			"tipo": [
+				"psíquico"
+			],
+			"habs": {
+				"normal": [
+					51,
+					151
+				],
+				"oculta": [
+					158
+				]
+			},
+			"stats": [
+				74,
+				48,
+				76,
+				83,
+				81,
+				104
+			],
+			"movs": {
+				"niv": [
+					44,
+					449,
+					638,
+					49,
+					451,
+					46,
+					193,
+					528,
+					587,
+					692,
+					771,
+					583,
+					282,
+					372,
+					637,
+					588,
+					404,
+					676,
+					360,
+					137
+				],
+				"mt": [
+					247,
+					392,
+					350,
+					519,
+					310,
+					528,
+					637,
+					753,
+					237,
+					663,
+					580,
+					282,
+					73,
+					224,
+					248,
+					403,
+					619,
+					638,
+					676,
+					440,
+					756,
+					296,
+					775,
+					776,
+					141,
+					566,
+					137,
+					139,
+					621,
+					588,
+					699,
+					583,
+					21,
+					691,
+					181,
+					98,
+					737,
+					409,
+					539,
+					597,
+					283,
+					455,
+					123,
+					131,
+					79,
+					151,
+					727,
+					567,
+					329,
+					651,
+					259,
+					725,
+					271,
+					624,
+					350,
+					459,
+					188,
+					198,
+					192,
+					244,
+					228,
+					608,
+					206
+				],
+				"tut": [
+					46,
+					123,
+					135,
+					148,
+					181,
+					263,
+					374,
+					404,
+					521,
+					632,
+					638,
+					656,
+					663,
+					737,
+					775,
+					776,
+					131,
+					409,
+					710
+				],
+				"egg": [],
+				"z": [],
+				"otro": []
+			},
+			"front": "https://images.wikidexcdn.net/mwuploads/wikidex/d/d3/Meowstic_(macho).png",
+			"gen": 6
+		},
+		{
+			"id": "678",
+			"title": "♀",
+			"name": "Meowstic",
+			"img": {
+				"sprite": "https://images.wikidexcdn.net/mwuploads/wikidex/3/3a/latest/20191121135636/Meowstic_icon_hembra.png",
+				"otros": [
 					"https://images.wikidexcdn.net/mwuploads/wikidex/e/e5/latest/20161127193128/Meowstic_XY_hembra.gif",
 					"https://images.wikidexcdn.net/mwuploads/wikidex/9/95/latest/20150321180250/Meowstic_espalda_G6_hembra.gif",
-					"https://images.wikidexcdn.net/mwuploads/wikidex/4/41/latest/20140107163150/Meowstic_XY_variocolor.gif",
-					"https://images.wikidexcdn.net/mwuploads/wikidex/3/38/latest/20161019213313/Meowstic_espalda_G6_variocolor.gif",
 					"https://images.wikidexcdn.net/mwuploads/wikidex/8/8c/latest/20140107162453/Meowstic_XY_variocolor_hembra.gif",
 					"https://images.wikidexcdn.net/mwuploads/wikidex/8/80/latest/20161019213255/Meowstic_espalda_G6_variocolor_hembra.gif"
 				]
@@ -146675,7 +146870,7 @@
 				"z": [],
 				"otro": []
 			},
-			"front": "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/0/0b/latest/20130913143059/Meowstic.png/200px-Meowstic.png",
+			"front": "https://images.wikidexcdn.net/mwuploads/wikidex/1/15/Meowstic_(hembra).png",
 			"gen": 6
 		}
 	],
@@ -164389,7 +164584,9 @@
 				"acero"
 			],
 			"habs": {
-				"normal": [],
+				"normal": [
+					89
+				],
 				"oculta": []
 			},
 			"stats": [],
@@ -165856,8 +166053,13 @@
 				"acero"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					46,
+					127
+				],
+				"oculta": [
+					240
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -166198,8 +166400,13 @@
 				"psíquico"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					68,
+					119
+				],
+				"oculta": [
+					140
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -167023,8 +167230,13 @@
 				"roca"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					173,
+					75
+				],
+				"oculta": [
+					33
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -167847,8 +168059,13 @@
 				"dragón"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					247,
+					82
+				],
+				"oculta": [
+					55
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -168032,8 +168249,13 @@
 				"dragón"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					247,
+					82
+				],
+				"oculta": [
+					47
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -168297,8 +168519,13 @@
 				"tierra"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					245,
+					61
+				],
+				"oculta": [
+					8
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -169157,8 +169384,14 @@
 				"veneno"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					244,
+					57,
+					58
+				],
+				"oculta": [
+					101
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -169440,8 +169673,13 @@
 				"bicho"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					18,
+					73
+				],
+				"oculta": [
+					49
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -170179,8 +170417,13 @@
 				"hada"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					131,
+					107
+				],
+				"oculta": [
+					156
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -170579,8 +170822,13 @@
 				"hada"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					158,
+					119
+				],
+				"oculta": [
+					124
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -171584,8 +171832,12 @@
 				"hada"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					175
+				],
+				"oculta": [
+					165
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -172959,8 +173211,12 @@
 				"acero"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					125
+				],
+				"oculta": [
+					134
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -173571,8 +173827,13 @@
 				"dragón"
 			],
 			"habs": {
-				"normal": [],
-				"oculta": []
+				"normal": [
+					135,
+					134
+				],
+				"oculta": [
+					242
+				]
 			},
 			"stats": [],
 			"movs": {
@@ -174383,7 +174644,98 @@
 					"https://images.wikidexcdn.net/mwuploads/wikidex/e/ed/latest/20191205214613/Eternatus_EpEc.gif",
 					"https://images.wikidexcdn.net/mwuploads/wikidex/4/4e/latest/20200109033813/Eternatus_espalda_G8.gif",
 					"https://images.wikidexcdn.net/mwuploads/wikidex/c/c9/latest/20191205214753/Eternatus_EpEc_variocolor.gif",
-					"https://images.wikidexcdn.net/mwuploads/wikidex/c/cc/latest/20200109033926/Eternatus_espalda_G8_variocolor.gif",
+					"https://images.wikidexcdn.net/mwuploads/wikidex/c/cc/latest/20200109033926/Eternatus_espalda_G8_variocolor.gif"
+				]
+			},
+			"tipo": [
+				"veneno",
+				"dragón"
+			],
+			"habs": {
+				"normal": [
+					46
+				],
+				"oculta": []
+			},
+			"stats": [
+				140,
+				85,
+				95,
+				145,
+				95,
+				130
+			],
+			"movs": {
+				"niv": [
+					182,
+					625,
+					180,
+					19,
+					727,
+					155,
+					221,
+					757,
+					594,
+					419,
+					146,
+					460,
+					634,
+					392,
+					629
+				],
+				"mt": [
+					773,
+					392,
+					350,
+					630,
+					167,
+					528,
+					637,
+					237,
+					663,
+					580,
+					149,
+					403,
+					756,
+					117,
+					757,
+					155,
+					141,
+					435,
+					356,
+					419,
+					19,
+					699,
+					106,
+					21,
+					691,
+					98,
+					460,
+					221,
+					590,
+					615,
+					594,
+					322,
+					518,
+					730
+				],
+				"tut": [
+					189
+				],
+				"egg": [],
+				"z": [],
+				"otro": []
+			},
+			"front": "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/1/16/latest/20191215041654/Eternatus.png/200px-Eternatus.png",
+			"gen": 8
+		},
+		{
+			"id": "890",
+			"title": "Dinamax Infinito",
+			"name": "Eternatus",
+			"img": {
+				"sprite": "https://images.wikidexcdn.net/mwuploads/wikidex/d/d1/latest/20191114203459/Eternatus_Dinamax_infinito_icon.png",
+				"otros": [
 					"https://images.wikidexcdn.net/mwuploads/wikidex/f/fc/latest/20191208203749/Eternatus_Dinamax_infinito_EpEc.gif",
 					"https://images.wikidexcdn.net/mwuploads/wikidex/0/02/latest/20191208204657/Eternatus_Dinamax_infinito_EpEc_variocolor.gif"
 				]
@@ -174467,7 +174819,7 @@
 				"z": [],
 				"otro": []
 			},
-			"front": "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/1/16/latest/20191215041654/Eternatus.png/200px-Eternatus.png",
+			"front": "https://images.wikidexcdn.net/mwuploads/wikidex/f/f1/latest/20191115183957/Eternatus_Dinamax_infinito_EpEc.png",
 			"gen": 8
 		}
 	]
