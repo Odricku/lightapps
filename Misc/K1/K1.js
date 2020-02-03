@@ -329,7 +329,7 @@ function tachanotipo(tipostr){
 				while(pokelist[pokenum][j]["name"] != nombrepoke && pokelist[pokenum][j]["title"] != poketipo)
 					j++;
 				
-				if(pokelist[pokenum][j]["tipo"].includes(tipos[k])){
+				if(!pokelist[pokenum][j]["tipo"].includes(tipoelej)){
 					pokeactual.getElementsByClassName("equis")[0].style.visibility = "visible";
 					pokeactual.style.backgroundColor = "#222222";
 				}
@@ -340,6 +340,9 @@ function tachanotipo(tipostr){
 }
 
 function eliminatacha(){
+	
+	if(document.getElementsByClassName("pokevista").length == 0)
+		return;
 	
 	var mensaje = confirm("¿Seguro?, no puede deshacerse");
 
