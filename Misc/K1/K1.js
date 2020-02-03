@@ -349,13 +349,17 @@ function cargalista(){
 		}
 		while(document.getElementsByClassName('pokevista').length > rand){
 			document.getElementsByClassName("pokevista")[~~(Math.random()*document.getElementsByClassName("pokevista").length)].remove();
-		}
-		
+		}	
+	}
+	
+	if(document.getElementsByClassName('pokevista').length == 0){
+		document.getElementById("pokelist").innerHTML = "";
+		return;
 	}
 	
 	try{
 		veracciones();
-		document.getElementById("pokeselect").innerHTML = "<textarea style='float:right; width:70%; height:180px;resize: none;'></textarea>" + document.getElementsByClassName("pokevista")[~~(Math.random()*document.getElementsByClassName("pokevista").length)].innerHTML;
+		document.getElementById("pokeselect").innerHTML = "<textarea placeholder='Campo de texto libre, usalo para anotar ideas o cosas que no quieras marcar.' style='float:right; width:70%; height:180px;resize: none;'></textarea>" + document.getElementsByClassName("pokevista")[~~(Math.random()*document.getElementsByClassName("pokevista").length)].innerHTML;
 	}catch(error){};
 }
 

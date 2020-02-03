@@ -151,8 +151,10 @@ th{
 }
 
 .pokeselect{
+	background: #FFFFFF url(https://db.pokemongohub.net/images/pokeball-gray.svg) bottom left no-repeat;
 	font-size:50%; 
 	height:190px;
+	border-radius: 95px 90% 90% 95px;
 }
 
 .pokevista{
