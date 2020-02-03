@@ -1,0 +1,312 @@
+body{
+	margin: 3px 3px 3px 3px;
+	color:#000000;
+	font-family: 'Hind','Avenir','Helvetica',arial; 
+	font-size: 21px;
+	font-stretch: ultra-condensed;
+	text-shadow: 0.05em 0.05em 0.05em #666;
+	overflow:hidden;
+}
+
+th{
+	color: #ffffff;
+}
+
+.xdetalle{
+	background-color:#f1f1f1; 
+	width:90%; 
+	margin-bottom:10px;
+	display: none;
+}
+
+.inputcalc{
+	max-width:80px;
+}
+
+.inputsel{
+	width: 116px;
+	height: 15px;
+}
+
+.inputdate{
+	width: 115px;
+	height: 17px;
+}
+
+.diploma{
+	text-align: left; 
+	width:197px;
+	box-shadow: 5px 10px #888888;
+	font-size: 60%;
+}
+.diplomainside{
+	background-color:rgba(255,255,255,0.8);
+	width:197px;
+	height:100%;
+	padding: 25px 10px 25px 10px;
+	text-shadow: none;
+}
+.tit{
+	background:#A6F3AA;
+	padding: 3px 15px 0px 15px;"
+}
+
+.initl{
+	border-top-left-radius: 10px;
+}
+.fintr{
+	border-top-right-radius: 10px;
+}
+.tab1{
+	background: #FFFFFF;
+}
+
+.tab2{
+	background: #DFDFDF;
+}
+
+.inibl{
+	border-bottom-left-radius: 10px;
+}
+
+.finbr{
+	border-bottom-right-radius: 10px;
+}
+
+.fin{
+	padding-bottom:10px;
+}
+
+.nivel{
+	width:50px;
+	margin-right: 5px;
+}
+
+.selectorwrap{
+	margin-bottom:5px;
+	font-size: 80%;
+	color: #ffffff;
+}
+.botones{
+	font-size: 50%;
+	margin: 0px 0px 0px 5px;
+	border-radius: 10px;
+	padding: 5px 10px 5px 10px;
+	background: #dddddd; 
+	border: 3px solid #000000;
+	color: #ffffff;
+	font-weight: bold;
+	
+}
+
+.importbtn{
+	visibility: hidden;
+	width: 100%;
+}
+
+.izquierda{
+	float:left;
+	width: 197px;
+}
+
+.derecha{
+	margin-top:10px;
+	float:right;
+	text-align: center;
+	width:570px;
+}
+
+.selector{
+	width:79px;
+}
+
+.rojo{
+	color: #DE0000;
+}
+
+.deco{
+	border-radius: 10px; 
+	background-color: #487361; 
+	border: 5px solid #3A3A3A;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+}
+.nat{
+	border-radius: 20px; 
+	background-color: #FFFFFF; 
+	text-align: center; 
+	margin: 10px 5px 0px 5px;
+	height: 30px;
+	font-size: 90%;
+}
+.footer{
+	margin-top: 15px; 
+	text-align:right;
+	width: 790px;
+}
+
+.botones{
+	font-size: 80%;
+	margin: 15px 0px 15px 0px;
+	border-radius: 10px;
+	padding: 5px 10px 5px 10px;
+	background: #dddddd; 
+	border: 3px solid #000000;
+	color: #ffffff;
+	
+}
+
+.debilidades{
+	margin-top:5px;
+	
+}
+
+.pokeselect{
+	font-size:50%; 
+	height:190px;
+}
+
+.pokevista{
+	float: left;
+	width: 110px;
+	height: 200px;
+	font-size: 50%;
+	margin-left: 10px;
+	padding-top: 5px;
+	margin-top:5px;
+	background-color: #FFFFFF;
+	border-top: 2px solid #FFFFFF;
+	border-left: 2px solid #FFFFFF;
+	border-bottom: 2px solid #EC350E;
+	border-right: 2px solid #EC350E;
+	border-radius: 7px 7px 7px 7px;
+	position: relative;
+}
+
+.equis{
+	display: hidden;
+	position: absolute;
+	background-image: url("https://st2.depositphotos.com/2899123/5947/v/600/depositphotos_59477929-stock-illustration-x-red-handwritten-letter.jpg");
+	background-color: #000000;
+	background-size:100% 100%;
+	top:0;
+	left:0;
+	width: 112px;
+	height: 207px;
+	opacity: 0.6;
+	border-radius: 5px 5px 5px 5px;
+	
+}
+
+.content {
+	background-color: #f1f1f1;
+	font-size: 90%;
+	font-stretch: initial;
+	text-shadow: none;
+	text-align: center;
+	float: left;
+	width: 84%;
+	height: 100vh;
+	overflow-y: scroll;
+	
+}
+
+.content::-webkit-scrollbar {
+    width: 0px;
+}
+
+/* Links inside the dropdown */
+.content a {
+	color: black;
+	text-decoration: none;
+	display: block;
+}
+
+/* Change color of dropdown links on hover */
+.content a:hover {background-color: #ddd;}
+
+.selectall{
+	font-size: 90%;
+}
+
+.temptext {
+	width: 100%;
+	text-align: center;
+	margin-top: 80px;
+}
+
+.tipofiltro{
+	color: #f1f1f1;
+	background-color: #111111;
+	width: 90%;
+	
+}
+
+.selector2 {
+	width: 120px;
+	height: 21px;
+}
+
+.actual{
+	max-height: 66px;
+	width: 120px;
+}
+
+.detcol{
+	text-align: center;
+	width: 120px;
+}
+
+.dex{
+	text-align: center;
+	width: 120px;
+}
+
+.detalleotras{
+	padding-left:5px; 
+	display: none; 
+	border-bottom: 1px solid #f1f1f1;
+	border-top: 1px solid #f1f1f1;
+}
+
+.detahab{
+	width: 610px; 
+	height: 35px; 
+	resize: none
+}
+
+.detatipo{
+	width:90%; 
+	height:135px;
+	resize: none;
+	margin-right:5px
+}
+
+.titulo{
+	text-align:center; 
+	margin-right:10px; 
+	border-bottom: 1px solid #f1f1f1;
+	border-top: 1px solid #f1f1f1;
+}
+
+.details{
+	float:right; 
+	width: 15%;
+	font-size: 80%; 
+	padding-left: 5px; 
+	padding-top: 5px;
+	background-color: #FFFFFF;
+	height: 100vh;
+	
+}
+
+@media only screen and (max-width: 1085px) {
+	.details{
+		position: absolute;
+		width: 168px;
+		top:0;
+		right:0;
+	}
+}
+position: absolute;
