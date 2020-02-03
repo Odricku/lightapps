@@ -203,6 +203,11 @@ th{
 	width: 84%;
 	height: 100vh;
 	overflow-y: scroll;
+	
+}
+
+.content::-webkit-scrollbar {
+    width: 0px;
 }
 
 /* Links inside the dropdown */
