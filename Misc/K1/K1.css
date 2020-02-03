@@ -88,14 +88,13 @@ th{
 	color: #ffffff;
 }
 .botones{
-	font-size: 16px;
-	margin: 0px 0px 0px 5px;
+	font-size: 12px;
+	margin: 0px 0px 0px 0px;
 	border-radius: 10px;
 	padding: 5px 10px 5px 10px;
 	background: #dddddd; 
 	border: 3px solid #000000;
 	color: #ffffff;
-	font-weight: bold;
 	
 }
 
@@ -144,17 +143,6 @@ th{
 	margin-top: 15px; 
 	text-align:right;
 	width: 790px;
-}
-
-.botones{
-	font-size: 80%;
-	margin: 15px 0px 15px 0px;
-	border-radius: 10px;
-	padding: 5px 10px 5px 10px;
-	background: #dddddd; 
-	border: 3px solid #000000;
-	color: #ffffff;
-	
 }
 
 .debilidades{
