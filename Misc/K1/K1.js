@@ -5,6 +5,27 @@ var CANTIDAD_MOVS = 778;
 var CANTIDAD_POKES = 891;
 var CANTIDAD_BALL = 27;	
 
+var tipos = [
+	"acero",
+	"agua",
+	"bicho",
+	"dragón",
+	"eléctrico",
+	"fantasma",
+	"fuego",
+	"hada",
+	"hielo",
+	"lucha",
+	"normal",
+	"planta",
+	"psíquico",
+	"roca",
+	"siniestro",
+	"tierra",
+	"veneno",
+	"volador"
+];
+
 var alola = [
 	"Rattata",
 	"Raticate",
@@ -200,27 +221,6 @@ function verrandom(){
 
 function cargadebilidades(){
 	
-	var tipos = [
-		"acero",
-		"agua",
-		"bicho",
-		"dragón",
-		"eléctrico",
-		"fantasma",
-		"fuego",
-		"hada",
-		"hielo",
-		"lucha",
-		"normal",
-		"planta",
-		"psíquico",
-		"roca",
-		"siniestro",
-		"tierra",
-		"veneno",
-		"volador"
-	];
-	
 	var linea = "";
 	var debs;
 	
@@ -280,6 +280,9 @@ function cargadebilidades(){
 
 function tachatipo(tipostr){
 	
+	if(tipostr == "") 
+		return;
+	
 	var tipoelej = tipostr.substring(2, tipostr.indexOf("##", 2));
 	
 	for(var i = 0; i < document.getElementsByClassName("pokevista").length; i++){
@@ -303,7 +306,52 @@ function tachatipo(tipostr){
 	}
 }
 
-function tacharnotipo(tipostr){}
+function tachanotipo(tipostr){
+	
+	if(tipostr == "") 
+	return;
+	
+	var tipoelej = tipostr.substring(2, tipostr.indexOf("##", 2));
+	
+	for(var k = 0; k < tipos.length; k++){
+		if(tipoelej != tipos[k]){
+	
+			for(var i = 0; i < document.getElementsByClassName("pokevista").length; i++){
+				var pokeactual = document.getElementsByClassName("pokevista")[i];
+				
+				var pokenum = parseInt(pokeactual.id.substring(0, 3));
+				var poketipo = pokeactual.id.substring(3, pokeactual.id.length);
+				
+				var nombrepoke = pokeactual.name;
+				
+				var j = 0;
+				
+				while(pokelist[pokenum][j]["name"] != nombrepoke && pokelist[pokenum][j]["title"] != poketipo)
+					j++;
+				
+				if(pokelist[pokenum][j]["tipo"].includes(tipos[k])){
+					pokeactual.getElementsByClassName("equis")[0].style.visibility = "visible";
+					pokeactual.style.backgroundColor = "#222222";
+				}
+				
+			}
+		}
+	}
+}
+
+function eliminatacha(){
+	
+	var mensaje = confirm("¿Seguro?, no puede deshacerse");
+
+	if (mensaje) {
+		for(var i = document.getElementsByClassName("pokevista").length -1; i >= 0; i--){
+			var pokeactual = document.getElementsByClassName("pokevista")[i];
+			if(pokeactual.getElementsByClassName("equis")[0].style.visibility == "visible")
+				pokeactual.remove();
+			
+		}
+	}
+}
 
 function creaficha(poke, j){
 	
