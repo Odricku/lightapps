@@ -293,9 +293,11 @@ function tachatipo(tipostr){
 		
 		var nombrepoke = pokeactual.name;
 		
+		
+		
 		var j = 0;
 		
-		while(pokelist[pokenum][j]["name"] != nombrepoke && pokelist[pokenum][j]["title"] != poketipo)
+		while(pokelist[pokenum][j]["name"] != nombrepoke || pokelist[pokenum][j]["title"] != poketipo)
 			j++;
 		
 		if(pokelist[pokenum][j]["tipo"].includes(tipoelej)){
