@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<meta charset="utf-8" />
-	<title>Calculadora IVs</title>
+	<title>Adivina Quien</title>
 	<script type="text/javascript" src="./K1.js"></script>
 	<link rel="stylesheet" type="text/css" href="./K1.css">
 </head>
@@ -13,59 +13,69 @@
 		<div class="temptext"><i>Espere a que se cargue la lista</i></div>
 	</div>
 	<div class="details">
-		<a style="text-align:center">Guess Who - Version Pokémon v1.4</a><br><br>
-		<table style="width:100%">
-			<tr>
-				<td>Gen 1</td><td><input type="checkbox" id="Gen1" value="1" disabled></input></td>
-			</tr>
-			<tr>
-				<td>Gen 2</td><td><input type="checkbox" id="Gen2" value="1" disabled></input></td>
-			</tr>
-			<tr>
-				<td>Gen 3</td><td><input type="checkbox" id="Gen3" value="1" disabled></input></td>
-			</tr>
-			<tr>
-				<td>Gen 4</td><td><input type="checkbox" id="Gen4" value="1" disabled></input></td>
-			</tr>
-			<tr>
-				<td>Gen 5</td><td><input type="checkbox" id="Gen5" value="1" disabled></input></td>
-			</tr>
-			<tr>
-				<td>Gen 6</td><td><input type="checkbox" id="Gen6" value="1" disabled></input></td>
-			</tr>
-			<tr>
-				<td>Gen 7</td><td><input type="checkbox" id="Gen7" value="1" disabled></input></td>
-			</tr>
-			<tr>
-				<td>Gen 8</td><td><input type="checkbox" id="Gen8" value="1" disabled></input></td>
-			</tr>
-			<tr>
-				<td>Formas</td><td><input type="checkbox" id="Otrasformas" value="1" onclick="formaseval()" disabled></input></td>
-				
-			</tr>
-			<tr>
-				<td colspan="2" >
-					<div id="detalleotras" style="padding-left:5px; display: none">
-						<table>
-							<tr>
-								<td>MegaEvo</td><td><input type="checkbox" id="Mega" value="1" onclick="tipoformaseval()"></input></td>
-							</tr>
-							<tr>
-								<td>Gigamax</td><td><input type="checkbox" id="Giga" value="1" onclick="tipoformaseval()"></input></td>
-							</tr>
-							<tr>
-								<td>RegForm</td><td><input type="checkbox" id="Reg" value="1" onclick="tipoformaseval()"></input></td>
-							</tr>
-							<tr>
-								<td>Otros</td><td><input type="checkbox" id="Otros" value="1" onclick="tipoformaseval()"></input></td>
-							</tr>
-						</table>
-					</div>
-				<td>
-			</tr>
-
-		</table>
 		<span class="botones" onclick="cargalista();">CARGAR</span>
+		<p class="titulo">Guess Who - Version Pokémon v1.4</p>
+		<div class="tipofiltro" onclick="vergen()">>> Por Generacion</div>
+		<div id="xgen" class="xdetalle">
+			<table style="width:100%">
+				<tr>
+					<td>Gen 1</td><td><input type="checkbox" id="Gen1" value="1" disabled></input></td>
+				</tr>
+				<tr>
+					<td>Gen 2</td><td><input type="checkbox" id="Gen2" value="1" disabled></input></td>
+				</tr>
+				<tr>
+					<td>Gen 3</td><td><input type="checkbox" id="Gen3" value="1" disabled></input></td>
+				</tr>
+				<tr>
+					<td>Gen 4</td><td><input type="checkbox" id="Gen4" value="1" disabled></input></td>
+				</tr>
+				<tr>
+					<td>Gen 5</td><td><input type="checkbox" id="Gen5" value="1" disabled></input></td>
+				</tr>
+				<tr>
+					<td>Gen 6</td><td><input type="checkbox" id="Gen6" value="1" disabled></input></td>
+				</tr>
+				<tr>
+					<td>Gen 7</td><td><input type="checkbox" id="Gen7" value="1" disabled></input></td>
+				</tr>
+				<tr>
+					<td>Gen 8</td><td><input type="checkbox" id="Gen8" value="1" disabled></input></td>
+				</tr>
+				<tr>
+					<td>Formas</td><td><input type="checkbox" id="Otrasformas" value="1" onclick="formaseval()" disabled></input></td>
+					
+				</tr>
+				<tr>
+					<td colspan="2" >
+						<div id="detalleotras" class="detalleotras">
+							<table>
+								<tr>
+									<td>MegaEvo</td><td><input type="checkbox" id="Mega" value="1" onclick="tipoformaseval()"></input></td>
+								</tr>
+								<tr>
+									<td>Gigamax</td><td><input type="checkbox" id="Giga" value="1" onclick="tipoformaseval()"></input></td>
+								</tr>
+								<tr>
+									<td>RegForm</td><td><input type="checkbox" id="Reg" value="1" onclick="tipoformaseval()"></input></td>
+								</tr>
+								<tr>
+									<td>Otros</td><td><input type="checkbox" id="Otros" value="1" onclick="tipoformaseval()"></input></td>
+								</tr>
+							</table>
+						</div>
+					<td>
+				</tr>
+			</table>
+		</div>
+		<div class="tipofiltro" onclick="verseed()">>> Por Semilla</div>
+		<div id="xseed" class="xdetalle"></div>
+		<div class="tipofiltro" onclick="verrandom()">>> Random</div>
+		<div id="xrandom" class="xdetalle">
+			¿Cuantos?: <input style="width:50px" id="cantrand"></input>
+		</div>
+		<div id="debilidades"></div>
+		<textarea class="detatipo" id="detatipo" readonly></textarea>
 	</div>
 </body>
 </html>

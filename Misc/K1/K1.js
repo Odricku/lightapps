@@ -160,9 +160,113 @@ function cargajson(){
 	request.send();
 	request.onload = function() {
 		pokelist = request.response;
-		cargalista();
+		document.getElementById("pokelist").innerHTML = "";
+		document.getElementById("Gen1").disabled = false;
+		document.getElementById("Gen2").disabled = false;
+		document.getElementById("Gen3").disabled = false;
+		document.getElementById("Gen4").disabled = false;
+		document.getElementById("Gen5").disabled = false;
+		document.getElementById("Gen6").disabled = false;
+		document.getElementById("Gen7").disabled = false;
+		document.getElementById("Gen8").disabled = false;
+		document.getElementById("Otrasformas").disabled = false;
 	}
 	return 1;
+}
+
+function vergen(){
+	document.getElementById('xgen').style.display= 'block'
+	document.getElementById('xseed').style.display= 'none'
+	document.getElementById('xrandom').style.display= 'none'
+}
+
+function verseed(){
+	document.getElementById('xgen').style.display= 'none'
+	document.getElementById('xseed').style.display= 'block'
+	document.getElementById('xrandom').style.display= 'none'
+}
+
+function verrandom(){
+	document.getElementById('xgen').style.display= 'block'
+	document.getElementById('xseed').style.display= 'none'
+	document.getElementById('xrandom').style.display= 'block'
+}
+
+function cargadebilidades(){
+	
+	var tipos = [
+		"acero",
+		"agua",
+		"bicho",
+		"dragón",
+		"eléctrico",
+		"fantasma",
+		"fuego",
+		"hada",
+		"hielo",
+		"lucha",
+		"normal",
+		"planta",
+		"psíquico",
+		"roca",
+		"siniestro",
+		"tierra",
+		"veneno",
+		"volador"
+	];
+	
+	var linea = "";
+	var debs;
+	
+	for(var i = 0; i < tipos.length; i++){
+		debs ="> Debil a (";
+		
+		if(pokelist[0].tipos[tipos[i]]["debil"].length == 0)
+			debs = debs + "nada)";
+		else{
+			for(var j = 0; j < pokelist[0].tipos[tipos[i]]["debil"].length; j++){
+				if (j == 0)
+					debs = debs + pokelist[0].tipos[tipos[i]]["debil"][j];
+				else				
+					debs = debs + ", " + pokelist[0].tipos[tipos[i]]["debil"][j];
+			}
+			debs = debs + "). ";
+		}
+		
+		debs = debs + "\n> Fuerte a (";
+		
+		if(pokelist[0].tipos[tipos[i]]["fuerte"].length == 0)
+			debs = debs + "nada)";
+		else{
+			for(var j = 0; j < pokelist[0].tipos[tipos[i]]["fuerte"].length; j++){
+				if (j == 0)
+					debs = debs + pokelist[0].tipos[tipos[i]]["fuerte"][j];
+				else				
+					debs = debs + ", " + pokelist[0].tipos[tipos[i]]["fuerte"][j];
+			}
+			debs = debs + "). ";
+		}
+		
+		debs = debs + "\n> Inmune a (";
+		
+		if(pokelist[0].tipos[tipos[i]]["inmune"].length == 0)
+			debs = debs + "nada)";
+		else{
+			for(var j = 0; j < pokelist[0].tipos[tipos[i]]["inmune"].length; j++){
+				if (j == 0)
+					debs = debs + pokelist[0].tipos[tipos[i]]["inmune"][j];
+				else				
+					debs = debs + ", " + pokelist[0].tipos[tipos[i]]["inmune"][j];
+			}
+			debs = debs + "). ";
+		}
+		
+		
+		linea = linea + "<img alt='" + debs + "' width='45px' src='" + pokelist[0]["tipos"][tipos[i]]["image"] + "' onclick='document.getElementById(\"detatipo\").value = this.alt'/>";
+	}
+	
+	document.getElementById("debilidades").innerHTML = linea;
+	
 }
 
 function creaficha(poke, j){
@@ -204,16 +308,27 @@ function creaficha(poke, j){
 	
 }
 
-function ocultar(item){
-	
-	alert(item.class);
-}
-
 function cargalista(){
 
 	var i = 1;
 	var j;
-	document.getElementById("pokelist").innerHTML = "";
+	var rand = 0;
+	
+	try{
+		if (document.getElementById('xrandom').style.display == "block"){
+			if(parseInt(document.getElementById('cantrand').value) <= 0){
+				alert("Debe indicar una cantidad");
+				return;
+			}
+			rand = parseInt(document.getElementById('cantrand').value);
+		}
+	}catch(error){
+		alert("Debe indicar una cantidad");
+		return;
+	}
+		
+	document.getElementById("pokelist").innerHTML = "<div style='font-size:50%' id='pokeselect'></div>";
+	cargadebilidades();
 	while(i < pokelist.length){
 		try{
 			if(document.getElementById("Otrasformas").checked){
@@ -237,17 +352,21 @@ function cargalista(){
 		}
 	}
 	
+	if(rand != 0){
+		if(rand > document.getElementsByClassName('pokevista').length){
+			alert("Cantidad especificada mayor a cantidad existente");
+			document.getElementById("pokelist").innerHTML = "";
+			return;
+		}
+		while(document.getElementsByClassName('pokevista').length > rand){
+			document.getElementsByClassName("pokevista")[~~(Math.random()*document.getElementsByClassName("pokevista").length)].remove();
+		}
+		
+	}
 	
-	document.getElementById("Gen1").disabled = false;
-	document.getElementById("Gen2").disabled = false;
-	document.getElementById("Gen3").disabled = false;
-	document.getElementById("Gen4").disabled = false;
-	document.getElementById("Gen5").disabled = false;
-	document.getElementById("Gen6").disabled = false;
-	document.getElementById("Gen7").disabled = false;
-	document.getElementById("Gen8").disabled = false;
-	document.getElementById("Otrasformas").disabled = false;
-	
+	try{
+		document.getElementById("pokeselect").innerHTML = "<textarea style='float:right; width:70%; height:180px;resize: none;'></textarea>" + document.getElementsByClassName("pokevista")[~~(Math.random()*document.getElementsByClassName("pokevista").length)].innerHTML;
+	}catch(error){};
 }
 
 function evalforma(poke, pos){
