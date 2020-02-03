@@ -221,18 +221,20 @@ function cargadebilidades(){
 	for(var i = 0; i < tipos.length; i++){
 		debs ="> Debil a (";
 		
-		if(pokelist[0].tipos[tipos[i]]["debil"].length == 0)
-			debs = debs + "nada)";
-		else{
-			for(var j = 0; j < pokelist[0].tipos[tipos[i]]["debil"].length; j++){
-				if (j == 0)
-					debs = debs + pokelist[0].tipos[tipos[i]]["debil"][j];
-				else				
-					debs = debs + ", " + pokelist[0].tipos[tipos[i]]["debil"][j];
+		var debil = "";
+		for(var j = 0; j < tipos.length; j++){
+			if(pokelist[0]["tipos"][tipos[j]]["fuerte"].includes(tipos[i])){
+				if (debil == "")
+					debil = tipos[j];
+				else
+					debil = debil + ", " + tipos[j];
 			}
-			debs = debs + "). ";
 		}
 		
+		if(debil == "")
+			debil = "nada"
+		debs = debs + debil + "). ";
+				
 		debs = debs + "\n> Fuerte a (";
 		
 		if(pokelist[0].tipos[tipos[i]]["fuerte"].length == 0)
@@ -248,18 +250,19 @@ function cargadebilidades(){
 		}
 		
 		debs = debs + "\n> Inmune a (";
-		
-		if(pokelist[0].tipos[tipos[i]]["inmune"].length == 0)
-			debs = debs + "nada)";
-		else{
-			for(var j = 0; j < pokelist[0].tipos[tipos[i]]["inmune"].length; j++){
-				if (j == 0)
-					debs = debs + pokelist[0].tipos[tipos[i]]["inmune"][j];
-				else				
-					debs = debs + ", " + pokelist[0].tipos[tipos[i]]["inmune"][j];
+		var inmune = "";
+		for(var j = 0; j < tipos.length; j++){
+			if(pokelist[0]["tipos"][tipos[j]]["inmune"].includes(tipos[i])){
+				if (inmune == "")
+					inmune = tipos[j];
+				else
+					inmune = inmune + ", " + tipos[j];
 			}
-			debs = debs + "). ";
 		}
+		
+		if(inmune == "")
+			inmune = "nada"
+		debs = debs + inmune + "). ";
 		
 		
 		linea = linea + "<img alt='" + debs + "' width='45px' src='" + pokelist[0]["tipos"][tipos[i]]["image"] + "' onclick='document.getElementById(\"detatipo\").value = this.alt'/>";
