@@ -161,6 +161,11 @@ th{
 	
 }
 
+.pokeselect{
+	font-size:50%; 
+	height:190px;
+}
+
 .pokevista{
 	float: left;
 	width: 110px;
