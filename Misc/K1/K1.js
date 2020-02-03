@@ -174,6 +174,12 @@ function cargajson(){
 	return 1;
 }
 
+function ocultar(){
+	document.getElementById('xgen').style.display= 'none'
+	document.getElementById('xseed').style.display= 'none'
+	document.getElementById('xrandom').style.display= 'none'
+}
+
 function vergen(){
 	document.getElementById('xgen').style.display= 'block'
 	document.getElementById('xseed').style.display= 'none'
@@ -219,7 +225,7 @@ function cargadebilidades(){
 	var debs;
 	
 	for(var i = 0; i < tipos.length; i++){
-		debs ="> Debil a (";
+		debs = "##" + tipos[i] + "##\n> Debil a (";
 		
 		var debil = "";
 		for(var j = 0; j < tipos.length; j++){
@@ -265,12 +271,39 @@ function cargadebilidades(){
 		debs = debs + inmune + "). ";
 		
 		
-		linea = linea + "<img alt='" + debs + "' width='45px' src='" + pokelist[0]["tipos"][tipos[i]]["image"] + "' onclick='document.getElementById(\"detatipo\").value = this.alt'/>";
+		linea = linea + "<img alt='" + debs + "' width='45px' src='" + pokelist[0]["tipos"][tipos[i]]["image"] + "' onclick='ocultar();document.getElementById(\"detatipo\").value = this.alt'/>";
 	}
 	
 	document.getElementById("debilidades").innerHTML = linea;
 	
 }
+
+function tachatipo(tipostr){
+	
+	var tipoelej = tipostr.substring(2, tipostr.indexOf("##", 2));
+	
+	for(var i = 0; i < document.getElementsByClassName("pokevista").length; i++){
+		var pokeactual = document.getElementsByClassName("pokevista")[i];
+		
+		var pokenum = parseInt(pokeactual.id.substring(0, 3));
+		var poketipo = pokeactual.id.substring(3, pokeactual.id.length);
+		
+		var nombrepoke = pokeactual.name;
+		
+		var j = 0;
+		
+		while(pokelist[pokenum][j]["name"] != nombrepoke && pokelist[pokenum][j]["title"] != poketipo)
+			j++;
+		
+		if(pokelist[pokenum][j]["tipo"].includes(tipoelej)){
+			pokeactual.getElementsByClassName("equis")[0].style.visibility = "visible";
+			pokeactual.style.backgroundColor = "#222222";
+		}
+		
+	}
+}
+
+function tacharnotipo(tipostr){}
 
 function creaficha(poke, j){
 	

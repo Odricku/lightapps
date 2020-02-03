@@ -15,6 +15,7 @@
 	<div class="details">
 		<span class="botones" onclick="cargalista();">CARGAR</span>
 		<p class="titulo">Guess Who - Version Pokémon v1.4</p>
+		<div class="tipofiltro" onclick="ocultar()">>> Ocultar todo</div>
 		<div class="tipofiltro" onclick="vergen()">>> Por Generacion</div>
 		<div id="xgen" class="xdetalle">
 			<table style="width:100%">
@@ -76,6 +77,10 @@
 		</div>
 		<div id="debilidades"></div>
 		<textarea class="detatipo" id="detatipo" readonly></textarea>
+		<div id="acciones">
+			<span class="botones" onclick="tachatipo(document.getElementById('detatipo').value);">TACHAR LOS DEL TIPO</span><br><br>
+			<span class="botones" onclick="tachanotipo(document.getElementById('detatipo').value);">TACHAR LOS QUE NO...</span>
+		</dv>
 	</div>
 </body>
 </html>
