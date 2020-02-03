@@ -5,6 +5,8 @@ var CANTIDAD_MOVS = 778;
 var CANTIDAD_POKES = 891;
 var CANTIDAD_BALL = 27;	
 
+var llave = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-";
+
 var tipos = [
 	"acero",
 	"agua",
@@ -292,9 +294,6 @@ function tachatipo(tipostr){
 		var poketipo = pokeactual.id.substring(3, pokeactual.id.length);
 		
 		var nombrepoke = pokeactual.name;
-		
-		
-		
 		var j = 0;
 		
 		while(pokelist[pokenum][j]["name"] != nombrepoke || pokelist[pokenum][j]["title"] != poketipo)
@@ -389,8 +388,9 @@ function creaficha(poke, j){
 		complem = complem + "</i>"
 	}
 	
-	if(poke.title == "normal" || (j == 0 && !document.getElementById("Otros").checked))
+	if(poke.title == "normal" || (j == 0 && !document.getElementById("Otros").checked)){
 		opcion.innerHTML = "<div><img width='100px' height='100px' src='" + poke["front"] + "'/><br>" + poke["name"].replace("_", "") + complem + "<a class='equis' style='visibility:hidden'></a></div>";
+	}
 	else
 		opcion.innerHTML = "<img width='100px' height='100px' src='" + poke["front"] + "'/><br>" + poke["name"].replace("_", "") + " " + poke.title + complem + "<a class='equis' style='visibility:hidden'></a></div>";
 	document.getElementById("pokelist").appendChild(opcion);
@@ -402,6 +402,38 @@ function cargalista(){
 	var i = 1;
 	var j;
 	var rand = 0;
+	var key = "";
+	
+	try{
+		if (document.getElementById('xseed').style.display == "block"){
+			if(document.getElementById('semilla').value.length <= 0){
+				alert("Debe indicar una seed");
+				return;
+			}
+			var cant = 0;
+			for(var f = 1; f < pokelist.length; f++)
+				cant = cant + pokelist[f].length;
+			key = document.getElementById("semilla").value.padEnd(Math.trunc(cant/6) + 1,0);
+			
+			document.getElementById("Gen1").checked = true;
+			document.getElementById("Gen2").checked = true;
+			document.getElementById("Gen3").checked = true;
+			document.getElementById("Gen4").checked = true;
+			document.getElementById("Gen5").checked = true;
+			document.getElementById("Gen6").checked = true;
+			document.getElementById("Gen7").checked = true;
+			document.getElementById("Gen8").checked = true;
+			
+			document.getElementById("Mega").checked = true; 
+			document.getElementById("Giga").checked = true; 
+			document.getElementById("Reg").checked = true; 
+			document.getElementById("Otros").checked = true; 
+			document.getElementById("Otrasformas").checked = true;
+		}
+	}catch(error){
+		alert("Debe indicar una seed");
+		return;
+	}
 	
 	try{
 		if (document.getElementById('xrandom').style.display == "block"){
@@ -418,22 +450,34 @@ function cargalista(){
 		
 	document.getElementById("pokelist").innerHTML = "<div style='font-size:50%' id='pokeselect'></div>";
 	cargadebilidades();
+	var pos = 0;
 	while(i < pokelist.length){
+		
 		try{
 			if(document.getElementById("Otrasformas").checked){
-				for(j = 0; j < pokelist[i].length; j++){
-					
-					var poke = pokelist[i][j];
-					if (document.getElementById("Gen" + poke.gen).checked && evalforma(poke, j))
-						creaficha(poke, j);
+				
+				for(var j = 0; j < pokelist[i].length; j++){
+					if (key != ""){
+						if(llave.indexOf(key[Math.trunc(pos/6)]).toString(2).padStart(6,0)[pos%6] == "1"){
+							var poke = pokelist[i][j];
+							if (document.getElementById("Gen" + poke.gen).checked && evalforma(poke, j))
+								creaficha(poke, j);
+						}
+					}
+					else{
+						var poke = pokelist[i][j];
+						if (document.getElementById("Gen" + poke.gen).checked && evalforma(poke, j))
+							creaficha(poke, j);
+					}
+					pos++;
 				}
 			}
 			else{
 				
 				var poke = pokelist[i][0];
-				
 				if (document.getElementById("Gen" + poke.gen).checked) 
 					creaficha(poke, 0);
+				
 			}
 			i++;
 		}catch(error){
@@ -454,8 +498,63 @@ function cargalista(){
 	}
 	
 	try{
+		ocultar();
 		document.getElementById("pokeselect").innerHTML = "<textarea style='float:right; width:70%; height:180px;resize: none;'></textarea>" + document.getElementsByClassName("pokevista")[~~(Math.random()*document.getElementsByClassName("pokevista").length)].innerHTML;
 	}catch(error){};
+}
+
+function tacha1tipo(){
+	for(var i = 0; i < document.getElementsByClassName("pokevista").length; i++){
+		var poke = document.getElementsByClassName("pokevista")[i];
+		if(poke.getElementsByTagName("img").length == 2){
+			poke.style.backgroundColor = "#222222";
+			poke.getElementsByClassName("equis")[0].style.visibility = "visible";
+		}
+	}
+}
+
+function tacha2tipo(){
+	
+	for(var i = 0; i < document.getElementsByClassName("pokevista").length; i++){
+		var poke = document.getElementsByClassName("pokevista")[i];
+		if(poke.getElementsByTagName("img").length == 3){
+			poke.style.backgroundColor = "#222222";
+			poke.getElementsByClassName("equis")[0].style.visibility = "visible";
+		}
+	}
+}
+
+function exportar(){
+	
+	var key = "";
+	var elem = "";
+	
+	var pos = 0;
+	
+	for(var i = 1; i < pokelist.length; i++){
+		for(var j = 0; j< pokelist[i].length; j++){
+			var temp = 0;
+			
+			for(var k = 0; k < document.getElementsByClassName("pokevista").length; k++){
+				var poke = document.getElementsByClassName("pokevista")[k];
+				if(pokelist[i][j]["name"] == poke.name && pokelist[i][j]["title"] == poke.id.substring(3, poke.id.length)){
+					temp = 1;
+					k = document.getElementsByClassName("pokevista").length;
+				}
+			}
+			
+			elem = elem + temp;
+			
+			if(Math.trunc(pos%6) == 5 || (i == pokelist.length - 1) && (j == pokelist[i].length - 1)){
+				key = key + llave.charAt(parseInt(elem.padEnd(6,0),2));
+				elem = "";
+			}
+			
+			pos++;
+		}
+	}
+	
+	document.getElementById("detatipo").value = key;
 }
 
 function evalforma(poke, pos){

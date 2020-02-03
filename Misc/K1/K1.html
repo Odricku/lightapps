@@ -70,16 +70,22 @@
 			</table>
 		</div>
 		<div class="tipofiltro" onclick="verseed()">>> Por Semilla</div>
-		<div id="xseed" class="xdetalle"></div>
+		<div id="xseed" class="xdetalle">
+			Semilla <input style="width:50px" id="semilla"></input>
+			<span class="botones" onclick="exportar();">EXP</span>
+		</div>
 		<div class="tipofiltro" onclick="verrandom()">>> Random</div>
 		<div id="xrandom" class="xdetalle">
 			¿Cuantos?: <input style="width:50px" id="cantrand"></input>
 		</div>
+		<br>
 		<div id="debilidades"></div>
 		<textarea class="detatipo" id="detatipo" readonly></textarea>
 		<div id="acciones">
 			<span class="botones" onclick="tachatipo(document.getElementById('detatipo').value);">TACHAR LOS DEL TIPO</span><br><br>
 			<span class="botones" onclick="tachanotipo(document.getElementById('detatipo').value);">TACHAR LOS QUE NO...</span><br><br>
+			<span class="botones" onclick="tacha1tipo();">TACHAR MONOTIPOS</span><br><br>
+			<span class="botones" onclick="tacha2tipo();">TACHAR DOBLE TIPO</span><br><br><br>
 			<span class="botones" onclick="eliminatacha();">ELIMINAR TACHADOS</span>
 		</dv>
 	</div>
