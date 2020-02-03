@@ -266,7 +266,8 @@ th{
 
 .detatipo{
 	width:90%; 
-	height:15vh; 
+	height:135px;
+	resize: none;
 	margin-right:5px
 }
 

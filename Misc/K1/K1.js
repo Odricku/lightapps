@@ -198,27 +198,39 @@ function cargajson(){
 }
 
 function ocultar(){
-	document.getElementById('xgen').style.display= 'none'
-	document.getElementById('xseed').style.display= 'none'
-	document.getElementById('xrandom').style.display= 'none'
+	document.getElementById('xgen').style.display= 'none';
+	document.getElementById('xseed').style.display= 'none';
+	document.getElementById('xrandom').style.display= 'none';
+	document.getElementById('xacciones').style.display= 'none';
 }
 
 function vergen(){
-	document.getElementById('xgen').style.display= 'block'
-	document.getElementById('xseed').style.display= 'none'
-	document.getElementById('xrandom').style.display= 'none'
+	document.getElementById('xgen').style.display= 'block';
+	document.getElementById('xseed').style.display= 'none';
+	document.getElementById('xrandom').style.display= 'none';
+	document.getElementById('xacciones').style.display= 'none';
+	
 }
 
 function verseed(){
-	document.getElementById('xgen').style.display= 'none'
-	document.getElementById('xseed').style.display= 'block'
-	document.getElementById('xrandom').style.display= 'none'
+	document.getElementById('xgen').style.display= 'none';
+	document.getElementById('xseed').style.display= 'block';
+	document.getElementById('xrandom').style.display= 'none';
+	document.getElementById('xacciones').style.display= 'none';
 }
 
 function verrandom(){
-	document.getElementById('xgen').style.display= 'block'
-	document.getElementById('xseed').style.display= 'none'
-	document.getElementById('xrandom').style.display= 'block'
+	document.getElementById('xgen').style.display= 'block';
+	document.getElementById('xseed').style.display= 'none';
+	document.getElementById('xrandom').style.display= 'block';
+	document.getElementById('xacciones').style.display= 'none';
+}
+
+function veracciones(){
+	document.getElementById('xgen').style.display= 'none';
+	document.getElementById('xseed').style.display= 'none';
+	document.getElementById('xrandom').style.display= 'none';
+	document.getElementById('xacciones').style.display= 'block';
 }
 
 function cargadebilidades(){
@@ -273,7 +285,7 @@ function cargadebilidades(){
 		debs = debs + inmune + "). ";
 		
 		
-		linea = linea + "<img alt='" + debs + "' width='45px' src='" + pokelist[0]["tipos"][tipos[i]]["image"] + "' onclick='ocultar();document.getElementById(\"detatipo\").value = this.alt'/>";
+		linea = linea + "<img alt='" + debs + "' width='45px' src='" + pokelist[0]["tipos"][tipos[i]]["image"] + "' onclick='document.getElementById(\"detatipo\").value = this.alt'/>";
 	}
 	
 	document.getElementById("debilidades").innerHTML = linea;
@@ -498,7 +510,7 @@ function cargalista(){
 	}
 	
 	try{
-		ocultar();
+		veracciones();
 		document.getElementById("pokeselect").innerHTML = "<textarea style='float:right; width:70%; height:180px;resize: none;'></textarea>" + document.getElementsByClassName("pokevista")[~~(Math.random()*document.getElementsByClassName("pokevista").length)].innerHTML;
 	}catch(error){};
 }
@@ -555,6 +567,7 @@ function exportar(){
 	}
 	
 	document.getElementById("detatipo").value = key;
+	veracciones();
 }
 
 function evalforma(poke, pos){

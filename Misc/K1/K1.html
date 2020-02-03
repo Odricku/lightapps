@@ -13,7 +13,10 @@
 		<div class="temptext"><i>Espere a que se cargue la lista</i></div>
 	</div>
 	<div class="details">
-		<span class="botones" onclick="cargalista();">CARGAR</span>
+		<div style="text-align:center; width:90%">
+			<span class="botones" onclick="cargalista();"> CARGAR </span>
+			<span class="botones" onclick="eliminatacha();">LIMPIAR</span>
+		</div>
 		<p class="titulo">Guess Who - Version Pokémon v1.4</p>
 		<div class="tipofiltro" onclick="ocultar()">>> Ocultar todo</div>
 		<div class="tipofiltro" onclick="vergen()">>> Por Generacion</div>
@@ -71,23 +74,29 @@
 		</div>
 		<div class="tipofiltro" onclick="verseed()">>> Por Semilla</div>
 		<div id="xseed" class="xdetalle">
+			<br>
 			Semilla <input style="width:50px" id="semilla"></input>
 			<span class="botones" onclick="exportar();">EXP</span>
+			<br>
 		</div>
 		<div class="tipofiltro" onclick="verrandom()">>> Random</div>
 		<div id="xrandom" class="xdetalle">
+			<br>
 			¿Cuantos?: <input style="width:50px" id="cantrand"></input>
+			<br>
 		</div>
-		<br>
-		<div id="debilidades"></div>
-		<textarea class="detatipo" id="detatipo" readonly></textarea>
-		<div id="acciones">
+		
+		<div class="tipofiltro" onclick="veracciones()">>> Acciones</div>
+		<div id="xacciones" class="xdetalle" style="text-align:center">
+			<div id="debilidades"></div>
+			<textarea class="detatipo" id="detatipo" readonly></textarea>
+			<br>
 			<span class="botones" onclick="tachatipo(document.getElementById('detatipo').value);">TACHAR LOS DEL TIPO</span><br><br>
 			<span class="botones" onclick="tachanotipo(document.getElementById('detatipo').value);">TACHAR LOS QUE NO...</span><br><br>
 			<span class="botones" onclick="tacha1tipo();">TACHAR MONOTIPOS</span><br><br>
-			<span class="botones" onclick="tacha2tipo();">TACHAR DOBLE TIPO</span><br><br><br>
-			<span class="botones" onclick="eliminatacha();">ELIMINAR TACHADOS</span>
-		</dv>
+			<span class="botones" onclick="tacha2tipo();">TACHAR DOBLE TIPO</span><br><br>
+			
+		</div>
 	</div>
 </body>
 </html>
