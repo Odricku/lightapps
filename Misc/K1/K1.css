@@ -337,5 +337,17 @@ textarea{
 	.ballbut{
 		right: 152px;
 	}
+	
+	.ballocul{
+		right: -18px;
+	}
+
+	.detocul{
+		width:0px;
+	}
+
+	.contocul{
+		width: 100%;
+	}
 }
 position: absolute;
