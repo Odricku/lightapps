@@ -4,8 +4,9 @@ var CANTIDAD_HABS = 259;
 var CANTIDAD_MOVS = 778;
 var CANTIDAD_POKES = 891;
 var CANTIDAD_BALL = 27;	
+var disc = "Pokémon es una marca registrada de Nintendo desde el 1995 a la fecha. Esta pagina es sin animos de lucro y no esta de ninguna manera afiliada a Nintendo ni oficialmente respaldada. Esta pagina solo tiene el objetivo de pasar un buen rato y para el disfrute gratuito de aquellas almas perdidas que se pierdan por estos rincones de internet. La intencion no es competir con la marca registrada de Nintendo.";
 
-var llave = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-";
+var llave = " 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+";
 
 var tipos = ["acero","agua","bicho","dragón","eléctrico","fantasma","fuego","hada","hielo","lucha","normal","planta","psíquico","roca","siniestro","tierra","veneno","volador"];
 var alola = ["Rattata","Raticate","Raichu","Sandshrew","Sandslash","Vulpix","Ninetales","Diglett","Dugtrio","Meowth","Persian","Geodude","Graveler","Golem","Grimer","Muk","Exeggutor","Marowak"];
@@ -269,7 +270,7 @@ function cargalista(){
 			var cant = 0;
 			for(var f = 1; f < pokelist.length; f++)
 				cant = cant + pokelist[f].length;
-			key = document.getElementById("semilla").value.padEnd(Math.trunc(cant/6) + 1,0);
+			key = document.getElementById("semilla").value.padEnd(Math.trunc(cant/6) + 1," ");
 			
 			document.getElementById("Gen1").checked = true;
 			document.getElementById("Gen2").checked = true;
@@ -414,8 +415,34 @@ function exportar(){
 		}
 	}
 	
-	document.getElementById("detatipo").value = key;
+	key = ("!" + key).trim();
+	document.getElementById("detatipo").value = key.slice(1);
 	veracciones();
+}
+
+function transform(key){
+	
+	var i = 0;
+	var espini = -1;
+	var espfin = -1;
+	var salida = "";
+	while(i < key.length){
+		if(key.charAt(i) == " "){
+			if(espini == -1)
+				espini = i;
+			espfin = i;
+		}
+		else{
+			if(espini != espfin)
+				salida = salida +  "!" + (espfin - espini).toString().padStart(3,0);
+			espini = -1;
+			espfin = -1;
+			salida = salida + key.charAt(i);
+		}
+		i++;
+	}
+	return salida;
+	
 }
 
 function evalforma(poke, pos){
@@ -878,29 +905,20 @@ function tipoformaseval(){
 
 }
 
-function readseed(seed){
-		
-	var listactual = new Array(seed.length/4);
+function showhid(){
 	
-	for(var i = 0; i < seed.length; i = i + 4){
-		
-		var numpoke = parseInt(seed.substring(i, i + 3)); 
-		var tipopoke = parseInt(seed.substring(i + 3, i + 4));
-		
-		try{
-			if( numpoke > CANTIDAD_POKES + 1 ||  numpoke == 0 || pokelist[numpoke][tipo] == null){
-				alert("seed erronea");
-				return;
-			}
-		}catch(error){
-			alert("seed erronea");
-			return;
-		}
-		
-		listactual[i/4] = pokelist[numpoke][tipopoke];
-			
+	if(!document.getElementsByTagName("button")[0].classList.contains("ballocul")){
+		document.getElementsByTagName("button")[0].classList.add("ballocul");
+		document.getElementsByClassName("details")[0].classList.add("detocul");
+		document.getElementsByClassName("content")[0].classList.add("contocul");
 	}
-	
+	else{
+		document.getElementsByTagName("button")[0].classList.remove("ballocul");
+		document.getElementsByClassName("details")[0].classList.remove("detocul");
+		document.getElementsByClassName("content")[0].classList.remove("contocul");
+	}
 }
+
+
 
 

@@ -1,5 +1,5 @@
 body{
-	margin: 3px 3px 3px 3px;
+	margin: 0px;
 	color:#000000;
 	font-family: 'Hind','Avenir','Helvetica',arial; 
 	font-size: 21px;
@@ -10,6 +10,11 @@ body{
 
 th{
 	color: #ffffff;
+}
+
+textarea{
+	border: none;
+	
 }
 
 .xdetalle{
@@ -140,9 +145,11 @@ th{
 	font-size: 90%;
 }
 .footer{
-	margin-top: 15px; 
-	text-align:right;
-	width: 790px;
+	position: absolute;
+	bottom: 0; 
+	text-align:center;
+	text-shadow: none;
+	font-size:60%;
 }
 
 .debilidades{
@@ -196,7 +203,7 @@ th{
 	text-shadow: none;
 	text-align: center;
 	float: left;
-	width: 84%;
+	width: 85%;
 	height: 100vh;
 	overflow-y: scroll;
 	
@@ -271,25 +278,52 @@ th{
 	width:90%; 
 	height:135px;
 	resize: none;
-	margin-right:5px
+	margin: auto;
 }
 
 .titulo{
 	text-align:center; 
+	color:#FFFFFF;
+	font-weight: bold;
 	margin-right:10px; 
 	border-bottom: 1px solid #f1f1f1;
 	border-top: 1px solid #f1f1f1;
 }
 
 .details{
-	float:right; 
+	position: absolute;	
+	right:0;
 	width: 15%;
 	font-size: 80%; 
 	padding-left: 5px; 
 	padding-top: 5px;
 	background-color: #FFFFFF;
 	height: 100vh;
-	
+	border-left: solid 7px;
+	background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 6%, rgba(196,0,0,1) 100%);
+}
+
+.ballbut{
+	width:50px; 
+	height:50px; 
+	border: solid 7px; 
+	border-radius: 25px; 
+	position: absolute; 
+	top:50%; 
+	right: 13.75%;
+	z-index:1;
+}
+
+.ballocul{
+	right: -18px;
+}
+
+.detocul{
+	width:0px;
+}
+
+.contocul{
+	width: 100%;
 }
 
 @media only screen and (max-width: 1085px) {
@@ -298,6 +332,10 @@ th{
 		width: 168px;
 		top:0;
 		right:0;
+	}
+	
+	.ballbut{
+		right: 152px;
 	}
 }
 position: absolute;
