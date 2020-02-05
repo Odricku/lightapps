@@ -16,91 +16,93 @@
 		<div class="temptext"><i>Espere a que se cargue la lista</i></div>
 	</div>
 	<div class="details">
-		<div style="text-align:center; width:90%">
-			<span class="botones" onclick="cargalista();"> CARGAR </span>
-			<span class="botones" onclick="eliminatacha();">LIMPIAR</span>
-		</div>
-		<p class="titulo">Guess Who - Version Pokémon v2.3</p>
-		<div class="tipofiltro" onclick="ocultar()">Ocultar todo</div>
-		<div class="tipofiltro" onclick="vergen()">Por Generacion</div>
-		<div id="xgen" class="xdetalle">
-			<table style="width:100%">
-				<tr>
-					<td>Gen 1</td><td><input type="checkbox" id="Gen1" value="1" disabled></input></td>
-				</tr>
-				<tr>
-					<td>Gen 2</td><td><input type="checkbox" id="Gen2" value="1" disabled></input></td>
-				</tr>
-				<tr>
-					<td>Gen 3</td><td><input type="checkbox" id="Gen3" value="1" disabled></input></td>
-				</tr>
-				<tr>
-					<td>Gen 4</td><td><input type="checkbox" id="Gen4" value="1" disabled></input></td>
-				</tr>
-				<tr>
-					<td>Gen 5</td><td><input type="checkbox" id="Gen5" value="1" disabled></input></td>
-				</tr>
-				<tr>
-					<td>Gen 6</td><td><input type="checkbox" id="Gen6" value="1" disabled></input></td>
-				</tr>
-				<tr>
-					<td>Gen 7</td><td><input type="checkbox" id="Gen7" value="1" disabled></input></td>
-				</tr>
-				<tr>
-					<td>Gen 8</td><td><input type="checkbox" id="Gen8" value="1" disabled></input></td>
-				</tr>
-				<tr>
-					<td>Formas</td><td><input type="checkbox" id="Otrasformas" value="1" onclick="formaseval()" disabled></input></td>
-					
-				</tr>
-				<tr>
-					<td colspan="2" >
-						<div id="detalleotras" class="detalleotras">
-							<table>
-								<tr>
-									<td>MegaEvo</td><td><input type="checkbox" id="Mega" value="1" onclick="tipoformaseval()"></input></td>
-								</tr>
-								<tr>
-									<td>Gigamax</td><td><input type="checkbox" id="Giga" value="1" onclick="tipoformaseval()"></input></td>
-								</tr>
-								<tr>
-									<td>RegForm</td><td><input type="checkbox" id="Reg" value="1" onclick="tipoformaseval()"></input></td>
-								</tr>
-								<tr>
-									<td>Otros</td><td><input type="checkbox" id="Otros" value="1" onclick="tipoformaseval()"></input></td>
-								</tr>
-							</table>
-						</div>
-					<td>
-				</tr>
-			</table>
-		</div>
-		<div class="tipofiltro" onclick="verseed()">Por Semilla</div>
-		<div id="xseed" class="xdetalle">
-			<br>
-			Seed <input style="width:50px" id="semilla"></input>
-			<span class="botones" onclick="exportar();">EXP</span>
-			<br>
-		</div>
-		<div class="tipofiltro" onclick="verrandom()">Random</div>
-		<div id="xrandom" class="xdetalle">
-			<br>
-			¿Cuantos?: <input style="width:50px" id="cantrand"></input>
-			<br>
-		</div>
-		
-		<div class="tipofiltro" onclick="veracciones()">Acciones</div>
-		<div id="xacciones" class="xdetalle" style="text-align:center">
-			<div id="debilidades"></div>
-			<textarea class="detatipo" id="detatipo" readonly></textarea>
-			<br>
-			<span class="botones" onclick="tachatipo(document.getElementById('detatipo').value);">TACHAR LOS DE TIPO</span><br><br>
-			<span class="botones" onclick="tachanotipo(document.getElementById('detatipo').value);">TACHAR LOS QUE NO</span><br><br>
-			<span class="botones" onclick="tacha1tipo();">TACHAR MONOTIPOS</span><br><br>
-			<span class="botones" onclick="tacha2tipo();">TACHAR DOBLE TIPO</span><br><br>
+		<div class="detailswrap">
+			<div style="text-align:center; width:90%">
+				<span class="botones" onclick="cargalista();"> CARGAR </span>
+				<span class="botones" onclick="eliminatacha();">LIMPIAR</span>
+			</div>
+			<p class="titulo">Guess Who - Version Pokémon v2.3</p>
+			<div class="tipofiltro" onclick="ocultar()">Ocultar todo</div>
+			<div class="tipofiltro" onclick="vergen()">Por Generacion</div>
+			<div id="xgen" class="xdetalle">
+				<table style="width:100%">
+					<tr>
+						<td>Gen 1</td><td><input type="checkbox" id="Gen1" value="1" disabled></input></td>
+					</tr>
+					<tr>
+						<td>Gen 2</td><td><input type="checkbox" id="Gen2" value="1" disabled></input></td>
+					</tr>
+					<tr>
+						<td>Gen 3</td><td><input type="checkbox" id="Gen3" value="1" disabled></input></td>
+					</tr>
+					<tr>
+						<td>Gen 4</td><td><input type="checkbox" id="Gen4" value="1" disabled></input></td>
+					</tr>
+					<tr>
+						<td>Gen 5</td><td><input type="checkbox" id="Gen5" value="1" disabled></input></td>
+					</tr>
+					<tr>
+						<td>Gen 6</td><td><input type="checkbox" id="Gen6" value="1" disabled></input></td>
+					</tr>
+					<tr>
+						<td>Gen 7</td><td><input type="checkbox" id="Gen7" value="1" disabled></input></td>
+					</tr>
+					<tr>
+						<td>Gen 8</td><td><input type="checkbox" id="Gen8" value="1" disabled></input></td>
+					</tr>
+					<tr>
+						<td>Formas</td><td><input type="checkbox" id="Otrasformas" value="1" onclick="formaseval()" disabled></input></td>
+						
+					</tr>
+					<tr>
+						<td colspan="2" >
+							<div id="detalleotras" class="detalleotras">
+								<table>
+									<tr>
+										<td>MegaEvo</td><td><input type="checkbox" id="Mega" value="1" onclick="tipoformaseval()"></input></td>
+									</tr>
+									<tr>
+										<td>Gigamax</td><td><input type="checkbox" id="Giga" value="1" onclick="tipoformaseval()"></input></td>
+									</tr>
+									<tr>
+										<td>RegForm</td><td><input type="checkbox" id="Reg" value="1" onclick="tipoformaseval()"></input></td>
+									</tr>
+									<tr>
+										<td>Otros</td><td><input type="checkbox" id="Otros" value="1" onclick="tipoformaseval()"></input></td>
+									</tr>
+								</table>
+							</div>
+						<td>
+					</tr>
+				</table>
+			</div>
+			<div class="tipofiltro" onclick="verseed()">Por Semilla</div>
+			<div id="xseed" class="xdetalle">
+				<br>
+				Seed <input style="width:50px" id="semilla"></input>
+				<span class="botones" onclick="exportar();">EXP</span>
+				<br>
+			</div>
+			<div class="tipofiltro" onclick="verrandom()">Random</div>
+			<div id="xrandom" class="xdetalle">
+				<br>
+				¿Cuantos?: <input style="width:50px" id="cantrand"></input>
+				<br>
+			</div>
 			
+			<div class="tipofiltro" onclick="veracciones()">Acciones</div>
+			<div id="xacciones" class="xdetalle" style="text-align:center">
+				<div id="debilidades"></div>
+				<textarea class="detatipo" id="detatipo" readonly></textarea>
+				<br>
+				<span class="botones" onclick="tachatipo(document.getElementById('detatipo').value);">TACHAR LOS DE TIPO</span><br><br>
+				<span class="botones" onclick="tachanotipo(document.getElementById('detatipo').value);">TACHAR LOS QUE NO</span><br><br>
+				<span class="botones" onclick="tacha1tipo();">TACHAR MONOTIPOS</span><br><br>
+				<span class="botones" onclick="tacha2tipo();">TACHAR DOBLE TIPO</span><br><br>
+				
+			</div>
+			<div class="footer">By Petreds - Petreds@gmail.com - <span onclick="alert(disc)">Disclaimer</span> -  </div>
 		</div>
-		<div class="footer">By Petreds - Petreds@gmail.com - <span onclick="alert(disc)">Disclaimer</span> -  </div>
 	</div>
 	
 </body>

@@ -911,11 +911,13 @@ function showhid(){
 		document.getElementsByTagName("button")[0].classList.add("ballocul");
 		document.getElementsByClassName("details")[0].classList.add("detocul");
 		document.getElementsByClassName("content")[0].classList.add("contocul");
+		document.getElementsByClassName("detailwrap")[0].classList.add("detailwrapocul");
 	}
 	else{
 		document.getElementsByTagName("button")[0].classList.remove("ballocul");
 		document.getElementsByClassName("details")[0].classList.remove("detocul");
 		document.getElementsByClassName("content")[0].classList.remove("contocul");
+		document.getElementsByClassName("detailwrap")[0].classList.remove("detailwrapocul");
 	}
 }
 
