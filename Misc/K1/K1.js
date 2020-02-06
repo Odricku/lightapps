@@ -14,6 +14,8 @@ var galar = ["Meowth","Ponyta","Rapidash","Slowpoke","Farfetch'd","Weezing","Mr.
 var mega = ["Mega-Venusaur","Mega-Charizard X","Mega-Charizard Y","Mega-Blastoise","Mega-Alakazam","Mega-Gengar","Mega-Kangaskhan","Mega-Pinsir","Mega-Gyarados","Mega-Aerodactyl","Mega-Mewtwo X","Mega-Mewtwo Y","Mega-Ampharos","Mega-Scizor","Mega-Heracross","Mega-Houndoom","Mega-Tyranitar","Mega-Blaziken","Mega-Gardevoir","Mega-Mawile","Mega-Aggron","Mega-Medicham","Mega-Manectric","Mega-Banette","Mega-Absol","Mega-Garchomp","Mega-Lucario","Mega-Abomasnow","Mega-Beedrill","Mega-Pidgeot","Mega-Slowbro","Mega-Steelix","Mega-Sceptile","Mega-Swampert","Mega-Sableye","Mega-Sharpedo","Mega-Camerupt","Mega-Altaria","Mega-Glalie","Mega-Salamence","Mega-Metagross","Mega-Latias","Mega-Latios","Mega-Rayquaza","Mega-Lopunny","Mega-Gallade","Mega-Audino","Mega-Diancie"];
 var cambios2 = ["Absorbe agua", "Absor. agua","Absorbe electricidad", "Absor. elec.","Electricidad estática", "Elec. estát.","Electricidad estática", "Elect. estát.","Espíritu vital", "Espír. vital","Efecto espora", "Efec. espora","Modo Daruma", "Modo daruma"];
 var cambios = ["Bombardeo", "Presa", "Constricción", "Repetición","Contraataque", "Contador","Espejo", "Movimiento espejo","Espejo", "Mov. Espejo","Retribución", "Retroceso","Rodar", "Desenrollar","Sellar", "Cerca","Semilladora", "Recurrente","Sísmico", "Movimiento sísmico","Colmillo ígneo", "Colmillo fuego","Colmillo hielo", "Colmillo Hielo","Golpe cabeza", "Golpe Cabeza","Hidrocañón", "Hidrocañon","Cambio de banda", "Cambio banda", "Treparrocas", "Treparocas","Divide dolor", "Divide Dolor", "Atadura", "atadura","Pantalla de luz", "Pantalla Luz","Pantalla de luz", "Pantalla luz","Pantalla de humo", "Pantallahumo","Cola férrea", "Cola ferrea","Onda voltio", "Onda Voltio","Otra vez", "Otra Vez","Garra metal", "Garra Metal","Onda ígnea", "Onda Ígnea","Foco energía", "Foco energia","Rayo confuso", "Rayo Confuso","Psicorrayo", "Psicorayo","Puño hielo", "Puño Hielo","Represión metal", "Repr. metal","Bomba germen", "Bomba Germen","Trampa rocas", "Trampa Rocas","Pisotón", "Pisoton","Tijera X", "Tijera x","Bola sombra", "Bola Sombra","Látigo cepa", "Latigo cepa","Hierba lazo", "Hierba Lazo","Látigo", "Latigo","Disparo demora", "Disparo Demora"];
+
+var accion = 1;
 	
 window.onload = function(){
 	cargajson();
@@ -205,19 +207,38 @@ function eliminatacha(){
 	var mensaje = confirm("¿Seguro?, no puede deshacerse");
 
 	if (mensaje) {
-		for(var i = document.getElementsByClassName("pokevista").length -1; i >= 0; i--){
-			var pokeactual = document.getElementsByClassName("pokevista")[i];
-			if(pokeactual.getElementsByClassName("equis")[0].style.visibility == "visible")
-				pokeactual.remove();
-			
+		var pokes = document.getElementsByClassName("pokevista");
+		for(var i = pokes.length -1; i >= 0; i--){
+			if(pokes[i].getElementsByClassName("equis")[0].style.visibility == "visible" && !pokes[i].classList.contains("oculto") ){
+				pokes[i].classList.add("oculto");
+				pokes[i].value = accion;
+			}
 		}
+		accion++;
 	}
+}
+
+function deshacer(){
+	
+	var pokes = document.getElementsByClassName("oculto");
+	for(var i = pokes.length - 1; i >= 0; i--){
+		try{
+			if(pokes[i].value + 1 == accion){
+				pokes[i].value = 0;
+				pokes[i].classList.remove("oculto");
+			}
+		}
+		catch(error){}
+	}
+	accion--;
+	
 }
 
 function creaficha(poke, j){
 	
 	var opcion = document.createElement("a");
 	opcion.id = poke["id"] + poke.title;
+	opcion.value = 0;
 	opcion.name = poke["name"];
 	opcion.setAttribute("class", "pokevista");
 	opcion.addEventListener("click", seleccion, false);
@@ -262,6 +283,8 @@ function cargalista(){
 	var key = "";
 	
 	try{
+		if (document.getElementById('xacciones').style.display == "block") return;
+		
 		if (document.getElementById('xseed').style.display == "block"){
 			if(document.getElementById('semilla').value.length <= 0){
 				alert("Debe indicar una seed");
@@ -270,7 +293,7 @@ function cargalista(){
 			var cant = 0;
 			for(var f = 1; f < pokelist.length; f++)
 				cant = cant + pokelist[f].length;
-			key = document.getElementById("semilla").value.padEnd(Math.trunc(cant/6) + 1," ");
+			key = invtransform(document.getElementById("semilla").value).padEnd(Math.trunc(cant/6) + 1," ");
 			
 			document.getElementById("Gen1").checked = true;
 			document.getElementById("Gen2").checked = true;
@@ -286,6 +309,7 @@ function cargalista(){
 			document.getElementById("Reg").checked = true; 
 			document.getElementById("Otros").checked = true; 
 			document.getElementById("Otrasformas").checked = true;
+
 		}
 	}catch(error){
 		alert("Debe indicar una seed");
@@ -308,6 +332,7 @@ function cargalista(){
 	document.getElementById("pokelist").innerHTML = "<div class='pokeselect' id='pokeselect'></div>";
 	cargadebilidades();
 	var pos = 0;
+	accion = 1;
 	while(i < pokelist.length){
 		
 		try{
@@ -398,7 +423,7 @@ function exportar(){
 			
 			for(var k = 0; k < document.getElementsByClassName("pokevista").length; k++){
 				var poke = document.getElementsByClassName("pokevista")[k];
-				if(pokelist[i][j]["name"] == poke.name && pokelist[i][j]["title"] == poke.id.substring(3, poke.id.length)){
+				if(pokelist[i][j]["name"] == poke.name && pokelist[i][j]["title"] == poke.id.substring(3, poke.id.length) && !poke.classList.contains("oculto")){
 					temp = 1;
 					k = document.getElementsByClassName("pokevista").length;
 				}
@@ -416,7 +441,7 @@ function exportar(){
 	}
 	
 	key = ("!" + key).trim();
-	document.getElementById("detatipo").value = key.slice(1);
+	document.getElementById("detatipo").value = transform(key.slice(1));
 	veracciones();
 }
 
@@ -433,8 +458,12 @@ function transform(key){
 			espfin = i;
 		}
 		else{
-			if(espini != espfin)
-				salida = salida +  "!" + (espfin - espini).toString().padStart(3,0);
+			if(espini != espfin){
+				if(espfin - espini > 3)
+					salida = salida +  "!" + (espfin - espini + 1).toString().padStart(3,0);
+				else
+					salida = salida + " ".padStart(espfin - espini + 1, " ");				
+			}
 			espini = -1;
 			espfin = -1;
 			salida = salida + key.charAt(i);
@@ -443,6 +472,24 @@ function transform(key){
 	}
 	return salida;
 	
+}
+
+function invtransform(seed){
+	
+	var semilla = "";
+	
+	for(var i = 0; i < seed.length; i++){
+		
+		if(seed.charAt(i) == "!"){
+			semilla = semilla + "".padStart(parseInt(seed.substring(i + 1, i + 4))," ");
+			i = i + 3;
+		}
+		else
+			semilla = semilla + seed.charAt(i);
+		
+	}
+	return semilla;
+		
 }
 
 function evalforma(poke, pos){

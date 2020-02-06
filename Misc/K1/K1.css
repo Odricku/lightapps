@@ -181,6 +181,10 @@ textarea{
 	position: relative;
 }
 
+.oculto{
+	display: none;
+}
+
 .equis{
 	display: hidden;
 	position: absolute;
@@ -217,7 +221,6 @@ textarea{
 .content a {
 	color: black;
 	text-decoration: none;
-	display: block;
 }
 
 /* Change color of dropdown links on hover */
