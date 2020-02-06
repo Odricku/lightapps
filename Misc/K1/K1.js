@@ -23,7 +23,7 @@ window.onload = function(){
 
 function cargajson(){
 
-	var pokejsonurl = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://odricku.cl/PKAW/base/pokelist.json");
+	var pokejsonurl = encodeURI("https://odricku.cl/PKAW/base/pokelist.json");
 	request = new XMLHttpRequest();	
 	request.open('GET', pokejsonurl);
 	request.responseType = 'json';
