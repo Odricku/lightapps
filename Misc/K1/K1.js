@@ -438,6 +438,7 @@ function exportar(){
 	
 	key = ("!" + key).trim();
 	document.getElementById("detatipo").value = transform(key.slice(1));
+
 	veracciones();
 }
 
@@ -460,6 +461,9 @@ function transform(key){
 				else
 					salida = salida + " ".padStart(espfin - espini + 1, " ");				
 			}
+			else if(espini != -1)
+				salida = salida + " ";
+			
 			espini = -1;
 			espfin = -1;
 			salida = salida + key.charAt(i);
