@@ -203,19 +203,15 @@ function eliminatacha(){
 	
 	if(document.getElementsByClassName("pokevista").length == 0)
 		return;
-	
-	var mensaje = confirm("¿Seguro?, no puede deshacerse");
 
-	if (mensaje) {
-		var pokes = document.getElementsByClassName("pokevista");
-		for(var i = pokes.length -1; i >= 0; i--){
-			if(pokes[i].getElementsByClassName("equis")[0].style.visibility == "visible" && !pokes[i].classList.contains("oculto") ){
-				pokes[i].classList.add("oculto");
-				pokes[i].value = accion;
-			}
+	var pokes = document.getElementsByClassName("pokevista");
+	for(var i = pokes.length -1; i >= 0; i--){
+		if(pokes[i].getElementsByClassName("equis")[0].style.visibility == "visible" && !pokes[i].classList.contains("oculto") ){
+			pokes[i].classList.add("oculto");
+			pokes[i].value = accion;
 		}
-		accion++;
 	}
+	accion++;
 }
 
 function deshacer(){
