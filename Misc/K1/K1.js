@@ -23,30 +23,30 @@ window.onload = function(){
 
 function cargajson(){
 	
-	try{
-		var pokejsonurl = encodeURI("https://odricku.cl/PKAW/base/pokelist.json");
-		request = new XMLHttpRequest();	
-		request.open('GET', pokejsonurl);
-		request.responseType = 'json';
-		request.send();
-		request.onload = function() {
-			pokelist = request.response;
-			document.getElementById("pokelist").innerHTML = "";
-			document.getElementById("Gen1").disabled = false;
-			document.getElementById("Gen2").disabled = false;
-			document.getElementById("Gen3").disabled = false;
-			document.getElementById("Gen4").disabled = false;
-			document.getElementById("Gen5").disabled = false;
-			document.getElementById("Gen6").disabled = false;
-			document.getElementById("Gen7").disabled = false;
-			document.getElementById("Gen8").disabled = false;
-			document.getElementById("Otrasformas").disabled = false;
-		}
-		return 1;
-	}
-	catch(error){
+	var bandera = 0;
+	
+	var pokejsonurl = encodeURI("https://odricku.cl/PKAW/base/pokelist.json");
+	request = new XMLHttpRequest();	
+	request.open('GET', pokejsonurl);
+	request.responseType = 'json';
+	request.send();
+	request.onload = function() {
+		pokelist = request.response;
+		document.getElementById("pokelist").innerHTML = "";
+		document.getElementById("Gen1").disabled = false;
+		document.getElementById("Gen2").disabled = false;
+		document.getElementById("Gen3").disabled = false;
+		document.getElementById("Gen4").disabled = false;
+		document.getElementById("Gen5").disabled = false;
+		document.getElementById("Gen6").disabled = false;
+		document.getElementById("Gen7").disabled = false;
+		document.getElementById("Gen8").disabled = false;
+		document.getElementById("Otrasformas").disabled = false;
 
-		var pokejsonurl = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://odricku.cl/PKAW/base/pokelist.json");
+	}
+	
+	request.onerror = function() {
+		pokejsonurl = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://odricku.cl/PKAW/base/pokelist.json");
 		request = new XMLHttpRequest();	
 		request.open('GET', pokejsonurl);
 		request.responseType = 'json';
@@ -63,9 +63,11 @@ function cargajson(){
 			document.getElementById("Gen7").disabled = false;
 			document.getElementById("Gen8").disabled = false;
 			document.getElementById("Otrasformas").disabled = false;
-		}
-		return 1;
+		}		
 	}
+	
+	return 1;
+		
 }
 
 function ocultar(){
