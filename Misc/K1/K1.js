@@ -23,7 +23,7 @@ window.onload = function(){
 
 function cargajson(){
 
-	var pokejsonurl = encodeURI("https://odricku.cl/PKAW/base/pokelist.json");
+	var pokejsonurl = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://odricku.cl/PKAW/base/pokelist.json");
 	request = new XMLHttpRequest();	
 	request.open('GET', pokejsonurl);
 	request.responseType = 'json';
@@ -456,8 +456,8 @@ function transform(key){
 		}
 		else{
 			if(espini != espfin){
-				if(espfin - espini > 3)
-					salida = salida +  "!" + (espfin - espini + 1).toString().padStart(3,0);
+				if(espfin - espini >= 2)
+					salida = salida +  "!" + (espfin - espini + 1).toString(36).padStart(2,0);
 				else
 					salida = salida + " ".padStart(espfin - espini + 1, " ");				
 			}
@@ -481,8 +481,8 @@ function invtransform(seed){
 	for(var i = 0; i < seed.length; i++){
 		
 		if(seed.charAt(i) == "!"){
-			semilla = semilla + "".padStart(parseInt(seed.substring(i + 1, i + 4))," ");
-			i = i + 3;
+			semilla = semilla + "".padStart( parseInt(seed.substring(i + 1, i + 3), 36) ," ");
+			i = i + 2;
 		}
 		else
 			semilla = semilla + seed.charAt(i);
