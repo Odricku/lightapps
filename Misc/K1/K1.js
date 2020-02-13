@@ -338,16 +338,15 @@ function cargalista(){
 			if(document.getElementById("Otrasformas").checked || key != ""){
 
 				for(var j = 0; j < pokelist[i].length; j++){
-					if (key != ""){
-						
+					if (key != ""){	
 						if(llave.indexOf(key[Math.trunc(pos/6)]).toString(2).padStart(6,0)[pos%6] == "1"){
-							creaficha(pokelist[i][j], masformas(key, i, pos));
+							creaficha(pokelist[i][j], masformas(key, i, j , pos));
 						}
 					}
 					else{
 						var poke = pokelist[i][j];
 						if (document.getElementById("Gen" + poke.gen).checked && evalforma(poke, j))
-							creaficha(poke, masformas(key, i, pos));
+							creaficha(poke, masformas(key, i, j,  pos));
 					}
 					pos++;
 				}
