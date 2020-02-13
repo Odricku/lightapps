@@ -161,7 +161,10 @@ textarea{
 	background: #FFFFFF url(https://db.pokemongohub.net/images/pokeball-gray.svg) bottom left no-repeat;
 	font-size:50%; 
 	height:190px;
-	border-radius: 95px 0px 0px 95px;
+	border-radius: 102px 0px 0px 102px;
+	border-bottom: solid 7px;
+	border-left: solid 7px;
+	border-top: solid 7px;
 }
 
 .pokevista{

@@ -256,7 +256,7 @@ function deshacer(){
 	
 }
 
-function creaficha(poke, j){
+function creaficha(poke, forma){
 	
 	var opcion = document.createElement("a");
 	opcion.id = poke["id"] + poke.title;
@@ -288,7 +288,7 @@ function creaficha(poke, j){
 		complem = complem + "</i>"
 	}
 	
-	if(poke.title == "normal" || (j == 0 && !document.getElementById("Otros").checked)){
+	if(poke.title == "normal" || !forma){
 		opcion.innerHTML = "<div><img width='100px' height='100px' src='" + poke["front"] + "'/><br>" + poke["name"].replace("_", "") + complem + "<a class='equis' style='visibility:hidden'></a></div>";
 	}
 	else
@@ -304,7 +304,6 @@ function cargalista(){
 	var rand = 0;
 	var key = "";
 	
-	try{
 		if (document.getElementById('xacciones').style.display == "block") return;
 		
 		if (document.getElementById('xseed').style.display == "block"){
@@ -312,31 +311,8 @@ function cargalista(){
 				alert("Debe indicar una seed");
 				return;
 			}
-			var cant = 0;
-			for(var f = 1; f < pokelist.length; f++)
-				cant = cant + pokelist[f].length;
-			key = invtransform(document.getElementById("semilla").value).padEnd(Math.trunc(cant/6) + 1," ");
-			
-			document.getElementById("Gen1").checked = true;
-			document.getElementById("Gen2").checked = true;
-			document.getElementById("Gen3").checked = true;
-			document.getElementById("Gen4").checked = true;
-			document.getElementById("Gen5").checked = true;
-			document.getElementById("Gen6").checked = true;
-			document.getElementById("Gen7").checked = true;
-			document.getElementById("Gen8").checked = true;
-			
-			document.getElementById("Mega").checked = true; 
-			document.getElementById("Giga").checked = true; 
-			document.getElementById("Reg").checked = true; 
-			document.getElementById("Otros").checked = true; 
-			document.getElementById("Otrasformas").checked = true;
-
+			key = invtransform(document.getElementById("semilla").value);
 		}
-	}catch(error){
-		alert("Debe indicar una seed");
-		return;
-	}
 	
 	try{
 		if (document.getElementById('xrandom').style.display == "block"){
@@ -355,23 +331,23 @@ function cargalista(){
 	cargadebilidades();
 	var pos = 0;
 	accion = 1;
+	
 	while(i < pokelist.length){
 		
 		try{
-			if(document.getElementById("Otrasformas").checked){
-				
+			if(document.getElementById("Otrasformas").checked || key != ""){
+
 				for(var j = 0; j < pokelist[i].length; j++){
 					if (key != ""){
+						
 						if(llave.indexOf(key[Math.trunc(pos/6)]).toString(2).padStart(6,0)[pos%6] == "1"){
-							var poke = pokelist[i][j];
-							if (document.getElementById("Gen" + poke.gen).checked && evalforma(poke, j))
-								creaficha(poke, j);
+							creaficha(pokelist[i][j], masformas(key, i, pos));
 						}
 					}
 					else{
 						var poke = pokelist[i][j];
 						if (document.getElementById("Gen" + poke.gen).checked && evalforma(poke, j))
-							creaficha(poke, j);
+							creaficha(poke, masformas(key, i, pos));
 					}
 					pos++;
 				}
@@ -380,12 +356,12 @@ function cargalista(){
 				
 				var poke = pokelist[i][0];
 				if (document.getElementById("Gen" + poke.gen).checked) 
-					creaficha(poke, 0);
+					creaficha(poke, false);
 				
 			}
 			i++;
 		}catch(error){
-			alert(pokelist.length + " " + i + " " + j);
+			alert(error);
 		}
 	}
 	
@@ -411,6 +387,16 @@ function cargalista(){
 	}catch(error){};
 }
 
+function masformas(key, i, j, pos){
+	if(pokelist[i].length == 1) return false;
+	if(j != 0) return true;
+	
+	for(var j = 1; j < pokelist[i].length; j++)
+		if(llave.indexOf(key[Math.trunc((pos + j)/6)]).toString(2).padStart(6,0)[(pos + j) % 6] == "1")
+			return true;
+	return false;
+}
+
 function tacha1tipo(){
 	for(var i = 0; i < document.getElementsByClassName("pokevista").length; i++){
 		var poke = document.getElementsByClassName("pokevista")[i];
@@ -434,17 +420,20 @@ function tacha2tipo(){
 
 function exportar(){
 	
-	var key = "";
+	var key1 = "";
+	var key2 = "¡";
 	var elem = "";
 	
 	var pos = 0;
 	
+	var lista = document.getElementsByClassName("pokevista");
+		
 	for(var i = 1; i < pokelist.length; i++){
 		for(var j = 0; j< pokelist[i].length; j++){
 			var temp = 0;
 			
-			for(var k = 0; k < document.getElementsByClassName("pokevista").length; k++){
-				var poke = document.getElementsByClassName("pokevista")[k];
+			for(var k = 0; k < lista.length; k++){
+				var poke = lista[k];
 				if(pokelist[i][j]["name"] == poke.name && pokelist[i][j]["title"] == poke.id.substring(3, poke.id.length) && !poke.classList.contains("oculto")){
 					temp = 1;
 					k = document.getElementsByClassName("pokevista").length;
@@ -454,7 +443,9 @@ function exportar(){
 			elem = elem + temp;
 			
 			if(Math.trunc(pos%6) == 5 || (i == pokelist.length - 1) && (j == pokelist[i].length - 1)){
-				key = key + llave.charAt(parseInt(elem.padEnd(6,0),2));
+				var char1 = llave.charAt(parseInt(elem.padEnd(6,0),2));
+				key1 = key1 + char1 ;
+				key2 = key2 + llave.charAt(llave.length - 1 - llave.indexOf(char1));
 				elem = "";
 			}
 			
@@ -462,8 +453,13 @@ function exportar(){
 		}
 	}
 	
-	key = ("!" + key).trim();
-	document.getElementById("detatipo").value = transform(key.slice(1));
+	key1 = transform(("!" + key1).trim().slice(1));
+	key2 = transform(("!" + key2).trim().slice(1));
+	
+	if(key1.length <= key2.length)
+		document.getElementById("detatipo").value = key1;
+	else
+		document.getElementById("detatipo").value = key2;
 
 	veracciones();
 }
@@ -504,18 +500,29 @@ function invtransform(seed){
 	
 	var semilla = "";
 	
+	var cant = 0;
+		for(var f = 1; f < pokelist.length; f++)
+			cant = cant + pokelist[f].length;
+		
+	var llenado = llave.charAt(0);
+	if(seed.charAt(0) == "¡")
+		llenado = llave.charAt(llave.length - 1);
+	
 	for(var i = 0; i < seed.length; i++){
 		
 		if(seed.charAt(i) == "!"){
-			semilla = semilla + "".padStart( parseInt(seed.substring(i + 1, i + 3), 36) ," ");
+			semilla = semilla + "".padStart( parseInt(seed.substring(i + 1, i + 3), 36) , llenado);
 			i = i + 2;
 		}
-		else
-			semilla = semilla + seed.charAt(i);
-		
+		else{
+			if(seed.charAt(0) != "¡")
+				semilla = semilla + seed.charAt(i);
+			else if(i != 0)
+				semilla = semilla + llave.charAt(llave.length - 1 - llave.indexOf(seed.charAt(i)));
+		}
 	}
-	return semilla;
-		
+	
+	return semilla.padEnd(Math.trunc(cant/6) + 1, llenado);
 }
 
 function evalforma(poke, pos){
