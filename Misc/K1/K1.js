@@ -33,16 +33,15 @@ function cargajson(){
 	request.onload = function() {
 		pokelist = request.response;
 		document.getElementById("pokelist").innerHTML = "";
-		document.getElementById("Gen1").disabled = false;
-		document.getElementById("Gen2").disabled = false;
-		document.getElementById("Gen3").disabled = false;
-		document.getElementById("Gen4").disabled = false;
-		document.getElementById("Gen5").disabled = false;
-		document.getElementById("Gen6").disabled = false;
-		document.getElementById("Gen7").disabled = false;
-		document.getElementById("Gen8").disabled = false;
-		document.getElementById("Otrasformas").disabled = false;
-
+		if(document.URL.indexOf("?") != -1){
+			var key = document.URL.slice(document.URL.split("?")[0].length + 1).replace(/%20/g, " ");
+			if(key.length > 0){
+				showhid();
+				verseed();
+				document.getElementById("semilla").value = key;
+				cargalista();
+			}
+		}
 	}
 	
 	request.onerror = function() {
@@ -54,16 +53,16 @@ function cargajson(){
 		request.onload = function() {
 			pokelist = request.response;
 			document.getElementById("pokelist").innerHTML = "";
-			document.getElementById("Gen1").disabled = false;
-			document.getElementById("Gen2").disabled = false;
-			document.getElementById("Gen3").disabled = false;
-			document.getElementById("Gen4").disabled = false;
-			document.getElementById("Gen5").disabled = false;
-			document.getElementById("Gen6").disabled = false;
-			document.getElementById("Gen7").disabled = false;
-			document.getElementById("Gen8").disabled = false;
-			document.getElementById("Otrasformas").disabled = false;
-		}		
+			if(document.URL.indexOf("?") != -1){
+				var key = document.URL.slice(document.URL.split("?")[0].length + 1).replace(/%20/g, " ");
+				if(key.length > 0){
+					showhid();
+					verseed();
+					document.getElementById("semilla").value = key;
+					cargalista();
+				}
+			}
+		}
 	}
 	
 	return 1;
@@ -441,7 +440,7 @@ function exportar(){
 			
 			elem = elem + temp;
 			
-			if(Math.trunc(pos%6) == 5 || (i == pokelist.length - 1) && (j == pokelist[i].length - 1)){
+			if(Math.trunc(pos % 6) == 5 || (i == pokelist.length - 1) && (j == pokelist[i].length - 1)){
 				var char1 = llave.charAt(parseInt(elem.padEnd(6,0),2));
 				key1 = key1 + char1 ;
 				key2 = key2 + llave.charAt(llave.length - 1 - llave.indexOf(char1));
