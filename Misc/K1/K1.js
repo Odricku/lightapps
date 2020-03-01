@@ -33,6 +33,16 @@ function cargajson(){
 	request.onload = function() {
 		pokelist = request.response;
 		document.getElementById("pokelist").innerHTML = "";
+		document.getElementById("Gen1").disabled = false;
+		document.getElementById("Gen2").disabled = false;
+		document.getElementById("Gen3").disabled = false;
+		document.getElementById("Gen4").disabled = false;
+		document.getElementById("Gen5").disabled = false;
+		document.getElementById("Gen6").disabled = false;
+		document.getElementById("Gen7").disabled = false;
+		document.getElementById("Gen8").disabled = false;
+		document.getElementById("Otrasformas").disabled = false;
+		
 		if(document.URL.indexOf("?") != -1){
 			var key = document.URL.slice(document.URL.split("?")[0].length + 1).replace(/%20/g, " ");
 			if(key.length > 0){
@@ -53,6 +63,16 @@ function cargajson(){
 		request.onload = function() {
 			pokelist = request.response;
 			document.getElementById("pokelist").innerHTML = "";
+			document.getElementById("Gen1").disabled = false;
+			document.getElementById("Gen2").disabled = false;
+			document.getElementById("Gen3").disabled = false;
+			document.getElementById("Gen4").disabled = false;
+			document.getElementById("Gen5").disabled = false;
+			document.getElementById("Gen6").disabled = false;
+			document.getElementById("Gen7").disabled = false;
+			document.getElementById("Gen8").disabled = false;
+			document.getElementById("Otrasformas").disabled = false;
+			
 			if(document.URL.indexOf("?") != -1){
 				var key = document.URL.slice(document.URL.split("?")[0].length + 1).replace(/%20/g, " ");
 				if(key.length > 0){
@@ -998,7 +1018,3 @@ function showhid(){
 		document.getElementsByClassName("detailswrap")[0].classList.remove("detailwrapocul");
 	}
 }
-
-
-
-
