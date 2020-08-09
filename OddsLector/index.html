@@ -14,13 +14,19 @@
 	img{
 		margin: 0px;
 	}
+	.head{
+		background-color: black;
+		position: fixed;
+	}
 	</style>
 </head>
 <body>
 	
-	<select id="chosecap" onchange="cargacap(this)">
-		<option disabled selected value></option>
-	</select>
+	<div class="head">
+		<select id="chosecap" onchange="cargacap(this)">
+			<option disabled selected value></option>
+		</select>
+	</div>
 	<div id="repositorio" style="text-align: center"></div>
 
 </body>
