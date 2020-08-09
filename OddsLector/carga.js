@@ -29,7 +29,7 @@ function cargacap(item){
 	
 	var cap = data[parseInt(item.value)];
 	
-	repo.innerHTML = "";
+	document.getElementById('repositorio').innerHTML = "";
 	
 	for(var i = 0; i < cap[page]; i++){
 		var container = document.createElement("div");
