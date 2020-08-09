@@ -6,7 +6,7 @@ window.onload = function(){
 
 function cargajson(){
 		
-	var urls = encodeURI("https://odricku.cl/oddslLector/data.json");
+	var urls = encodeURI("https://odricku.cl/oddslector/data.json");
 	
 	request = new XMLHttpRequest();	
 	request.open('GET', urls);
