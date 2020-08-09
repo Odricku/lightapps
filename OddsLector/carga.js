@@ -27,7 +27,7 @@ function cargajson(){
 }
 	
 
-function cargacap((item){
+function cargacap(item){
 	
 	var cap = data[parseInt(item.value)];
 	var repo = document.getElementById('repositorio');
