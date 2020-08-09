@@ -18,7 +18,7 @@ function cargajson(){
 		for(var i = 0; i < data.length; i++){
 			var opcion = document.createElement("option");
 			opcion.value = i;
-			opcion.innerText = "Capitulo " + data[i].num;
+			opcion.innerText = "Capitulo " + data[i].num + " (Traducido x " + data[i].trad + ")";
 			document.getElementById('chosecap').appendChild(opcion);
 		}
 	}

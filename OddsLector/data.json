@@ -1,8 +1,8 @@
 [
-{"num":"1", "page":63},
-{"num":"2", "page":64},
-{"num":"3", "page":69},
-{"num":"4", "page":70},
-{"num":"6", "page":52},
-{"num":"7", "page":58}
+{"num":"1", "page":63, "trad": "Ruk230"},
+{"num":"2", "page":64, "trad": "BCDT"},
+{"num":"3", "page":69, "trad": "Ruk230"},
+{"num":"4", "page":70, "trad": "BCDT"},
+{"num":"6", "page":52, "trad": "Odds"},
+{"num":"7", "page":58, "trad": "BCDT"}
 ]
