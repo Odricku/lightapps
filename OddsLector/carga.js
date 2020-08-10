@@ -31,10 +31,11 @@ function cargacap(item){
 	
 	document.getElementById('repositorio').innerHTML = "";
 	
-	for(var i = 1; i < cap.page + 1; i++){
+	for(var i = 0; i < cap.page + 1; i++){
 		var container = document.createElement("div");
 		var numpage = document.createElement("div");
 		var imagen = document.createElement("img");
+		imagen.width = "600px";
 		numpage.classList.add("numpage");
 		numpage.innerText = i;
 		imagen.src = "https://odricku.cl/oddslector/caps/" + cap.num + "/" + i + ".png";
