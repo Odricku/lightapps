@@ -43,14 +43,18 @@ function cargacap(item){
 		var pose = 0;
 		var posp = 0;
 				
+		alert(imagen.naturalHeight);
+		
 		while(imagen.naturalHeight == 0){
+			
+			posp = 0;
 			while(imagen.naturalHeight == 0){
 				imagen.src = "https://odricku.cl/oddslector/caps/" + cap.num + "/" + pre[posp]+ i + "." + ext[pose];
 				posp = posp + 1;
 			}
 			pose = pose + 1;
 			
-			if (pose == ext.length && posp == pre.length){
+			if (pose == ext.length + 1 && posp == pre.length + 1){
 				imagen.src = "https://odricku.cl/oddslector/caps/error.png";
 			}	
 		}
