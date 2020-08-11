@@ -1,5 +1,5 @@
 var data;
-var exts = ["png", "jpg", "gif", "bmp", "jpeg", "tif", "tiff"];
+var ext = ["png", "jpg", "gif", "bmp", "jpeg", "tif", "tiff"];
 var pre = ["0", "00"];
 	
 window.onload = function(){
