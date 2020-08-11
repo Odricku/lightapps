@@ -1,4 +1,6 @@
 var data;
+var exts = ["png", "jpg", "gif", "bmp", "jpeg", "tif", "tiff"];
+var pre = ["0", "00"];
 	
 window.onload = function(){
 	cargajson();
@@ -37,7 +39,22 @@ function cargacap(item){
 		var imagen = document.createElement("img");
 		numpage.classList.add("numpage");
 		numpage.innerText = i;
-		imagen.src = "https://odricku.cl/oddslector/caps/" + cap.num + "/" + i + "."+ cap.ext;
+			
+		var pose = 0;
+		var posp = 0;
+				
+		while(imagen.naturalHeight == 0){
+			while(imagen.naturalHeight == 0){
+				imagen.src = "https://odricku.cl/oddslector/caps/" + cap.num + "/" + pre[posp]+ i + "." + ext[pose];
+				posp = posp + 1;
+			}
+			pose = pose + 1;
+			
+			if (pose == ext.length && posp == pre.length){
+				imagen.src = "https://odricku.cl/oddslector/caps/error.png";
+			}	
+		}
+		
 		container.appendChild(numpage);
 		container.appendChild(imagen);
 		document.getElementById('repositorio').appendChild(container);
