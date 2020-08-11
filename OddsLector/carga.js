@@ -42,7 +42,11 @@ function cargacap(item){
 			
 		var pose = 0;
 		var posp = 0;
-				
+		
+		container.appendChild(numpage);
+		container.appendChild(imagen);
+		document.getElementById('repositorio').appendChild(container);
+		
 		while(imagen.naturalHeight == 0){
 			
 			posp = 0;
@@ -53,13 +57,10 @@ function cargacap(item){
 			}
 			pose = pose + 1;
 			
-			if (pose == ext.length + 1 && posp == pre.length + 1){
+			if (pose == ext.length && posp == pre.length){
 				imagen.src = "https://odricku.cl/oddslector/caps/error.png";
 			}	
 		}
-		
-		container.appendChild(numpage);
-		container.appendChild(imagen);
-		document.getElementById('repositorio').appendChild(container);
+	
 	}
 }
