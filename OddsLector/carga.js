@@ -48,7 +48,7 @@ function cargacap(item){
 		imagen.pre = 0;
 		imagen.ext = 0;
 		
-		imagen.onload = "verificaimg(this)";
+		imagen.onload = function(){verificaimg(this)};
 	}
 }
 
