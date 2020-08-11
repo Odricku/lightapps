@@ -43,13 +43,12 @@ function cargacap(item){
 		var pose = 0;
 		var posp = 0;
 				
-		alert(imagen.naturalHeight);
-		
 		while(imagen.naturalHeight == 0){
 			
 			posp = 0;
 			while(imagen.naturalHeight == 0){
 				imagen.src = "https://odricku.cl/oddslector/caps/" + cap.num + "/" + pre[posp]+ i + "." + ext[pose];
+				alert(imagen.src);
 				posp = posp + 1;
 			}
 			pose = pose + 1;
