@@ -40,27 +40,31 @@ function cargacap(item){
 		numpage.classList.add("numpage");
 		numpage.innerText = i;
 			
-		var pose = 0;
-		var posp = 0;
-		
 		container.appendChild(numpage);
 		container.appendChild(imagen);
 		document.getElementById('repositorio').appendChild(container);
 		
-		while(pose < ext.length && imagen.naturalHeight == 0){
-			
-			posp = 0;
-			while(posp < pre.length && imagen.naturalHeight == 0){
-				imagen.src = "https://odricku.cl/oddslector/caps/" + cap.num + "/" + pre[posp]+ i + "." + ext[pose];
-				console.log(imagen.src);
-				posp = posp + 1;
+		imagen.src = "https://odricku.cl/oddslector/caps/" + cap.num + "/" + pre[0]+ i + "." + ext[0];
+		imagen.pre = 0;
+		imagen.ext = 0;
+		
+		imagen.onload = function() {
+			if (imagen.naturalHeight == 0){
+				if(imagen.pre == pre.length && imagen.ext == ext.length){
+					imagen.src = "https://odricku.cl/oddslector/caps/error.png";
+				}
+				else{
+					if(imagen.pre == pre.length){
+						imagen.ext = imagen.ext + 1;
+						imagen.pre = 0;
+					}
+					else{
+						imagen.pre = imagen.pre + 1;
+					}
+					
+					imagen.src = "https://odricku.cl/oddslector/caps/" + cap.num + "/" + pre[imagen.pre]+ i + "." + ext[imagen.ext];
+				}
 			}
-			pose = pose + 1;
-			
-			if (pose == ext.length && posp == pre.length){
-				imagen.src = "https://odricku.cl/oddslector/caps/error.png";
-			}	
-		}
-	
+		}	
 	}
 }
