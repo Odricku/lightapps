@@ -48,6 +48,7 @@ function cargacap(item){
 		imagen.pre = 0;
 		imagen.ext = 0;
 		imagen.cap = cap.num;
+		imagen.num = i;
 		
 		imagen.onerror = function(){verificaimg(this)};
 	}
@@ -68,7 +69,7 @@ function verificaimg(item) {
 				item.pre = item.pre + 1;
 			}
 			
-			item.src = "https://odricku.cl/oddslector/caps/" + item.cap + "/" + pre[item.pre]+ i + "." + ext[item.ext];
+			item.src = "https://odricku.cl/oddslector/caps/" + item.cap + "/" + pre[item.pre] + item.num + "." + ext[item.ext];
 		}
 	}
 }	
