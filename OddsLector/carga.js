@@ -1,6 +1,6 @@
 var data;
 var ext = ["png", "jpg", "gif", "bmp", "jpeg", "tif", "tiff"];
-var pre = ["0", "00"];
+var pre = ["", "0", "00"];
 	
 window.onload = function(){
 	cargajson();
@@ -46,7 +46,7 @@ function cargacap(item){
 		while(imagen.naturalHeight == 0){
 			
 			posp = 0;
-			while(imagen.naturalHeight == 0){
+			while(posp < pre.length && imagen.naturalHeight == 0){
 				imagen.src = "https://odricku.cl/oddslector/caps/" + cap.num + "/" + pre[posp]+ i + "." + ext[pose];
 				alert(imagen.src);
 				posp = posp + 1;
