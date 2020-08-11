@@ -48,7 +48,7 @@ function cargacap(item){
 		imagen.pre = 0;
 		imagen.ext = 0;
 		
-		imagen.onload = function() {
+		imagen.onerror = function() {
 			if (imagen.naturalHeight == 0){
 				if(imagen.pre == pre.length && imagen.ext == ext.length){
 					imagen.src = "https://odricku.cl/oddslector/caps/error.png";
