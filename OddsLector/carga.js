@@ -48,24 +48,26 @@ function cargacap(item){
 		imagen.pre = 0;
 		imagen.ext = 0;
 		
-		imagen.onload = function(item) {
-			console.log(item.naturalHeight);
-			if (item.naturalHeight == 0){
-				if(item.pre == pre.length && item.ext == ext.length){
-					item.src = "https://odricku.cl/oddslector/caps/error.png";
-				}
-				else{
-					if(item.pre == pre.length){
-						item.ext = item.ext + 1;
-						item.pre = 0;
-					}
-					else{
-						item.pre = item.pre + 1;
-					}
-					
-					item.src = "https://odricku.cl/oddslector/caps/" + cap.num + "/" + pre[item.pre]+ i + "." + ext[item.ext];
-				}
-			}
-		}	
+		imagen.onload = "verificaimg(this)";
 	}
 }
+
+function verificaimg(item) {
+	console.log(item.naturalHeight);
+	if (item.naturalHeight == 0){
+		if(item.pre == pre.length && item.ext == ext.length){
+			item.src = "https://odricku.cl/oddslector/caps/error.png";
+		}
+		else{
+			if(item.pre == pre.length){
+				item.ext = item.ext + 1;
+				item.pre = 0;
+			}
+			else{
+				item.pre = item.pre + 1;
+			}
+			
+			item.src = "https://odricku.cl/oddslector/caps/" + cap.num + "/" + pre[item.pre]+ i + "." + ext[item.ext];
+		}
+	}
+}	
