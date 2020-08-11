@@ -1,8 +1,9 @@
 [
-{"num":"1", "page":63, "trad": "Ruk230"},
-{"num":"2", "page":64, "trad": "BCDT"},
-{"num":"3", "page":69, "trad": "Ruk230"},
-{"num":"4", "page":70, "trad": "BCDT"},
-{"num":"6", "page":52, "trad": "Odds"},
-{"num":"7", "page":58, "trad": "BCDT"}
+{"num":"0", "page":56, "trad": "Ruk230", "ext": "jpg"},
+{"num":"1", "page":63, "trad": "Ruk230", "ext": "png"},
+{"num":"2", "page":64, "trad": "BCDT", "ext": "png"},
+{"num":"3", "page":69, "trad": "Ruk230", "ext": "png"},
+{"num":"4", "page":70, "trad": "BCDT", "ext": "png"},
+{"num":"6", "page":52, "trad": "Odds", "ext": "png"},
+{"num":"7", "page":58, "trad": "BCDT", "ext": "png"}
 ]

@@ -38,7 +38,7 @@ function cargacap(item){
 		imagen.width = "600";
 		numpage.classList.add("numpage");
 		numpage.innerText = i;
-		imagen.src = "https://odricku.cl/oddslector/caps/" + cap.num + "/" + i + ".png";
+		imagen.src = "https://odricku.cl/oddslector/caps/" + cap.num + "/" + i + "."+ cap.ext;
 		container.appendChild(numpage);
 		container.appendChild(imagen);
 		document.getElementById('repositorio').appendChild(container);
