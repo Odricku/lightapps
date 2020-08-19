@@ -44,7 +44,7 @@ function cargacap(item){
 		container.appendChild(imagen);
 		document.getElementById('repositorio').appendChild(container);
 		
-		imagen.src = "./caps/" + cap.num + "/" + pre[0]+ i + "." + ext[0];
+		imagen.src = "./caps/ZG/" + cap.num + "/Result/" + pre[0]+ i + "." + ext[0];
 		imagen.pre = 0;
 		imagen.ext = 0;
 		imagen.cap = cap.num;
@@ -69,7 +69,7 @@ function verificaimg(item) {
 				item.pre = item.pre + 1;
 			}
 			
-			item.src = "./caps/" + item.cap + "/" + pre[item.pre] + item.num + "." + ext[item.ext];
+			item.src = "./caps/ZG/" + item.cap + "/Result/" + pre[item.pre] + item.num + "." + ext[item.ext];
 		}
 	}
 }	
