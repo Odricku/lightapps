@@ -1,6 +1,6 @@
 var data;
-var ext = ["png", "jpg", "gif", "bmp", "jpeg", "tif", "tiff"];
-var pre = ["", "0", "00"];
+var ext = ["png"];
+var pre = [""];
 	
 window.onload = function(){
 	cargajson();
