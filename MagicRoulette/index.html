@@ -190,9 +190,29 @@
 		<img src="ruleta magica.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">		
 	</div>
 	<div style="width:700px;margin-left:auto; margin-right:auto ">
-		<input type="button" name="boton" value="TIRA LA RULETA" class="btn btn lg btn-primary btn-block" onclick="girar(10)" style="float:left; max-width:200px">
-		<input type="button" name="boton" value="AUN MAS SUSPENSO 😱" class="btn btn lg btn-primary btn-block" onclick="girar(3)" style="float:right;max-width:200px;margin-top: 0px">
-		<input type="button" name="boton" value="CON MAS SUSPENSO" class="btn btn lg btn-primary btn-block" onclick="girar(5)" style="max-width:200px;margin-left:250px; margin-right:250px">
+		<table style="width:100%">
+			<tbody>
+				<tr>
+					<td colspan="2">
+						<input type="button" name="boton" value="TIRA LA RULETA" class="btn btn lg btn-primary btn-block" onclick="girar(10)" style="max-width:200px">
+					</td>
+					<td colspan="2">
+						<input type="button" name="boton" value="CON MAS SUSPENSO" class="btn btn lg btn-primary btn-block" onclick="girar(5)" style="max-width:200px;margin-left:250px; margin-right:250px">
+					</td>
+					<td colspan="2">
+						<input type="button" name="boton" value="AUN MAS SUSPENSO 😱" class="btn btn lg btn-primary btn-block" onclick="girar(3)" style="max-width:200px;margin-top: 0px">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<input type="button" name="boton" value="VERSION DE CELULAR" class="btn btn lg btn-primary btn-block" onclick="rellenoInicial(1)" style="max-width:300px;margin-top: 0px">
+					</td>
+					<td colspan="3">
+						<input type="button" name="boton" value="VERSION DE PC" class="btn btn lg btn-primary btn-block" onclick="rellenoInicial(0)" style="max-width:300px;margin-top: 0px">
+					</td>
+				</tr>
+			</tbody>
+		</table>
 		
 	</div>
 </div>
