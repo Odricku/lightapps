@@ -7,7 +7,6 @@ html {
   font-family: system-ui, sans-serif;
 }
 body {
-  background: linear-gradient(#545454, #454545, #676767);
   display: grid;
   grid-template-columns: 1fr;
   height: 100vh;
@@ -206,3 +205,30 @@ button:hover {
     perspective: 1300px;
   }
 }
+
+#editdice{
+	display: none;
+	padding: 15px;
+	background-color:white; 
+	border-bottom-right-radius: 15px;
+	position:absolute; 
+	width: 200px; 
+	height:190px; 
+	border-right-style: double; 
+	border-bottom-style: double;
+	z-index:6	
+}
+
+#backeditdice{
+	display: none;
+	float:left; 
+	position:fixed; 
+	top:0px; 
+	left:0px; 
+	width:100vw; 
+	height:100vh; 
+	background-color:gray; 
+	opacity:0.6; 
+	z-index:5;
+}
+

@@ -6,66 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Dice Roll</title>
     <link rel="stylesheet" href="./d1.css" />
-	<script>
-	
-		var cantDado = 0;
-		var dicefocus;
-		
-		function addDado(){
-			
-			container.innerHTML = container.innerHTML + "<div><ol onclick=\"changeName(this)\" class=\"die-list even-roll\" data-roll=\"1\" id=\"die-" + (cantDado + 1) + "\">" + xPuntitos(1) + xPuntitos(2) + xPuntitos(3) + xPuntitos(4) + xPuntitos(5) + xPuntitos(6) + "</ol><div style=\"text-align:center;width:100%;margin-top:-140px\" id=\"die-" + (cantDado + 1) + "\"></div></div>";
-			cantDado++;
-			
-		}
-		
-		function removeDado(){
-
-			dicefocus.parentElement.remove();
-			ocultarEdit();
-
-		}
-		
-		function xPuntitos(num){
-			
-			var res = "<li class=\"die-item\" data-side=\"" + num + "\">";
-			for(var i = 0; i < num ; i++){
-				res = res + "<span class=\"dot\"></span>"
-			}
-		
-			return res + "</li>";
-		
-		}
-		
-		function changeName(node){
-		
-			dicefocus = node;
-			
-			backeditdice.style.display = "block";
-			editdice.style.display = "block";
-			
-			nombreDado.value = node.nextElementSibling.innerHTML;
-		
-		}
-		
-		function changesbutton(){
-			dicefocus.nextElementSibling.innerHTML = nombreDado.value
-			dicefocus.nextElementSibling.style.color = colorDado.value;
-			dicefocus.children[0].style.backgroundColor = colorDado.value;
-			dicefocus.children[1].style.backgroundColor = colorDado.value;
-			dicefocus.children[2].style.backgroundColor = colorDado.value;
-			dicefocus.children[3].style.backgroundColor = colorDado.value;
-			dicefocus.children[4].style.backgroundColor = colorDado.value;
-			dicefocus.children[5].style.backgroundColor = colorDado.value;
-			
-			ocultarEdit();
-		}
-		
-		function ocultarEdit(){
-			backeditdice.style.display = "none";
-			editdice.style.display = "none";
-		}
-		
-	</script>
   </head>
   <body>
     <div id="container" class="dice"></div>
@@ -83,9 +23,9 @@
 			</tbody>
 		</table>
 	</div>
-	<div id="backeditdice" style="display: none;float:left; position:fixed; top:0px; left:0px; width:100vw; height:100vh; background-color:gray; opacity:0.6; z-index:5;" onclick="ocultarEdit()">
+	<div id="backeditdice" onclick="ocultarEdit()">
 	</div>
-	<div id="editdice" style="display: none;padding: 15px;background-color:white; border-bottom-right-radius: 15px;position:absolute; width: 200px; height:190px; border-right-style: double; border-bottom-style: double;z-index:6;">
+	<div id="editdice">
 		<label for="nombre">Nombre del dado:</label></br>
 		<input type="text" id="nombreDado" value=""></br></br>
 		<label for="colorpicker">Color del Dado:</label>

@@ -15,6 +15,64 @@ function getRandomNumber(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
+  
 }
 
 document.getElementById("roll-button").addEventListener("click", rollDice);
+
+var cantDado = 0;
+var dicefocus;
+
+function addDado(){
+	
+	container.innerHTML = container.innerHTML + "<div><ol onclick=\"changeName(this)\" class=\"die-list even-roll\" data-roll=\"1\" id=\"die-" + (cantDado + 1) + "\">" + xPuntitos(1) + xPuntitos(2) + xPuntitos(3) + xPuntitos(4) + xPuntitos(5) + xPuntitos(6) + "</ol><div style=\"text-align:center;width:100%;margin-top:-140px\" id=\"die-" + (cantDado + 1) + "\"></div></div>";
+	cantDado++;
+	
+}
+
+function removeDado(){
+
+	dicefocus.parentElement.remove();
+	ocultarEdit();
+
+}
+
+function xPuntitos(num){
+	
+	var res = "<li class=\"die-item\" data-side=\"" + num + "\">";
+	for(var i = 0; i < num ; i++){
+		res = res + "<span class=\"dot\"></span>"
+	}
+
+	return res + "</li>";
+
+}
+
+function changeName(node){
+
+	dicefocus = node;
+	
+	backeditdice.style.display = "block";
+	editdice.style.display = "block";
+	
+	nombreDado.value = node.nextElementSibling.innerHTML;
+
+}
+
+function changesbutton(){
+	dicefocus.nextElementSibling.innerHTML = nombreDado.value
+	dicefocus.nextElementSibling.style.color = colorDado.value;
+	dicefocus.children[0].style.backgroundColor = colorDado.value;
+	dicefocus.children[1].style.backgroundColor = colorDado.value;
+	dicefocus.children[2].style.backgroundColor = colorDado.value;
+	dicefocus.children[3].style.backgroundColor = colorDado.value;
+	dicefocus.children[4].style.backgroundColor = colorDado.value;
+	dicefocus.children[5].style.backgroundColor = colorDado.value;
+	
+	ocultarEdit();
+}
+
+function ocultarEdit(){
+	backeditdice.style.display = "none";
+	editdice.style.display = "none";
+}
