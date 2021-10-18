@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Dice Roll</title>
+    <link rel="stylesheet" href="./d1.css" />
+	<script>
+	
+		var cantDado = 0;
+		
+		function addDado(){
+			
+			container.innerHTML = container.innerHTML + "<ol class=\"die-list even-roll\" data-roll=\"1\" id=\"die-" + (cantDado + 1) + "\">" + xPuntitos(1) + xPuntitos(2) + xPuntitos(3) + xPuntitos(4) + xPuntitos(5) + xPuntitos(6) + "</ol>";
+			cantDado++;
+			
+		}
+		
+		function removeDado(){
+		
+			if (cantDado > 0){
+				document.getElementsByClassName("die-list")[document.getElementsByClassName("die-list").length - 1].remove();
+				cantDado--;
+			}
+			else{
+				alert("No hay dados");
+			}
+			
+		}
+		
+		function xPuntitos(num){
+			
+			var res = "<li class=\"die-item\" data-side=\"" + num + "\">";
+			for(var i = 0; i < num ; i++){
+				res = res + "<span class=\"dot\"></span>"
+			}
+		
+			return res + "</li>";
+		
+		}
+		
+	</script>
+  </head>
+  <body>
+    <div id="container" class="dice"></div>
+	<div style="width:700px;margin-left:auto; margin-right:auto ">
+		<table>
+			<tbody>
+				<tr>
+					<td>
+						<button type="button" id="roll-button">LANZAR</button>
+					</td>
+					<td>
+						<button type="button" id="roll-button" onclick="addDado()">AGREGAR DADO</button>
+					</td>
+					<td>
+						<button type="button" id="roll-button" onclick="removeDado()">QUITAR DADO</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+    
+	
+	
+
+    <script src="./d1.js"></script>
+  </body>
+</html>
