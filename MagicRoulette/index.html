@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<title>Ha hablado la Ruleta Magica!</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+
+
+</style>
+
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script>
+		var names = ["https://imgur.com/G90lbza","https://imgur.com/PbPLXlD","https://imgur.com/6Psfh07","https://imgur.com/LoYHw23","https://imgur.com/AtThqPK","https://imgur.com/8I6Pe0i","https://imgur.com/9TngrdW","https://imgur.com/jvpUOJR","https://imgur.com/CgxBTjO","https://imgur.com/FtzqV6E","https://imgur.com/Egm9ADz","https://imgur.com/DEXeB9N","https://imgur.com/wAzolMZ","https://imgur.com/VMIcbWR","https://imgur.com/ZJwJHn8","https://imgur.com/x7nVNkL","https://imgur.com/QFOQUsY", "https://imgur.com/CxFUqU0", "https://imgur.com/iybES7L"];
+    		
+		var num;
+		
+		for(var i = 0; i < names.length; i++){
+		
+			num = Math.floor(Math.random() * names.length);
+			[names[i], names[num]] = [names[num], names[i]];
+		
+		}
+		
+		
+		var regex = /\-{0,1}(\d+)/g;
+		var lap = 10;
+		var per = 8;
+		var rand = 0;
+		var audioLoop = new Audio('Item roulette Loop.mp3');
+		audioLoop.loop = true;
+		audioLoop.volume = 0.3;
+		var audioEnd = new Audio('Item roulette End.mp3');
+		audioEnd.volume = 0.3;
+		
+		var slots = [];
+		
+		let timerId;
+		var flag = 1;
+		var flag2 = 0;
+		
+		function rellenoInicial(){
+			document.getElementById("slot1").src = names[(num++) % names.length] + ".png";
+			document.getElementById("slot2").src = names[(num++) % names.length] + ".png";
+			document.getElementById("slot3").src = names[(num++) % names.length] + ".png";
+			document.getElementById("slot4").src = names[(num++) % names.length] + ".png";
+					
+			slots = [document.getElementById("slot1"), document.getElementById("slot2"), document.getElementById("slot3"), document.getElementById("slot4")];
+			rellenoRes();
+
+		}
+		
+		function rellenoRes(){
+		
+			var num = [parseInt(slots[0].style.top.match(regex)[0]), parseInt(slots[1].style.top.match(regex)[0]), parseInt(slots[2].style.top.match(regex)[0]),parseInt(slots[3].style.top.match(regex)[0])];
+			
+			var pos1 = num.indexOf(Math.min(...num));
+			num[pos1] = 9999;
+			var pos2 = num.indexOf(Math.min(...num));
+			num[pos2] = 9999;
+			var pos3 = num.indexOf(Math.min(...num));
+			num[pos3] = 9999;
+			var pos4 = num.indexOf(Math.min(...num));
+			num[pos4] = 9999;
+			
+			slots[pos1].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(66deg)";
+			slots[pos1].width = 504;
+			slots[pos1].style.top = "22px";
+			
+			slots[pos2].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(0deg)";
+			slots[pos2].width = 600;
+			slots[pos2].style.top = "186px";
+			
+			slots[pos3].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(-66deg)";
+			slots[pos3].width = 504;
+			slots[pos3].style.top = "386px";
+			
+			slots[pos4].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(-86deg)";
+			slots[pos4].width = 424;
+			slots[pos4].style.top = "447px";
+			
+			
+		}
+		
+		function girar(velGiro){
+			
+			if(flag == 1){
+		
+				audioLoop.play();
+					
+				flag = 0;
+				flag2 = 0;
+			
+				slots = [document.getElementById("slot1"), document.getElementById("slot2"), document.getElementById("slot3"), document.getElementById("slot4")];
+				
+				timerId = setInterval(() => girar2(velGiro), velGiro);
+				setTimeout(() => { flag = 1;}, (30000/velGiro) + Math.floor(Math.random() * 1000));
+			}
+		}
+		
+		function girar2(velGiro){
+		
+			for (var i = 0; i < slots.length; i++) {
+
+				var elem = slots[i];
+				
+				var angel = parseInt(elem.style.transform.match(regex)[3])
+				
+				if(angel > 74){
+					elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
+					elem.width = elem.width + 16;
+				}
+				else if(angel > 42){
+					elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
+					elem.width = elem.width + 16;
+					elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 11) + "px";
+
+				}
+				else if(angel > -42){
+					elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 21) + "deg)";
+					elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 49) + "px";
+				}
+				
+				else if(angel > -74){
+					elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
+					elem.width = elem.width - 16;
+					elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 17) + "px";
+
+				}
+				
+				else if(angel > -90){
+					elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
+					elem.width = elem.width - 16;
+					elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 9) + "px";
+
+				}
+				else{
+					elem.src = names[(num++) % names.length] + ".png";
+					elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(90deg)";
+					elem.width = 408;
+					elem.style.top = "0px";
+				}
+				
+				if(angel == 21 && flag == 1){
+					flag2 = 1;
+				}
+			}	
+			if(flag2 == 1){
+				clearInterval(timerId);
+				rellenoRes();
+				if(velGiro < 40){
+					girar(2 * velGiro);
+				}
+				else{
+					audioLoop.pause();
+					audioEnd.play();
+				}
+			}			
+		}
+		
+	
+
+    </script>
+</head>
+<body onload="rellenoInicial()">
+
+<div>
+	<div style="width:100%; min-height:600px;text-align: center;">
+		<img src="fondo.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
+		<img id="slot1" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
+		<img id="slot2" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
+		<img id="slot3" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
+		<img id="slot4" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
+		<img src="ruleta magica.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">		
+	</div>
+	<div style="width:700px;margin-left:auto; margin-right:auto ">
+		<input type="button" name="boton" value="TIRA LA RULETA" class="btn btn lg btn-primary btn-block" onclick="girar(10)" style="float:left; max-width:200px">
+		<input type="button" name="boton" value="AUN MAS SUSPENSO 😱" class="btn btn lg btn-primary btn-block" onclick="girar(3)" style="float:right;max-width:200px;margin-top: 0px">
+		<input type="button" name="boton" value="CON MAS SUSPENSO" class="btn btn lg btn-primary btn-block" onclick="girar(5)" style="max-width:200px;margin-left:250px; margin-right:250px">
+		
+	</div>
+</div>
+
+</body>
+</html>
