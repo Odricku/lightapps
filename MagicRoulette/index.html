@@ -23,7 +23,7 @@
 		var per = 8;
 		var rand = 0;
 		
-		var topValue = 100;
+		var topValue = 0;
 		
 		var slots = [];
 		
@@ -180,15 +180,14 @@
     </script>
 </head>
 <body onload="rellenoInicial(0)">
-<iframe style="width:100%;height:100%" src="../menu/index.html" title="menu" frameBorder="0" style="position:absolute; top:0px"></iframe>
 <div>
 	<div style="width:100%; min-height:600px;text-align: center;">
-		<img src="fondo.png" style="transform: translate(-50%, 0%);top:145px; position:absolute">
+		<img src="fondo.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
 		<img id="slot1" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
 		<img id="slot2" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
 		<img id="slot3" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
 		<img id="slot4" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
-		<img src="ruleta magica.png" style="transform: translate(-50%, 0%);top:145px; position:absolute">		
+		<img src="ruleta magica.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">		
 	</div>
 	<div style="width:700px;margin-left:auto; margin-right:auto ">
 		<input type="button" name="boton" value="TIRA LA RULETA" class="btn btn lg btn-primary btn-block" onclick="girar(10)" style="float:left; max-width:200px">
