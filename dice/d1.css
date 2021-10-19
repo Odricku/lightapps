@@ -213,7 +213,7 @@ button:hover {
 	border-bottom-right-radius: 15px;
 	position:absolute; 
 	width: 200px; 
-	height:190px; 
+	height: 205px; 
 	border-right-style: double; 
 	border-bottom-style: double;
 	z-index:6	
