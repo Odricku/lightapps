@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Dice Roll</title>
+    <link rel="stylesheet" href="./d1.css" />
+  </head>
+  <body>
+    <div id="container" class="dice"></div>
+	<div style="width:405px;margin-left:auto; margin-right:auto">
+		<button type="button" id="roll-button">LANZAR</button>
+		<button type="button" id="add-button" onclick="addDado()">AGREGAR DADO</button>
+	</div>
+	<div id="backeditdice" onclick="ocultarEdit()">
+	</div>
+	<div id="editdice">
+		<label for="nombre">Nombre del dado:</label></br>
+		<input type="text" id="nombreDado" value=""></br></br>
+		<label for="colorpicker">Color del Dado:</label>
+		<input type="color" id="colorDado" value="#FFFFFF"></br></br>
+		<button type="button" id="changes-button" onclick="changesbutton()">GUARDAR</button></br></br>
+		<button type="button" id="del-button" onclick="removeDado()">BORRAR</button>
+	</div>
+    <script src="./d1.js"></script>
+  </body>
+</html>

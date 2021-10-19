@@ -21,7 +21,60 @@
 		  text-align: center;
 		  padding: 14px 16px;
 		  text-decoration: none
+		  
 		}
+		
+		iframe {
+			transform: scale(1);
+			width:100vw;
+			height:100vh;
+			transform-origin: 0% 0%;
+		}
+		
+		
+		@media (max-width: 1100px) {
+		iframe {
+			transform: scale(0.87);
+			width:114vw;
+			height:114vh;
+		}
+		
+		@media (max-width: 900px) {
+		iframe {
+			transform: scale(0.78);
+			width:128vw;
+			height:128vh;
+		}
+		
+		@media (max-width: 800px) {
+		iframe {
+			transform: scale(0.69);
+			width:144vw;
+			height:144vh;
+		}
+		
+		@media (max-width: 700px) {
+		iframe {
+			transform: scale(0.6);
+			width:166vw;
+			height:166vh;
+		}
+		
+		@media (max-width: 600px) {
+		iframe {
+			transform: scale(0.52);
+			width:192vw;
+			height:192vh;
+		}
+		
+		@media (max-width: 500px) {
+		iframe {
+			transform: scale(0.43);
+			width:232vw;
+			height:232vh;
+		}
+		
+}
 
 	</style>
 
@@ -51,7 +104,7 @@
 	</table>
 </div>
 
-<iframe id="frame" style="width:100%;height:1000px" src="welcome/index.html" title="menu" frameBorder="0"></iframe>
+<iframe id="frame" src="welcome/index.html" title="menu" frameBorder="0"></iframe>
 
 
 </body>
