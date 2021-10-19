@@ -185,7 +185,6 @@ body {
 }
 
 button {
-	float: left;
 	align-self: center;
 	background-color: #007bff;
 	border: none;
