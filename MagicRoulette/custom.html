@@ -46,15 +46,21 @@
 			
 			}
 			
-			if(names.length > 3){
+			if(custom.length > 3){
 		
-				document.getElementById("slot1").src = names[(num++) % names.length] + ".png";
-				document.getElementById("slot2").src = names[(num++) % names.length] + ".png";
-				document.getElementById("slot3").src = names[(num++) % names.length] + ".png";
-				document.getElementById("slot4").src = names[(num++) % names.length] + ".png";
+				document.getElementById("slot1").src = names[(num++) % names.length];
+				document.getElementById("slot2").src = names[(num++) % names.length];
+				document.getElementById("slot3").src = names[(num++) % names.length];
+				document.getElementById("slot4").src = names[(num++) % names.length];
 						
 				slots = [document.getElementById("slot1"), document.getElementById("slot2"), document.getElementById("slot3"), document.getElementById("slot4")];
 				rellenoRes();
+			}
+			else{
+				document.getElementById("slot1").src = "Placeholder.png";
+				document.getElementById("slot2").src = "Placeholder.png";
+				document.getElementById("slot3").src = "Placeholder.png";
+				document.getElementById("slot4").src = "Placeholder.png";
 			}
 		}
 		
@@ -83,12 +89,12 @@
 			
 			slots[pos3].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(-66deg)";
 			slots[pos3].width = 504;
-			slots[pos2].height = 202;
+			slots[pos3].height = 202;
 			slots[pos3].style.top = topValue + 386 + "px";
 			
 			slots[pos4].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(-86deg)";
 			slots[pos4].width = 424;
-			slots[pos2].height = 170;
+			slots[pos4].height = 170;
 			slots[pos4].style.top = topValue + 447 + "px";
 			
 			
@@ -125,10 +131,12 @@
 				if(angel > 74){
 					elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
 					elem.width = elem.width + 16;
+					elem.height = elem.height + 6;
 				}
 				else if(angel > 42){
 					elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
 					elem.width = elem.width + 16;
+					elem.height = elem.height + 6;
 					elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 11) + "px";
 
 				}
@@ -140,6 +148,7 @@
 				else if(angel > -74){
 					elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
 					elem.width = elem.width - 16;
+					elem.height = elem.height - 6;
 					elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 17) + "px";
 
 				}
@@ -147,13 +156,15 @@
 				else if(angel > -90){
 					elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
 					elem.width = elem.width - 16;
+					elem.height = elem.height - 6;
 					elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 9) + "px";
 
 				}
 				else{
-					elem.src = names[(num++) % names.length] + ".png";
+					elem.src = names[(num++) % names.length];
 					elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(90deg)";
 					elem.width = 408;
+					elem.height = 166;
 					elem.style.top = topValue + "px";
 				}
 				
@@ -181,6 +192,18 @@
 			}
 		}
 		
+		function thereallimpiar(){
+		
+			var listTarj = document.getElementById("tarjetacontainer").children;
+			
+			for(var i = listTarj.length - 1; i > 0 ; i--){
+				listTarj[i].remove();
+			}
+			
+			custom = [];
+			rellenoInicial();
+		}
+		
 		function addTarjeta(){
 			
 			if(urltarj.value.length != 0){
@@ -198,21 +221,10 @@
 			rellenoInicial();
 
 		}
-
-		function xPuntitos(num){
-			
-			var res = "<li class=\"die-item\" data-side=\"" + num + "\">";
-			for(var i = 0; i < num ; i++){
-				res = res + "<span class=\"dot\"></span>"
-			}
-
-			return res + "</li>";
-
-		}
 		
     </script>
 </head>
-<body onload="rellenoInicial(0)">
+<body onload="rellenoInicial()">
 <div>
 	<div style="width:100%; min-height:600px;text-align: center;">
 		<img src="fondo.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
@@ -239,7 +251,7 @@
 				</tr>
 				<tr>
 					<td colspan="3">
-						<input type="button" name="boton" value="AGREGAR OPCION" class="btn btn lg btn-primary btn-block" onclick="rellenoInicial(1)">
+						<input type="button" name="boton" value="AGREGAR OPCION" class="btn btn lg btn-primary btn-block" onclick="urltarj.focus()">
 					</td>
 					<td colspan="3">
 						<input type="button" name="boton" value="LIMPIAR" class="btn btn lg btn-primary btn-block" onclick="limpiar()">
