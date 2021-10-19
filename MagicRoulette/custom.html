@@ -183,7 +183,7 @@
 		
 		function addTarjeta(){
 			
-			if(urltarj.value.length <> 0){
+			if(urltarj.value.length != 0){
 				tarjetacontainer.innerHTML = tarjetacontainer.innerHTML + "<tr><td><img src=\"" + urltarj.value + "\" width=\"400\" height=\"160\"></td><td><input type=\"button\" value=\"ELIMINAR\" class=\"btn btn lg btn-primary btn-block\" onclick=\"deleteTarjeta(this)\"></td></tr>"
 				custom.push(urltarj.value);
 				urltarj.value = "";
@@ -193,7 +193,7 @@
 
 		function deleteTarjeta(node){
 		
-			custom.splice(elim,1);
+			custom.splice(custom.indexOf(node.parentElement.parentElement.children[0].children[0].src),1);
 			node.parentElement.parentElement.remove();
 			rellenoInicial();
 
