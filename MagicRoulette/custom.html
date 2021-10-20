@@ -213,6 +213,17 @@
 				rellenoInicial();
 			}			
 		}
+		
+		function pasteTarjeta(fil){
+			
+			if(fil){
+				var urlpaste = URL.createObjectURL(fil);
+			
+				tarjetacontainer.innerHTML = tarjetacontainer.innerHTML + "<tr><td><img src=\"" + urlpaste + "\" width=\"400\" height=\"160\"></td><td><input type=\"button\" value=\"ELIMINAR\" class=\"btn btn lg btn-primary btn-block\" onclick=\"deleteTarjeta(this)\"></td></tr>"
+				custom.push(urlpaste);
+				rellenoInicial();
+			}			
+		}
 
 		function deleteTarjeta(node){
 		
@@ -250,9 +261,16 @@
 			palillo.style.transform = 'translate(480px, 30px) scale(1)';
 		}
 		
+		window.addEventListener('paste', e => {
+			for(var i = 0; i < e.clipboardData.files.length; i++){
+				pasteTarjeta(e.clipboardData.files[i]);
+			}
+		});
+			
+		
     </script>
 </head>
-<body onload="rellenoInicial()">
+<body id="cuerpo" onload="rellenoInicial()">
 <div>
 	<div style="width:100%; min-height:600px;text-align: center;">
 		<img src="fondo.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
@@ -307,6 +325,8 @@
 		<div>
 			<input type="text" id="urltarj" placeholder="URL de la imagen (Se reescalara a 500x200)" class="btn btn lg btn-dark btn-block"><input type="button" name="boton" value="AGREGAR TARJETA" class="btn btn lg btn-primary btn-block" onclick="addTarjeta()">
 		</div>
+	</div>
+	<div id="drop" style="display: none;float:left; position:fixed; top:0px; left:0px; width:100vw; height:100vh; background-color:gray; opacity:0.6; z-index:5;" onclick="this.style.display = 'none'">
 	</div>
 </div>
 
