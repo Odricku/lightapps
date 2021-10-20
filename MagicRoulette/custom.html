@@ -222,17 +222,47 @@
 
 		}
 		
+		function palanca(){
+		
+			if(flag == 1 && custom.length > 3){
+				perilla.style.transform = 'translate(470px, 350px) scale(1)';
+				palillo.style.transform = 'translate(480px, 30px) scaleY(-1)';
+				setTimeout(()=> {
+					fixPalanca();
+				}, 1000);
+			}
+			else{
+				palancaTraba();
+			}
+		}
+		
+		function palancaTraba(){
+			perilla.style.transform = 'translate(470px, 80px) scale(1)';
+			palillo.style.transform = 'translate(480px, 30px) scaleY(0.7)';
+			setTimeout(()=> {
+				fixPalanca();
+			}, 500);
+			
+		}
+		
+		function fixPalanca(){
+			perilla.style.transform = 'translate(470px, 0px) scale(1) ';
+			palillo.style.transform = 'translate(480px, 30px) scale(1)';
+		}
+		
     </script>
 </head>
 <body onload="rellenoInicial()">
 <div>
 	<div style="width:100%; min-height:600px;text-align: center;">
 		<img src="fondo.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
+		<img src="palillo.png" id="palillo" style="transform-origin: 50% 100%;transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(480px, 30px);top:45px; position:absolute">
 		<img id="slot1" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
 		<img id="slot2" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
 		<img id="slot3" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
 		<img id="slot4" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
-		<img src="ruleta magica.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">		
+		<img src="ruleta magica.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
+		<img src="perilla.png" id="perilla" style="transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(470px, 0px);top:45px; position:absolute" onclick="palanca();girar(10)">		
 	</div>
 	<div style="text-align:center;max-width:700px; margin-left:auto; margin-right:auto">
 		<table style="width:100%">
