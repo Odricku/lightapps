@@ -13,7 +13,7 @@
 	<script>
 		var custom = []
 		
-		var names;
+		var names = [];
 		var num;
 		
 		var regex = /\-{0,1}(\d+)/g;
@@ -261,16 +261,28 @@
 			palillo.style.transform = 'translate(480px, 30px) scale(1)';
 		}
 		
+		var datt;
+		
 		window.addEventListener('paste', e => {
 			for(var i = 0; i < e.clipboardData.files.length; i++){
 				pasteTarjeta(e.clipboardData.files[i]);
 			}
 		});
-			
+
+		window.addEventListener("dragover", (e)=>{
+			e.preventDefault(); //preventing from default behaviour
+		});
+		
+		window.addEventListener("drop", (e)=>{
+			e.preventDefault(); 
+			for(var i = 0; i < event.dataTransfer.files.length; i++){
+				pasteTarjeta(event.dataTransfer.files[i]);
+			}
+		});
 		
     </script>
 </head>
-<body id="cuerpo" onload="rellenoInicial()">
+<body id="cuerpo">
 <div>
 	<div style="width:100%; min-height:600px;text-align: center;">
 		<img src="fondo.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
@@ -325,8 +337,6 @@
 		<div>
 			<input type="text" id="urltarj" placeholder="URL de la imagen (Se reescalara a 500x200)" class="btn btn lg btn-dark btn-block"><input type="button" name="boton" value="AGREGAR TARJETA" class="btn btn lg btn-primary btn-block" onclick="addTarjeta()">
 		</div>
-	</div>
-	<div id="drop" style="display: none;float:left; position:fixed; top:0px; left:0px; width:100vw; height:100vh; background-color:gray; opacity:0.6; z-index:5;" onclick="this.style.display = 'none'">
 	</div>
 </div>
 
