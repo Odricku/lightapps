@@ -13,7 +13,7 @@
 	<script>
 		var custom = []
 		
-		var names = [];
+		var names;
 		var num;
 		
 		var regex = /\-{0,1}(\d+)/g;
@@ -55,15 +55,12 @@
 						
 				slots = [document.getElementById("slot1"), document.getElementById("slot2"), document.getElementById("slot3"), document.getElementById("slot4")];
 				rellenoRes();
-				crearPizza();
 			}
 			else{
 				document.getElementById("slot1").src = "Placeholder.png";
 				document.getElementById("slot2").src = "Placeholder.png";
 				document.getElementById("slot3").src = "Placeholder.png";
 				document.getElementById("slot4").src = "Placeholder.png";
-				
-				pizza.innerHTML = "";
 			}
 		}
 		
@@ -216,17 +213,6 @@
 				rellenoInicial();
 			}			
 		}
-		
-		function pasteTarjeta(fil){
-			
-			if(fil){
-				var urlpaste = URL.createObjectURL(fil);
-			
-				tarjetacontainer.innerHTML = tarjetacontainer.innerHTML + "<tr><td><img src=\"" + urlpaste + "\" width=\"400\" height=\"160\"></td><td><input type=\"button\" value=\"ELIMINAR\" class=\"btn btn lg btn-primary btn-block\" onclick=\"deleteTarjeta(this)\"></td></tr>"
-				custom.push(urlpaste);
-				rellenoInicial();
-			}			
-		}
 
 		function deleteTarjeta(node){
 		
@@ -236,168 +222,40 @@
 
 		}
 		
-		function palanca(){
-		
-			if(flag == 1 && custom.length > 3){
-				perilla.style.transform = 'translate(470px, 350px) scale(1)';
-				palillo.style.transform = 'translate(480px, 30px) scaleY(-1)';
-				setTimeout(()=> {
-					fixPalanca();
-				}, 1000);
-			}
-			else{
-				palancaTraba();
-			}
-		}
-		
-		function palancaTraba(){
-			perilla.style.transform = 'translate(470px, 80px) scale(1)';
-			palillo.style.transform = 'translate(480px, 30px) scaleY(0.7)';
-			setTimeout(()=> {
-				fixPalanca();
-			}, 500);
-			
-		}
-		
-		function fixPalanca(){
-			perilla.style.transform = 'translate(470px, 0px) scale(1) ';
-			palillo.style.transform = 'translate(480px, 30px) scale(1)';
-		}
-		
-		window.addEventListener('paste', e => {
-			for(var i = 0; i < e.clipboardData.files.length; i++){
-				pasteTarjeta(e.clipboardData.files[i]);
-			}
-		});
-
-		window.addEventListener("dragover", (e)=>{
-			e.preventDefault();
-		});
-		
-		window.addEventListener("drop", (e)=>{
-			e.preventDefault(); 
-			for(var i = 0; i < event.dataTransfer.files.length; i++){
-				pasteTarjeta(event.dataTransfer.files[i]);
-			}
-		});
-		
-		function crearPizza(){
-		
-			pizza.innerHTML = "";
-		
-			for(var i = 0; i < names.length; i++){
-				pizza.innerHTML = pizza.innerHTML + "<div class=\"slice-cont\"><div class=\"slice\"><img class=\"tarjetapizza\" src=\"" + names[i] + "\"></div></div>";
-			}
-			
-			trozar();
-		
-		}
-		
-		function trozar(){
-		
-			var listTrozos = document.getElementsByClassName("slice-cont");
-						
-			if (listTrozos.length > 3){
-						
-				pizza.style.transform = "translate(-720px, " + (80 - 860/listTrozos.length) + "px) scale(0.33)";
-				
-				for (var i = 0; i < listTrozos.length; i++){
-					listTrozos[i].style.height =  2* apotema * Math.tan(Math.PI/listTrozos.length) + "px";
-					
-					listTrozos[i].style.transform = "rotateZ(" + (i * 360/ listTrozos.length)+ "deg)";
-					listTrozos[i].children[0].children[0].style.height =  2* apotema * Math.tan(Math.PI/listTrozos.length) + "px";	
-					listTrozos[i].children[0].children[0].style.width =  "75%";	
-				
-				}
-			} //135 = i           f = -50
-		}
-
-		var apotema = 600;
-		
-		function cambio(){
-			if(pizza.parentElement.style.display == "none"){
-				pizza.parentElement.style.display = "block";
-				tombola.style.display = "none";
-			}
-			else{
-				tombola.style.display = "block";
-				pizza.parentElement.style.display = "none";
-			}
-		}
-		
-		
     </script>
-	<style>
-	.slice {
-		height: 100%;
-		width: 2326px;
-		transform-origin: 0% 50% 0;
-		transform: perspective(10em) translateZ(4rem) rotateY(8.53deg);
-	}
-
-	.slice-cont {
-		position:absolute;
-		transform-origin: 43% 50% 0;	
-	}
-	
-	.pizza-cont{   
-		margin-left: auto;
-		position: absolute;
-		top: 0;
-		left: 50%;
-		width: 1150px;
-		height: 700px;
-	}
-	
-	
-	.tarjetapizza{
-	
-	}
-	</style>
 </head>
-<body id="cuerpo" onload="trozar()">
+<body onload="rellenoInicial()">
 <div>
-	<div id= "tombola" style="width:100%; min-height:600px;text-align: center;">
+	<div style="width:100%; min-height:600px;text-align: center;">
 		<img src="fondo.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
-		<img src="palillo.png" id="palillo" style="transform-origin: 50% 100%;transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(480px, 30px);top:45px; position:absolute">
 		<img id="slot1" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
 		<img id="slot2" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
 		<img id="slot3" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
 		<img id="slot4" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
-		<img src="ruleta magica.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
-		<img src="perilla.png" id="perilla" style="transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(470px, 0px);top:45px; position:absolute" onclick="palanca();girar(10)">		
+		<img src="ruleta magica.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">		
 	</div>
-	
-	<div style="display:none; width:100%; max-height:600px;min-height:600px;text-align: center;">
-		<div id= "pizza" class="pizza-cont"></div>
-	</div>
-	
 	<div style="text-align:center;max-width:700px; margin-left:auto; margin-right:auto">
 		<table style="width:100%">
 			<tbody>
 				<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 				<tr>
-					<td>
+					<td colspan="2">
 						<input type="button" name="boton" value="TIRA LA RULETA" class="btn btn lg btn-primary btn-block" onclick="girar(10)">
 					</td>
-					<td>
+					<td colspan="2">
 						<input type="button" name="boton" value="CON MAS SUSPENSO" class="btn btn lg btn-primary btn-block" onclick="girar(5)">
 					</td>
-					<td>
+					<td colspan="2">
 						<input type="button" name="boton" value="AUN MAS SUSPENSO 😱" class="btn btn lg btn-primary btn-block" onclick="girar(3)">
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td colspan="3">
 						<input type="button" name="boton" value="AGREGAR OPCION" class="btn btn lg btn-primary btn-block" onclick="urltarj.focus()">
 					</td>
-					<td>
+					<td colspan="3">
 						<input type="button" name="boton" value="LIMPIAR" class="btn btn lg btn-primary btn-block" onclick="limpiar()">
 					</td>
-					<td>
-						<input type="button" name="boton" value="CAMBIAR RULETA" class="btn btn lg btn-primary btn-block" onclick="cambio()">
-					</td>
-					
 				</tr>
 			</tbody>
 		</table>

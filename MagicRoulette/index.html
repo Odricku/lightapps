@@ -62,10 +62,12 @@
 						
 				slots = [document.getElementById("slot1"), document.getElementById("slot2"), document.getElementById("slot3"), document.getElementById("slot4")];
 				rellenoRes();
+				crearPizza();
 			}
 			
 			else{
-				alert("Deben haber al menos 4 opciones");
+				alert("Deben haber al menos 4 opciones");				
+				pizza.innerHTML = "";
 			}
 		}
 		
@@ -205,8 +207,82 @@
 			perilla.style.transform = 'translate(470px, 0px) scale(1) ';
 			palillo.style.transform = 'translate(480px, 30px) scale(1)';
 		}
+		
+		
+		function crearPizza(){
+		
+			pizza.innerHTML = "";
+		
+			for(var i = 0; i < names.length; i++){
+				pizza.innerHTML = pizza.innerHTML + "<div class=\"slice-cont\"><div class=\"slice\"><img class=\"tarjetapizza\" src=\"" + names[i] + ".png\"></div></div>";
+			}
+			
+			trozar();
+		
+		}
+		
+		function trozar(){
+		
+			var listTrozos = document.getElementsByClassName("slice-cont");
+			
+			if (listTrozos.length > 3){
+						
+				pizza.style.transform = "translate(-720px, " + (80 - 860/listTrozos.length) + "px) scale(0.33)";
 				
+				for (var i = 0; i < listTrozos.length; i++){
+					listTrozos[i].style.height =  2* apotema * Math.tan(Math.PI/listTrozos.length) + "px";
+					
+					listTrozos[i].style.transform = "rotateZ(" + (i * 360/ listTrozos.length)+ "deg)";
+					listTrozos[i].children[0].children[0].style.height =  2* apotema * Math.tan(Math.PI/listTrozos.length) + "px";	
+					listTrozos[i].children[0].children[0].style.width =  "75%";	
+				
+				}
+			} //-135 = i           f = 60
+		}
+
+		var apotema = 600;
+		
+		function cambio(){
+			if(pizza.parentElement.style.display == "none"){
+				pizza.parentElement.style.display = "block";
+				tombola.style.display = "none";
+			}
+			else{
+				tombola.style.display = "block";
+				pizza.parentElement.style.display = "none";
+			}
+		}
+		
     </script>
+	<style>
+	.slice {
+		height: 100%;
+		width: 2326px;
+		transform-origin: 0% 50% 0;
+		transform: perspective(10em) translateZ(4rem) rotateY(8.53deg);
+	}
+
+	.slice-cont {
+		position:absolute;
+		transform-origin: 43% 50% 0;	
+	}
+	
+	.pizza-cont{   
+		margin-left: auto;
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: 1150px;
+		height: 700px;
+	}
+	
+	
+	.tarjetapizza{
+
+	
+	}
+				
+    </style>
 </head>
 <body onload="rellenoInicial(0)">
 <div>
@@ -220,28 +296,35 @@
 		<img src="ruleta magica.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">	
 		<img src="perilla.png" id="perilla" style="transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(470px, 0px);top:45px; position:absolute" onclick="palanca();girar(10)">		
 	</div>
+	
+	<div style="display:none;width:100%; max-height:600px;min-height:600px;text-align: center;">
+		<div id= "pizza" class="pizza-cont"></div>
+	</div>
 
 	<div style="text-align:center;max-width:700px; margin-left:auto; margin-right:auto;">
 		<table style="width:100%">
 			<tbody>
 				<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 				<tr>
-					<td colspan="2">
+					<td>
 						<input type="button" name="boton" value="TIRA LA RULETA" class="btn btn lg btn-primary btn-block" onclick="girar(10)">
 					</td>
-					<td colspan="2">
+					<td>
 						<input type="button" name="boton" value="CON MAS SUSPENSO" class="btn btn lg btn-primary btn-block" onclick="girar(5)">
 					</td>
-					<td colspan="2">
+					<td>
 						<input type="button" name="boton" value="AUN MAS SUSPENSO 😱" class="btn btn lg btn-primary btn-block" onclick="girar(3)">
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3">
+					<td>
 						<input type="button" name="boton" value="VERSION CELULAR" class="btn btn lg btn-primary btn-block" onclick="rellenoInicial(1)">
 					</td>
-					<td colspan="3">
+					<td>
 						<input type="button" name="boton" value="VERSION DE PC" class="btn btn lg btn-primary btn-block" onclick="rellenoInicial(0)">
+					</td>
+					<td>
+						<input type="button" name="boton" value="CAMBIAR RULETA" class="btn btn lg btn-primary btn-block" onclick="cambio()">
 					</td>
 				</tr>
 			</tbody>
