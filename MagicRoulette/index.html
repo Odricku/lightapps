@@ -38,36 +38,39 @@
 		
 		function rellenoInicial(mode){
 		
-			if(mode == 0){
-				names = pc;
-			}else if(mode == 1){
-				names = cel;
-			}else if(mode == 2){
-				names = custom;
-			}
+			if(flag == 1){
 		
-			for(var i = 0; i < names.length; i++){
-		
-				num = Math.floor(Math.random() * names.length);
-				[names[i], names[num]] = [names[num], names[i]];
+				if(mode == 0){
+					names = pc;
+				}else if(mode == 1){
+					names = cel;
+				}else if(mode == 2){
+					names = custom;
+				}
 			
-			}
+				for(var i = 0; i < names.length; i++){
 			
-			if(names.length > 3){
-		
-				document.getElementById("slot1").src = names[(num++) % names.length] + ".png";
-				document.getElementById("slot2").src = names[(num++) % names.length] + ".png";
-				document.getElementById("slot3").src = names[(num++) % names.length] + ".png";
-				document.getElementById("slot4").src = names[(num++) % names.length] + ".png";
-						
-				slots = [document.getElementById("slot1"), document.getElementById("slot2"), document.getElementById("slot3"), document.getElementById("slot4")];
-				rellenoRes();
-				crearPizza();
-			}
+					num = Math.floor(Math.random() * names.length);
+					[names[i], names[num]] = [names[num], names[i]];
+				
+				}
+				
+				if(names.length > 3){
 			
-			else{
-				alert("Deben haber al menos 4 opciones");				
-				pizza.innerHTML = "";
+					document.getElementById("slot1").src = names[(num++) % names.length] + ".png";
+					document.getElementById("slot2").src = names[(num++) % names.length] + ".png";
+					document.getElementById("slot3").src = names[(num++) % names.length] + ".png";
+					document.getElementById("slot4").src = names[(num++) % names.length] + ".png";
+							
+					slots = [document.getElementById("slot1"), document.getElementById("slot2"), document.getElementById("slot3"), document.getElementById("slot4")];
+					rellenoRes();
+					crearPizza();
+				}
+				
+				else{
+					alert("Deben haber al menos 4 opciones");				
+					pizza.innerHTML = "";
+				}
 			}
 		}
 		
@@ -84,18 +87,22 @@
 			var pos4 = num.indexOf(Math.min(...num));
 			num[pos4] = 9999;
 			
+			slots[pos1].style.transition = "0.5s";
 			slots[pos1].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(66deg)";
 			slots[pos1].width = 504;
 			slots[pos1].style.top = topValue + 22 + "px";
 			
+			slots[pos2].style.transition = "0.5s";
 			slots[pos2].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(0deg)";
 			slots[pos2].width = 600;
 			slots[pos2].style.top = topValue + 186 + "px";
 			
+			slots[pos3].style.transition = "0.5s";
 			slots[pos3].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(-66deg)";
 			slots[pos3].width = 504;
 			slots[pos3].style.top = topValue + 386 + "px";
 			
+			slots[pos4].style.transition = "0.5s";
 			slots[pos4].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(-86deg)";
 			slots[pos4].width = 424;
 			slots[pos4].style.top = topValue + 447 + "px";
@@ -114,6 +121,11 @@
 				
 					slots = [document.getElementById("slot1"), document.getElementById("slot2"), document.getElementById("slot3"), document.getElementById("slot4")];
 					
+					slots[0].style.transition = "";
+					slots[1].style.transition = "";
+					slots[2].style.transition = "";
+					slots[3].style.transition = "";
+					
 					timerId = setInterval(() => girar2(velGiro), velGiro);
 					setTimeout(() => { flag = 1;}, (30000/velGiro) + Math.floor(Math.random() * 1000));
 				}
@@ -124,10 +136,8 @@
 					flag2 = 0;
 					
 					pizzaGiro(velGiro);
-					setTimeout(() => { flag = 1;}, (20000/velGiro) + Math.floor(Math.random() * 1000));
+					setTimeout(() => { flag2 = 1;}, (20000/velGiro) + Math.floor(Math.random() * 1000));
 				}
-			}else{
-				alert("Deben haber al menos 4 opciones");
 			}
 		}
 		
@@ -140,9 +150,10 @@
 					listTarj[i].style.transform = "rotateZ(" + (parseInt(listTarj[i].style.transform.match(regex)[0]) + 15)+ "deg)";
 					listTarj[i].style.transition = "linear " + (velGiro/1000 + 0.25) + "s";
 				}
-				if(flag == 1){
+				if(flag2 == 1){
 					clearInterval(timerId);
 					if(velGiro < 160){
+						flag = 1;
 						girar(2 * velGiro);
 					}
 					else{
@@ -151,7 +162,7 @@
 							listTarj[i].style.transform = "rotateZ(" + (parseInt(listTarj[i].style.transform.match(regex)[0]) + 45)+ "deg)";
 							listTarj[i].style.transition = "ease-out " + (10 * velGiro/1000) + "s";
 						}
-						setTimeout(() => { audioLoop.pause(); audioEnd.play();}, 1500 + 5 * velGiro/1000);
+						setTimeout(() => { audioLoop.pause(); audioEnd.play(); flag = 1}, 1500 + 5 * velGiro/1000);
 					}
 				}
 			},velGiro);
@@ -281,13 +292,15 @@
 		var apotema = 600;
 		
 		function cambio(){
-			if(pizza.parentElement.style.display == "none"){
-				pizza.parentElement.style.display = "block";
-				tombola.style.display = "none";
-			}
-			else{
-				tombola.style.display = "block";
-				pizza.parentElement.style.display = "none";
+			if(flag == 1){
+				if(pizza.parentElement.style.display == "none"){
+					pizza.parentElement.style.display = "block";
+					tombola.style.display = "none";
+				}
+				else{
+					tombola.style.display = "block";
+					pizza.parentElement.style.display = "none";
+				}
 			}
 		}
 		
@@ -335,11 +348,14 @@
 		<img src="perilla.png" id="perilla" style="transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(470px, 0px);top:45px; position:absolute" onclick="palanca();girar(10)">		
 	</div>
 	
-	<div style="display:none; width:100%; max-height:600px;min-height:600px;text-align: center;">
+	<div style="display:none;background: url(fondoPizza.png) center no-repeat; width:100%; max-height:600px;min-height:600px;text-align: center;">
 		<div id= "pizza" class="pizza-cont"></div>
+		<img src="clip.png"  style="margin-top:18px; transform: translate(-138px,188px);">
+		<img src="cono.png"  style="margin-top:18px; transform: translate(-136px,188px);width: 168px;" onclick="girar(10)">
+	
 	</div>
 
-	<div style="text-align:center;max-width:700px; margin-left:auto; margin-right:auto;">
+	<div style="position: relative;text-align:center;max-width:700px; margin-left:auto; margin-right:auto;">
 		<table style="width:100%">
 			<tbody>
 				<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>

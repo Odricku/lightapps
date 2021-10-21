@@ -80,21 +80,25 @@
 			var pos4 = num.indexOf(Math.min(...num));
 			num[pos4] = 9999;
 			
+			slots[pos1].style.transition = "ease-out 0.5s";
 			slots[pos1].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(66deg)";
 			slots[pos1].width = 504;
 			slots[pos1].height = 202; 
 			slots[pos1].style.top = topValue + 22 + "px";
 			
+			slots[pos2].style.transition = "ease-out 0.5s";
 			slots[pos2].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(0deg)";
 			slots[pos2].width = 600;
 			slots[pos2].height = 240;
 			slots[pos2].style.top = topValue + 186 + "px";
 			
+			slots[pos3].style.transition = "ease-out 0.5s";
 			slots[pos3].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(-66deg)";
 			slots[pos3].width = 504;
 			slots[pos3].height = 202;
 			slots[pos3].style.top = topValue + 386 + "px";
 			
+			slots[pos4].style.transition = "ease-out 0.5s";
 			slots[pos4].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(-86deg)";
 			slots[pos4].width = 424;
 			slots[pos4].height = 170;
@@ -116,6 +120,11 @@
 					
 						slots = [document.getElementById("slot1"), document.getElementById("slot2"), document.getElementById("slot3"), document.getElementById("slot4")];
 						
+						slots[0].style.transition = "";
+						slots[1].style.transition = "";
+						slots[2].style.transition = "";
+						slots[3].style.transition = "";
+						
 						timerId = setInterval(() => girar2(velGiro), velGiro);
 						setTimeout(() => { flag = 1;}, (30000/velGiro) + Math.floor(Math.random() * 1000));
 					}
@@ -126,7 +135,7 @@
 						flag2 = 0;
 						
 						pizzaGiro(velGiro);
-						setTimeout(() => { flag = 1;}, (20000/velGiro) + Math.floor(Math.random() * 1000));
+						setTimeout(() => { flag2 = 1;}, (20000/velGiro) + Math.floor(Math.random() * 1000));
 					}
 				}
 			}else{
@@ -143,9 +152,10 @@
 					listTarj[i].style.transform = "rotateZ(" + (parseInt(listTarj[i].style.transform.match(regex)[0]) + 15)+ "deg)";
 					listTarj[i].style.transition = "linear " + (velGiro/1000 + 0.25) + "s";
 				}
-				if(flag == 1){
+				if(flag2 == 1){
 					clearInterval(timerId);
 					if(velGiro < 160){
+						flag = 1;
 						girar(2 * velGiro);
 					}
 					else{
@@ -154,7 +164,7 @@
 							listTarj[i].style.transform = "rotateZ(" + (parseInt(listTarj[i].style.transform.match(regex)[0]) + 45)+ "deg)";
 							listTarj[i].style.transition = "ease-out " + (10 * velGiro/1000) + "s";
 						}
-						setTimeout(() => { audioLoop.pause(); audioEnd.play();}, 1500 + 5 * velGiro/1000);
+						setTimeout(() => { audioLoop.pause(); audioEnd.play(); flag = 1;}, 1500 + 5 * velGiro/1000);
 					}
 				}
 			},velGiro);
@@ -226,51 +236,63 @@
 		}
 		
 		function limpiar(){
-			var res = confirm("Esto eliminara todo y no puede deshacerse, ¿estas seguro?")
-			if (res == true){
-				thereallimpiar();
+		
+			if(flag == 1){
+				var res = confirm("Esto eliminara todo y no puede deshacerse, ¿estas seguro?")
+				if (res == true){
+					thereallimpiar();
+				}
 			}
 		}
 		
 		function thereallimpiar(){
 		
-			var listTarj = document.getElementById("tarjetacontainer").children;
-			
-			for(var i = listTarj.length - 1; i > 0 ; i--){
-				listTarj[i].remove();
+			if(flag == 1){
+		
+				var listTarj = document.getElementById("tarjetacontainer").children;
+				
+				for(var i = listTarj.length - 1; i > 0 ; i--){
+					listTarj[i].remove();
+				}
+				
+				custom = [];
+				rellenoInicial();
 			}
-			
-			custom = [];
-			rellenoInicial();
 		}
 		
 		function addTarjeta(){
+		
+			if(flag == 1){
 			
-			if(urltarj.value.length != 0){
-				tarjetacontainer.innerHTML = tarjetacontainer.innerHTML + "<tr><td><img src=\"" + urltarj.value + "\" width=\"400\" height=\"160\"></td><td><input type=\"button\" value=\"ELIMINAR\" class=\"btn btn lg btn-primary btn-block\" onclick=\"deleteTarjeta(this)\"></td></tr>"
-				custom.push(urltarj.value);
-				urltarj.value = "";
-				rellenoInicial();
-			}			
+				if(urltarj.value.length != 0){
+					tarjetacontainer.innerHTML = tarjetacontainer.innerHTML + "<tr><td><img src=\"" + urltarj.value + "\" width=\"400\" height=\"160\"></td><td><input type=\"button\" value=\"ELIMINAR\" class=\"btn btn lg btn-primary btn-block\" onclick=\"deleteTarjeta(this)\"></td></tr>"
+					custom.push(urltarj.value);
+					urltarj.value = "";
+					rellenoInicial();
+				}			
+			}
 		}
 		
 		function pasteTarjeta(fil){
-			
-			if(fil){
-				var urlpaste = URL.createObjectURL(fil);
-			
-				tarjetacontainer.innerHTML = tarjetacontainer.innerHTML + "<tr><td><img src=\"" + urlpaste + "\" width=\"400\" height=\"160\"></td><td><input type=\"button\" value=\"ELIMINAR\" class=\"btn btn lg btn-primary btn-block\" onclick=\"deleteTarjeta(this)\"></td></tr>"
-				custom.push(urlpaste);
-				rellenoInicial();
-			}			
+			if(flag == 1){
+				if(fil){
+					var urlpaste = URL.createObjectURL(fil);
+				
+					tarjetacontainer.innerHTML = tarjetacontainer.innerHTML + "<tr><td><img src=\"" + urlpaste + "\" width=\"400\" height=\"160\"></td><td><input type=\"button\" value=\"ELIMINAR\" class=\"btn btn lg btn-primary btn-block\" onclick=\"deleteTarjeta(this)\"></td></tr>"
+					custom.push(urlpaste);
+					rellenoInicial();
+				}			
+			}
 		}
 
 		function deleteTarjeta(node){
 		
-			custom.splice(custom.indexOf(node.parentElement.parentElement.children[0].children[0].src),1);
-			node.parentElement.parentElement.remove();
-			rellenoInicial();
-
+			if(flag == 1){
+		
+				custom.splice(custom.indexOf(node.parentElement.parentElement.children[0].children[0].src),1);
+				node.parentElement.parentElement.remove();
+				rellenoInicial();
+			}
 		}
 		
 		function palanca(){
@@ -322,45 +344,51 @@
 		
 		function crearPizza(){
 		
-			pizza.innerHTML = "";
+			if(flag == 1){
 		
-			for(var i = 0; i < names.length; i++){
-				pizza.innerHTML = pizza.innerHTML + "<div class=\"slice-cont\"><div class=\"slice\"><img class=\"tarjetapizza\" src=\"" + names[i] + "\"></div></div>";
-			}
+				pizza.innerHTML = "";
 			
-			trozar();
-		
+				for(var i = 0; i < names.length; i++){
+					pizza.innerHTML = pizza.innerHTML + "<div class=\"slice-cont\"><div class=\"slice\"><img class=\"tarjetapizza\" src=\"" + names[i] + "\"></div></div>";
+				}
+				
+				trozar();
+			}
 		}
 		
 		function trozar(){
 		
-			var listTrozos = document.getElementsByClassName("slice-cont");
-						
-			if (listTrozos.length > 3){
-						//i
-				pizza.style.transform = "translate(-1000px, " + (-100 - 800/listTrozos.length) + "px) scale(0.33)";
-				
-				for (var i = 0; i < listTrozos.length; i++){
-					listTrozos[i].style.height =  2* apotema * Math.tan(Math.PI/listTrozos.length) + "px";
+			if(flag == 1){
+				var listTrozos = document.getElementsByClassName("slice-cont");
+							
+				if (listTrozos.length > 3){
+							//i
+					pizza.style.transform = "translate(-1000px, " + (-100 - 800/listTrozos.length) + "px) scale(0.33)";
 					
-					listTrozos[i].style.transform = "rotateZ(" + (i * 360/ listTrozos.length)+ "deg)";
-					listTrozos[i].children[0].children[0].style.height =  2* apotema * Math.tan(Math.PI/listTrozos.length) + "px";	
-					listTrozos[i].children[0].children[0].style.width =  "75%";	
-				
-				}
-			} //-300 = i           f = -50
+					for (var i = 0; i < listTrozos.length; i++){
+						listTrozos[i].style.height =  2* apotema * Math.tan(Math.PI/listTrozos.length) + "px";
+						
+						listTrozos[i].style.transform = "rotateZ(" + (i * 360/ listTrozos.length)+ "deg)";
+						listTrozos[i].children[0].children[0].style.height =  2* apotema * Math.tan(Math.PI/listTrozos.length) + "px";	
+						listTrozos[i].children[0].children[0].style.width =  "75%";	
+					
+					}
+				} //-300 = i           f = -50
+			}
 		}
 
 		var apotema = 600;
 		
 		function cambio(){
-			if(pizza.parentElement.style.display == "none"){
-				pizza.parentElement.style.display = "block";
-				tombola.style.display = "none";
-			}
-			else{
-				tombola.style.display = "block";
-				pizza.parentElement.style.display = "none";
+			if (flag == 1){
+				if(pizza.parentElement.style.display == "none"){
+					pizza.parentElement.style.display = "block";
+					tombola.style.display = "none";
+				}
+				else{
+					tombola.style.display = "block";
+					pizza.parentElement.style.display = "none";
+				}
 			}
 		}
 		
@@ -372,6 +400,7 @@
 		width: 2326px;
 		transform-origin: 0% 50% 0;
 		transform: perspective(10em) translateZ(4rem) rotateY(8.53deg);
+		z-index:-1;
 	}
 
 	.slice-cont {
@@ -412,11 +441,11 @@
 	<div style="display:none; background: url(fondoPizza.png) center no-repeat; width:100%; max-height:600px;min-height:600px;text-align: center;">
 		<div id= "pizza" class="pizza-cont"></div>
 		<img src="clip.png"  style="margin-top:18px; transform: translate(-138px,188px);">
-		<img src="cono.png"  style="margin-top:18px; transform: translate(-136px,188px);width: 168px;">
+		<img src="cono.png"  style="margin-top:18px; transform: translate(-136px,188px);width: 168px;" onclick="girar(10)">
 	
 	</div>
 	
-	<div style="text-align:center;max-width:700px; margin-left:auto; margin-right:auto">
+	<div style="position: relative;text-align:center;max-width:700px; margin-left:auto; margin-right:auto">
 		<table style="width:100%">
 			<tbody>
 				<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
