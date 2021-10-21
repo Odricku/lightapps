@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html>
-<title>Ha hablado la Ruleta Magica!</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<style>
-</style>
-
-<head>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<script>
-		var pc = ["Tarjeta DG","Tarjeta DRAW","tarjeta FG","Tarjeta GB","Tarjeta GMOD","Tarjeta GTA","Tarjeta HFF","Tarjeta HS","Tarjeta JMC","Tarjeta JMD","Tarjeta JMP","Tarjeta LL","Tarjeta MOD","Tarjeta OC2","Tarjeta PA","Tarjeta PP","Tarjeta PU", "Tarjeta RL", "Tarjeta SR","Tarjeta UCH"];
-    	var cel =["Tarjeta JMD","Tarjeta JMP","Tarjeta PU","Tarjeta SG","Tarjeta BF","Tarjeta UNO","Tarjeta DRAW","Tarjeta PS", "Tarjeta G"];
-		var custom = []
+var custom = []
 		
-		var names;
+		var names = [];
 		var num;
 		
 		var regex = /\-{0,1}(\d+)/g;
@@ -36,15 +22,9 @@
 		var audioEnd = new Audio('Item roulette End.mp3');
 		audioEnd.volume = 0.3;
 		
-		function rellenoInicial(mode){
-		
-			if(mode == 0){
-				names = pc;
-			}else if(mode == 1){
-				names = cel;
-			}else if(mode == 2){
-				names = custom;
-			}
+		function rellenoInicial(){
+
+			names = custom;
 		
 			for(var i = 0; i < names.length; i++){
 		
@@ -53,20 +33,23 @@
 			
 			}
 			
-			if(names.length > 3){
+			if(custom.length > 3){
 		
-				document.getElementById("slot1").src = names[(num++) % names.length] + ".png";
-				document.getElementById("slot2").src = names[(num++) % names.length] + ".png";
-				document.getElementById("slot3").src = names[(num++) % names.length] + ".png";
-				document.getElementById("slot4").src = names[(num++) % names.length] + ".png";
+				document.getElementById("slot1").src = names[(num++) % names.length];
+				document.getElementById("slot2").src = names[(num++) % names.length];
+				document.getElementById("slot3").src = names[(num++) % names.length];
+				document.getElementById("slot4").src = names[(num++) % names.length];
 						
 				slots = [document.getElementById("slot1"), document.getElementById("slot2"), document.getElementById("slot3"), document.getElementById("slot4")];
 				rellenoRes();
 				crearPizza();
 			}
-			
 			else{
-				alert("Deben haber al menos 4 opciones");				
+				document.getElementById("slot1").src = "Placeholder.png";
+				document.getElementById("slot2").src = "Placeholder.png";
+				document.getElementById("slot3").src = "Placeholder.png";
+				document.getElementById("slot4").src = "Placeholder.png";
+				
 				pizza.innerHTML = "";
 			}
 		}
@@ -86,45 +69,52 @@
 			
 			slots[pos1].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(66deg)";
 			slots[pos1].width = 504;
+			slots[pos1].height = 202; 
 			slots[pos1].style.top = topValue + 22 + "px";
 			
 			slots[pos2].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(0deg)";
 			slots[pos2].width = 600;
+			slots[pos2].height = 240;
 			slots[pos2].style.top = topValue + 186 + "px";
 			
 			slots[pos3].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(-66deg)";
 			slots[pos3].width = 504;
+			slots[pos3].height = 202;
 			slots[pos3].style.top = topValue + 386 + "px";
 			
 			slots[pos4].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(-86deg)";
 			slots[pos4].width = 424;
+			slots[pos4].height = 170;
 			slots[pos4].style.top = topValue + 447 + "px";
 			
 			
 		}
 		
 		function girar(velGiro){
-		
-			if(flag == 1){
-				if(tombola.style.display != 'none'){
-					audioLoop.play();
-						
-					flag = 0;
-					flag2 = 0;
+			if(names.length > 3){
+			
+				if(flag == 1){
 				
-					slots = [document.getElementById("slot1"), document.getElementById("slot2"), document.getElementById("slot3"), document.getElementById("slot4")];
+					if(tombola.style.display != 'none'){
+						audioLoop.play();
+							
+						flag = 0;
+						flag2 = 0;
 					
-					timerId = setInterval(() => girar2(velGiro), velGiro);
-					setTimeout(() => { flag = 1;}, (30000/velGiro) + Math.floor(Math.random() * 1000));
-				}
-				else if(pizza.parentElement.style.display != 'none'){
-					audioLoop.play();
-					
-					flag = 0;
-					flag2 = 0;
-					
-					pizzaGiro(velGiro);
-					setTimeout(() => { flag = 1;}, (20000/velGiro) + Math.floor(Math.random() * 1000));
+						slots = [document.getElementById("slot1"), document.getElementById("slot2"), document.getElementById("slot3"), document.getElementById("slot4")];
+						
+						timerId = setInterval(() => girar2(velGiro), velGiro);
+						setTimeout(() => { flag = 1;}, (30000/velGiro) + Math.floor(Math.random() * 1000));
+					}
+					else if(pizza.parentElement.style.display != 'none'){
+						audioLoop.play();
+						
+						flag = 0;
+						flag2 = 0;
+						
+						pizzaGiro(velGiro);
+						setTimeout(() => { flag = 1;}, (20000/velGiro) + Math.floor(Math.random() * 1000));
+					}
 				}
 			}else{
 				alert("Deben haber al menos 4 opciones");
@@ -155,6 +145,9 @@
 					}
 				}
 			},velGiro);
+			
+			
+			
 		}
 		
 		function girar2(velGiro){
@@ -168,10 +161,12 @@
 				if(angel > 74){
 					elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
 					elem.width = elem.width + 16;
+					elem.height = elem.height + 6;
 				}
 				else if(angel > 42){
 					elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
 					elem.width = elem.width + 16;
+					elem.height = elem.height + 6;
 					elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 11) + "px";
 
 				}
@@ -183,6 +178,7 @@
 				else if(angel > -74){
 					elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
 					elem.width = elem.width - 16;
+					elem.height = elem.height - 6;
 					elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 17) + "px";
 
 				}
@@ -190,15 +186,16 @@
 				else if(angel > -90){
 					elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
 					elem.width = elem.width - 16;
+					elem.height = elem.height - 6;
 					elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 9) + "px";
 
 				}
 				else{
-					elem.src = names[(num++) % names.length] + ".png";
+					elem.src = names[(num++) % names.length];
 					elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(90deg)";
 					elem.width = 408;
+					elem.height = 166;
 					elem.style.top = topValue + "px";
-
 				}
 				
 				if(angel == 21 && flag == 1){
@@ -218,9 +215,57 @@
 			}			
 		}
 		
+		function limpiar(){
+			var res = confirm("Esto eliminara todo y no puede deshacerse, ¿estas seguro?")
+			if (res == true){
+				thereallimpiar();
+			}
+		}
+		
+		function thereallimpiar(){
+		
+			var listTarj = document.getElementById("tarjetacontainer").children;
+			
+			for(var i = listTarj.length - 1; i > 0 ; i--){
+				listTarj[i].remove();
+			}
+			
+			custom = [];
+			rellenoInicial();
+		}
+		
+		function addTarjeta(){
+			
+			if(urltarj.value.length != 0){
+				tarjetacontainer.innerHTML = tarjetacontainer.innerHTML + "<tr><td><img src=\"" + urltarj.value + "\" width=\"400\" height=\"160\"></td><td><input type=\"button\" value=\"ELIMINAR\" class=\"btn btn lg btn-primary btn-block\" onclick=\"deleteTarjeta(this)\"></td></tr>"
+				custom.push(urltarj.value);
+				urltarj.value = "";
+				rellenoInicial();
+			}			
+		}
+		
+		function pasteTarjeta(fil){
+			
+			if(fil){
+				var urlpaste = URL.createObjectURL(fil);
+			
+				tarjetacontainer.innerHTML = tarjetacontainer.innerHTML + "<tr><td><img src=\"" + urlpaste + "\" width=\"400\" height=\"160\"></td><td><input type=\"button\" value=\"ELIMINAR\" class=\"btn btn lg btn-primary btn-block\" onclick=\"deleteTarjeta(this)\"></td></tr>"
+				custom.push(urlpaste);
+				rellenoInicial();
+			}			
+		}
+
+		function deleteTarjeta(node){
+		
+			custom.splice(custom.indexOf(node.parentElement.parentElement.children[0].children[0].src),1);
+			node.parentElement.parentElement.remove();
+			rellenoInicial();
+
+		}
+		
 		function palanca(){
 		
-			if(flag == 1){
+			if(flag == 1 && custom.length > 3){
 				perilla.style.transform = 'translate(470px, 350px) scale(1)';
 				palillo.style.transform = 'translate(480px, 30px) scaleY(-1)';
 				setTimeout(()=> {
@@ -246,13 +291,31 @@
 			palillo.style.transform = 'translate(480px, 30px) scale(1)';
 		}
 		
+		window.addEventListener('paste', e => {
+			for(var i = 0; i < e.clipboardData.files.length; i++){
+				pasteTarjeta(e.clipboardData.files[i]);
+			}
+		});
+
+		window.addEventListener("dragover", (e)=>{
+			e.preventDefault();
+		});
+		
+		window.addEventListener("drop", (e)=>{
+			e.preventDefault(); 
+			if(flag == 1){
+				for(var i = 0; i < event.dataTransfer.files.length; i++){
+					pasteTarjeta(event.dataTransfer.files[i]);
+				}
+			}
+		});
 		
 		function crearPizza(){
 		
 			pizza.innerHTML = "";
 		
 			for(var i = 0; i < names.length; i++){
-				pizza.innerHTML = pizza.innerHTML + "<div class=\"slice-cont\"><div class=\"slice\"><img class=\"tarjetapizza\" src=\"" + names[i] + ".png\"></div></div>";
+				pizza.innerHTML = pizza.innerHTML + "<div class=\"slice-cont\"><div class=\"slice\"><img class=\"tarjetapizza\" src=\"" + names[i] + "\"></div></div>";
 			}
 			
 			trozar();
@@ -290,86 +353,3 @@
 				pizza.parentElement.style.display = "none";
 			}
 		}
-		
-    </script>
-	<style>
-	.slice {
-		height: 100%;
-		width: 2326px;
-		transform-origin: 0% 50% 0;
-		transform: perspective(10em) translateZ(4rem) rotateY(8.53deg);
-	}
-
-	.slice-cont {
-		max-width:2326px;
-		position:absolute;
-		transform-origin: 43% 50% 0;
-		transition: linear 0.01s;	
-	}
-	
-	.pizza-cont{   
-		margin-left: auto;
-		position: absolute;
-		top: 0;
-		left: 50%;
-		width: 2000px;
-		height: 1200px;
-	}
-	
-	
-	.tarjetapizza{
-	
-	}	
-    </style>
-</head>
-<body onload="rellenoInicial(0)">
-<div>
-	<div id="tombola" style="width:100%; min-height:600px;text-align: center;">
-		<img src="fondo.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
-		<img src="palillo.png" id="palillo" style="transform-origin: 50% 100%;transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(480px, 30px);top:45px; position:absolute">
-		<img id="slot1" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
-		<img id="slot2" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
-		<img id="slot3" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
-		<img id="slot4" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
-		<img src="ruleta magica.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">	
-		<img src="perilla.png" id="perilla" style="transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(470px, 0px);top:45px; position:absolute" onclick="palanca();girar(10)">		
-	</div>
-	
-	<div style="display:none; width:100%; max-height:600px;min-height:600px;text-align: center;">
-		<div id= "pizza" class="pizza-cont"></div>
-	</div>
-
-	<div style="text-align:center;max-width:700px; margin-left:auto; margin-right:auto;">
-		<table style="width:100%">
-			<tbody>
-				<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-				<tr>
-					<td>
-						<input type="button" name="boton" value="TIRA LA RULETA" class="btn btn lg btn-primary btn-block" onclick="girar(10)">
-					</td>
-					<td>
-						<input type="button" name="boton" value="CON MAS SUSPENSO" class="btn btn lg btn-primary btn-block" onclick="girar(5)">
-					</td>
-					<td>
-						<input type="button" name="boton" value="AUN MAS SUSPENSO 😱" class="btn btn lg btn-primary btn-block" onclick="girar(3)">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="button" name="boton" value="VERSION CELULAR" class="btn btn lg btn-primary btn-block" onclick="rellenoInicial(1)">
-					</td>
-					<td>
-						<input type="button" name="boton" value="VERSION DE PC" class="btn btn lg btn-primary btn-block" onclick="rellenoInicial(0)">
-					</td>
-					<td>
-						<input type="button" name="boton" value="CAMBIAR RULETA" class="btn btn lg btn-primary btn-block" onclick="cambio()">
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		</br></br>
-		¿Quieres hacer tu propia ruleta? <a href="custom.html">Entra Aca</a>
-	</div>
-</div>
-</body>
-</html>

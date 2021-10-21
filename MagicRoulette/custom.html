@@ -107,20 +107,57 @@
 			if(names.length > 3){
 			
 				if(flag == 1){
-			
-					audioLoop.play();
-						
-					flag = 0;
-					flag2 = 0;
 				
-					slots = [document.getElementById("slot1"), document.getElementById("slot2"), document.getElementById("slot3"), document.getElementById("slot4")];
+					if(tombola.style.display != 'none'){
+						audioLoop.play();
+							
+						flag = 0;
+						flag2 = 0;
 					
-					timerId = setInterval(() => girar2(velGiro), velGiro);
-					setTimeout(() => { flag = 1;}, (30000/velGiro) + Math.floor(Math.random() * 1000));
+						slots = [document.getElementById("slot1"), document.getElementById("slot2"), document.getElementById("slot3"), document.getElementById("slot4")];
+						
+						timerId = setInterval(() => girar2(velGiro), velGiro);
+						setTimeout(() => { flag = 1;}, (30000/velGiro) + Math.floor(Math.random() * 1000));
+					}
+					else if(pizza.parentElement.style.display != 'none'){
+						audioLoop.play();
+						
+						flag = 0;
+						flag2 = 0;
+						
+						pizzaGiro(velGiro);
+						setTimeout(() => { flag = 1;}, (20000/velGiro) + Math.floor(Math.random() * 1000));
+					}
 				}
 			}else{
 				alert("Deben haber al menos 4 opciones");
 			}
+		}
+		
+		function pizzaGiro(velGiro){
+			var listTarj = document.getElementsByClassName("slice-cont"); 
+			
+			timerId = setInterval(()=> {
+				console.log(velGiro);
+				for(var i = 0; i < listTarj.length; i++){
+					listTarj[i].style.transform = "rotateZ(" + (parseInt(listTarj[i].style.transform.match(regex)[0]) + 15)+ "deg)";
+					listTarj[i].style.transition = "linear " + (velGiro/1000 + 0.25) + "s";
+				}
+				if(flag == 1){
+					clearInterval(timerId);
+					if(velGiro < 160){
+						girar(2 * velGiro);
+					}
+					else{
+						clearInterval(timerId);
+						for(var i = 0; i < listTarj.length; i++){
+							listTarj[i].style.transform = "rotateZ(" + (parseInt(listTarj[i].style.transform.match(regex)[0]) + 45)+ "deg)";
+							listTarj[i].style.transition = "ease-out " + (10 * velGiro/1000) + "s";
+						}
+						setTimeout(() => { audioLoop.pause(); audioEnd.play();}, 1500 + 5 * velGiro/1000);
+					}
+				}
+			},velGiro);
 		}
 		
 		function girar2(velGiro){
@@ -276,8 +313,10 @@
 		
 		window.addEventListener("drop", (e)=>{
 			e.preventDefault(); 
-			for(var i = 0; i < event.dataTransfer.files.length; i++){
-				pasteTarjeta(event.dataTransfer.files[i]);
+			if(flag == 1){
+				for(var i = 0; i < event.dataTransfer.files.length; i++){
+					pasteTarjeta(event.dataTransfer.files[i]);
+				}
 			}
 		});
 		
@@ -298,8 +337,8 @@
 			var listTrozos = document.getElementsByClassName("slice-cont");
 						
 			if (listTrozos.length > 3){
-						
-				pizza.style.transform = "translate(-720px, " + (80 - 860/listTrozos.length) + "px) scale(0.33)";
+						//i
+				pizza.style.transform = "translate(-1000px, " + (-100 - 800/listTrozos.length) + "px) scale(0.33)";
 				
 				for (var i = 0; i < listTrozos.length; i++){
 					listTrozos[i].style.height =  2* apotema * Math.tan(Math.PI/listTrozos.length) + "px";
@@ -309,7 +348,7 @@
 					listTrozos[i].children[0].children[0].style.width =  "75%";	
 				
 				}
-			} //135 = i           f = -50
+			} //-300 = i           f = -50
 		}
 
 		var apotema = 600;
@@ -336,8 +375,10 @@
 	}
 
 	.slice-cont {
+		max-width:2326px;
 		position:absolute;
-		transform-origin: 43% 50% 0;	
+		transform-origin: 43% 50% 0;
+		transition: linear 0.01s;	
 	}
 	
 	.pizza-cont{   
@@ -345,8 +386,8 @@
 		position: absolute;
 		top: 0;
 		left: 50%;
-		width: 1150px;
-		height: 700px;
+		width: 2000px;
+		height: 1200px;
 	}
 	
 	
@@ -368,8 +409,11 @@
 		<img src="perilla.png" id="perilla" style="transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(470px, 0px);top:45px; position:absolute" onclick="palanca();girar(10)">		
 	</div>
 	
-	<div style="display:none; width:100%; max-height:600px;min-height:600px;text-align: center;">
+	<div style="display:none; background: url(fondoPizza.png) center no-repeat; width:100%; max-height:600px;min-height:600px;text-align: center;">
 		<div id= "pizza" class="pizza-cont"></div>
+		<img src="clip.png"  style="margin-top:18px; transform: translate(-138px,188px);">
+		<img src="cono.png"  style="margin-top:18px; transform: translate(-136px,188px);width: 168px;">
+	
 	</div>
 	
 	<div style="text-align:center;max-width:700px; margin-left:auto; margin-right:auto">
