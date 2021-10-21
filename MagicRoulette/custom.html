@@ -80,25 +80,25 @@
 			var pos4 = num.indexOf(Math.min(...num));
 			num[pos4] = 9999;
 			
-			slots[pos1].style.transition = "ease-out 0.5s";
+			slots[pos1].style.transition = "0.5s";
 			slots[pos1].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(66deg)";
 			slots[pos1].width = 504;
 			slots[pos1].height = 202; 
 			slots[pos1].style.top = topValue + 22 + "px";
 			
-			slots[pos2].style.transition = "ease-out 0.5s";
+			slots[pos2].style.transition = "0.5s";
 			slots[pos2].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(0deg)";
 			slots[pos2].width = 600;
 			slots[pos2].height = 240;
 			slots[pos2].style.top = topValue + 186 + "px";
 			
-			slots[pos3].style.transition = "ease-out 0.5s";
+			slots[pos3].style.transition = "0.5s";
 			slots[pos3].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(-66deg)";
 			slots[pos3].width = 504;
 			slots[pos3].height = 202;
 			slots[pos3].style.top = topValue + 386 + "px";
 			
-			slots[pos4].style.transition = "ease-out 0.5s";
+			slots[pos4].style.transition = "0.5s";
 			slots[pos4].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(-86deg)";
 			slots[pos4].width = 424;
 			slots[pos4].height = 170;
@@ -490,7 +490,7 @@
 			</tbody>
 		</table>
 		<div>
-			<input type="text" id="urltarj" placeholder="URL de la imagen (Se reescalara a 500x200)" class="btn btn lg btn-dark btn-block"><input type="button" name="boton" value="AGREGAR TARJETA" class="btn btn lg btn-primary btn-block" onclick="addTarjeta()">
+			<input type="text" id="urltarj" placeholder="Arrastra, pega imagen o escribe su URL (Se reescalara a 500x200)" class="btn btn lg btn-dark btn-block"><input type="button" name="boton" value="AGREGAR TARJETA" class="btn btn lg btn-primary btn-block" onclick="addTarjeta()">
 		</div>
 	</div>
 </div>
