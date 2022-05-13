@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Dice Roll</title>
+	<style>
+		.rnOuter {
+		  background: hsl(0, 80%, 38%);
+		  overflow: hidden;
+		  position: relative;
+		  height: 60vh;
+		}
+		.rnInner {
+		  width: 100%;
+		  position: absolute;
+		  top: -10%;
+		  right: 0;
+		  bottom: 0;
+		  left: 0;
+		  margin: auto;
+		  transform-style: preserve-3d;
+		  transition: transform 4s ease;
+		  transform-origin: -120% top;
+		}
+		
+		.lnInner {
+		  position: absolute;
+		  top: -10%;
+		  right: 0;
+		  transform-style: preserve-3d;
+		  transition: transform 3s ease;
+		  transform-origin: 240% top;
+		}
+		.rnUnit {
+		  width: 10vw;
+		  height: 120vh;
+		  background: repeating-linear-gradient(to left, hsl(0, 80%, 50%) 4vw, hsl(0, 80%, 30%) 8vw, hsl(0, 80%, 70%) 10vw);
+		  background-size: 100% 100%;
+		  display: inline-block;
+		  transform-origin: 0 0%;
+		  transform: rotate(1deg);
+		  -webkit-animation: rnUnit 2s ease infinite;
+				  animation: rnUnit 2s ease infinite;
+		}
+		@-webkit-keyframes rnUnit {
+		  50% {
+			transform: rotate(-1deg);
+		  }
+		}
+		@keyframes rnUnit {
+		  50% {
+			transform: rotate(-1deg);
+		  }
+		}
+		.aoTable {
+		  display: table;
+		  width: 100%;
+		  height: 70vh;
+		  text-align: center;
+		}
+		.aoTableCell {
+		  color: hsl(0, 80%, 38%);
+		  display: table-cell;
+		  vertical-align: middle;
+		  transition: color 3s ease;
+		}
+		.rnOuter:hover .rnInner {
+		  transform-origin: -120% top;
+		  transform: scaleX(0);
+		}
+		.rnOuter:hover .lnInner {
+		  transform-origin: 240% top;
+		  transform: scaleX(0);
+		}
+		.rnOuter:hover .aoTableCell {
+		  background-color: black;
+		  text-align:center;
+		}
+		body{
+			margin:0 0 0 0;
+		}
+
+	</style>
+	<script>
+		
+		function cleanAllMinus(name){
+			var videos = document.getElementsByClassName("video");
+			for(var i = 0; i < videos.length; i++){
+				if(videos[i].id == name){
+					videos[i].style.display = "block";
+				}
+				else{
+					videos[i].style.display = "none";
+				}
+			}
+		}
+		
+		function openCurtains(name){
+			cleanAllMinus(name)
+			var uno = document.getElementsByClassName("lnInner");
+			var dos = document.getElementsByClassName("rnInner");
+			
+			for(var i = 0; i < uno.length; i++){
+				uno[i].style.transform = "scaleX(0)";
+			}
+			
+			for(var j = 0; j < dos.length; j++){
+				dos[j].style.transform = "scaleX(0)";
+			}
+		}
+		
+		function closeCurtains(){
+			cleanAllMinus("")
+			var uno = document.getElementsByClassName("lnInner");
+			var dos = document.getElementsByClassName("rnInner");
+			
+			for(var i = 0; i < uno.length; i++){
+				uno[i].style.transform = "scaleX(1)";
+			}
+			
+			for(var j = 0; j < dos.length; j++){
+				dos[j].style.transform = "scaleX(1)";
+			}
+		}
+
+				
+		cleanAllMinus("");
+
+	</script>
+  </head>
+  <body style="background-color:black">
+	
+	<div style="background-color:black;height:50px;width:100%"></div>
+	<div class="wrap">
+
+		<div class="rnOuter ">
+		
+			<div class='lnInner'">
+				<div class='rnUnit'></div>
+				<div class='rnUnit'></div>
+				<div class='rnUnit'></div>
+				<div class='rnUnit'></div>
+				<div class='rnUnit'></div>				
+
+			</div>
+			<div class='rnInner'">
+				<div class='rnUnit'></div>
+				<div class='rnUnit'></div>
+				<div class='rnUnit'></div>
+				<div class='rnUnit'></div>
+				<div class='rnUnit'></div>				
+			</div>
+			   
+			<div class="aoTable">
+				<div class="aoTableCell">
+					<table style="text-align:center;width:100%">
+						<tbody>
+							<tr>
+								<td>
+									<a href="https://drive.google.com/file/d/1-3OyL8bxwIyOB1i-jT33MeCwhi4HBXL6/view" target="_blank">
+										<img width="200" height="300" src="https://img.cuevana2.io/2022/05/6DrHO1jr3qVrViUO6s6kFiAGM71-200x300.jpg" href="https://drive.google.com/file/d/1-3OyL8bxwIyOB1i-jT33MeCwhi4HBXL6/view"/>
+									</a>
+								</td>
+								<td>
+									<a href="https://drive.google.com/file/d/1gUAWV1ZrSyfqEfDMQVLHCT85j_mv_SpV/view" target="_blank">
+										<img width="200" height="300" src="https://img.cuevana2.io/2022/05/MV5BMDhkYmU0MzctMWEzNy00ODg1LWI3ZjAtMGZlZjkzNWVmMzVjXkEyXkFqcGdeQXVyMTM1MTE1NDMx._V1_SX300.jpg"/>
+										</a>
+								</td>
+								<td>
+									<a href="https://drive.google.com/file/d/1ftWBBg3WUZ57kRFxu8NM0p07LA8rvmqW/view" target="_blank">
+										<img width="200" height="300" src="https://img.cuevana2.io/2022/04/MV5BMWEwNjhkYzYtNjgzYy00YTY2LThjYWYtYzViMGJkZTI4Y2MyXkEyXkFqcGdeQXVyNTM0OTY1OQ@@._V1_SX300.jpg"/>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+		</div>
+		
+	</div>
+	<div style="margin-top:-60px;position: absolute">
+		<img style="width:100vw" src="https://i.ibb.co/mRKd5zt/asientos.png" border="0"></img>
+	</div>
+
+  </body>
+</html>
