@@ -119,12 +119,9 @@
 		.butaca {
 		  width: 20vw;
 		  height: 150px;
-		  background: linear-gradient(to left, hsl(0, 80%, 30%) 4vw, hsl(0, 80%, 40%) 8vw, hsl(0, 80%, 30%) 100vw);
+		  background: url("https://i.ibb.co/1MFm876/asientos.png") no-repeat;
 		  background-size: 100% 100%;
 		  display: inline-block;
-		  border: 2px outset hsl(0, 80%, 30%);
-		  border-top-left-radius: 50px;
-		  border-top-right-radius: 50px;
 		}
 		.open{
 			scaleX(0.7);
@@ -165,18 +162,24 @@
 		.fila4{
 			 margin-top:180px;
 			 position: absolute;
-			 width:110vw;
+			 width:120vw;
 			 overflow:hidden;
 			 padding-left: 0vw;
 		}
 		.fila4 .butaca {
 			margin-left:-0.4vw;
-			height: 100px;
+			height: 180px;
 			transform: scaleX(1);
+			background-size: 100% 200%;
 		}
 		.asientos{
-			max-width: 100%;
-			overflow-x: hidden;
+			margin-top: 20px;
+		}
+		.pilar{
+			background: url('https://i.ibb.co/nzXhHfN/pilarg.png');
+			background-size: 100% 100%;
+			height:50px;
+			width:100%;
 		}
 	</style>
 	<script>
@@ -228,7 +231,7 @@
   </head>
   <body style="background-color:black; max-width:100%; overflow:hidden">
 	
-	<div style="background-color:black;height:50px;width:100%"></div>
+	<div class="pilar"></div>
 	<div class="wrap">
 
 		<div class="rnOuter ">
@@ -273,7 +276,7 @@
 									<iframe class="video" id="videouncharted" src="https://drive.google.com/file/d/1ftWBBg3WUZ57kRFxu8NM0p07LA8rvmqW/preview" allow="autoplay" allowfullscreen></iframe>
 									<iframe class="video" id="videosonic" src="https://drive.google.com/file/d/1-3OyL8bxwIyOB1i-jT33MeCwhi4HBXL6/preview" allow="autoplay" allowfullscreen></iframe>
 									<iframe class="video" id="videobadguys" src="https://drive.google.com/file/d/1gUAWV1ZrSyfqEfDMQVLHCT85j_mv_SpV/preview" allow="autoplay" allowfullscreen></iframe>
-									<iframe class="video" id="videodumbledore" src="https://drive.google.com/file/d/1gUAWV1ZrSyfqEfDMQVLHCT85j_mv_SpV/preview" allow="autoplay" allowfullscreen onclick="this.fullscreen()"></iframe>					
+									<iframe class="video" id="videodumbledore" src="https://drive.google.com/file/d/1gUAWV1ZrSyfqEfDMQVLHCT85j_mv_SpV/preview" allow="autoplay" allowfullscreen"></iframe>					
 								</td>
 							</tr>
 						</tbody>
@@ -285,6 +288,7 @@
 	</div>
 	<div class="asientos">
 		<div class="fila1">
+			<div class="butaca" style=""></div>
 			<div class="butaca" style=""></div>
 			<div class="butaca" style=""></div>
 			<div class="butaca" style=""></div>
@@ -317,6 +321,7 @@
 			<div class="butaca" style=""></div>
 		</div>
 		<div class="fila4">
+			<div class="butaca" style=""></div>
 			<div class="butaca" style=""></div>
 			<div class="butaca" style=""></div>
 			<div class="butaca" style=""></div>
