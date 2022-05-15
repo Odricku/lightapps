@@ -7,7 +7,7 @@
     <title>Dice Roll</title>
 	<style>
 		.rnOuter {
-		  background: hsl(0, 80%, 38%);
+		  background-color: black;
 		  overflow: hidden;
 		  position: relative;
 		  height: 60vh;
@@ -22,7 +22,7 @@
 		  margin: auto;
 		  transform-style: preserve-3d;
 		  transition: transform 4s ease;
-		  transform-origin: -120% top;
+		  transform-origin: -60% top;
 		}
 		
 		.lnInner {
@@ -64,19 +64,15 @@
 		  color: hsl(0, 80%, 38%);
 		  display: table-cell;
 		  vertical-align: middle;
-		  transition: color 3s ease;
+		  transition: color 1s ease;
 		}
 		.rnOuter:hover .rnInner {
-		  transform-origin: -120% top;
+		  transform-origin: -60% top;
 		  transform: scaleX(0);
 		}
 		.rnOuter:hover .lnInner {
 		  transform-origin: 240% top;
 		  transform: scaleX(0);
-		}
-		.rnOuter:hover .aoTableCell {
-		  background-color: black;
-		  text-align:center;
 		}
 		body{
 			margin:0 0 0 0;
@@ -112,7 +108,76 @@
 		  -webkit-animation-delay: -0.5s;
 				  animation-delay: -0.5s;
 		}
-
+		iframe{
+			display:none;
+			margin:auto;
+			margin-top:-170px;
+			width:50vw;
+			height:50vh;
+			
+		}
+		.butaca {
+		  width: 20vw;
+		  height: 150px;
+		  background: linear-gradient(to left, hsl(0, 80%, 30%) 4vw, hsl(0, 80%, 40%) 8vw, hsl(0, 80%, 30%) 100vw);
+		  background-size: 100% 100%;
+		  display: inline-block;
+		  border: 2px outset hsl(0, 80%, 30%);
+		  border-top-left-radius: 50px;
+		  border-top-right-radius: 50px;
+		}
+		.open{
+			scaleX(0.7);
+		}
+		.fila1{
+			 margin-top:-50px;
+			 position: absolute;
+			 width:110vw;
+			 overflow:hidden;
+			 padding-left: 5.4vw;
+		}
+		.fila1 .butaca {
+			margin-left:-10.4vw;
+			transform: scaleX(0.5);
+		}
+		.fila2{
+			 margin-top:20px;
+			 position: absolute;
+			 width:110vw;
+			 overflow:hidden;
+			 padding-left: 0vw;
+		}
+		.fila2 .butaca {
+			margin-left:-8.4vw;
+			transform: scaleX(0.6);
+		}
+		.fila3{
+			 margin-top:100px;
+			 position: absolute;
+			 width:110vw;
+			 overflow:hidden;
+			 padding-left: 0vw;
+		}
+		.fila3 .butaca {
+			margin-left:-5.4vw;
+			transform: scaleX(0.75);
+		}
+		.fila4{
+			 margin-top:180px;
+			 position: absolute;
+			 width:110vw;
+			 overflow:hidden;
+			 padding-left: 0vw;
+		}
+		.fila4 .butaca {
+			margin-left:-0.4vw;
+			height: 100px;
+			transform: scaleX(1);
+		}
+		.asientos{
+			max-width: 100%;
+			overflow-x: hidden;
+		}
 	</style>
 	<script>
 		
@@ -130,22 +195,19 @@
 		
 		function openCurtains(name){
 			cleanAllMinus(name)
-			var uno = document.getElementsByClassName("lnInner");
-			var dos = document.getElementsByClassName("rnInner");
-			
-			for(var i = 0; i < uno.length; i++){
-				uno[i].style.transform = "scaleX(0)";
-			}
-			
-			for(var j = 0; j < dos.length; j++){
-				dos[j].style.transform = "scaleX(0)";
-			}
+			if (name != ""){
+				var posters = document.getElementsByClassName("poster");
+				for(var k = 0; k < posters.length; k++){
+					posters[k].style.display = "none";
+				}
+			}			
 		}
 		
 		function closeCurtains(){
 			cleanAllMinus("")
 			var uno = document.getElementsByClassName("lnInner");
 			var dos = document.getElementsByClassName("rnInner");
+			var posters = document.getElementsByClassName("poster");
 			
 			for(var i = 0; i < uno.length; i++){
 				uno[i].style.transform = "scaleX(1)";
@@ -154,13 +216,17 @@
 			for(var j = 0; j < dos.length; j++){
 				dos[j].style.transform = "scaleX(1)";
 			}
+			
+			for(var k = 0; k < posters.length; k++){
+				posters[k].style.display = "block";
+			}
 		}
 	
 		cleanAllMinus("");
 
 	</script>
   </head>
-  <body style="background-color:black">
+  <body style="background-color:black; max-width:100%; overflow:hidden">
 	
 	<div style="background-color:black;height:50px;width:100%"></div>
 	<div class="wrap">
@@ -190,32 +256,73 @@
 						<tbody>
 							<tr>
 								<td>
-									<a href="https://drive.google.com/file/d/1-3OyL8bxwIyOB1i-jT33MeCwhi4HBXL6/view" target="_blank">
-										<img width="200" height="300" src="https://img.cuevana2.io/2022/05/6DrHO1jr3qVrViUO6s6kFiAGM71-200x300.jpg" href="https://drive.google.com/file/d/1-3OyL8bxwIyOB1i-jT33MeCwhi4HBXL6/view"/>
-									</a>
+									<img class="poster" width="200" height="300" src="https://img.cuevana2.io/2022/05/6DrHO1jr3qVrViUO6s6kFiAGM71-200x300.jpg" onclick="openCurtains('videosonic')"/>
 								</td>
 								<td>
-									<a href="https://drive.google.com/file/d/1gUAWV1ZrSyfqEfDMQVLHCT85j_mv_SpV/view" target="_blank">
-										<img width="200" height="300" src="https://img.cuevana2.io/2022/05/MV5BMDhkYmU0MzctMWEzNy00ODg1LWI3ZjAtMGZlZjkzNWVmMzVjXkEyXkFqcGdeQXVyMTM1MTE1NDMx._V1_SX300.jpg"/>
-										</a>
+									<img class="poster" width="200" height="300" src="https://img.cuevana2.io/2022/05/MV5BMDhkYmU0MzctMWEzNy00ODg1LWI3ZjAtMGZlZjkzNWVmMzVjXkEyXkFqcGdeQXVyMTM1MTE1NDMx._V1_SX300.jpg" onclick="openCurtains('videobadguys')"/>
 								</td>
 								<td>
-									<a href="https://drive.google.com/file/d/1ftWBBg3WUZ57kRFxu8NM0p07LA8rvmqW/view" target="_blank">
-										<img width="200" height="300" src="https://img.cuevana2.io/2022/04/MV5BMWEwNjhkYzYtNjgzYy00YTY2LThjYWYtYzViMGJkZTI4Y2MyXkEyXkFqcGdeQXVyNTM0OTY1OQ@@._V1_SX300.jpg"/>
-									</a>
+									<img class="poster" width="200" height="300" src="https://img.cuevana2.io/2022/04/MV5BMWEwNjhkYzYtNjgzYy00YTY2LThjYWYtYzViMGJkZTI4Y2MyXkEyXkFqcGdeQXVyNTM0OTY1OQ@@._V1_SX300.jpg" onclick="openCurtains('videouncharted')"/>
+								</td>
+								<td>
+									<img class="poster" width="200" height="300" src="https://img.cuevana2.io/2022/05/MV5BZGQ1NjQyNDMtNzFlZS00ZGIzLTliMWUtNGJkMGMzNTBjNDg0XkEyXkFqcGdeQXVyMTE1NDI5MDQx._V1_SX300.jpg" onclick="openCurtains('videodumbledore')"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="4">
+									<iframe class="video" id="videouncharted" src="https://drive.google.com/file/d/1ftWBBg3WUZ57kRFxu8NM0p07LA8rvmqW/preview" allow="autoplay" allowfullscreen></iframe>
+									<iframe class="video" id="videosonic" src="https://drive.google.com/file/d/1-3OyL8bxwIyOB1i-jT33MeCwhi4HBXL6/preview" allow="autoplay" allowfullscreen></iframe>
+									<iframe class="video" id="videobadguys" src="https://drive.google.com/file/d/1gUAWV1ZrSyfqEfDMQVLHCT85j_mv_SpV/preview" allow="autoplay" allowfullscreen></iframe>
+									<iframe class="video" id="videodumbledore" src="https://drive.google.com/file/d/1gUAWV1ZrSyfqEfDMQVLHCT85j_mv_SpV/preview" allow="autoplay" allowfullscreen onclick="this.fullscreen()"></iframe>					
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-			</div>
-			
+			</div>	
 		</div>
 		
 	</div>
-	<div style="margin-top:-60px;position: absolute">
-		<img style="width:100vw" src="https://i.ibb.co/mRKd5zt/asientos.png" border="0"></img>
+	<div class="asientos">
+		<div class="fila1">
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+		</div>
+		<div class="fila2">
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+		</div>
+		<div class="fila3">
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+		</div>
+		<div class="fila4">
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+			<div class="butaca" style=""></div>
+		</div>
 	</div>
-
   </body>
 </html>
