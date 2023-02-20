@@ -1174,8 +1174,6 @@ function cargaobj(){
 					posfin = objtabla.indexOf("<", posini);
 				}
 				
-				
-				
 				var imgdet = {
 					name: objtabla.substring(posini, posfin),
 					img: imgobj[0]
@@ -1193,13 +1191,13 @@ function cargaobj(){
 
 function generajson(){}
 
-var pokelistTemp;
-
 function generapoke(){
 
-	pokelistTemp = [];
+	var pokelistTemp = [];
 	
 	var imgobj;
+	
+	pokelist = [];
 	
 	try{
 		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_Pok%C3%A9mon");
@@ -1213,38 +1211,22 @@ function generapoke(){
 			
 			var generacion = 1;
 			
-			while(posinitable != -1){
-/*
-				var poke = {
-					id: " ",
-					title: "normal",
-					name: pokelist[pos][0]["name"],
-					img: {sprite: " ", otros:[]},
-					tipo: [],
-					habs: {normal: [], oculta: []},
-					stats: [0, 0, 0, 0, 0, 0],
-					movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
-					front: " ",
-					gen: generacion
-				};
-*/			
+			while(posini == -1 && posinitable != -1){
+		
 				posini = poketabla.indexOf("\">", posini) + 2;
 				
-				pokelistTemp.push(poketabla.substring(posini, posfin) + " GEN= " + generacion + " " +  posini + " " + posinitable);
-				console.log(poketabla.substring(posini, posfin) + " GEN= " + generacion + " " +  posini + " "  + posfin + " " + posinitable +  " " + posfintable);
+				pokelist.push(cargapokes(poketabla.substring(posini, posfin), "normal",generacion));
 				
 				posfin = poketabla.indexOf("</tr>", posini);
 				posini = poketabla.indexOf("<td><a href=", posfin);
 				posfin = poketabla.indexOf("</a>", posini);
 				
-				if(posini == -1 || posini > posfintable){
+				if(posini > posfintable){
 					posinitable = poketabla.indexOf("<table class=\"tabpokemon", posfintable);
 					posfintable = poketabla.indexOf("</table>", posinitable);
 					generacion = generacion + 1;
 				}
-				
 			}
-			
 		});
 	}catch(error){
 		cargahabs();
