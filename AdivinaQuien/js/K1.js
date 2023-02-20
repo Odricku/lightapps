@@ -1231,6 +1231,7 @@ function generapoke(){
 				posini = poketabla.indexOf("\">", posini) + 2;
 				
 				pokelistTemp.push(poketabla.substring(posini, posfin) + " GEN= " + generacion + " " +  posini + " " + posinitable);
+				console.log(poketabla.substring(posini, posfin) + " GEN= " + generacion + " " +  posini + " "  + posfin + " " + posinitable +  " " + posfintable);
 				
 				posfin = poketabla.indexOf("</tr>", posini);
 				posini = poketabla.indexOf("<td><a href=", posfin);
@@ -1241,8 +1242,6 @@ function generapoke(){
 					posfintable = poketabla.indexOf("</table>", posinitable);
 					generacion = generacion + 1;
 				}
-				
-				console.log(poketabla.substring(posini, posfin) + " GEN= " + generacion + " " +  posini + " "  + posfin + " " + posinitable +  " " + posfintable);
 				
 			}
 			
