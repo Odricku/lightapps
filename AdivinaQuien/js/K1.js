@@ -2,10 +2,6 @@ var pokelist;
 
 var pokelist2 = [];
 	
-var CANTIDAD_HABS = 259;
-var CANTIDAD_MOVS = 778;
-var CANTIDAD_POKES = 891;
-var CANTIDAD_BALL = 27;	
 var disc = "Pokémon es una marca registrada de Nintendo desde el 1995 a la fecha. Esta pagina es sin animos de lucro y no esta de ninguna manera afiliada a Nintendo ni oficialmente respaldada. Esta pagina solo tiene el objetivo de pasar un buen rato y para el disfrute gratuito de aquellas almas perdidas que se pierdan por estos rincones de internet. La intencion no es competir con la marca registrada de Nintendo.";
 
 var llave = " 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+";
@@ -659,7 +655,7 @@ function cargapokes(nombre, vartitle, generacion){
 			var wikipage = data.replace(/(\r\n|\n|\r)/gm,"");
 								
 			var idpokeini = wikipage.indexOf(">", wikipage.indexOf(">#<") + 3) + 1;
-			poke["id"] = wikipage.substring(idpokeini, wikipage.indexOf("<", idpokeini));
+			poke["id"] = wikipage.substring(idpokeini, wikipage.indexOf("<", idpokeini)); console.log(poke["id"])
 			
 			var tipoini = wikipage.indexOf("<td>", wikipage.indexOf("Tipos a los que pertenece") + 25);
 			var tipofin = wikipage.indexOf("</tr>" , tipoini);
@@ -671,7 +667,9 @@ function cargapokes(nombre, vartitle, generacion){
 			
 			tipoini = tipostr.indexOf("title=\"Tipo ", tipoini) + 12;
 			if(tipoini != 11)
-				poke["tipo"].push(tipostr.substring(tipoini, tipostr.indexOf("\"", tipoini)));
+				poke["tipo"].push(tipostr.substring(tipoini, tipostr.indexOf("\"", tipoini))); 
+			
+			console.log(poke["tipo"])
 			
 			var spriteini = wikipage.indexOf("src=\"" , wikipage.indexOf("class=\"float-app")) + 5;
 			poke["img"]["sprite"] = wikipage.substring(spriteini, wikipage.indexOf(".png", spriteini) + 4);
@@ -698,6 +696,8 @@ function cargapokes(nombre, vartitle, generacion){
 			
 				spriteini = wikipage.indexOf("class=\"galeria-sprites", spritefin + 1);
 			}
+			
+			console.log(poke["img"]["otros"])
 			
 			var posini = wikipage.indexOf("class=\"movnivel") + 15;
 			var posfin = wikipage.indexOf("</table>", posini);
@@ -962,11 +962,11 @@ function intataq(ataque){
 
 	var i = 0;
 	try{
-		while(pokelist[0]["movs"][i]["name"].replace(" ", "") != ataque.replace(" ", "") && i != CANTIDAD_POKES){
+		while(pokelist[0]["movs"][i]["name"].replace(" ", "") != ataque.replace(" ", "") && i < pokelist[0]["movs"].length){
 			i++;
 		}
 			
-		if (i == CANTIDAD_POKES)
+		if (i == pokelist[0]["movs"].length)
 			alert(ataque + " con problemas");
 	}
 	catch(error){
@@ -980,11 +980,11 @@ function inthab(hab){
 
 	var i = 0;
 	try{
-		while(pokelist[0]["habs"][i]["name"].replace(" ", "") != hab.replace(" ", "") && i != CANTIDAD_HABS){
+		while(pokelist[0]["habs"][i]["name"].replace(" ", "") != hab.replace(" ", "") && i < pokelist[0]["habs"].length){
 			i++;
 		}
 			
-		if (i == CANTIDAD_HABS)
+		if (i == pokelist[0]["habs"].length)
 			alert("Habilidad " + hab + " con problemas");
 	}
 	catch(error){
@@ -1168,7 +1168,6 @@ function savedata(){
 
 function cargaobj(){
 	
-	
 	try{
 		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_objetos");
 		$.get(link, function(data) {
@@ -1216,8 +1215,6 @@ function generajson(){}
 
 function generapoke(){
 
-	var pokelistTemp = [];
-	
 	var imgobj;
 	
 	pokelist = [];
