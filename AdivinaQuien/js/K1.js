@@ -1180,30 +1180,27 @@ function cargaobj(){
 			while(posini != -1 && posfin != -1){
 				
 				posini = objtabla.indexOf("class=\"celdaobjeto\"><a", posfin);
-				posfin = objtabla.indexOf("</a>", posini);
-				
-				var imgobj = objtabla.substring(posini, posfin).match(/(https:[^"]*[\.png|\.gif])/gi);
-				
-				if(imgobj == null){
-					imgobj = "";
+				if(posini != -1){
+					posfin = objtabla.indexOf("</a>", posini);
+					
+					var imgobj = objtabla.substring(posini, posfin).match(/(https:[^"]*[\.png|\.gif])/gi);
+					
+					if(imgobj == null){
+						imgobj = "";
+					}
+					
 					posini = objtabla.indexOf(">", objtabla.indexOf("title=", posini)) + 1;
 					posfin = objtabla.indexOf("<", posini);
-				
+			
+					var imgdet = {
+						name: objtabla.substring(posini, posfin),
+						img: imgobj[0]
+					};
+					
+					pokelist2[0]["obj"].push(imgdet);
+					
+					console.log(posini);
 				}
-				else{
-					posini = objtabla.indexOf(">", objtabla.indexOf("title=", posfin)) + 1;
-					posfin = objtabla.indexOf("<", posini);
-				}
-				
-				var imgdet = {
-					name: objtabla.substring(posini, posfin),
-					img: imgobj[0]
-				};
-				
-				pokelist2[0]["obj"].push(imgdet);
-				
-				console.log(posini);
-				
 			}
 			
 		});
