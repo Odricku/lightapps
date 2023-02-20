@@ -1052,6 +1052,7 @@ function generapokelist(){
 	}];
 	
 	cargaball();
+	cargahabs();
 	
 	
 }
@@ -1120,11 +1121,11 @@ function cargahabs(){
 				var labelhab = sacaetiq(habsarray[i].substring(pos1, pos2));
 				
 				var habilidad = {
-					name: pokelist[0]["habs"][i],
+					name: "TEST",
 					label: labelhab.charAt(0).toUpperCase() + labelhab.slice(1)
 				}
 				
-				pokelist[0]["habs"][i] = habilidad;
+				pokelist2[0]["habs"].push(habilidad);
 				
 			}
 			
