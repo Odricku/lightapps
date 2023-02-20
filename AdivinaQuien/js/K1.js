@@ -1103,7 +1103,6 @@ function cargaball(){
 function cargahabs(){
 
 	var habsarray;
-	var infoarray;
 	try{
 		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_habilidades");
 		$.get(link, function(data) {
@@ -1115,8 +1114,13 @@ function cargahabs(){
 			
 			for(var i = 0; i < habsarray.length; i++){
 				
-				var pos1 = habsarray[i].indexOf("<td>", (habsarray[i].indexOf(">", habsarray[i].indexOf("title=")) + 1)) + 4;
-				var pos2 = habsarray[i].indexOf("</td>", pos1);
+				pos1 = habsarray[i].indexOf("title=");
+				pos2 = habsarray[i].indexOf("\">");
+				
+				var nombrehab = habsarray[i].substring(pos1, pos2);
+				
+				pos1 = habsarray[i].indexOf("<td>", (habsarray[i].indexOf(">", pos1) + 1)) + 4;
+				pos2 = habsarray[i].indexOf("</td>", pos1);
 				
 				var labelhab = sacaetiq(habsarray[i].substring(pos1, pos2));
 				
