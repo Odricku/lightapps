@@ -1114,7 +1114,7 @@ function cargahabs(){
 			
 			for(var i = 0; i < habsarray.length; i++){
 				
-				pos1 = habsarray[i].indexOf("title=");
+				pos1 = habsarray[i].indexOf("title=") + 7;
 				pos2 = habsarray[i].indexOf("\">");
 				
 				var nombrehab = habsarray[i].substring(pos1, pos2);
