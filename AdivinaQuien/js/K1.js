@@ -627,6 +627,8 @@ function cargaregionales(){
 }
 
 function cargapokes(pos, vartitle){
+	
+	console.log(pokelist);
 
 	try{
 		var url = "https://www.wikidex.net/wiki/" + pokelist[pos][0]["name"] + "_" + vartitle.replace(/ /g, "_");
