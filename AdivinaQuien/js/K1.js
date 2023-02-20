@@ -1089,7 +1089,7 @@ function cargaball(){
 					img: imgball[0]
 				}
 				
-				pokelist[0]["ball"][i] = detaball;
+				pokelist2[0]["ball"][i] = detaball;
 				
 				posfin = data.indexOf("<table style=\"padding: 0.5em;", posfin);
 				
