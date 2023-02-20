@@ -907,7 +907,6 @@ function cargapokes(pos, vartitle){
 			pokelist[pos].push(poke);
 		});
 	}catch(error){
-		console.log(error);
 		cargapokes( pos );
 	}
 }
