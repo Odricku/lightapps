@@ -26,7 +26,7 @@ function cargajson(){
 	
 	var bandera = 0;
 	
-	var pokejsonurl = encodeURI("../PKAW/base/pokelist.json");
+	var pokejsonurl = encodeURI("../base/pokelist.json");
 	request = new XMLHttpRequest();	
 	request.open('GET', pokejsonurl);
 	request.responseType = 'json';
