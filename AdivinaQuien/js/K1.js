@@ -1053,7 +1053,7 @@ function generapokelist(){
 	
 	cargaball();
 	cargahabs();
-	
+	cargaobj();
 	
 }
 
@@ -1135,7 +1135,7 @@ function cargahabs(){
 			
 		});
 	}catch(error){
-		cargahabs();
+		console.log(error);
 	}
 }
 
@@ -1167,25 +1167,22 @@ function savedata(){
 }
 
 function cargaobj(){
-
-	pokelist[0]["obj"] = new Array(621);
 	
-	var imgobj;
 	
 	try{
 		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_objetos");
 		$.get(link, function(data) {
 			var objtabla = data.replace(/(\r\n|\n|\r)/gm,"");
 			
-			var posini;
+			var posini = 1;
 			var posfin = 0;
 			
-			for(var i = 0; i < pokelist[0]["obj"].length; i++){
+			while(posini != -1 && posfin != -1){
 				
-				var posini = objtabla.indexOf("class=\"celdaobjeto\"><a", posfin);
-				var posfin = objtabla.indexOf("</a>", posini);
+				posini = objtabla.indexOf("class=\"celdaobjeto\"><a", posfin);
+				posfin = objtabla.indexOf("</a>", posini);
 				
-				imgobj = objtabla.substring(posini, posfin).match(/(https:[^"]*[\.png|\.gif])/gi);
+				var imgobj = objtabla.substring(posini, posfin).match(/(https:[^"]*[\.png|\.gif])/gi);
 				
 				if(imgobj == null){
 					imgobj = "";
@@ -1203,13 +1200,15 @@ function cargaobj(){
 					img: imgobj[0]
 				};
 				
-				pokelist[0]["obj"][i] = imgdet;
+				pokelist2[0]["obj"].push(imgdet);
+				
+				console.log(posini);
 				
 			}
 			
 		});
 	}catch(error){
-		cargahabs();
+		console.log(error);
 	}
 }
 
@@ -1253,6 +1252,6 @@ function generapoke(){
 			}
 		});
 	}catch(error){
-		cargahabs();
+		console.log(error);
 	}
 }
