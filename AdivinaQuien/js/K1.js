@@ -56,7 +56,7 @@ function cargajson(){
 	}
 	
 	request.onerror = function() {
-		pokejsonurl = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("../PKAW/base/pokelist.json");
+		pokejsonurl = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("../base/pokelist.json");
 		request = new XMLHttpRequest();	
 		request.open('GET', pokejsonurl);
 		request.responseType = 'json';
