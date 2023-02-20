@@ -1189,7 +1189,7 @@ function cargaobj(){
 						imgobj = "";
 					}
 					
-					posini = objtabla.indexOf(">", objtabla.indexOf("title=", posini)) + 1;
+					posini = objtabla.indexOf("\">", objtabla.indexOf("</a> <a ", posini)) + 1;
 					posfin = objtabla.indexOf("<", posini);
 			
 					var imgdet = {
