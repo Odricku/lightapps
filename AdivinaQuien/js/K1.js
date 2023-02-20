@@ -1,4 +1,6 @@
 var pokelist;
+
+var pokelist2 = [];
 	
 var CANTIDAD_HABS = 259;
 var CANTIDAD_MOVS = 778;
@@ -1037,9 +1039,26 @@ function showhid(){
 //////////////////////////////////////////////////////
 // Cargas
 //////////////////////////////////////////////////////
+function generacion(){}
+
+function generapokelist(){
+	
+	pokelist2 = [{
+		ball: [],
+		habs: [],
+		movs: [],
+		obj: [],
+		tipos: {}
+	}];
+	
+	cargaball();
+	
+	
+}
+
 function cargaball(){
 
-	pokelist[0]["ball"] = new Array(27);
+	pokelist2[0]["ball"] = [];
 
 	try{
 		var url = "https://www.wikidex.net/wiki/Pok%C3%A9_Ball";
@@ -1053,7 +1072,7 @@ function cargaball(){
 			
 			var detaball;
 			
-			for(var i = 0; i < 27; i++){
+			while(posini != -1 && posfin != -1){
 				
 				posini = data.indexOf(">" , data.indexOf("title=", posfin)) + 1;
 				posfin = data.indexOf("<", posini);
@@ -1215,7 +1234,7 @@ function generapoke(){
 		
 				posini = poketabla.indexOf("\">", posini) + 2;
 				
-				pokelist.push(cargapokes(poketabla.substring(posini, posfin), "normal",generacion));
+				pokelist.push(cargapokes(poketabla.substring(posini, posfin), "normal", generacion));
 				
 				posfin = poketabla.indexOf("</tr>", posini);
 				posini = poketabla.indexOf("<td><a href=", posfin);
