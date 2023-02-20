@@ -1232,17 +1232,17 @@ function generapoke(){
 				
 				pokelistTemp.push(poketabla.substring(posini, posfin) + " GEN= " + generacion + " " +  posini + " " + posinitable);
 				
-				console.log(poketabla.substring(posini, posfin) + " GEN= " + generacion + " " +  posini + " "  + posfin + " "+ posinitable);
-
 				posfin = poketabla.indexOf("</tr>", posini);
 				posini = poketabla.indexOf("<td><a href=", posfin);
 				posfin = poketabla.indexOf("</a>", posini);
 				
-				if(posfin == -1 || posini > posfintable){
+				if(posini > posfintable){
 					posinitable = poketabla.indexOf("<table class=\"tabpokemon", posfintable);
 					posfintable = poketabla.indexOf("</table>", posinitable);
 					generacion = generacion + 1;
 				}
+				
+				console.log(poketabla.substring(posini, posfin) + " GEN= " + generacion + " " +  posini + " "  + posfin + " " + posinitable +  " " + posfintable);
 				
 			}
 			
