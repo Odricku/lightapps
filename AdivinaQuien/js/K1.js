@@ -601,9 +601,12 @@ function savedata(){
 
 function buscapoke(name){
 	
-	for(var i = 1; i < pokelist.length; i++)
-		if(pokelist[i][0].name == name)
+	for(var i = 1; i < pokelist.length; i++){
+		if(pokelist[i][0].name == name){
 			return i;
+		}
+	}
+	return -1;
 	
 	
 }
@@ -612,37 +615,43 @@ function cargaregionales(){
 	
 	for(var i = 0; i < alola.length; i++){
 		console.log(i);
-		cargapokes(buscapoke(alola[i]), "de Alola");
+		cargapokes(buscapoke(alola[i]), "de Alola", 7);
 	}
 	
 	for(var i = 0; i < galar.length; i++){
 		console.log(i);
-		cargapokes(buscapoke(galar[i]), "de Galar");
+		cargapokes(buscapoke(galar[i]), "de Galar", 8);
 	}
 	
 	for(var i = 0; i < paldea.length; i++){
 		console.log(i);
-		cargapokes(buscapoke(paldea[i]), "de Paldea");
+		cargapokes(buscapoke(paldea[i]), "de Paldea", 9);
 	}
 }
 
-function cargapokes(pos, vartitle){
+function cargapokes(nombre, vartitle, generacion){
 	
 	try{
-		var url = "https://www.wikidex.net/wiki/" + pokelist[pos][0]["name"] + "_" + vartitle.replace(/ /g, "_");
+		var url;
+		if(vartitle == "normal"){ 
+			url = "https://www.wikidex.net/wiki/" + nombre.replace(/ /g, "_");
+		}
+		else{ 
+			url = "https://www.wikidex.net/wiki/" + nombre.replace(/ /g, "_") + "_" + vartitle.replace(/ /g, "_");
+		}
 		$.get("https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI(url), function(data) {
 			
 			var poke = {
 				id: " ",
 				title: vartitle,
-				name: pokelist[pos][0]["name"],
+				name: nombre,
 				img: {sprite: " ", otros:[]},
 				tipo: [],
 				habs: {normal: [], oculta: []},
 				stats: [0, 0, 0, 0, 0, 0],
 				movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
 				front: " ",
-				gen: 7
+				gen: generacion
 			};
 			
 			var wikipage = data.replace(/(\r\n|\n|\r)/gm,"");
@@ -901,11 +910,11 @@ function cargapokes(pos, vartitle){
 				poke["habs"]["oculta"].push(inthab(validanamehab(wikipage.substring(posmov1, posmov2))));
 					
 			}
-			
-			pokelist[pos].push(poke);
+
+			return poke;
 		});
 	}catch(error){
-		cargapokes( pos );
+		console.log(error);
 	}
 }
 
@@ -1022,5 +1031,220 @@ function showhid(){
 		document.getElementsByClassName("details")[0].classList.remove("detocul");
 		document.getElementsByClassName("content")[0].classList.remove("contocul");
 		document.getElementsByClassName("detailswrap")[0].classList.remove("detailwrapocul");
+	}
+}
+
+//////////////////////////////////////////////////////
+// Cargas
+//////////////////////////////////////////////////////
+function cargaball(){
+
+	pokelist[0]["ball"] = new Array(27);
+
+	try{
+		var url = "https://www.wikidex.net/wiki/Pok%C3%A9_Ball";
+		$.get("https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI(url), function(data) {
+			
+			var posini;
+			var posfin = data.indexOf("<table style=\"padding: 0.5em;");
+			
+			var labelball;
+			var imgball;
+			
+			var detaball;
+			
+			for(var i = 0; i < 27; i++){
+				
+				posini = data.indexOf(">" , data.indexOf("title=", posfin)) + 1;
+				posfin = data.indexOf("<", posini);
+				
+				labelball = data.substring(posini, posfin);
+				
+				posini = data.indexOf(">" , data.indexOf("title=", posfin)) + 1;
+				posfin = data.indexOf("width=", posini);
+				
+				imgball = data.substring(posini, posfin).match(/(https:[^"]*[\.png|\.gif])/gi);
+				
+				detaball = {
+					name: labelball,
+					img: imgball[0]
+				}
+				
+				pokelist[0]["ball"][i] = detaball;
+				
+				posfin = data.indexOf("<table style=\"padding: 0.5em;", posfin);
+				
+			}
+		});
+	}catch(error){
+	}
+}
+
+function cargahabs(){
+
+	var habsarray;
+	var infoarray;
+	try{
+		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_habilidades");
+		$.get(link, function(data) {
+			var habstabla = data.replace(/(\r\n|\n|\r)/gm,"");
+			var posini = habstabla.indexOf("<tr><td>", habstabla.indexOf("tabpokemon sortable mergetable")) + 4;
+			var posfin = habstabla.indexOf("</table>", posini);
+			
+			habsarray = habstabla.substring(posini, posfin).split("<tr><td>");
+			
+			for(var i = 0; i < habsarray.length; i++){
+				
+				var pos1 = habsarray[i].indexOf("<td>", (habsarray[i].indexOf(">", habsarray[i].indexOf("title=")) + 1)) + 4;
+				var pos2 = habsarray[i].indexOf("</td>", pos1);
+				
+				var labelhab = sacaetiq(habsarray[i].substring(pos1, pos2));
+				
+				var habilidad = {
+					name: pokelist[0]["habs"][i],
+					label: labelhab.charAt(0).toUpperCase() + labelhab.slice(1)
+				}
+				
+				pokelist[0]["habs"][i] = habilidad;
+				
+			}
+			
+		});
+	}catch(error){
+		cargahabs();
+	}
+}
+
+function sacaetiq(linea){
+
+	var salida = linea;
+	
+	while(salida.indexOf("<") != -1){
+		posini = salida.indexOf("<");
+		posfin = salida.indexOf(">", posini);
+		
+		salida = salida.substring(0, posini) + salida.substring(posfin + 1, salida.length);
+	
+	}
+	
+	return salida;
+	
+}
+
+function savedata(){
+	var filename = "pokelist";
+	var a = document.createElement("a");
+	var file = new Blob([JSON.stringify(pokelist)], {type: "text/plain"});
+	a.href = URL.createObjectURL(file);
+	a.download = filename;
+	a.click();
+	
+	alert(filename + " guardado.");
+}
+
+function cargaobj(){
+
+	pokelist[0]["obj"] = new Array(621);
+	
+	var imgobj;
+	
+	try{
+		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_objetos");
+		$.get(link, function(data) {
+			var objtabla = data.replace(/(\r\n|\n|\r)/gm,"");
+			
+			var posini;
+			var posfin = 0;
+			
+			for(var i = 0; i < pokelist[0]["obj"].length; i++){
+				
+				var posini = objtabla.indexOf("class=\"celdaobjeto\"><a", posfin);
+				var posfin = objtabla.indexOf("</a>", posini);
+				
+				imgobj = objtabla.substring(posini, posfin).match(/(https:[^"]*[\.png|\.gif])/gi);
+				
+				if(imgobj == null){
+					imgobj = "";
+					posini = objtabla.indexOf(">", objtabla.indexOf("title=", posini)) + 1;
+					posfin = objtabla.indexOf("<", posini);
+				
+				}
+				else{
+					posini = objtabla.indexOf(">", objtabla.indexOf("title=", posfin)) + 1;
+					posfin = objtabla.indexOf("<", posini);
+				}
+				
+				
+				
+				var imgdet = {
+					name: objtabla.substring(posini, posfin),
+					img: imgobj[0]
+				};
+				
+				pokelist[0]["obj"][i] = imgdet;
+				
+			}
+			
+		});
+	}catch(error){
+		cargahabs();
+	}
+}
+
+function generajson(){}
+
+var pokelistTemp;
+
+function generapoke(){
+
+	pokelistTemp = [];
+	
+	var imgobj;
+	
+	try{
+		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_Pok%C3%A9mon");
+		$.get(link, function(data) {
+			var poketabla = data.replace(/(\r\n|\n|\r)/gm,"");
+			
+			var posinitable = poketabla.indexOf("<table class=\"tabpokemon");
+			var posfintable = poketabla.indexOf("</table>", posinitable);
+			var posini = poketabla.indexOf("<td><a href=", posfin);
+			var posfin = poketabla.indexOf("</a>", posini);
+			
+			var generacion = 1;
+			
+			while(posinitable != -1){
+/*
+				var poke = {
+					id: " ",
+					title: "normal",
+					name: pokelist[pos][0]["name"],
+					img: {sprite: " ", otros:[]},
+					tipo: [],
+					habs: {normal: [], oculta: []},
+					stats: [0, 0, 0, 0, 0, 0],
+					movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+					front: " ",
+					gen: generacion
+				};
+*/			
+				posini = poketabla.indexOf("\">", posini) + 2;
+				
+				pokelistTemp.push(poketabla.substring(posini, posfin) + " GEN= " + generacion);
+
+				posini = poketabla.indexOf("<td><a href=", posfin);
+				posfin = poketabla.indexOf("</a>", posini);
+				
+				if(posini > posfintable){
+					posinitable = poketabla.indexOf("<table class=\"tabpokemon", posfintable);
+					posinitable = poketabla.indexOf("</table>", posinitable);
+					gen = gen + 1;
+				}
+				
+			}
+			
+		});
+	}catch(error){
+		cargahabs();
 	}
 }
