@@ -1198,8 +1198,6 @@ function cargaobj(){
 					};
 					
 					pokelist2[0]["obj"].push(imgdet);
-					
-					console.log(posini);
 				}
 			}
 			
