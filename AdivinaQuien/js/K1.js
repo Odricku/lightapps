@@ -1238,7 +1238,7 @@ function generapoke(){
 				posini = poketabla.indexOf("<td><a href=", posfin);
 				posfin = poketabla.indexOf("</a>", posini);
 				
-				if(posini > posfintable){
+				if(posfin == -1 || posini > posfintable){
 					posinitable = poketabla.indexOf("<table class=\"tabpokemon", posfintable);
 					posfintable = poketabla.indexOf("</table>", posinitable);
 					generacion = generacion + 1;
