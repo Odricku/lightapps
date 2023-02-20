@@ -1125,7 +1125,7 @@ function cargahabs(){
 				var labelhab = sacaetiq(habsarray[i].substring(pos1, pos2));
 				
 				var habilidad = {
-					name: "TEST",
+					name: nombrehab,
 					label: labelhab.charAt(0).toUpperCase() + labelhab.slice(1)
 				}
 				
