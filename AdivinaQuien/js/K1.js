@@ -1231,6 +1231,8 @@ function generapoke(){
 				posini = poketabla.indexOf("\">", posini) + 2;
 				
 				pokelistTemp.push(poketabla.substring(posini, posfin) + " GEN= " + generacion);
+				
+				console.log(poketabla.substring(posini, posfin) + " GEN= " + generacion);
 
 				posini = poketabla.indexOf("<td><a href=", posfin);
 				posfin = poketabla.indexOf("</a>", posini);
