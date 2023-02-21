@@ -1150,18 +1150,27 @@ function generamovs(){
 			
 			movsarray = movstabla.substring(posini, posfin).split("<tr><td>");
 			
-			for(var i = 0; i < movstabla.length; i++){
+			for(var i = 0; i < movsarray.length; i++){
 				
-				pos1 = movstabla[i].indexOf("title=") + 7;
-				pos2 = movstabla[i].indexOf("\">", pos1);
+				pos1 = movsarray[i].indexOf("title=") + 7;
+				pos2 = movsarray[i].indexOf("\">", pos1);
 				
-				var nombremov = habsarray[i].substring(pos1, pos2);
-				pokelist2[0]["movs"].push({});
+				var nombremov = movsarray[i].substring(pos1, pos2);
+				
+				pos1 = movsarray[i].indexOf("title=", pos1) + 7;
+				pos2 = movsarray[i].indexOf("\">", pos1);
+				
+				var tipomov = movsarray[i].substring(pos1, pos2);
+				
+				pos1 = movsarray[i].indexOf("title=", pos1) + 13;
+				pos2 = movsarray[i].indexOf("\">", pos1);
+				
+				var catemov = movsarray[i].substring(pos1, pos2);
 				
 				var movimiento = {
 					name: nombremov,
-					tipo: "",
-					categoria: "",
+					tipo: tipomov,
+					categoria: catemov,
 					stats:{
 						potencia: "",
 						precision: "",
