@@ -1275,7 +1275,7 @@ function generapoke(){
 			
 			var generacion = 1;
 			console.log(posini + " " + posinitable);
-			while(posini == -1 && posinitable != -1){
+			while(posini != -1 && posinitable != -1){
 				
 				var idpoke = poketabla.substring(posini, posfin);
 				
