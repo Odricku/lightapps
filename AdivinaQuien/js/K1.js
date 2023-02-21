@@ -1096,7 +1096,7 @@ function cargapoke(id, variacion){
 			var posini = pokeinfo.indexOf("src=\"", pokeinfo.indexOf("alt=\"Ilustración")) + 5;
 			var posfin = pokeinfo.indexOf("\"", posini);
 			
-			pokelist2[id][0].img.otros.push(pokeinfo.substring(posini, posfin));
+			pokelist2[id][variacion].front.push(pokeinfo.substring(posini, posfin));
 
 			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Tipos a los que pertenece\"")) + 4;
 			posfin = pokeinfo.indexOf("<\td>", posini);
@@ -1108,12 +1108,12 @@ function cargapoke(id, variacion){
 				posini = tipospoke[i].indexOf("title=\"Tipo ") + 12;
 				posfin = tipospoke[i].indexOf("\"", posini);
 				
-				pokelist2[id][0].tipo.push(tipospoke[i].substring(posini, posfin));
+				pokelist2[id][variacion].tipo.push(tipospoke[i].substring(posini, posfin));
 				
 			}
 			
 			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Habilidades que puede conocer\"")) + 4;
-			posfin = pokeinfo.indexOf("<\td>", posini);
+			posfin = pokeinfo.indexOf("</td>", posini);
 			
 			var habspoke = pokeinfo.substring(posini, posfin).split("</a><br><a ");
 			
@@ -1122,7 +1122,7 @@ function cargapoke(id, variacion){
 				posini = habspoke[i].indexOf("title=\"") + 7;
 				posfin = habspoke[i].indexOf("\"", posini);
 				
-				pokelist2[id][0].habs.normal.push(inthab(habspoke[i].substring(posini, posfin)));
+				pokelist2[id][variacion].habs.normal.push(inthab(habspoke[i].substring(posini, posfin)));
 				
 			}
 
@@ -1131,10 +1131,10 @@ function cargapoke(id, variacion){
 				posini = pokeinfo.indexOf("title=\"", pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Habilidad oculta\""))) + 7;
 				posfin = pokeinfo.indexOf("\"", posini);
 				
-				pokelist2[id][0].habs.oculta.push(inthab(pokeinfo.substring(posini, posfin)));
+				pokelist2[id][variacion].habs.oculta.push(inthab(pokeinfo.substring(posini, posfin)));
 				
 			}
-			pokelist2[id].front = pokeinfo;
+			pokelist2[id][variacion]["code"] = pokeinfo;
 			console.log(pokelist2[id]);
 		});
 	}catch(error){
