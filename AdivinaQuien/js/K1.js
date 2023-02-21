@@ -1105,7 +1105,7 @@ function generatipos(){
 		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Tipo");
 		$.get(link, function(data) {
 			var tipotabla = data.replace(/(\r\n|\n|\r)/gm,"");
-			var posini = tipotabla.indexOf("<td>", habstabla.indexOf("class=\"lista"));
+			var posini = tipotabla.indexOf("<td>", tipotabla.indexOf("class=\"lista"));
 			var posfin = tipotabla.indexOf("</table>", posini);
 			
 			var pos1 = posini;
