@@ -1050,7 +1050,7 @@ function generapokelist(){
 	generaball();
 	generahabs();
 	generaobj();
-	generatipos();
+	//generatipos();
 	generamovs();
 	generapokes();
 	
@@ -1097,6 +1097,73 @@ function generaball(){
 			}
 		});
 	}catch(error){
+	}
+}
+
+function generatipos(){
+	try{
+		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Tipo");
+		$.get(link, function(data) {
+			var tipotabla = data.replace(/(\r\n|\n|\r)/gm,"");
+			var posini = tipotabla.indexOf("<td>", habstabla.indexOf("class=\"lista"));
+			var posfin = tipotabla.indexOf("</table>", posini);
+			
+			var pos1 = posini;
+			var pos2 = posini;
+			
+			var tabla = {};
+			var mapa = [];
+			
+			var tipoarray = tipotabla.substring(posini, posfin).split("</tr><tr>");
+			var tipoarray2 = tipoarray[0].split("</td><td>");
+			
+			for(var i = 0; i < tipoarray2.length; i++){
+				pos1 = tipoarray2[i].indexOf("title=\"Tipo ") + 12;
+				pos2 = tipoarray2[i].indexOf("\"", posini);
+				
+				mapa.push(tipoarray2[i].substring(pos1, pos2));
+				
+			}
+			
+			for(var i = 1; i < tipoarray.length; i++){
+				
+				tipoarray2 = tipoarray[i].split("</td><td>");
+				
+				pos1 = tipoarray2[0].indexOf("title=\"Tipo ") + 12;
+				pos2 = tipoarray2[0].indexOf("\"", posini);
+				
+				var tiponombre = tipoarray2[0].substring(pos1, pos2);
+				
+				pos1 = tipoarray2[0].indexOf("src=\"", pos2) + 5;
+				pos2 = tipoarray2[0].indexOf("\"", posini);
+				
+				var tipoimagen = tipoarray2[0].substring(pos1, pos2);
+				
+				
+				tabla[tipoactual] = {
+					image: tipoimagen,
+					inmune: [],
+					fuerte: [],
+					debil: []
+				};
+				
+				for(var j = 1; j < tipoarray2.length; j++){
+
+					if (tipoarray2[j].contains("X2.png")){
+						tabla[tipoactual]["fuerte"].push(mapa[j-1]);
+						tabla[mapa[j-1]]["debil"].push(tipoactual);
+					}
+					else if (tipoarray2[j].contains("X0.png")){
+						tabla[mapa[j-1]]["inmune"].push(tipoactual);
+					}
+				}
+			}
+			
+			pokelist2[0]["tipos"] = tabla;
+			
+		});
+	}catch(error){
+		console.log(error);
 	}
 }
 
