@@ -1147,7 +1147,7 @@ function generamovs(){
 			var movstabla = data.replace(/(\r\n|\n|\r)/gm,"");
 			
 			var posini = movstabla.indexOf("lista sortable mergetable");
-			var posfin = posiniM
+			var posfin = posini;
 			
 			while(posini != -1){
 			
@@ -1189,7 +1189,7 @@ function generamovs(){
 					pokelist2[0]["movs"].push(movimiento);
 					
 				}
-				posini = movstabla.indexOf("lista sortable mergetable", posfin)
+				posini = movstabla.indexOf("lista sortable mergetable", posfin);
 			}
 			
 		});
