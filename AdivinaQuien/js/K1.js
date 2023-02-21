@@ -655,7 +655,7 @@ function cargapokes(nombre, vartitle, generacion){
 			var wikipage = data.replace(/(\r\n|\n|\r)/gm,"");
 								
 			var idpokeini = wikipage.indexOf(">", wikipage.indexOf(">#<") + 3) + 1;
-			poke["id"] = wikipage.substring(idpokeini, wikipage.indexOf("<", idpokeini)); console.log(poke["id"])
+			poke["id"] = wikipage.substring(idpokeini, wikipage.indexOf("<", idpokeini));
 			
 			var tipoini = wikipage.indexOf("<td>", wikipage.indexOf("Tipos a los que pertenece") + 25);
 			var tipofin = wikipage.indexOf("</tr>" , tipoini);
@@ -668,8 +668,6 @@ function cargapokes(nombre, vartitle, generacion){
 			tipoini = tipostr.indexOf("title=\"Tipo ", tipoini) + 12;
 			if(tipoini != 11)
 				poke["tipo"].push(tipostr.substring(tipoini, tipostr.indexOf("\"", tipoini))); 
-			
-			console.log(poke["tipo"])
 			
 			var spriteini = wikipage.indexOf("src=\"" , wikipage.indexOf("class=\"float-app")) + 5;
 			poke["img"]["sprite"] = wikipage.substring(spriteini, wikipage.indexOf(".png", spriteini) + 4);
@@ -696,8 +694,6 @@ function cargapokes(nombre, vartitle, generacion){
 			
 				spriteini = wikipage.indexOf("class=\"galeria-sprites", spritefin + 1);
 			}
-			
-			console.log(poke["img"]["otros"])
 			
 			var posini = wikipage.indexOf("class=\"movnivel") + 15;
 			var posfin = wikipage.indexOf("</table>", posini);
@@ -913,7 +909,7 @@ function cargapokes(nombre, vartitle, generacion){
 					
 			}
 
-			return poke;
+			pokelist2[parseInt(poke.id)].push(poke);
 		});
 	}catch(error){
 		console.log(error);
@@ -1051,13 +1047,16 @@ function generapokelist(){
 		tipos: {}
 	}];
 	
-	cargaball();
-	cargahabs();
-	cargaobj();
+	generaball();
+	generahabs();
+	generaobj();
+	generatipos();
+	generamovs();
+	
 	
 }
 
-function cargaball(){
+function generaball(){
 
 	pokelist2[0]["ball"] = [];
 
@@ -1100,7 +1099,7 @@ function cargaball(){
 	}
 }
 
-function cargahabs(){
+function generahabs(){
 
 	var habsarray;
 	try{
@@ -1139,6 +1138,49 @@ function cargahabs(){
 	}
 }
 
+function generamovs(){
+
+	var movsarray;
+	try{
+		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_movimientos");
+		$.get(link, function(data) {
+			var movstabla = data.replace(/(\r\n|\n|\r)/gm,"");
+			var posini = movstabla.indexOf("<tr><td>", movstabla.indexOf("lista sortable mergetable")) + 4;
+			var posfin = movstabla.indexOf("</table>", posini);
+			
+			movsarray = movstabla.substring(posini, posfin).split("<tr><td>");
+			
+			for(var i = 0; i < movstabla.length; i++){
+				
+				pos1 = movstabla[i].indexOf("title=") + 7;
+				pos2 = movstabla[i].indexOf("\">", pos1);
+				
+				var nombremov = habsarray[i].substring(pos1, pos2);
+				pokelist2[0]["movs"].push({});
+				
+				var movimiento = {
+					name: nombremov,
+					tipo: "",
+					categoria: "",
+					stats:{
+						potencia: "",
+						precision: "",
+						efecto: "",
+						prioridad: "",
+						contacto: ""
+					}
+				}
+				
+				pokelist2[0]["movs"].push(movimiento);
+				
+			}
+			
+		});
+	}catch(error){
+		console.log(error);
+	}
+}
+
 function sacaetiq(linea){
 
 	var salida = linea;
@@ -1155,18 +1197,7 @@ function sacaetiq(linea){
 	
 }
 
-function savedata(){
-	var filename = "pokelist";
-	var a = document.createElement("a");
-	var file = new Blob([JSON.stringify(pokelist)], {type: "text/plain"});
-	a.href = URL.createObjectURL(file);
-	a.download = filename;
-	a.click();
-	
-	alert(filename + " guardado.");
-}
-
-function cargaobj(){
+function generaobj(){
 	
 	try{
 		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_objetos");
@@ -1211,8 +1242,6 @@ function cargaobj(){
 	}
 }
 
-function generajson(){}
-
 function generapoke(){
 
 	var imgobj;
@@ -1234,8 +1263,9 @@ function generapoke(){
 			while(posini == -1 && posinitable != -1){
 		
 				posini = poketabla.indexOf("\">", posini) + 2;
+				pokelist.push([]);
 				
-				pokelist.push(cargapokes(poketabla.substring(posini, posfin), "normal", generacion));
+				cargapokes(poketabla.substring(posini, posfin), "normal", generacion);
 				
 				posfin = poketabla.indexOf("</tr>", posini);
 				posini = poketabla.indexOf("<td><a href=", posfin);
@@ -1251,4 +1281,15 @@ function generapoke(){
 	}catch(error){
 		console.log(error);
 	}
+}
+
+function savedata(){
+	var filename = "pokelist";
+	var a = document.createElement("a");
+	var file = new Blob([JSON.stringify(pokelist)], {type: "text/plain"});
+	a.href = URL.createObjectURL(file);
+	a.download = filename;
+	a.click();
+	
+	alert(filename + " guardado.");
 }
