@@ -1149,11 +1149,11 @@ function generatipos(){
 				
 				for(var j = 1; j < tipoarray2.length; j++){
 
-					if (tipoarray2[j].contains("X2.png")){
+					if (tipoarray2[j].includes("X2.png")){
 						tabla[tiponombre]["fuerte"].push(mapa[j-1]);
 						tabla[mapa[j-1]]["debil"].push(tiponombre);
 					}
-					else if (tipoarray2[j].contains("X0.png")){
+					else if (tipoarray2[j].includes("X0.png")){
 						tabla[mapa[j-1]]["inmune"].push(tiponombre);
 					}
 				}
