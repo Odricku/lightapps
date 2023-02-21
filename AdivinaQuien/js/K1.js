@@ -1096,7 +1096,7 @@ function cargapoke(id, variacion){
 			var posini = pokeinfo.indexOf("src=\"", pokeinfo.indexOf("alt=\"Ilustración")) + 5;
 			var posfin = pokeinfo.indexOf("\"", posini);
 			
-			pokelist2[id][variacion].front.push(pokeinfo.substring(posini, posfin));
+			pokelist2[id][variacion].front = pokeinfo.substring(posini, posfin);
 
 			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Tipos a los que pertenece\"")) + 4;
 			posfin = pokeinfo.indexOf("</td>", posini);
