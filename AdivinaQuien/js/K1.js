@@ -1057,7 +1057,7 @@ function generapokes(){
 				};
 				pokelist2[parseInt(idpoke)] = [poke];
 				
-				cargapoke(parseInt(idpoke));
+				cargapoke(parseInt(idpoke), 0);
 				
 				posfin = poketabla.indexOf("</tr>", posini);
 				posini = poketabla.indexOf("<td>", posfin);
@@ -1086,14 +1086,14 @@ function savedata(){
 	alert(filename + " guardado.");
 }
 
-function cargapoke(id){
+function cargapoke(id, variacion){
 	
 	try{
 		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/" + pokelist2[id][0].name.replace(" ", "_"));
 		$.get(link, function(data) {
-			var pokeinfo = data.replace(/(\r\n|\n|\r)/gm,"");
+			var pokeinfo = data.replace(/(\r\n|\n|\r)/gm,"").replace("> <", "><");
 			
-			var posini = pokeinfo.indexOf("src=\"", pokeinfo.indexOf("<alt=\"Ilustración")) + 4;
+			var posini = pokeinfo.indexOf("src=\"", pokeinfo.indexOf("<alt=\"Ilustración")) + 5;
 			var posfin = pokeinfo.indexOf("\"", posini);
 			
 			pokelist2[id][0].img.otros.push(pokeinfo.substring(posini, posfin));
@@ -1101,7 +1101,7 @@ function cargapoke(id){
 			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Tipos a los que pertenece\"")) + 4;
 			posfin = pokeinfo.indexOf("<\td>", posini);
 			
-			var tipospoke = pokeinfo.substring(posini, posfin).split("<br>")[0].replace("</a> <a ", "</a><a ").split("</a><a ");
+			var tipospoke = pokeinfo.substring(posini, posfin).split("<br>")[variacion].split("</a><a ");
 			
 			for(var i = 0; i < tipospoke.length; i++){
 			
