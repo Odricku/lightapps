@@ -1052,6 +1052,7 @@ function generapokelist(){
 	generaobj();
 	generatipos();
 	generamovs();
+	generapokes();
 	
 	//cargamovs();
 }
@@ -1259,10 +1260,8 @@ function generaobj(){
 	}
 }
 
-function generapoke(){
+function generapokes(){
 
-	var imgobj;
-	
 	try{
 		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_Pok%C3%A9mon");
 		$.get(link, function(data) {
