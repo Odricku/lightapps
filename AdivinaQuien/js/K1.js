@@ -665,24 +665,6 @@ function numataq(){
 	}
 }
 
-function intataq(ataque){
-
-	var i = 0;
-	try{
-		while(pokelist[0]["movs"][i]["name"].replace(" ", "") != ataque.replace(" ", "") && i < pokelist[0]["movs"].length){
-			i++;
-		}
-			
-		if (i == pokelist[0]["movs"].length)
-			alert(ataque + " con problemas");
-	}
-	catch(error){
-		alert("Ataque " + ataque + " fallo");
-	}
-	return i;
-	
-}
-
 function formaseval(item){
 	
 	if(!document.getElementById("Otrasformas").checked)
@@ -1134,6 +1116,36 @@ function cargapoke(id, variacion){
 				pokelist2[id][variacion].habs.oculta.push(inthab(pokeinfo.substring(posini, posfin)));
 				
 			}
+			
+			var posinitable = pokeinfo.indexOf("<table class=\"movnivel");
+			var posfintable = pokeinfo.indexOf("</table>", posinitable);
+			
+			posfin = posinitable;
+			
+			while(posinitable != -1){
+				
+				var movarray = pokeinfo.substring(pokeinfo.indexOf("<tr>", posinitable), posfintable).split("</tr><tr>");
+				
+				for(var i = 0; i < movarray.length; i++){
+					
+					posini = movarray[i].indexOf("title=\"");
+					posfin = movarray[i].indexOf("\"", posini);
+					
+					var intmov = intataq(movarray.substring(posini + 7, posfin));
+					
+					if(!pokelist[id][variacion].movs.niv.includes(intmov)){
+						pokelist[id][variacion].movs.niv.push();
+					}
+					
+				}
+				
+				posinitable = pokeinfo.indexOf("<table class=\"movnivel", posfintable);
+				posfintable = pokeinfo.indexOf("</table>", posinitable);
+
+			}
+			
+			pokeinfo.indexOf(">", pokeinfo.indexOf("title=\"", pokeinfo.indexOf("<table class=\"movnivel")));
+			
 			pokelist2[id][variacion]["code"] = pokeinfo;
 			console.log(pokelist2[id]);
 		});
@@ -1154,7 +1166,25 @@ function inthab(hab){
 			alert("Habilidad " + hab + " con problemas");
 	}
 	catch(error){
-		//alert("Habilidad " + hab + " de " + pokelist[poke][0]["name"] + " fallo");
+		alert("Habilidad " + hab + " fallo");
+	}
+	return i;
+	
+}
+
+function intataq(ataque){
+
+	var i = 0;
+	try{
+		while(pokelist2[0]["movs"][i]["name"].replace(" ", "") != ataque.replace(" ", "") && i < pokelist2[0]["movs"].length){
+			i++;
+		}
+			
+		if (i == pokelist2[0]["movs"].length)
+			alert(ataque + " con problemas");
+	}
+	catch(error){
+		alert("Ataque " + ataque + " fallo");
 	}
 	return i;
 	
