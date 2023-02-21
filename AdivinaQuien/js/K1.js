@@ -1300,8 +1300,8 @@ function generapoke(){
 				pokelist2[parseInt(idpoke)] = [poke];
 				
 				posfin = poketabla.indexOf("</tr>", posini);
-				posini = poketabla.indexOf("<td><a href=", posfin);
-				posfin = poketabla.indexOf("</a>", posini);
+				posini = poketabla.indexOf("<td>", posfin);
+				posfin = poketabla.indexOf("<", posini);
 				
 				if(posini > posfintable){
 					posinitable = poketabla.indexOf("<table class=\"tabpokemon", posfintable);
