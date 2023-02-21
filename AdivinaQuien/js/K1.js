@@ -1263,8 +1263,6 @@ function generapoke(){
 
 	var imgobj;
 	
-	pokelist = [];
-	
 	try{
 		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_Pok%C3%A9mon");
 		$.get(link, function(data) {
@@ -1276,7 +1274,7 @@ function generapoke(){
 			var posfin = poketabla.indexOf("<", posini);
 			
 			var generacion = 1;
-			
+			console.log(posini + " " + posinitable);
 			while(posini == -1 && posinitable != -1){
 				
 				var idpoke = poketabla.substring(posini, posfin);
@@ -1285,6 +1283,8 @@ function generapoke(){
 				posfin = poketabla.indexOf("</a>", posini);
 				
 				var nombrepoke = poketabla.substring(posini, posfin);
+				
+				console.log(nombrepoke);
 		
 				var poke = {
 					id: idpoke,
@@ -1299,7 +1299,6 @@ function generapoke(){
 					gen: generacion
 				};
 				
-				console.log(poke);
 				pokelist2.push([]);
 				pokelist2[parseInt(idpoke)].push(poke);
 				
