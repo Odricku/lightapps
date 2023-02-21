@@ -1140,7 +1140,7 @@ function generatipos(){
 				var tipoimagen = tipoarray2[0].substring(pos1, pos2);
 				
 				
-				tabla[tipoactual] = {
+				tabla[tiponombre] = {
 					image: tipoimagen,
 					inmune: [],
 					fuerte: [],
@@ -1150,11 +1150,11 @@ function generatipos(){
 				for(var j = 1; j < tipoarray2.length; j++){
 
 					if (tipoarray2[j].contains("X2.png")){
-						tabla[tipoactual]["fuerte"].push(mapa[j-1]);
-						tabla[mapa[j-1]]["debil"].push(tipoactual);
+						tabla[tiponombre]["fuerte"].push(mapa[j-1]);
+						tabla[mapa[j-1]]["debil"].push(tiponombre);
 					}
 					else if (tipoarray2[j].contains("X0.png")){
-						tabla[mapa[j-1]]["inmune"].push(tipoactual);
+						tabla[mapa[j-1]]["inmune"].push(tiponombre);
 					}
 				}
 			}
