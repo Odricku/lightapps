@@ -1101,7 +1101,7 @@ function cargapoke(id){
 			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Tipos a los que pertenece\"")) + 4;
 			posfin = pokeinfo.indexOf("<\td>", posini);
 			
-			var tipospoke = pokeinfo.substring(posini, posfin).split("<br>")[0].split("</a><a ");
+			var tipospoke = pokeinfo.substring(posini, posfin).split("<br>")[0].replace("</a> <a ", "</a><a ").split("</a><a ");
 			
 			for(var i = 0; i < tipospoke.length; i++){
 			
@@ -1134,7 +1134,7 @@ function cargapoke(id){
 				pokelist2[id][0].habs.oculta.push(inthab(pokeinfo.substring(posini, posfin)));
 				
 			}
-			pokelist2[id].front = pokeinfo;
+ment			pokelist2[id].front = pokeinfo;
 			console.log(pokelist2[id]);
 		});
 	}catch(error){
