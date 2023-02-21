@@ -627,295 +627,6 @@ function cargaregionales(){
 	}
 }
 
-function cargapokes(nombre, vartitle, generacion){
-	
-	try{
-		var url;
-		if(vartitle == "normal"){ 
-			url = "https://www.wikidex.net/wiki/" + nombre.replace(/ /g, "_");
-		}
-		else{ 
-			url = "https://www.wikidex.net/wiki/" + nombre.replace(/ /g, "_") + "_" + vartitle.replace(/ /g, "_");
-		}
-		$.get("https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI(url), function(data) {
-			
-			var poke = {
-				id: " ",
-				title: vartitle,
-				name: nombre,
-				img: {sprite: " ", otros:[]},
-				tipo: [],
-				habs: {normal: [], oculta: []},
-				stats: [0, 0, 0, 0, 0, 0],
-				movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
-				front: " ",
-				gen: generacion
-			};
-			
-			var wikipage = data.replace(/(\r\n|\n|\r)/gm,"");
-								
-			var idpokeini = wikipage.indexOf(">", wikipage.indexOf(">#<") + 3) + 1;
-			poke["id"] = wikipage.substring(idpokeini, wikipage.indexOf("<", idpokeini));
-			
-			var tipoini = wikipage.indexOf("<td>", wikipage.indexOf("Tipos a los que pertenece") + 25);
-			var tipofin = wikipage.indexOf("</tr>" , tipoini);
-			
-			var tipostr = wikipage.substring(tipoini, tipofin);
-
-			tipoini = tipostr.indexOf("title=\"Tipo ") + 12;
-			poke["tipo"].push(tipostr.substring(tipoini, tipostr.indexOf("\"", tipoini)));
-			
-			tipoini = tipostr.indexOf("title=\"Tipo ", tipoini) + 12;
-			if(tipoini != 11)
-				poke["tipo"].push(tipostr.substring(tipoini, tipostr.indexOf("\"", tipoini))); 
-			
-			var spriteini = wikipage.indexOf("src=\"" , wikipage.indexOf("class=\"float-app")) + 5;
-			poke["img"]["sprite"] = wikipage.substring(spriteini, wikipage.indexOf(".png", spriteini) + 4);
-			
-			var frontini = wikipage.indexOf("src=\"" , wikipage.indexOf("class=\"vnav_datos")) + 5; ;
-			poke["front"] = wikipage.substring(frontini, wikipage.indexOf("\"", frontini));
-			
-			spriteini = wikipage.indexOf("class=\"galeria-sprites");
-			var spritefin;
-			var sprite;
-			
-			var spritedata;
-	
-			while (spriteini != -1){
-				spritefin = wikipage.indexOf("</table>", spriteini);
-				sprite = wikipage.substring(spriteini, spritefin);
-				
-				spritedata = sprite.match(/(https:[^"]*[\.png|\.gif])/gi);
-				try{
-					for(var i = 0; i < spritedata.length; i++){
-						poke["img"]["otros"].push(spritedata[i]);
-					}
-				}catch(error){}
-			
-				spriteini = wikipage.indexOf("class=\"galeria-sprites", spritefin + 1);
-			}
-			
-			var posini = wikipage.indexOf("class=\"movnivel") + 15;
-			var posfin = wikipage.indexOf("</table>", posini);
-			
-			var tabla1 = wikipage.substring(wikipage.indexOf("<tr>", posini), posfin);
-			var posmov1 = 0;
-			var posmov2 = 0;
-			
-			var atname;
-			var atnum;
-			
-			while(posmov1 != -1){
-				
-				posmov1 = tabla1.indexOf(">", tabla1.indexOf("title=", tabla1.indexOf("href=", tabla1.indexOf("<td><", tabla1.indexOf("<tr>", posmov2))))) + 1;
-				posmov2 = tabla1.indexOf("<", posmov1);
-				
-				if(tabla1.substring(posmov1,posmov2) != ""){
-					atname = validaname(tabla1.substring(posmov1,posmov2));
-					
-					atnum = intataq(atname);
-					if(!poke["movs"]["niv"].includes(atnum))
-						poke["movs"]["niv"].push(atnum);
-					
-				}
-				
-				posmov1 = tabla1.indexOf("<tr>", posmov2);
-				
-			}
-								
-			posini = wikipage.indexOf("class=\"movmtmo", posfin) + 14;
-			
-			while(posini != 13){
-			
-				posmov1 = 0;
-			
-				while(posmov1 != -1){
-				
-					posfin = wikipage.indexOf("</table>", posini);
-					tabla1 = wikipage.substring(wikipage.indexOf("<tr>", posini), posfin);
-				
-					posmov1 = tabla1.indexOf(">", tabla1.indexOf("title=", tabla1.indexOf("href=", tabla1.indexOf("</td>", tabla1.indexOf("<tr>", posmov1))))) + 1;
-					posmov2 = tabla1.indexOf("<", posmov1);
-					
-					if(tabla1.substring(posmov1,posmov2) != ""){
-						atname = validaname(tabla1.substring(posmov1,posmov2));
-						
-						atnum = intataq(atname);
-						
-						if(!poke["movs"]["mt"].includes(atnum))
-							poke["movs"]["mt"].push(atnum);
-						
-					}
-						
-					posmov1 = tabla1.indexOf("<tr>", posmov2);
-				
-				}
-				posini = wikipage.indexOf("class=\"movmtmo", posini) + 14;
-										
-			} 
-			
-			posini = wikipage.indexOf("class=\"movtutor", posfin) + 15;
-			
-			if(posini != 14){
-			
-				posmov1 = 0;
-			
-				while(posmov1 != -1){
-				
-					posfin = wikipage.indexOf("</table>", posini);
-					tabla1 = wikipage.substring(wikipage.indexOf("<tr>", posini), posfin);
-				
-					posmov1 = tabla1.indexOf(">", tabla1.indexOf("title=", tabla1.indexOf("href=", tabla1.indexOf("</td>", tabla1.indexOf("<tr>", posmov1))))) + 1;
-					posmov2 = tabla1.indexOf("<", posmov1);
-					
-					if(tabla1.substring(posmov1,posmov2) != ""){
-						atname = validaname(tabla1.substring(posmov1,posmov2));
-						
-						atnum = intataq(atname);
-						
-						if(!poke["movs"]["tut"].includes(atnum))
-							poke["movs"]["tut"].push(atnum);
-						
-					}
-					posmov1 = tabla1.indexOf("<tr>", posmov2);
-				
-				}
-										
-			}
-								
-			posini = wikipage.indexOf("class=\"movhuevo", posfin) + 15;
-			
-			if(posini != 14){
-			
-				posmov1 = 0;
-			
-				while(posmov1 != -1){
-				
-					posfin = wikipage.indexOf("</table>", posini);
-					tabla1 = wikipage.substring(wikipage.indexOf("<tr>", posini), posfin);
-				
-					posmov1 = tabla1.indexOf(">", tabla1.indexOf("title=", tabla1.indexOf("href=", tabla1.indexOf("</td>", tabla1.indexOf("<tr>", posmov1))))) + 1;
-					posmov2 = tabla1.indexOf("<", posmov1);
-					
-					if(tabla1.substring(posmov1,posmov2) != ""){
-						atname = validaname(tabla1.substring(posmov1,posmov2));
-						
-						atnum = intataq(atname);
-						
-						if(!poke["movs"]["egg"].includes(atnum))
-							poke["movs"]["egg"].push(atnum);
-						
-					}
-						
-					posmov1 = tabla1.indexOf("<tr>", posmov2);
-				}												
-			}
-			
-			posini = wikipage.indexOf("title=\"Movimiento Z\"", posfin);
-			
-			if(posini != -1){
-
-				posmov1 = 0;
-				
-				if(wikipage.indexOf("<a href=\"/wiki/Cristal_Z\" title=\"Cristal Z\">Cristal Z</a>",posini) == -1){
-					posmov1 = -1;
-					posini = -1;
-				}
-					
-				while(posmov1 != -1){
-					
-					posfin = wikipage.indexOf("</table>", posini);
-					
-					tabla1 = wikipage.substring(wikipage.indexOf("<tr>", posini), posfin);
-				
-					posmov1 = tabla1.indexOf(">", tabla1.indexOf("title=", tabla1.indexOf("href=", tabla1.indexOf("<td>", tabla1.indexOf("<tr>", posmov1))))) + 1;
-					posmov2 = tabla1.indexOf("<", posmov1);
-					
-					if(tabla1.substring(posmov1,posmov2) != ""){
-						atname = validaname(tabla1.substring(posmov1,posmov2));
-						
-						atnum = intataq(atname);
-						
-						if(!poke["movs"]["z"].includes(atnum))
-							poke["movs"]["z"].push(atnum);
-						
-					}
-						
-					posmov1 = tabla1.indexOf("<tr>", posmov2);
-				}												
-			}
-			
-			posini = wikipage.indexOf("class=\"movespecial sortable", posfin) + 18;
-			
-			if(posini != 17){
-			
-				posmov1 = 0;
-			
-				while(posmov1 != -1){
-				
-					posfin = wikipage.indexOf("</table>", posini);
-					tabla1 = wikipage.substring(wikipage.indexOf("<tr>", posini), posfin);
-				
-					posmov1 = tabla1.indexOf(">", tabla1.indexOf("title=", tabla1.indexOf("href=", tabla1.indexOf("</td>", tabla1.indexOf("<tr>", posmov1))))) + 1;
-					posmov2 = tabla1.indexOf("<", posmov1);
-					
-					if(tabla1.substring(posmov1,posmov2) != ""){
-						atname = validaname(tabla1.substring(posmov1,posmov2));
-						
-						atnum = intataq(atname);
-						
-						if(!poke["movs"]["otro"].includes(atnum))
-							poke["movs"]["otro"].push(atnum);
-						
-					}
-						
-					posmov1 = tabla1.indexOf("<tr>", posmov2);
-				}												
-			}
-			posini = wikipage.indexOf("class=\"base\"");
-			
-			for (var i = 0; i < 6; i++){
-				posini = wikipage.indexOf("<td>", posini) + 4;
-				poke["stats"][i] = parseInt(wikipage.substring(posini, wikipage.indexOf("</td>", posini)));
-			}
-			
-			posini = wikipage.indexOf("title=\"Habilidades que puede conocer\"") + 37;
-			
-			if(posini != 36){
-			
-				posfin = wikipage.indexOf("</tr>", posini);
-				
-				posmov1 = wikipage.indexOf(">", wikipage.indexOf("title=",  wikipage.indexOf("<a" , wikipage.indexOf("<td>", posini)))) + 1;
-				posmov2 = wikipage.indexOf("<", posmov1);
-				
-				poke["habs"]["normal"].push(inthab(validanamehab(wikipage.substring(posmov1, posmov2))));
-					
-				posmov1 = wikipage.indexOf(">", wikipage.indexOf("title=", wikipage.indexOf("<a", posmov2))) + 1;
-
-				if(posmov1 < posfin){
-					posmov2 = wikipage.indexOf("<", posmov1);
-					poke["habs"]["normal"].push(inthab(validanamehab(wikipage.substring(posmov1, posmov2))));
-				}
-			}
-			
-			posini = wikipage.indexOf("title=\"Habilidad oculta\"") + 24;
-								
-			if(posini != 23){
-									
-				posmov1 = wikipage.indexOf(">", wikipage.indexOf("title=",  wikipage.indexOf("<td>" ,posini))) + 1;
-				posmov2 = wikipage.indexOf("<", posmov1);
-				
-				poke["habs"]["oculta"].push(inthab(validanamehab(wikipage.substring(posmov1, posmov2))));
-					
-			}
-
-			pokelist2[parseInt(poke.id)].push(poke);
-		});
-	}catch(error){
-		console.log(error);
-	}
-}
-
 function validaname(nombre){
 
 	var val = cambios.indexOf(nombre);
@@ -967,24 +678,6 @@ function intataq(ataque){
 	}
 	catch(error){
 		alert("Ataque " + ataque + " fallo");
-	}
-	return i;
-	
-}
-
-function inthab(hab){
-
-	var i = 0;
-	try{
-		while(pokelist[0]["habs"][i]["name"].replace(" ", "") != hab.replace(" ", "") && i < pokelist[0]["habs"].length){
-			i++;
-		}
-			
-		if (i == pokelist[0]["habs"].length)
-			alert("Habilidad " + hab + " con problemas");
-	}
-	catch(error){
-		//alert("Habilidad " + hab + " de " + pokelist[poke][0]["name"] + " fallo");
 	}
 	return i;
 	
@@ -1055,6 +748,7 @@ function generapokelist(){
 	generapokes();
 	
 	//cargamovs();
+	//cargapokes();
 }
 
 function generaball(){
@@ -1363,6 +1057,8 @@ function generapokes(){
 				};
 				pokelist2[parseInt(idpoke)] = [poke];
 				
+				cargapoke(parseInt(idpoke));
+				
 				posfin = poketabla.indexOf("</tr>", posini);
 				posini = poketabla.indexOf("<td>", posfin);
 				posfin = poketabla.indexOf("<", posini + 4);
@@ -1388,4 +1084,78 @@ function savedata(){
 	a.click();
 	
 	alert(filename + " guardado.");
+}
+
+function cargapoke(id){
+	
+	try{
+		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/" + pokelist2[id][0].name.replace(" ", "_"));
+		$.get(link, function(data) {
+			var pokeinfo = data.replace(/(\r\n|\n|\r)/gm,"");
+			
+			var posini = pokeinfo.indexOf("src=\"", pokeinfo.indexOf("<alt=\"Ilustración")) + 4;
+			var posfin = pokeinfo.indexOf("\"", posini);
+			
+			pokelist2[id][0].img.otros.push(pokeinfo.substring(posini, posfin));
+
+			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Tipos a los que pertenece\"")) + 4;
+			posfin = pokeinfo.indexOf("<\td>", posini);
+			
+			var tipospoke = pokeinfo.substring(posini, posfin).split("<br>")[0].split("</a><a ");
+			
+			for(var i = 0; i < tipospoke.length; i++){
+			
+				posini = tipospoke[i].indexOf("title=\"Tipo ")) + 12;
+				posfin = tipospoke[i].indexOf("\"", posini);
+				
+				pokelist2[id][0].tipo.push(tipospoke[i].substring(posini, posfin));
+				
+			}
+			
+			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Habilidades que puede conocer\"")) + 4;
+			posfin = pokeinfo.indexOf("<\td>", posini);
+			
+			var habspoke = pokeinfo.substring(posini, posfin).split("</a><br><a ");
+			
+			for(var i = 0; i < habspoke.length; i++){
+			
+				posini = habspoke[i].indexOf("title=\"")) + 7;
+				posfin = habspoke[i].indexOf("\"", posini);
+				
+				pokelist2[id][0].habs.normal.push(inthab(habspoke[i].substring(posini, posfin)));
+				
+			}
+
+			if(pokeinfo.indexOf("title=\"Habilidad oculta\"") != -1){
+				
+				posini = pokeinfo.indexOf("title=\"", pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Habilidad oculta\""))) + 7;
+				posfin = pokeinfo.indexOf("\"", posini);
+				
+				pokelist2[id][0].habs.oculta.push(inthab(pokeinfo.substring(posini, posfin)));
+				
+			}
+			
+			console.log(pokelist2[id]);
+		});
+	}catch(error){
+		console.log(error);
+	}
+}
+
+function inthab(hab){
+
+	var i = 0;
+	try{
+		while(pokelist2[0]["habs"][i]["name"].replace(" ", "") != hab.replace(" ", "") && i < pokelist2[0]["habs"].length){
+			i++;
+		}
+			
+		if (i == pokelist2[0]["habs"].length)
+			alert("Habilidad " + hab + " con problemas");
+	}
+	catch(error){
+		//alert("Habilidad " + hab + " de " + pokelist[poke][0]["name"] + " fallo");
+	}
+	return i;
+	
 }
