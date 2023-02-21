@@ -1093,7 +1093,7 @@ function cargapoke(id, variacion){
 		$.get(link, function(data) {
 			var pokeinfo = data.replace(/(\r\n|\n|\r)/gm,"").replace("> <", "><");
 			
-			var posini = pokeinfo.indexOf("src=\"", pokeinfo.indexOf("<alt=\"Ilustración")) + 5;
+			var posini = pokeinfo.indexOf("src=\"", pokeinfo.indexOf("alt=\"Ilustración")) + 5;
 			var posfin = pokeinfo.indexOf("\"", posini);
 			
 			pokelist2[id][0].img.otros.push(pokeinfo.substring(posini, posfin));
