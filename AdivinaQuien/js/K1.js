@@ -1050,7 +1050,7 @@ function generapokelist(){
 	generaball();
 	generahabs();
 	generaobj();
-	//generatipos();
+	generatipos();
 	generamovs();
 	generapokes();
 	
