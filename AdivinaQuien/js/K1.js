@@ -1270,13 +1270,13 @@ function generapoke(){
 			
 			var posinitable = poketabla.indexOf("<table class=\"tabpokemon");
 			var posfintable = poketabla.indexOf("</table>", posinitable);
-			var posini = poketabla.indexOf("<td>", posinitable) + 4;
-			var posfin = poketabla.indexOf("<", posini);
+			var posini = poketabla.indexOf("<td>", posinitable);
+			var posfin = poketabla.indexOf("<", posini + 4);
 			
 			var generacion = 1;
 			while(posini != -1 && posinitable != -1){
 				
-				var idpoke = poketabla.substring(posini, posfin);
+				var idpoke = poketabla.substring(posini + 4, posfin);
 				
 				posini = poketabla.indexOf("\">", poketabla.indexOf("<td><a href=", posfin)) + 2;
 				posfin = poketabla.indexOf("</a>", posini);
@@ -1299,7 +1299,7 @@ function generapoke(){
 				
 				posfin = poketabla.indexOf("</tr>", posini);
 				posini = poketabla.indexOf("<td>", posfin);
-				posfin = poketabla.indexOf("<", posini);
+				posfin = poketabla.indexOf("<", posini + 4);
 				
 				if(posini > posfintable){
 					posinitable = poketabla.indexOf("<table class=\"tabpokemon", posfintable);
