@@ -1053,7 +1053,7 @@ function generapokelist(){
 	generatipos();
 	generamovs();
 	
-	
+	//cargamovs();
 }
 
 function generaball(){
@@ -1163,7 +1163,7 @@ function generamovs(){
 					
 					var nombremov = movsarray[i].substring(pos1, pos2);
 					
-					pos1 = movsarray[i].indexOf("title=", pos1) + 7;
+					pos1 = movsarray[i].indexOf("title=", pos1) + 13;
 					pos2 = movsarray[i].indexOf("\">", pos1);
 					
 					var tipomov = movsarray[i].substring(pos1, pos2);
@@ -1272,17 +1272,32 @@ function generapoke(){
 			
 			var posinitable = poketabla.indexOf("<table class=\"tabpokemon");
 			var posfintable = poketabla.indexOf("</table>", posinitable);
-			var posini = poketabla.indexOf("<td><a href=", posfin);
-			var posfin = poketabla.indexOf("</a>", posini);
+			var posini = poketabla.indexOf("<td>", posfin) + 4;
+			var posfin = poketabla.indexOf("<", posini);
 			
 			var generacion = 1;
 			
 			while(posini == -1 && posinitable != -1){
-		
-				posini = poketabla.indexOf("\">", posini) + 2;
-				pokelist.push([]);
 				
-				cargapokes(poketabla.substring(posini, posfin), "normal", generacion);
+				var idpoke = poketabla.substring(posini, posfin);
+				
+				posini = poketabla.indexOf("\">", poketabla.indexOf("<td><a href=", posfin)) + 2;
+				posfin = poketabla.indexOf("</a>", posini);
+				
+				var nombrepoke = poketabla.substring(posini, posfin);
+		
+				var poke = {
+					id: idpoke,
+					title: "normal",
+					name: nombrepoke,
+					img: {sprite: " ", otros:[]},
+					tipo: [],
+					habs: {normal: [], oculta: []},
+					stats: [0, 0, 0, 0, 0, 0],
+					movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+					front: " ",
+					gen: generacion
+				};
 				
 				posfin = poketabla.indexOf("</tr>", posini);
 				posini = poketabla.indexOf("<td><a href=", posfin);
