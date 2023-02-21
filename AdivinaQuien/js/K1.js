@@ -1270,11 +1270,10 @@ function generapoke(){
 			
 			var posinitable = poketabla.indexOf("<table class=\"tabpokemon");
 			var posfintable = poketabla.indexOf("</table>", posinitable);
-			var posini = poketabla.indexOf("<td>", posfin) + 4;
+			var posini = poketabla.indexOf("<td>") + 4;
 			var posfin = poketabla.indexOf("<", posini);
 			
 			var generacion = 1;
-			console.log(posini + " " + posinitable);
 			while(posini != -1 && posinitable != -1){
 				
 				var idpoke = poketabla.substring(posini, posfin);
