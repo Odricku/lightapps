@@ -1122,6 +1122,12 @@ function generatipos(){
 				pos2 = tipoarray2[i].indexOf("\"", pos1);
 				
 				mapa.push(tipoarray2[i].substring(pos1, pos2));
+				tabla[mapa[i]] = {
+					image: "",
+					inmune: [],
+					fuerte: [],
+					debil: []
+				};
 				
 			}
 			
@@ -1139,13 +1145,7 @@ function generatipos(){
 				
 				var tipoimagen = tipoarray2[0].substring(pos1, pos2);
 				
-				
-				tabla[tiponombre] = {
-					image: tipoimagen,
-					inmune: [],
-					fuerte: [],
-					debil: []
-				};
+				tabla[tiponombre]["image"] = tipoimagen;
 				
 				for(var j = 1; j < tipoarray2.length; j++){
 
