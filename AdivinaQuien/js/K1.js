@@ -1119,7 +1119,7 @@ function generatipos(){
 			
 			for(var i = 0; i < tipoarray2.length; i++){
 				pos1 = tipoarray2[i].indexOf("title=\"Tipo ") + 12;
-				pos2 = tipoarray2[i].indexOf("\"", posini);
+				pos2 = tipoarray2[i].indexOf("\"", pos1);
 				
 				mapa.push(tipoarray2[i].substring(pos1, pos2));
 				
@@ -1130,12 +1130,12 @@ function generatipos(){
 				tipoarray2 = tipoarray[i].split("</td><td>");
 				
 				pos1 = tipoarray2[0].indexOf("title=\"Tipo ") + 12;
-				pos2 = tipoarray2[0].indexOf("\"", posini);
+				pos2 = tipoarray2[0].indexOf("\"", pos1);
 				
 				var tiponombre = tipoarray2[0].substring(pos1, pos2);
 				
 				pos1 = tipoarray2[0].indexOf("src=\"", pos2) + 5;
-				pos2 = tipoarray2[0].indexOf("\"", posini);
+				pos2 = tipoarray2[0].indexOf("\"", pos1);
 				
 				var tipoimagen = tipoarray2[0].substring(pos1, pos2);
 				
