@@ -1149,6 +1149,7 @@ function generatipos(){
 				
 				for(var j = 1; j < tipoarray2.length; j++){
 
+					console.log(tiponombre +  " vs " +mapa[j-1])
 					if (tipoarray2[j].includes("X2.png")){
 						tabla[tiponombre]["fuerte"].push(mapa[j-1]);
 						tabla[mapa[j-1]]["debil"].push(tiponombre);
