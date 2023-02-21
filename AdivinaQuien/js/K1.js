@@ -1149,8 +1149,6 @@ function generatipos(){
 				
 				for(var j = 1; j < tipoarray2.length; j++){
 
-					console.log(mapa);
-					console.log(tiponombre +  " vs " +mapa[j-1]);
 					if (tipoarray2[j].includes("X2.png")){
 						tabla[tiponombre]["fuerte"].push(mapa[j-1]);
 						tabla[mapa[j-1]]["debil"].push(tiponombre);
@@ -1233,10 +1231,10 @@ function generamovs(){
 					
 					var nombremov = movsarray[i].substring(pos1, pos2);
 					
-					pos1 = movsarray[i].indexOf("title=", pos1) + 13;
+					pos1 = movsarray[i].indexOf("title=", pos1) + 12;
 					pos2 = movsarray[i].indexOf("\">", pos1);
 					
-					var tipomov = movsarray[i].substring(pos1, pos2);
+					var tipomov = movsarray[i].substring(pos1, pos2).toLowerCase();
 					
 					pos1 = movsarray[i].indexOf("title=", pos1) + 13;
 					pos2 = movsarray[i].indexOf("\">", pos1);
