@@ -1134,7 +1134,7 @@ function cargapoke(id){
 				pokelist2[id][0].habs.oculta.push(inthab(pokeinfo.substring(posini, posfin)));
 				
 			}
-ment			pokelist2[id].front = pokeinfo;
+			pokelist2[id].front = pokeinfo;
 			console.log(pokelist2[id]);
 		});
 	}catch(error){
