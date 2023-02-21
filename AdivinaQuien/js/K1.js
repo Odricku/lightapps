@@ -1145,43 +1145,51 @@ function generamovs(){
 		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_movimientos");
 		$.get(link, function(data) {
 			var movstabla = data.replace(/(\r\n|\n|\r)/gm,"");
-			var posini = movstabla.indexOf("<tr><td>", movstabla.indexOf("lista sortable mergetable")) + 4;
-			var posfin = movstabla.indexOf("</table>", posini);
 			
-			movsarray = movstabla.substring(posini, posfin).split("<tr><td>");
+			var posini = movstabla.indexOf("lista sortable mergetable");
+			var posfin = posiniM
 			
-			for(var i = 0; i < movsarray.length; i++){
+			while(posini != -1){
+			
+				posini = movstabla.indexOf("<tr><td>", posini) + 4;
+				posfin = movstabla.indexOf("</table>", posini);
 				
-				pos1 = movsarray[i].indexOf("title=") + 7;
-				pos2 = movsarray[i].indexOf("\">", pos1);
+				movsarray = movstabla.substring(posini, posfin).split("<tr><td>");
 				
-				var nombremov = movsarray[i].substring(pos1, pos2);
-				
-				pos1 = movsarray[i].indexOf("title=", pos1) + 7;
-				pos2 = movsarray[i].indexOf("\">", pos1);
-				
-				var tipomov = movsarray[i].substring(pos1, pos2);
-				
-				pos1 = movsarray[i].indexOf("title=", pos1) + 13;
-				pos2 = movsarray[i].indexOf("\">", pos1);
-				
-				var catemov = movsarray[i].substring(pos1, pos2);
-				
-				var movimiento = {
-					name: nombremov,
-					tipo: tipomov,
-					categoria: catemov,
-					stats:{
-						potencia: "",
-						precision: "",
-						efecto: "",
-						prioridad: "",
-						contacto: ""
+				for(var i = 0; i < movsarray.length; i++){
+					
+					pos1 = movsarray[i].indexOf("title=") + 7;
+					pos2 = movsarray[i].indexOf("\">", pos1);
+					
+					var nombremov = movsarray[i].substring(pos1, pos2);
+					
+					pos1 = movsarray[i].indexOf("title=", pos1) + 7;
+					pos2 = movsarray[i].indexOf("\">", pos1);
+					
+					var tipomov = movsarray[i].substring(pos1, pos2);
+					
+					pos1 = movsarray[i].indexOf("title=", pos1) + 13;
+					pos2 = movsarray[i].indexOf("\">", pos1);
+					
+					var catemov = movsarray[i].substring(pos1, pos2);
+					
+					var movimiento = {
+						name: nombremov,
+						tipo: tipomov,
+						categoria: catemov,
+						stats:{
+							potencia: "",
+							precision: "",
+							efecto: "",
+							prioridad: "",
+							contacto: ""
+						}
 					}
+					
+					pokelist2[0]["movs"].push(movimiento);
+					
 				}
-				
-				pokelist2[0]["movs"].push(movimiento);
-				
+				posini = movstabla.indexOf("lista sortable mergetable", posfin)
 			}
 			
 		});
