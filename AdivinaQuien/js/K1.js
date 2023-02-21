@@ -1105,7 +1105,7 @@ function cargapoke(id){
 			
 			for(var i = 0; i < tipospoke.length; i++){
 			
-				posini = tipospoke[i].indexOf("title=\"Tipo ")) + 12;
+				posini = tipospoke[i].indexOf("title=\"Tipo ") + 12;
 				posfin = tipospoke[i].indexOf("\"", posini);
 				
 				pokelist2[id][0].tipo.push(tipospoke[i].substring(posini, posfin));
@@ -1119,7 +1119,7 @@ function cargapoke(id){
 			
 			for(var i = 0; i < habspoke.length; i++){
 			
-				posini = habspoke[i].indexOf("title=\"")) + 7;
+				posini = habspoke[i].indexOf("title=\"") + 7;
 				posfin = habspoke[i].indexOf("\"", posini);
 				
 				pokelist2[id][0].habs.normal.push(inthab(habspoke[i].substring(posini, posfin)));
