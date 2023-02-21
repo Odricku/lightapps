@@ -1297,7 +1297,7 @@ function generapoke(){
 					front: " ",
 					gen: generacion
 				};
-				pokelist2[parseInt(idpoke)] = [poke];
+				pokelist2.push([poke]);
 				
 				posfin = poketabla.indexOf("</tr>", posini);
 				posini = poketabla.indexOf("<td>", posfin);
