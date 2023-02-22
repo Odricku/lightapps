@@ -866,6 +866,7 @@ function generamovs(){
 					}
 					
 					pokelist2[0]["movs"].push(movimiento);
+					cargamov(nombremov);
 					
 				}
 				posini = movstabla.indexOf("lista sortable mergetable", posfin);
@@ -1081,7 +1082,7 @@ function generapokes(){
 function savedata(){
 	var filename = "pokelist";
 	var a = document.createElement("a");
-	var file = new Blob([JSON.stringify(pokelist)], {type: "text/plain"});
+	var file = new Blob([JSON.stringify(pokelist2)], {type: "text/plain"});
 	a.href = URL.createObjectURL(file);
 	a.download = filename;
 	a.click();
@@ -1385,6 +1386,50 @@ function cargapoke(id, variacion ,titulo, sprite){
 		console.log(error);
 	}
 }
+
+function cargamov(movname){
+	
+	
+	try{
+
+		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/" + movname.replace(" ", "_"));
+		
+		$.get(link, function(data) {
+			
+			var idmov = intataq(movname);
+			var movinfo = data.replace(/(\r\n|\n|\r)/gm,"").replace("> <", "><");
+			
+			var posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Movimiento\">Potencia</a>")) + 4;
+			var posfin = pokeinfo.indexOf("<", posini);
+			
+			pokelist2[0].movs[idmov].stats.potencia = movinfo.substring(posini, posfin).replace("\"", "").replace(" ", "");
+			
+			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Precisión\">Precisión</a>")) + 4;
+			posfin = pokeinfo.indexOf("<", posini);
+			
+			pokelist2[0].movs[idmov].stats.precision = movinfo.substring(posini, posfin).replace("\"", "").replace(" ", "");
+			
+			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Movimiento\">Efecto secundario</a>")) + 4;
+			posfin = pokeinfo.indexOf("<", posini);
+			
+			pokelist2[0].movs[idmov].stats.efecto = movinfo.substring(posini, posfin).replace("\"", "");
+			
+			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Prioridad\">Prioridad</a>")) + 4;
+			posfin = pokeinfo.indexOf("<", posini);
+			
+			pokelist2[0].movs[idmov].stats.prioridad = movinfo.substring(posini, posfin).replace("\"", "").replace(" ", "");
+			
+			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Movimiento\">Contacto</a>")) + 4;
+			posfin = pokeinfo.indexOf("<", posini);
+			
+			pokelist2[0].movs[idmov].stats.contacto = movinfo.substring(posini, posfin).replace("\"", "").replace(" ", "");
+			
+		});
+	}catch(error){
+		console.log(error);
+	}
+}
+
 
 function inthab(hab){
 
