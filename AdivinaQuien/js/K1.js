@@ -1132,7 +1132,7 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 			link = encodeURI("https://www.wikidex.net/wiki/" + (pokelist2[id][variacion].name + "_" + titulo).replaceAll(" ", "_"));
 		}
 		$.get(link, function(data) {
-			var pokeinfo = data.replaceAll(/(\r\n|\n|\r)/gm,"").replaceAll("> <", "><");
+			var pokeinfo = data.replaceAll(/(\r\n|\n|\r)/gm,"").replaceAll("> <", "><").replaceAll("<br />", "<br/>");
 			
 			var posini = pokeinfo.indexOf("src=\"", pokeinfo.indexOf("alt=\"Ilustración")) + 5;
 			var posfin = pokeinfo.indexOf("\"", posini);
@@ -1162,6 +1162,7 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 			
 				posini = habspoke[i].indexOf("title=\"") + 7;
 				posfin = habspoke[i].indexOf("\"", posini);
+				console.log(id + " " + habspoke[i]);
 				
 				pokelist2[id][variacion].habs.normal.push(inthab(habspoke[i].substring(posini, posfin)));
 				
