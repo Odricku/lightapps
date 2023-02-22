@@ -1225,7 +1225,7 @@ function cargapoke(id, variacion){
 
 			if(posinitable != -1){
 				
-				var movarray = pokeinfo.substring(pokeinfo.indexOf("<tr>", posinitable), posfintable).split("</tr><tr>");
+				var movarray = pokeinfo.substring(0, pokeinfo.indexOf("<tr>", posinitable), posfintable).split("</tr><tr>");
 				
 				for(var i = 0; i < movarray.length; i++){
 					
