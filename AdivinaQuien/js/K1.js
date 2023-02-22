@@ -1173,7 +1173,7 @@ function cargapoke(id, variacion){
 				
 				for(var i = 0; i < movarray.length; i++){
 					
-					posini = movarray[i].indexOf("<td>",movarray[i].indexOf("<td>") + 4) + 4);
+					posini = movarray[i].indexOf("<td>",movarray[i].indexOf("<td>") + 4) + 4;
 					posfin = movarray[i].indexOf("\"", movarray[i].indexOf("title=\"", posini) + 7);
 					
 					var intmov = intataq(movarray[i].substring(posini, posfin));
@@ -1207,7 +1207,7 @@ function cargapoke(id, variacion){
 				
 				for(var i = 0; i < movarray.length; i++){
 					
-					posini = movarray[i].indexOf("<td>",movarray[i].indexOf("<td>") + 4) + 4);
+					posini = movarray[i].indexOf("<td>",movarray[i].indexOf("<td>") + 4) + 4;
 					posfin = movarray[i].indexOf("\"", movarray[i].indexOf("title=\"", posini) + 7);
 					
 					var intmov = intataq(movarray[i].substring(posini, posfin));
