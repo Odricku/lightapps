@@ -1121,7 +1121,7 @@ function cargapoke(id, variacion){
 					var intmov = intataq(movarray[i].substring(posini, posfin));
 					
 					if(intmov == -1)
-						console.log(pokelist2[id][0].name + " " + movarray[i] + " " + movarray[i].substring(posini, posfin));
+						console.log(pokelist2[id][0].name + " " + movarray[i].substring(posini, posfin));
 					
 					if(!pokelist2[id][variacion].movs.niv.includes(intmov)){
 						pokelist2[id][variacion].movs.niv.push(intmov);
@@ -1150,7 +1150,7 @@ function cargapoke(id, variacion){
 					var intmov = intataq(movarray[i].substring(posini, posfin));
 					
 					if(intmov == -1)
-						console.log(pokelist2[id][0].name + " " + movarray[i] + " " + movarray[i].substring(posini, posfin));
+						console.log(pokelist2[id][0].name + " " + movarray[i].substring(posini, posfin));
 					
 					if(!pokelist2[id][variacion].movs.mt.includes(intmov)){
 						pokelist2[id][variacion].movs.mt.push(intmov);
@@ -1181,7 +1181,7 @@ function cargapoke(id, variacion){
 					while(posini != -1 && intmov == -1){
 						
 						if(intmov == -1)
-							console.log(pokelist2[id][0].name + " " + movarray[i] + " " + movarray[i].substring(posini, posfin));
+							console.log(pokelist2[id][0].name + " " + movarray[i].substring(posini, posfin));
 												
 						posini = movarray[i].indexOf("<td>", posfin);
 						posfin = movarray[i].indexOf("\"", movarray[i].indexOf("title=\"", posini) + 7);
@@ -1215,7 +1215,7 @@ function cargapoke(id, variacion){
 					while(posini != -1 && intmov == -1){
 						
 						if(intmov == -1)
-							console.log(pokelist2[id][0].name + " " + movarray[i] + " " + movarray[i].substring(posini, posfin));
+							console.log(pokelist2[id][0].name + " " + movarray[i].substring(posini, posfin));
 												
 						posini = movarray[i].indexOf("<td>", posfin);
 						posfin = movarray[i].indexOf("\"", movarray[i].indexOf("title=\"", posini) + 7);
@@ -1248,7 +1248,7 @@ function cargapoke(id, variacion){
 						var intmov = intataq(movarray[i].substring(posini, posfin));
 						
 						if(intmov == -1)
-							console.log(pokelist2[id][0].name + " " + movarray[i] + " " + movarray[i].substring(posini, posfin));
+							console.log(pokelist2[id][0].name + " " + movarray[i].substring(posini, posfin));
 						
 						if(!pokelist2[id][variacion].movs.z.includes(intmov)){
 							pokelist2[id][variacion].movs.z.push(intmov);
@@ -1268,7 +1268,7 @@ function cargapoke(id, variacion){
 						var intmov = intataq(movarray[i].substring(posini, posfin));
 						
 						if(intmov == -1)
-							console.log(pokelist2[id][0].name + " " + movarray[i] + " " + movarray[i].substring(posini, posfin));
+							console.log(pokelist2[id][0].name + " " + movarray[i].substring(posini, posfin));
 						
 						if(!pokelist2[id][variacion].movs.otro.includes(intmov)){
 							pokelist2[id][variacion].movs.otro.push();
