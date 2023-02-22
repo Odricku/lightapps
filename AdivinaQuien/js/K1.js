@@ -12,9 +12,11 @@ var galar = ["Meowth","Ponyta","Rapidash","Slowpoke","Farfetch'd","Weezing","Mr.
 var paldea = [];
 var mega = ["Mega-Venusaur","Mega-Charizard X","Mega-Charizard Y","Mega-Blastoise","Mega-Alakazam","Mega-Gengar","Mega-Kangaskhan","Mega-Pinsir","Mega-Gyarados","Mega-Aerodactyl","Mega-Mewtwo X","Mega-Mewtwo Y","Mega-Ampharos","Mega-Scizor","Mega-Heracross","Mega-Houndoom","Mega-Tyranitar","Mega-Blaziken","Mega-Gardevoir","Mega-Mawile","Mega-Aggron","Mega-Medicham","Mega-Manectric","Mega-Banette","Mega-Absol","Mega-Garchomp","Mega-Lucario","Mega-Abomasnow","Mega-Beedrill","Mega-Pidgeot","Mega-Slowbro","Mega-Steelix","Mega-Sceptile","Mega-Swampert","Mega-Sableye","Mega-Sharpedo","Mega-Camerupt","Mega-Altaria","Mega-Glalie","Mega-Salamence","Mega-Metagross","Mega-Latias","Mega-Latios","Mega-Rayquaza","Mega-Lopunny","Mega-Gallade","Mega-Audino","Mega-Diancie"];
 var cambios2 = ["Absorbe agua", "Absor. agua","Absorbe electricidad", "Absor. elec.","Electricidad estática", "Elec. estát.","Electricidad estática", "Elect. estát.","Espíritu vital", "Espír. vital","Efecto espora", "Efec. espora","Modo Daruma", "Modo daruma"];
-var cambios = ["Empapar", "Anegar", "Placaje eléctrico", "Placaje eléc", "Esquirla helada", "Canto helado","Ovocuración", "Amortiguador", "Llave vital", "Tiro vital", "Rayo señal", "Doble rayo", "Cascabel cura", "Campana cura", "Saña", "Golpe", "Tormenta de arena", "Tormenta arena", "Meteoros" ,"Rapidez", "Autosugestión", "Más psique", "Bombardeo", "Presa", "Constricción", "Repetición","Contraataque", "Contador","Espejo", "Movimiento espejo","Espejo", "Mov. Espejo","Retribución", "Retroceso","Rodar", "Desenrollar","Sellar", "Cerca","Semilladora", "Recurrente","Sísmico", "Movimiento sísmico","Colmillo ígneo", "Colmillo fuego","Colmillo hielo", "Colmillo Hielo","Golpe cabeza", "Golpe Cabeza","Hidrocañón", "Hidrocañon","Cambio de banda", "Cambio banda", "Treparrocas", "Treparocas","Divide dolor", "Divide Dolor", "Atadura", "atadura","Pantalla de luz", "Pantalla Luz","Pantalla de luz", "Pantalla luz","Pantalla de humo", "Pantallahumo","Cola férrea", "Cola ferrea","Onda voltio", "Onda Voltio","Otra vez", "Otra Vez","Garra metal", "Garra Metal","Onda ígnea", "Onda Ígnea","Foco energía", "Foco energia","Rayo confuso", "Rayo Confuso","Psicorrayo", "Psicorayo","Puño hielo", "Puño Hielo","Represión metal", "Repr. metal","Bomba germen", "Bomba Germen","Trampa rocas", "Trampa Rocas","Pisotón", "Pisoton","Tijera X", "Tijera x","Bola sombra", "Bola Sombra","Látigo cepa", "Latigo cepa","Hierba lazo", "Hierba Lazo","Látigo", "Latigo","Disparo demora", "Disparo Demora"];
+var cambios = ["Fulgor semilla", "Fogonazo", "Luminicola", "Ráfaga", "Patada salto alta", "Pat. salto alta", "Velocidad extrema", "Veloc. extrema", "Empapar", "Anegar", "Placaje eléctrico", "Placaje eléc", "Esquirla helada", "Canto helado","Ovocuración", "Amortiguador", "Llave vital", "Tiro vital", "Rayo señal", "Doble rayo", "Cascabel cura", "Campana cura", "Saña", "Golpe", "Tormenta de arena", "Tormenta arena", "Meteoros" ,"Rapidez", "Autosugestión", "Más psique", "Bombardeo", "Presa", "Constricción", "Repetición","Contraataque", "Contador","Espejo", "Movimiento espejo","Espejo", "Mov. Espejo","Retribución", "Retroceso","Rodar", "Desenrollar","Sellar", "Cerca","Semilladora", "Recurrente","Sísmico", "Movimiento sísmico","Colmillo ígneo", "Colmillo fuego","Colmillo hielo", "Colmillo Hielo","Golpe cabeza", "Golpe Cabeza","Hidrocañón", "Hidrocañon","Cambio de banda", "Cambio banda", "Treparrocas", "Treparocas","Divide dolor", "Divide Dolor", "Atadura", "atadura","Pantalla de luz", "Pantalla Luz","Pantalla de luz", "Pantalla luz","Pantalla de humo", "Pantallahumo","Cola férrea", "Cola ferrea","Onda voltio", "Onda Voltio","Otra vez", "Otra Vez","Garra metal", "Garra Metal","Onda ígnea", "Onda Ígnea","Foco energía", "Foco energia","Rayo confuso", "Rayo Confuso","Psicorrayo", "Psicorayo","Puño hielo", "Puño Hielo","Represión metal", "Repr. metal","Bomba germen", "Bomba Germen","Trampa rocas", "Trampa Rocas","Pisotón", "Pisoton","Tijera X", "Tijera x","Bola sombra", "Bola Sombra","Látigo cepa", "Latigo cepa","Hierba lazo", "Hierba Lazo","Látigo", "Latigo","Disparo demora", "Disparo Demora"];
 
-var juegos = [""];
+var juegos = ["USUL", "N2B2", "ROZA", "Rubí Omega"];
+
+var ataquesnoregistrados = [{name: "Lanza glacial",	tipo: "hielo", categoria: "físico"}, {name: "Orbes espectro",	tipo: "fantasma", categoria: "especial"}];
 
 var accion = 1;
 	
@@ -927,6 +929,24 @@ function generamovs(){
 				posini = movstabla.indexOf("lista sortable mergetable", posfin);
 			}
 			
+			for(var i = 0; i < ataquesnoregistrados.length; i++){
+				
+				var movimiento = {
+					name: ataquesnoregistrados[i].name,
+					tipo: ataquesnoregistrados[i].tipo,
+					categoria: ataquesnoregistrados[i].categoria,
+					stats:{
+						potencia: "",
+						precision: "",
+						efecto: "",
+						prioridad: "",
+						contacto: ""
+					}
+				}
+					
+				pokelist2[0]["movs"].push(movimiento);
+			}
+			
 		});
 	}catch(error){
 		console.log(error);
@@ -1180,7 +1200,7 @@ function cargapoke(id, variacion){
 					
 					var intmov = intataq(movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin));
 					
-					if(!movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin).includes("Pokémon ")){
+					if(!movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin).includes("Pokémon")){
 					
 						while(posini != -1 && intmov == -1){
 							
@@ -1217,7 +1237,7 @@ function cargapoke(id, variacion){
 					
 					var intmov = intataq(movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin));
 					
-					if(!movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin).includes("Pokémon ")){
+					if(!movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin).includes("Pokémon")){
 						while(posini != -1 && intmov == -1){
 							
 							if(intmov == -1)
@@ -1314,9 +1334,18 @@ function inthab(hab){
 	
 }
 
-function intataq(ataque){
+function intataq(ata){
 
 	var i = 0;
+	var ataque = ata;
+	
+	if(juegos.includes(ata))
+		return -1;
+	
+	if(ataque.includes("(")){
+		ataque = ataque.substring(0,ataque.indexOf("(")).replace;
+	}
+	
 	try{
 		while(pokelist2[0]["movs"][i]["name"].replace(" ", "") != validaname(ataque).replace(" ", "") && i < pokelist2[0]["movs"].length){
 			i++;
