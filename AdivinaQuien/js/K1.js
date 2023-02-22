@@ -1330,6 +1330,14 @@ function cargapoke(id, variacion){
 			posfin = pokeinfo.indexOf("<", posini);
 			pokelist2[id][variacion].stats[5] = parseInt(pokeinfo.substring(posini, posfin));
 			
+			//sprite
+			posinitable = pokeinfo.indexOf("src=\"", pokeinfo.indexOf("class=\"otrosdatos") + 5);
+			posfintable = pokeinfo.indexOf("</div>", posinitable);
+			
+			var spritearray = pokeinfo.substring(posinitable, posfintable).split("src=\"");
+			
+			pokelist2[id][variacion].sprite = spritearray[variacion].substring(0, spritearray[variacion].indexOf("\""));
+			
 			//imgs
 			posinitable = pokeinfo.indexOf("<table class=\"galeria-sprites");
 			posfintable = pokeinfo.indexOf("</table>", posinitable);
