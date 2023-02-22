@@ -9,7 +9,8 @@ var llave = " 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+";
 var tipos = ["acero","agua","bicho","dragón","eléctrico","fantasma","fuego","hada","hielo","lucha","normal","planta","psíquico","roca","siniestro","tierra","veneno","volador"];
 var alola = ["Rattata","Raticate","Raichu","Sandshrew","Sandslash","Vulpix","Ninetales","Diglett","Dugtrio","Meowth","Persian","Geodude","Graveler","Golem","Grimer","Muk","Exeggutor","Marowak"];
 var galar = ["Meowth","Ponyta","Rapidash","Slowpoke","Farfetch'd","Weezing","Mr._Mime","Corsola","Zigzagoon","Linoone","Darumaka","Darmanitan","Yamask","Stunfisk"];
-var paldea = [];
+var hisui = ["Growlithe", "Arcanine", "Voltorb", "Electrode", "Typhlosion", "Qwilfish", "Sneasel", "Samurott", "Lilligant", "Zorua", "Zoroark", "Braviary", "Sliggoo", "Goodra", "Avalugg", "Decidueye"];
+var paldea = ["Tauros", "Wooper"];
 var mega = ["Mega-Venusaur","Mega-Charizard X","Mega-Charizard Y","Mega-Blastoise","Mega-Alakazam","Mega-Gengar","Mega-Kangaskhan","Mega-Pinsir","Mega-Gyarados","Mega-Aerodactyl","Mega-Mewtwo X","Mega-Mewtwo Y","Mega-Ampharos","Mega-Scizor","Mega-Heracross","Mega-Houndoom","Mega-Tyranitar","Mega-Blaziken","Mega-Gardevoir","Mega-Mawile","Mega-Aggron","Mega-Medicham","Mega-Manectric","Mega-Banette","Mega-Absol","Mega-Garchomp","Mega-Lucario","Mega-Abomasnow","Mega-Beedrill","Mega-Pidgeot","Mega-Slowbro","Mega-Steelix","Mega-Sceptile","Mega-Swampert","Mega-Sableye","Mega-Sharpedo","Mega-Camerupt","Mega-Altaria","Mega-Glalie","Mega-Salamence","Mega-Metagross","Mega-Latias","Mega-Latios","Mega-Rayquaza","Mega-Lopunny","Mega-Gallade","Mega-Audino","Mega-Diancie"];
 var cambios2 = ["Absorbe agua", "Absor. agua","Absorbe electricidad", "Absor. elec.","Electricidad estática", "Elec. estát.","Electricidad estática", "Elect. estát.","Espíritu vital", "Espír. vital","Efecto espora", "Efec. espora","Modo Daruma", "Modo daruma"];
 var cambios = ["Fulgor semilla", "Fogonazo", "Luminicola", "Ráfaga", "Patada salto alta", "Pat. salto alta", "Velocidad extrema", "Veloc. extrema", "Empapar", "Anegar", "Placaje eléctrico", "Placaje eléc", "Esquirla helada", "Canto helado","Ovocuración", "Amortiguador", "Llave vital", "Tiro vital", "Rayo señal", "Doble rayo", "Cascabel cura", "Campana cura", "Saña", "Golpe", "Tormenta de arena", "Tormenta arena", "Meteoros" ,"Rapidez", "Autosugestión", "Más psique", "Bombardeo", "Presa", "Constricción", "Repetición","Contraataque", "Contador","Espejo", "Movimiento espejo","Espejo", "Mov. Espejo","Retribución", "Retroceso","Rodar", "Desenrollar","Sellar", "Cerca","Semilladora", "Recurrente","Sísmico", "Movimiento sísmico","Colmillo ígneo", "Colmillo fuego","Colmillo hielo", "Colmillo Hielo","Golpe cabeza", "Golpe Cabeza","Hidrocañón", "Hidrocañon","Cambio de banda", "Cambio banda", "Treparrocas", "Treparocas","Divide dolor", "Divide Dolor", "Atadura", "atadura","Pantalla de luz", "Pantalla Luz","Pantalla de luz", "Pantalla luz","Pantalla de humo", "Pantallahumo","Cola férrea", "Cola ferrea","Onda voltio", "Onda Voltio","Otra vez", "Otra Vez","Garra metal", "Garra Metal","Onda ígnea", "Onda Ígnea","Foco energía", "Foco energia","Rayo confuso", "Rayo Confuso","Psicorrayo", "Psicorayo","Puño hielo", "Puño Hielo","Represión metal", "Repr. metal","Bomba germen", "Bomba Germen","Trampa rocas", "Trampa Rocas","Pisotón", "Pisoton","Tijera X", "Tijera x","Bola sombra", "Bola Sombra","Látigo cepa", "Latigo cepa","Hierba lazo", "Hierba Lazo","Látigo", "Latigo","Disparo demora", "Disparo Demora"];
@@ -598,63 +599,81 @@ function buscapoke(name){
 		}
 	}
 	return -1;
-	
-	
+
 }
 
 function cargaregionales(){
 	
 	for(var i = 0; i < alola.length; i++){
-		console.log(i);
-		cargapokes(buscapoke(alola[i]), "de Alola", 7);
+		var idpoke = buscapoke(alola[i]);
+		var poke = {
+			id: idpoke,
+			title: "de Alola",
+			name: alola[i],
+			img: {sprite: " ", otros:[]},
+			tipo: [],
+			habs: {normal: [], oculta: []},
+			stats: [0, 0, 0, 0, 0, 0],
+			movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+			front: " ",
+			gen: 7
+		};
+		pokelist2[idpoke].push(poke);
+		cargapoke(buscapoke(alola[i]), pokelist2[idpoke].length - 1, "de Alola");
 	}
 	
 	for(var i = 0; i < galar.length; i++){
-		console.log(i);
-		cargapokes(buscapoke(galar[i]), "de Galar", 8);
+		var idpoke = buscapoke(galar[i]);
+		var poke = {
+			id: idpoke,
+			title: "de Galar",
+			name: galar[i],
+			img: {sprite: " ", otros:[]},
+			tipo: [],
+			habs: {normal: [], oculta: []},
+			stats: [0, 0, 0, 0, 0, 0],
+			movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+			front: " ",
+			gen: 8
+		};
+		pokelist2[idpoke].push(poke);
+		cargapoke(buscapoke(galar[i]), pokelist2[idpoke].length - 1, "de Galar");
+	}
+	
+	for(var i = 0; i < hisui.length; i++){
+		var idpoke = buscapoke(hisui[i]);
+		var poke = {
+			id: idpoke,
+			title: "de Hisui",
+			name: hisui[i],
+			img: {sprite: " ", otros:[]},
+			tipo: [],
+			habs: {normal: [], oculta: []},
+			stats: [0, 0, 0, 0, 0, 0],
+			movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+			front: " ",
+			gen: 8
+		};
+		pokelist2[idpoke].push(poke);
+		cargapoke(buscapoke(hisui[i]), pokelist2[idpoke].length - 1, "de Hisui");
 	}
 	
 	for(var i = 0; i < paldea.length; i++){
-		console.log(i);
-		cargapokes(buscapoke(paldea[i]), "de Paldea", 9);
-	}
-}
-
-function validaname(nombre){
-
-	var val = cambios.indexOf(nombre);
-	if(val == -1 || val%2 == 0)
-		return nombre;
-	return cambios[val-1];
-}
-
-function validanamehab(nombre){
-
-	var val = cambios2.indexOf(nombre);
-	if(val == -1 || val%2 == 0)
-		return nombre;
-	return cambios2[val-1];
-}
-
-function numataq(){
-	for(var i = 1; i< pokelist.length; i++){
-		for(var j = 0; j< pokelist[i][0]["movs"]["niv"].length; j++)
-			pokelist[i][0]["movs"]["niv"][j] = intataq(pokelist[i][0]["movs"]["niv"][j]);
-		for(var j = 0; j< pokelist[i][0]["movs"]["mt"].length; j++)
-			pokelist[i][0]["movs"]["mt"][j] = intataq(pokelist[i][0]["movs"]["mt"][j]);
-		for(var j = 0; j< pokelist[i][0]["movs"]["tut"].length; j++)
-			pokelist[i][0]["movs"]["tut"][j] = intataq(pokelist[i][0]["movs"]["tut"][j]);
-		for(var j = 0; j< pokelist[i][0]["movs"]["egg"].length; j++)
-			pokelist[i][0]["movs"]["egg"][j] = intataq(pokelist[i][0]["movs"]["egg"][j]);
-		for(var j = 0; j< pokelist[i][0]["movs"]["z"].length; j++)
-			pokelist[i][0]["movs"]["z"][j] = intataq(pokelist[i][0]["movs"]["z"][j]);
-		for(var j = 0; j< pokelist[i][0]["movs"]["otro"].length; j++)
-			pokelist[i][0]["movs"]["otro"][j] = intataq(pokelist[i][0]["movs"]["otro"][j]);
-		for(var j = 0; j< pokelist[i][0]["habs"]["normal"].length; j++)
-			pokelist[i][0]["habs"]["normal"][j] = inthab(pokelist[i][0]["habs"]["normal"][j], i);
-		for(var j = 0; j< pokelist[i][0]["habs"]["oculta"].length; j++)
-			pokelist[i][0]["habs"]["oculta"][j] = inthab(pokelist[i][0]["habs"]["oculta"][j], i);
-		
+		var idpoke = buscapoke(paldea[i]);
+		var poke = {
+			id: idpoke,
+			title: "de Paldea",
+			name: paldea[i],
+			img: {sprite: " ", otros:[]},
+			tipo: [],
+			habs: {normal: [], oculta: []},
+			stats: [0, 0, 0, 0, 0, 0],
+			movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+			front: " ",
+			gen: 9
+		};
+		pokelist2[idpoke].push(poke);
+		cargapoke(buscapoke(paldea[i]), pokelist2[idpoke].length - 1, "de Paldea");
 	}
 }
 
@@ -722,8 +741,7 @@ function generapokelist(){
 	generamovs();
 	generapokes();
 	
-	//cargamovs();
-	//cargapokes();
+	cargaregionales();
 }
 
 function generaball(){
@@ -1050,7 +1068,7 @@ function generapokes(){
 				};
 				pokelist2[parseInt(idpoke)] = [poke];
 				
-				cargapoke(parseInt(idpoke), 0);
+				cargapoke(parseInt(idpoke), 0, "normal");
 				
 				posfin = poketabla.indexOf("</tr>", posini);
 				posini = poketabla.indexOf("<td>", posfin);
@@ -1079,10 +1097,17 @@ function savedata(){
 	alert(filename + " guardado.");
 }
 
-function cargapoke(id, variacion){
+function cargapoke(id, variacion ,titulo){
+	
+	var link;
 	
 	try{
-		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/" + pokelist2[id][0].name.replace(" ", "_"));
+		if(titulo == "normal"){
+			link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/" + pokelist2[id][variacion].name.replace(" ", "_"));
+		}
+		else{
+			link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/" + (pokelist2[id][variacion].name + "_" + titulo).replace(" ", "_"));
+		}
 		$.get(link, function(data) {
 			var pokeinfo = data.replace(/(\r\n|\n|\r)/gm,"").replace("> <", "><");
 			
@@ -1094,7 +1119,7 @@ function cargapoke(id, variacion){
 			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Tipos a los que pertenece\"")) + 4;
 			posfin = pokeinfo.indexOf("</td>", posini);
 			
-			var tipospoke = pokeinfo.substring(posini, posfin).split("<br>")[variacion].split("</a><a ");
+			var tipospoke = pokeinfo.substring(posini, posfin).split("<br>")[0].split("</a><a ");
 			
 			for(var i = 0; i < tipospoke.length; i++){
 			
@@ -1143,7 +1168,7 @@ function cargapoke(id, variacion){
 					var intmov = intataq(movarray[i].substring(posini, posfin));
 					
 					if(intmov == -1)
-						console.log(pokelist2[id][0].name + " " + movarray[i].substring(posini, posfin));
+						console.log(pokelist2[id][variacion].name + " " + movarray[i].substring(posini, posfin));
 					
 					if(!pokelist2[id][variacion].movs.niv.includes(intmov)){
 						pokelist2[id][variacion].movs.niv.push(intmov);
@@ -1172,7 +1197,7 @@ function cargapoke(id, variacion){
 					var intmov = intataq(movarray[i].substring(posini, posfin));
 					
 					if(intmov == -1)
-						console.log(pokelist2[id][0].name + " " + movarray[i].substring(posini, posfin));
+						console.log(pokelist2[id][variacion].name + " " + movarray[i].substring(posini, posfin));
 					
 					if(!pokelist2[id][variacion].movs.mt.includes(intmov)){
 						pokelist2[id][variacion].movs.mt.push(intmov);
@@ -1212,7 +1237,7 @@ function cargapoke(id, variacion){
 						}
 					
 						if(intmov == -1)
-							console.log(pokelist2[id][0].name + " " + movarray[i]);
+							console.log(pokelist2[id][variacion].name + " " + movarray[i]);
 						else if(!pokelist2[id][variacion].movs.tut.includes(intmov)){
 							pokelist2[id][variacion].movs.tut.push(intmov);
 						}
@@ -1245,7 +1270,7 @@ function cargapoke(id, variacion){
 						}
 						
 						if(intmov == -1)
-							console.log(pokelist2[id][0].name + " " + movarray[i]);
+							console.log(pokelist2[id][variacion].name + " " + movarray[i]);
 						else if(!pokelist2[id][variacion].movs.egg.includes(intmov)){
 							pokelist2[id][variacion].movs.egg.push(intmov);
 						}
@@ -1269,7 +1294,7 @@ function cargapoke(id, variacion){
 						var intmov = intataq(movarray[i].substring(posini, posfin));
 						
 						if(intmov == -1)
-							console.log(pokelist2[id][0].name + " " + movarray[i].substring(posini, posfin));
+							console.log(pokelist2[id][variacion].name + " " + movarray[i].substring(posini, posfin));
 						
 						if(!pokelist2[id][variacion].movs.z.includes(intmov)){
 							pokelist2[id][variacion].movs.z.push(intmov);
@@ -1289,7 +1314,7 @@ function cargapoke(id, variacion){
 						var intmov = intataq(movarray[i].substring(posini, posfin));
 						
 						if(intmov == -1)
-							console.log(pokelist2[id][0].name + " " + movarray[i].substring(posini, posfin));
+							console.log(pokelist2[id][variacion].name + " " + movarray[i].substring(posini, posfin));
 						
 						if(!pokelist2[id][variacion].movs.otro.includes(intmov)){
 							pokelist2[id][variacion].movs.otro.push();
@@ -1336,8 +1361,8 @@ function cargapoke(id, variacion){
 			
 			var spritearray = pokeinfo.substring(posinitable, posfintable).split("src=\"");
 			
-			
-			pokelist2[id][variacion].sprite = spritearray[variacion].substring(0, spritearray[variacion].indexOf("\""));
+			pokelist2[id][variacion].sprite = spritearray[0].substring(0, spritearray[0].indexOf("\""));
+
 			
 			//imgs
 			posinitable = pokeinfo.indexOf("<table class=\"galeria-sprites");
@@ -1415,4 +1440,20 @@ function intataq(ata){
 	}
 	return i;
 	
+}
+
+function validaname(nombre){
+
+	var val = cambios.indexOf(nombre);
+	if(val == -1 || val%2 == 0)
+		return nombre;
+	return cambios[val-1];
+}
+
+function validanamehab(nombre){
+
+	var val = cambios2.indexOf(nombre);
+	if(val == -1 || val%2 == 0)
+		return nombre;
+	return cambios2[val-1];
 }
