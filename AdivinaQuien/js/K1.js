@@ -1129,7 +1129,7 @@ function cargapoke(id, variacion){
 					posini = movarray[i].indexOf("title=\"",movarray[i].indexOf("<td>",movarray[i].indexOf("<td>") + 4) + 4) + 7;
 					posfin = movarray[i].indexOf("\"", posini);
 					
-					var intmov = intataq(movarray.substring(posini + 7, posfin));
+					var intmov = intataq(movarray[i].substring(posini + 7, posfin));
 					
 					if(!pokelist[id][variacion].movs.niv.includes(intmov)){
 						pokelist[id][variacion].movs.niv.push();
@@ -1155,7 +1155,7 @@ function cargapoke(id, variacion){
 					posini = movarray[i].indexOf("title=\"",movarray[i].indexOf("<td>",movarray[i].indexOf("<td>") + 4) + 4) + 7;
 					posfin = movarray[i].indexOf("\"", posini);
 					
-					var intmov = intataq(movarray.substring(posini + 7, posfin));
+					var intmov = intataq(movarray[i].substring(posini + 7, posfin));
 					
 					if(!pokelist[id][variacion].movs.mt.includes(intmov)){
 						pokelist[id][variacion].movs.mt.push();
@@ -1181,7 +1181,7 @@ function cargapoke(id, variacion){
 					posini = movarray[i].indexOf("title=\"",movarray[i].indexOf("<td>",movarray[i].indexOf("<td>") + 4) + 4) + 7;
 					posfin = movarray[i].indexOf("\"", posini);
 					
-					var intmov = intataq(movarray.substring(posini + 7, posfin));
+					var intmov = intataq(movarray[i].substring(posini + 7, posfin));
 					
 					if(!pokelist[id][variacion].movs.tut.includes(intmov)){
 						pokelist[id][variacion].movs.tut.push();
@@ -1201,7 +1201,7 @@ function cargapoke(id, variacion){
 					posini = movarray[i].indexOf("title=\"",movarray[i].indexOf("<td>",movarray[i].indexOf("<td>") + 4) + 4) + 7;
 					posfin = movarray[i].indexOf("\"", posini);
 					
-					var intmov = intataq(movarray.substring(posini + 7, posfin));
+					var intmov = intataq(movarray[i].substring(posini + 7, posfin));
 					
 					if(!pokelist[id][variacion].movs.egg.includes(intmov)){
 						pokelist[id][variacion].movs.egg.push();
@@ -1222,7 +1222,7 @@ function cargapoke(id, variacion){
 						posini = movarray[i].indexOf("title=\"",movarray[i].indexOf("<td>") + 4) + 7;
 						posfin = movarray[i].indexOf("\"", posini);
 						
-						var intmov = intataq(movarray.substring(posini + 7, posfin));
+						var intmov = intataq(movarray[i].substring(posini + 7, posfin));
 						
 						if(!pokelist[id][variacion].movs.z.includes(intmov)){
 							pokelist[id][variacion].movs.z.push();
@@ -1239,7 +1239,7 @@ function cargapoke(id, variacion){
 						posini = movarray[i].indexOf("title=\"",movarray[i].indexOf("<td>",movarray[i].indexOf("<td>") + 4) + 4) + 7;
 						posfin = movarray[i].indexOf("\"", posini);
 						
-						var intmov = intataq(movarray.substring(posini + 7, posfin));
+						var intmov = intataq(movarray[i].substring(posini + 7, posfin));
 						
 						if(!pokelist[id][variacion].movs.otro.includes(intmov)){
 							pokelist[id][variacion].movs.otro.push();
