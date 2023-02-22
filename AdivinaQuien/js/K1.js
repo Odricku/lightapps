@@ -1223,7 +1223,7 @@ function cargapoke(id, variacion){
 					}
 					
 					if(intmov == -1)
-						console.log(pokelist2[id][0].name + " " + namemov);
+						console.log(pokelist2[id][0].name + " " + movarray[i]);
 					else if(!pokelist2[id][variacion].movs.egg.includes(intmov)){
 						pokelist2[id][variacion].movs.egg.push(intmov);
 					}
