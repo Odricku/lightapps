@@ -1336,8 +1336,8 @@ function intataq(ata){
 	if(juegos.includes(ata))
 		return -1;
 	
-	if(ataque.includes("(")){
-		ataque = ataque.substring(0,ataque.indexOf("("));
+	if(ata.includes("(")){
+		ataque = ata.substring(0,ata.indexOf("("));
 	}
 	
 	try{
