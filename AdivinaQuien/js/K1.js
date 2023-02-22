@@ -1176,7 +1176,7 @@ function cargapoke(id, variacion){
 					posini = movarray[i].indexOf("<td>",movarray[i].indexOf("<td>") + 4) + 4;
 					posfin = movarray[i].indexOf("\"", movarray[i].indexOf("title=\"", posini) + 7);
 					
-					var intmov = intataq(movarray[i].substring(posini, posfin));
+					var intmov = intataq(movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin));
 					
 					while(posini != -1 && intmov == -1){
 						
@@ -1210,7 +1210,7 @@ function cargapoke(id, variacion){
 					posini = movarray[i].indexOf("<td>",movarray[i].indexOf("<td>") + 4) + 4;
 					posfin = movarray[i].indexOf("\"", movarray[i].indexOf("title=\"", posini) + 7);
 					
-					var intmov = intataq(movarray[i].substring(posini, posfin));
+					var intmov = intataq(movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin));
 					
 					while(posini != -1 && intmov == -1){
 						
