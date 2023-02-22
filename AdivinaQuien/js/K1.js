@@ -1304,27 +1304,27 @@ function cargapoke(id, variacion){
 			
 			//Stats
 			
-			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td>", pokeinfo.indexOf(">PS</a>")) + 4) + 1;
+			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf(">PS</a>")) + 4;
 			posfin = pokeinfo.indexOf("<", posini) + 1;
 			pokelist2[id][variacion].stats[0] = parseInt(pokeinfo.substring(posini, posfin));
 			
-			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td>", pokeinfo.indexOf(">Ataque</a>")) + 4) + 1;
+			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf(">Ataque</a>")) + 4;
 			posfin = pokeinfo.indexOf("<", posini) + 1;
 			pokelist2[id][variacion].stats[1] = parseInt(pokeinfo.substring(posini, posfin));
 			
-			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td>", pokeinfo.indexOf(">Defensa</a>")) + 4) + 1;
+			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf(">Defensa</a>")) + 4;
 			posfin = pokeinfo.indexOf("<", posini) + 1;
 			pokelist2[id][variacion].stats[2] = parseInt(pokeinfo.substring(posini, posfin));
 			
-			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td>", pokeinfo.indexOf(">At. esp.</a>")) + 4) + 1;
+			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf(">At. esp.</a>")) + 4;
 			posfin = pokeinfo.indexOf("<", posini) + 1;
 			pokelist2[id][variacion].stats[3] = parseInt(pokeinfo.substring(posini, posfin));
 			
-			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td>", pokeinfo.indexOf(">Def. esp.</a>")) + 4) + 1;
+			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf(">Def. esp.</a>")) + 4;
 			posfin = pokeinfo.indexOf("<", posini) + 1;
 			pokelist2[id][variacion].stats[4] = parseInt(pokeinfo.substring(posini, posfin));
 			
-			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td>", pokeinfo.indexOf(">Velocidad</a>")) + 4) + 1;
+			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf(">Velocidad</a>")) + 4;
 			posfin = pokeinfo.indexOf("<", posini) + 1;
 			pokelist2[id][variacion].stats[5] = parseInt(pokeinfo.substring(posini, posfin));
 			
