@@ -1342,7 +1342,7 @@ function cargapoke(id, variacion){
 				
 				while(posini != -1){
 					
-					pokelist2[id][variacion].img.push(tablesprite.substring(posini, posfin));
+					pokelist2[id][variacion].img.otros.push(tablesprite.substring(posini, posfin));
 					
 					posini = tablesprite.indexOf("src=\"", posfin);
 					posfin = tablesprite.indexOf("src=\"", posini + 5);
