@@ -1282,7 +1282,7 @@ function inthab(hab){
 
 	var i = 0;
 	try{
-		while(pokelist2[0]["habs"][i]["name"].replace(" ", "") != hab.replace(" ", "") && i < pokelist2[0]["habs"].length){
+		while(pokelist2[0]["habs"][i]["name"].replace(" ", "") != validanamehab(hab).replace(" ", "") && i < pokelist2[0]["habs"].length){
 			i++;
 		}
 			
