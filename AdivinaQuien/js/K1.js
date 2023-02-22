@@ -1120,7 +1120,7 @@ function cargapoke(id, variacion){
 					
 					var intmov = intataq(movarray[i].substring(posini, posfin));
 					
-					if(intmov == 0)
+					if(intmov == -1)
 						console.log(pokelist2[id][0].name + " " + movarray[i] + " " + movarray[i].substring(posini, posfin));
 					
 					if(!pokelist2[id][variacion].movs.niv.includes(intmov)){
@@ -1149,7 +1149,7 @@ function cargapoke(id, variacion){
 					
 					var intmov = intataq(movarray[i].substring(posini, posfin));
 					
-					if(intmov == 0)
+					if(intmov == -1)
 						console.log(pokelist2[id][0].name + " " + movarray[i] + " " + movarray[i].substring(posini, posfin));
 					
 					if(!pokelist2[id][variacion].movs.mt.includes(intmov)){
@@ -1178,7 +1178,7 @@ function cargapoke(id, variacion){
 					
 					var intmov = intataq(movarray[i].substring(posini, posfin));
 					
-					while(posini != -1 && intmov == 0){
+					while(posini != -1 && intmov == -1){
 						
 						console.log(pokelist2[id][0].name + " " + movarray[i] + " " + movarray[i].substring(posini, posfin));
 												
@@ -1189,7 +1189,7 @@ function cargapoke(id, variacion){
 					
 					}
 					
-					if(intmov == 0)
+					if(intmov == -1)
 						console.log(pokelist2[id][0].name + " " + movarray[i]);
 					else if(!pokelist2[id][variacion].movs.tut.includes(intmov)){
 						pokelist2[id][variacion].movs.tut.push(intmov);
@@ -1211,7 +1211,7 @@ function cargapoke(id, variacion){
 					
 					var intmov = intataq(movarray[i].substring(posini, posfin));
 					
-					while(posini != -1 && intmov == 0){
+					while(posini != -1 && intmov == -1){
 						
 						console.log(pokelist2[id][0].name + " " + movarray[i] + " " + movarray[i].substring(posini, posfin));
 												
@@ -1222,10 +1222,10 @@ function cargapoke(id, variacion){
 
 					}
 					
-					if(intmov == 0)
+					if(intmov == -1)
 						console.log(pokelist2[id][0].name + " " + namemov);
-					else if(!pokelist[id][variacion].movs.egg.includes(intmov)){
-						pokelist[id][variacion].movs.egg.push(intmov);
+					else if(!pokelist2[id][variacion].movs.egg.includes(intmov)){
+						pokelist2[id][variacion].movs.egg.push(intmov);
 					}
 				}
 			}
@@ -1245,11 +1245,11 @@ function cargapoke(id, variacion){
 						
 						var intmov = intataq(movarray[i].substring(posini, posfin));
 						
-						if(intmov == 0)
+						if(intmov == -1)
 							console.log(pokelist2[id][0].name + " " + movarray[i] + " " + movarray[i].substring(posini, posfin));
 						
-						if(!pokelist[id][variacion].movs.z.includes(intmov)){
-							pokelist[id][variacion].movs.z.push(intmov);
+						if(!pokelist2[id][variacion].movs.z.includes(intmov)){
+							pokelist2[id][variacion].movs.z.push(intmov);
 						}
 						
 					}
@@ -1265,11 +1265,11 @@ function cargapoke(id, variacion){
 						
 						var intmov = intataq(movarray[i].substring(posini, posfin));
 						
-						if(intmov == 0)
+						if(intmov == -1)
 							console.log(pokelist2[id][0].name + " " + movarray[i] + " " + movarray[i].substring(posini, posfin));
 						
-						if(!pokelist[id][variacion].movs.otro.includes(intmov)){
-							pokelist[id][variacion].movs.otro.push();
+						if(!pokelist2[id][variacion].movs.otro.includes(intmov)){
+							pokelist2[id][variacion].movs.otro.push();
 						}
 						
 					}
@@ -1288,17 +1288,20 @@ function cargapoke(id, variacion){
 
 function inthab(hab){
 
-	var i = 0;
+	var i = -1;
 	try{
 		while(pokelist2[0]["habs"][i]["name"].replace(" ", "") != validanamehab(hab).replace(" ", "") && i < pokelist2[0]["habs"].length){
 			i++;
 		}
 			
-		if (i == pokelist2[0]["habs"].length)
+		if (i == pokelist2[0]["habs"].length){
 			console.warn("Habilidad " + hab + " con problemas");
+			return -1;
+		}
 	}
 	catch(error){
 		console.warn("Habilidad " + hab + " fallo");
+		return -1;
 	}
 	return i;
 	
@@ -1306,17 +1309,20 @@ function inthab(hab){
 
 function intataq(ataque){
 
-	var i = 0;
+	var i = -1;
 	try{
 		while(pokelist2[0]["movs"][i]["name"].replace(" ", "") != validaname(ataque).replace(" ", "") && i < pokelist2[0]["movs"].length){
 			i++;
 		}
 			
-		if (i == pokelist2[0]["movs"].length)
+		if (i == pokelist2[0]["movs"].length){
 			console.warn(ataque + " con problemas");
+			return -1;
+		}
 	}
 	catch(error){
 		console.warn("Ataque " + ataque + " fallo");
+		return -1;
 	}
 	return i;
 	
