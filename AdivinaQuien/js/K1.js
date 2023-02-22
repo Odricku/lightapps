@@ -45,6 +45,7 @@ function cargajson(){
 		document.getElementById("Gen6").disabled = false;
 		document.getElementById("Gen7").disabled = false;
 		document.getElementById("Gen8").disabled = false;
+		document.getElementById("Gen9").disabled = false;
 		document.getElementById("Otrasformas").disabled = false;
 		
 		if(document.URL.indexOf("?") != -1){
@@ -75,6 +76,7 @@ function cargajson(){
 			document.getElementById("Gen6").disabled = false;
 			document.getElementById("Gen7").disabled = false;
 			document.getElementById("Gen8").disabled = false;
+			document.getElementById("Gen9").disabled = false;
 			document.getElementById("Otrasformas").disabled = false;
 			
 			if(document.URL.indexOf("?") != -1){
