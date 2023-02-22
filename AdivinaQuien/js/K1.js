@@ -1304,7 +1304,7 @@ function cargapoke(id, variacion){
 			
 			//Stats
 			
-			var posstats = pokeinfo.indexOf("title=\"Características\">características</a>");
+			var posstats = pokeinfo.indexOf("id=\"Características_de_combate\"");
 			
 			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td", pokeinfo.indexOf(">PS</a>", posstats)) + 3) + 1;
 			posfin = pokeinfo.indexOf("<", posini);
