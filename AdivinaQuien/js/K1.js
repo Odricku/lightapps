@@ -1181,6 +1181,8 @@ function cargapoke(id, variacion){
 					
 					while(posini != -1 && titlemov != namemov){
 						
+						console.log(titlemov + " <> " + namemov + " " + posini)
+						
 						posini = movarray[i].indexOf("title=\"",movarray[i].indexOf("<td>", posfin) + 4);
 						posfin = movarray[i].indexOf("\"", posini + 7);
 					
@@ -1213,6 +1215,8 @@ function cargapoke(id, variacion){
 					var namemov = movarray[i].substring(movarray[i].indexOf(">", posfin) + 1, movarray[i].indexOf("<", posfin));
 					
 					while(posini != -1 && titlemov != namemov){
+						
+						console.log(titlemov + " <> " + namemov + " " + posini)
 						
 						posini = movarray[i].indexOf("title=\"",movarray[i].indexOf("<td>", posfin) + 4);
 						posfin = movarray[i].indexOf("\"", posini + 7);
