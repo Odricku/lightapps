@@ -1340,7 +1340,7 @@ function intataq(ata){
 		return -1;
 	
 	if(ataque.includes("(")){
-		ataque = ataque.substring(0,ataque.indexOf("(")).replace;
+		ataque = ataque.substring(0,ataque.indexOf("("));
 	}
 	
 	try{
