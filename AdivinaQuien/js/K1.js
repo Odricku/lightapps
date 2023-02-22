@@ -1181,7 +1181,7 @@ function cargapoke(id, variacion){
 					while(posini != -1 && intmov == -1){
 						
 						if(intmov == -1)
-							console.log(pokelist2[id][0].name + " " + movarray[i].substring(movarray[i].indexOf("title=\"", posini)) + 7, posfin);
+							console.log(pokelist2[id][0].name + " " + movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin));
 												
 						posini = movarray[i].indexOf("<td>", posfin);
 						posfin = movarray[i].indexOf("\"", movarray[i].indexOf("title=\"", posini) + 7);
@@ -1215,7 +1215,7 @@ function cargapoke(id, variacion){
 					while(posini != -1 && intmov == -1){
 						
 						if(intmov == -1)
-							console.log(pokelist2[id][0].name + " " + movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7), posfin);
+							console.log(pokelist2[id][0].name + " " + movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin));
 												
 						posini = movarray[i].indexOf("<td>", posfin);
 						posfin = movarray[i].indexOf("\"", movarray[i].indexOf("title=\"", posini) + 7);
