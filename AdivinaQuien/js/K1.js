@@ -1288,7 +1288,7 @@ function cargapoke(id, variacion){
 
 function inthab(hab){
 
-	var i = -1;
+	var i = 0;
 	try{
 		while(pokelist2[0]["habs"][i]["name"].replace(" ", "") != validanamehab(hab).replace(" ", "") && i < pokelist2[0]["habs"].length){
 			i++;
@@ -1309,7 +1309,7 @@ function inthab(hab){
 
 function intataq(ataque){
 
-	var i = -1;
+	var i = 0;
 	try{
 		while(pokelist2[0]["movs"][i]["name"].replace(" ", "") != validaname(ataque).replace(" ", "") && i < pokelist2[0]["movs"].length){
 			i++;
