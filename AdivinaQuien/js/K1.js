@@ -1181,7 +1181,7 @@ function cargapoke(id, variacion){
 					
 					while(posini != -1 && titlemov.replace(" ", "") != namemov.replace(" ", "")){
 						
-						console.log(titlemov + " <> " + namemov + " " + posini)
+						console.log(pokelist2[id][0].name + " " + titlemov + " <> " + namemov + " " + posini)
 						
 						posini = movarray[i].indexOf("title=\"",movarray[i].indexOf("<td>", posfin) + 4);
 						posfin = movarray[i].indexOf("\"", posini + 7);
@@ -1216,7 +1216,7 @@ function cargapoke(id, variacion){
 					
 					while(posini != -1 && titlemov.replace(" ", "") != namemov.replace(" ", "")){
 						
-						console.log(titlemov + " <> " + namemov + " " + posini)
+						console.log(pokelist2[id][0].name + " " + titlemov + " <> " + namemov + " " + posini)
 						
 						posini = movarray[i].indexOf("title=\"",movarray[i].indexOf("<td>", posfin) + 4);
 						posfin = movarray[i].indexOf("\"", posini + 7);
