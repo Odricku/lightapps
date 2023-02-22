@@ -1310,37 +1310,37 @@ function cargapoke(id, variacion){
 			posfin = pokeinfo.indexOf("<", posini);
 			pokelist2[id][variacion].stats[0] = parseInt(pokeinfo.substring(posini, posfin));
 			
-			if(pokelist2[id][variacion].stats[0] == NaN)console.log(">" + pokeinfo.substring(posini, posfin) + "<");
+			if(id == 710 || id == 711)console.log(">" + pokeinfo.substring(posini, posfin) + "<");
 			
 			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td", pokeinfo.indexOf(">Ataque</a>", posstats)) + 3) + 1;
 			posfin = pokeinfo.indexOf("<", posini);
 			pokelist2[id][variacion].stats[1] = parseInt(pokeinfo.substring(posini, posfin));
 			
-			if(pokelist2[id][variacion].stats[1] == NaN)console.log(">" + pokeinfo.substring(posini, posfin) + "<");
+			if(id == 710 || id == 711)console.log(">" + pokeinfo.substring(posini, posfin) + "<");
 			
 			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td", pokeinfo.indexOf(">Defensa</a>", posstats)) + 3) + 1;
 			posfin = pokeinfo.indexOf("<", posini);
 			pokelist2[id][variacion].stats[2] = parseInt(pokeinfo.substring(posini, posfin));
 			
-			if(pokelist2[id][variacion].stats[2] == NaN)console.log(">" + pokeinfo.substring(posini, posfin) + "<");
+			if(id == 710 || id == 711)console.log(">" + pokeinfo.substring(posini, posfin) + "<");
 			
 			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td", pokeinfo.indexOf(">At. esp.</a>", posstats)) + 3) + 1;
 			posfin = pokeinfo.indexOf("<", posini);
 			pokelist2[id][variacion].stats[3] = parseInt(pokeinfo.substring(posini, posfin));
 			
-			if(pokelist2[id][variacion].stats[3] == NaN)console.log(">" + pokeinfo.substring(posini, posfin) + "<");
+			if(id == 710 || id == 711)console.log(">" + pokeinfo.substring(posini, posfin) + "<");
 			
 			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td", pokeinfo.indexOf(">Def. esp.</a>", posstats)) + 3) + 1;
 			posfin = pokeinfo.indexOf("<", posini);
 			pokelist2[id][variacion].stats[4] = parseInt(pokeinfo.substring(posini, posfin));
 
-			if(pokelist2[id][variacion].stats[4] == NaN)console.log(">" + pokeinfo.substring(posini, posfin) + "<");
+			if(id == 710 || id == 711)console.log(">" + pokeinfo.substring(posini, posfin) + "<");
 
 			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td", pokeinfo.indexOf(">Velocidad</a>", posstats)) + 3) + 1;
 			posfin = pokeinfo.indexOf("<", posini);
 			pokelist2[id][variacion].stats[5] = parseInt(pokeinfo.substring(posini, posfin));
 			
-			if(pokelist2[id][variacion].stats[5] == NaN)console.log(">" + pokeinfo.substring(posini, posfin) + "<");
+			if(id == 710 || id == 711)console.log(">" + pokeinfo.substring(posini, posfin) + "<");
 			
 		});
 	}catch(error){
