@@ -602,81 +602,6 @@ function buscapoke(name){
 
 }
 
-function cargaregionales(){
-	
-	for(var i = 0; i < alola.length; i++){
-		var idpoke = buscapoke(alola[i]);
-		var poke = {
-			id: idpoke,
-			title: "de Alola",
-			name: alola[i],
-			img: {sprite: " ", otros:[]},
-			tipo: [],
-			habs: {normal: [], oculta: []},
-			stats: [0, 0, 0, 0, 0, 0],
-			movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
-			front: " ",
-			gen: 7
-		};
-		pokelist2[idpoke].push(poke);
-		cargapoke(buscapoke(alola[i]), pokelist2[idpoke].length - 1, "de Alola");
-	}
-	
-	for(var i = 0; i < galar.length; i++){
-		var idpoke = buscapoke(galar[i]);
-		var poke = {
-			id: idpoke,
-			title: "de Galar",
-			name: galar[i],
-			img: {sprite: " ", otros:[]},
-			tipo: [],
-			habs: {normal: [], oculta: []},
-			stats: [0, 0, 0, 0, 0, 0],
-			movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
-			front: " ",
-			gen: 8
-		};
-		pokelist2[idpoke].push(poke);
-		cargapoke(buscapoke(galar[i]), pokelist2[idpoke].length - 1, "de Galar");
-	}
-	
-	for(var i = 0; i < hisui.length; i++){
-		var idpoke = buscapoke(hisui[i]);
-		var poke = {
-			id: idpoke,
-			title: "de Hisui",
-			name: hisui[i],
-			img: {sprite: " ", otros:[]},
-			tipo: [],
-			habs: {normal: [], oculta: []},
-			stats: [0, 0, 0, 0, 0, 0],
-			movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
-			front: " ",
-			gen: 8
-		};
-		pokelist2[idpoke].push(poke);
-		cargapoke(buscapoke(hisui[i]), pokelist2[idpoke].length - 1, "de Hisui");
-	}
-	
-	for(var i = 0; i < paldea.length; i++){
-		var idpoke = buscapoke(paldea[i]);
-		var poke = {
-			id: idpoke,
-			title: "de Paldea",
-			name: paldea[i],
-			img: {sprite: " ", otros:[]},
-			tipo: [],
-			habs: {normal: [], oculta: []},
-			stats: [0, 0, 0, 0, 0, 0],
-			movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
-			front: " ",
-			gen: 9
-		};
-		pokelist2[idpoke].push(poke);
-		cargapoke(buscapoke(paldea[i]), pokelist2[idpoke].length - 1, "de Paldea");
-	}
-}
-
 function formaseval(item){
 	
 	if(!document.getElementById("Otrasformas").checked)
@@ -741,7 +666,6 @@ function generapokelist(){
 	generamovs();
 	generapokes();
 	
-	cargaregionales();
 }
 
 function generaball(){
@@ -1069,6 +993,74 @@ function generapokes(){
 				pokelist2[parseInt(idpoke)] = [poke];
 				
 				cargapoke(parseInt(idpoke), 0, "normal");
+				
+				if(alola.includes(nombrepoke)){
+					poke = {
+						id: idpoke,
+						title: "de Alola",
+						name: nombrepoke,
+						img: {sprite: " ", otros:[]},
+						tipo: [],
+						habs: {normal: [], oculta: []},
+						stats: [0, 0, 0, 0, 0, 0],
+						movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+						front: " ",
+						gen: 7
+					};
+					pokelist2[idpoke].push(poke);
+					cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Alola");
+				}
+				
+				if(galar.includes(nombrepoke)){
+					var poke = {
+						id: idpoke,
+						title: "de Galar",
+						name: nombrepoke,
+						img: {sprite: " ", otros:[]},
+						tipo: [],
+						habs: {normal: [], oculta: []},
+						stats: [0, 0, 0, 0, 0, 0],
+						movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+						front: " ",
+						gen: 8
+					};
+					pokelist2[idpoke].push(poke);
+					cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Galar");
+				}
+				
+				if(hisui.includes(nombrepoke)){
+					var poke = {
+						id: idpoke,
+						title: "de Hisui",
+						name: nombrepoke,
+						img: {sprite: " ", otros:[]},
+						tipo: [],
+						habs: {normal: [], oculta: []},
+						stats: [0, 0, 0, 0, 0, 0],
+						movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+						front: " ",
+						gen: 8
+					};
+					pokelist2[idpoke].push(poke);
+					cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Hisui");
+				}
+				
+				if(paldea.includes(nombrepoke)){
+					var poke = {
+						id: idpoke,
+						title: "de Paldea",
+						name: nombrepoke,
+						img: {sprite: " ", otros:[]},
+						tipo: [],
+						habs: {normal: [], oculta: []},
+						stats: [0, 0, 0, 0, 0, 0],
+						movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+						front: " ",
+						gen: 9
+					};
+					pokelist2[idpoke].push(poke);
+					cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Paldea");
+				}
 				
 				posfin = poketabla.indexOf("</tr>", posini);
 				posini = poketabla.indexOf("<td>", posfin);
