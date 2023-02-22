@@ -1120,15 +1120,13 @@ function cargapoke(id, variacion){
 			var posinitable = pokeinfo.indexOf("<table class=\"movnivel");
 			var posfintable = pokeinfo.indexOf("</table>", posinitable);
 			
-			posfin = posinitable;
-			
 			while(posinitable != -1){
 				
 				var movarray = pokeinfo.substring(pokeinfo.indexOf("<tr>", posinitable), posfintable).split("</tr><tr>");
 				
 				for(var i = 0; i < movarray.length; i++){
 					
-					posini = movarray[i].indexOf("title=\"");
+					posini = movarray[i].indexOf("title=\"",movarray[i].indexOf("<td>",movarray[i].indexOf("<td>") + 4) + 4) + 7;
 					posfin = movarray[i].indexOf("\"", posini);
 					
 					var intmov = intataq(movarray.substring(posini + 7, posfin));
@@ -1144,7 +1142,115 @@ function cargapoke(id, variacion){
 
 			}
 			
-			pokeinfo.indexOf(">", pokeinfo.indexOf("title=\"", pokeinfo.indexOf("<table class=\"movnivel")));
+			posinitable = pokeinfo.indexOf("<table class=\"movmtmo");
+			posfintable = pokeinfo.indexOf("</table>", posinitable);
+
+			
+			while(posinitable != -1){
+				
+				var movarray = pokeinfo.substring(pokeinfo.indexOf("<tr>", posinitable), posfintable).split("</tr><tr>");
+				
+				for(var i = 0; i < movarray.length; i++){
+					
+					posini = movarray[i].indexOf("title=\"",movarray[i].indexOf("<td>",movarray[i].indexOf("<td>") + 4) + 4) + 7;
+					posfin = movarray[i].indexOf("\"", posini);
+					
+					var intmov = intataq(movarray.substring(posini + 7, posfin));
+					
+					if(!pokelist[id][variacion].movs.mt.includes(intmov)){
+						pokelist[id][variacion].movs.mt.push();
+					}
+					
+				}
+				
+				posinitable = pokeinfo.indexOf("<table class=\"movmtmo", posfintable);
+				posfintable = pokeinfo.indexOf("</table>", posinitable);
+
+			}
+			
+			posinitable = pokeinfo.indexOf("<table class=\"movtutor");
+			posfintable = pokeinfo.indexOf("</table>", posinitable);
+
+			
+			if(posinitable != -1){
+				
+				var movarray = pokeinfo.substring(pokeinfo.indexOf("<tr>", posinitable), posfintable).split("</tr><tr>");
+				
+				for(var i = 0; i < movarray.length; i++){
+					
+					posini = movarray[i].indexOf("title=\"",movarray[i].indexOf("<td>",movarray[i].indexOf("<td>") + 4) + 4) + 7;
+					posfin = movarray[i].indexOf("\"", posini);
+					
+					var intmov = intataq(movarray.substring(posini + 7, posfin));
+					
+					if(!pokelist[id][variacion].movs.tut.includes(intmov)){
+						pokelist[id][variacion].movs.tut.push();
+					}
+				}
+			}
+			
+			posinitable = pokeinfo.indexOf("<table class=\"movhuevo");
+			posfintable = pokeinfo.indexOf("</table>", posinitable);
+
+			if(posinitable != -1){
+				
+				var movarray = pokeinfo.substring(pokeinfo.indexOf("<tr>", posinitable), posfintable).split("</tr><tr>");
+				
+				for(var i = 0; i < movarray.length; i++){
+					
+					posini = movarray[i].indexOf("title=\"",movarray[i].indexOf("<td>",movarray[i].indexOf("<td>") + 4) + 4) + 7;
+					posfin = movarray[i].indexOf("\"", posini);
+					
+					var intmov = intataq(movarray.substring(posini + 7, posfin));
+					
+					if(!pokelist[id][variacion].movs.egg.includes(intmov)){
+						pokelist[id][variacion].movs.egg.push();
+					}
+				}
+			}
+			
+			posinitable = pokeinfo.indexOf("<table class=\"movespecial");
+			posfintable = pokeinfo.indexOf("</table>", posinitable);
+						
+			while(posinitable != -1){
+				if(pokeinfo.substring(posinitable, posfintable).includes("Movimiento Z")){
+
+					var movarray = pokeinfo.substring(pokeinfo.indexOf("<tr>", posinitable), posfintable).split("</tr><tr>");
+					
+					for(var i = 0; i < movarray.length; i++){
+						
+						posini = movarray[i].indexOf("title=\"",movarray[i].indexOf("<td>") + 4) + 7;
+						posfin = movarray[i].indexOf("\"", posini);
+						
+						var intmov = intataq(movarray.substring(posini + 7, posfin));
+						
+						if(!pokelist[id][variacion].movs.z.includes(intmov)){
+							pokelist[id][variacion].movs.z.push();
+						}
+						
+					}
+				}
+				else{
+
+					var movarray = pokeinfo.substring(pokeinfo.indexOf("<tr>", posinitable), posfintable).split("</tr><tr>");
+					
+					for(var i = 0; i < movarray.length; i++){
+						
+						posini = movarray[i].indexOf("title=\"",movarray[i].indexOf("<td>",movarray[i].indexOf("<td>") + 4) + 4) + 7;
+						posfin = movarray[i].indexOf("\"", posini);
+						
+						var intmov = intataq(movarray.substring(posini + 7, posfin));
+						
+						if(!pokelist[id][variacion].movs.otro.includes(intmov)){
+							pokelist[id][variacion].movs.otro.push();
+						}
+						
+					}
+				}
+				
+				posinitable = pokeinfo.indexOf("<table class=\"movmtmo", posfintable);
+				posfintable = pokeinfo.indexOf("</table>", posinitable);
+			}
 			
 			pokelist2[id][variacion]["code"] = pokeinfo;
 			console.log(pokelist2[id]);
