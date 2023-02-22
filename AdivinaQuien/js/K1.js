@@ -1008,7 +1008,7 @@ function generapokes(){
 						gen: 7
 					};
 					pokelist2[parseInt(idpoke)].push(poke);
-					cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Alola");
+					cargapoke(parseInt(idpoke), pokelist2[parseInt(idpoke)].length - 1, "de Alola");
 				}
 				
 				if(galar.includes(nombrepoke)){
@@ -1025,7 +1025,7 @@ function generapokes(){
 						gen: 8
 					};
 					pokelist2[parseInt(idpoke)].push(poke);
-					cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Galar");
+					cargapoke(parseInt(idpoke), pokelist2[parseInt(idpoke)].length - 1, "de Galar");
 				}
 				
 				if(hisui.includes(nombrepoke)){
@@ -1042,7 +1042,7 @@ function generapokes(){
 						gen: 8
 					};
 					pokelist2[parseInt(idpoke)].push(poke);
-					cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Hisui");
+					cargapoke(parseInt(idpoke), pokelist2[parseInt(idpoke)].length - 1, "de Hisui");
 				}
 				
 				if(paldea.includes(nombrepoke)){
@@ -1059,7 +1059,7 @@ function generapokes(){
 						gen: 9
 					};
 					pokelist2[parseInt(idpoke)].push(poke);
-					cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Paldea");
+					cargapoke(parseInt(idpoke), pokelist2[parseInt(idpoke)].length - 1, "de Paldea");
 				}
 				
 				posfin = poketabla.indexOf("</tr>", posini);
