@@ -1007,7 +1007,7 @@ function generapokes(){
 						front: " ",
 						gen: 7
 					};
-					pokelist2[idpoke].push(poke);
+					pokelist2[parseInt(idpoke)].push(poke);
 					cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Alola");
 				}
 				
@@ -1024,7 +1024,7 @@ function generapokes(){
 						front: " ",
 						gen: 8
 					};
-					pokelist2[idpoke].push(poke);
+					pokelist2[parseInt(idpoke)].push(poke);
 					cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Galar");
 				}
 				
@@ -1041,7 +1041,7 @@ function generapokes(){
 						front: " ",
 						gen: 8
 					};
-					pokelist2[idpoke].push(poke);
+					pokelist2[parseInt(idpoke)].push(poke);
 					cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Hisui");
 				}
 				
@@ -1058,7 +1058,7 @@ function generapokes(){
 						front: " ",
 						gen: 9
 					};
-					pokelist2[idpoke].push(poke);
+					pokelist2[parseInt(idpoke)].push(poke);
 					cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Paldea");
 				}
 				
