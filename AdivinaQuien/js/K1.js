@@ -1291,10 +1291,10 @@ function inthab(hab){
 		}
 			
 		if (i == pokelist2[0]["habs"].length)
-			alert("Habilidad " + hab + " con problemas");
+			console.warn("Habilidad " + hab + " con problemas");
 	}
 	catch(error){
-		alert("Habilidad " + hab + " fallo");
+		console.warn("Habilidad " + hab + " fallo");
 	}
 	return i;
 	
@@ -1309,10 +1309,10 @@ function intataq(ataque){
 		}
 			
 		if (i == pokelist2[0]["movs"].length)
-			console.log(ataque + " con problemas");
+			console.warn(ataque + " con problemas");
 	}
 	catch(error){
-		console.log("Ataque " + ataque + " fallo");
+		console.warn("Ataque " + ataque + " fallo");
 	}
 	return i;
 	
