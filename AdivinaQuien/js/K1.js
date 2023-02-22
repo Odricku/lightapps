@@ -48,7 +48,7 @@ function cargajson(){
 		document.getElementById("Otrasformas").disabled = false;
 		
 		if(document.URL.indexOf("?") != -1){
-			var key = document.URL.slice(document.URL.split("?")[0].length + 1).replace(/%20/g, " ");
+			var key = document.URL.slice(document.URL.split("?")[0].length + 1).replaceAll(/%20/g, " ");
 			if(key.length > 0){
 				showhid();
 				verseed();
@@ -78,7 +78,7 @@ function cargajson(){
 			document.getElementById("Otrasformas").disabled = false;
 			
 			if(document.URL.indexOf("?") != -1){
-				var key = document.URL.slice(document.URL.split("?")[0].length + 1).replace(/%20/g, " ");
+				var key = document.URL.slice(document.URL.split("?")[0].length + 1).replaceAll(/%20/g, " ");
 				if(key.length > 0){
 					showhid();
 					verseed();
@@ -312,10 +312,10 @@ function creaficha(poke, forma){
 	}
 	
 	if(poke.title == "normal" || !forma){
-		opcion.innerHTML = "<div><img width='100px' height='100px' src='" + poke["front"] + "'/><br>" + poke["name"].replace("_", "") + complem + "<a class='equis' style='visibility:hidden'></a></div>";
+		opcion.innerHTML = "<div><img width='100px' height='100px' src='" + poke["front"] + "'/><br>" + poke["name"].replaceAll("_", "") + complem + "<a class='equis' style='visibility:hidden'></a></div>";
 	}
 	else
-		opcion.innerHTML = "<img width='100px' height='100px' src='" + poke["front"] + "'/><br>" + poke["name"].replace("_", "") + " " + poke.title + complem + "<a class='equis' style='visibility:hidden'></a></div>";
+		opcion.innerHTML = "<img width='100px' height='100px' src='" + poke["front"] + "'/><br>" + poke["name"].replaceAll("_", "") + " " + poke.title + complem + "<a class='equis' style='visibility:hidden'></a></div>";
 	document.getElementById("pokelist").appendChild(opcion);
 	
 }
@@ -715,7 +715,7 @@ function generatipos(){
 	try{
 		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Tipo");
 		$.get(link, function(data) {
-			var tipotabla = data.replace(/(\r\n|\n|\r)/gm,"");
+			var tipotabla = data.replaceAll(/(\r\n|\n|\r)/gm,"");
 			var posini = tipotabla.indexOf("<td>", tipotabla.indexOf("class=\"lista"));
 			var posfin = tipotabla.indexOf("</table>", posini);
 			
@@ -784,7 +784,7 @@ function generahabs(){
 	try{
 		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_habilidades");
 		$.get(link, function(data) {
-			var habstabla = data.replace(/(\r\n|\n|\r)/gm,"");
+			var habstabla = data.replaceAll(/(\r\n|\n|\r)/gm,"");
 			var posini = habstabla.indexOf("<tr><td>", habstabla.indexOf("tabpokemon sortable mergetable")) + 4;
 			var posfin = habstabla.indexOf("</table>", posini);
 			
@@ -823,7 +823,7 @@ function generamovs(){
 	try{
 		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_movimientos");
 		$.get(link, function(data) {
-			var movstabla = data.replace(/(\r\n|\n|\r)/gm,"");
+			var movstabla = data.replaceAll(/(\r\n|\n|\r)/gm,"");
 			
 			var posini = movstabla.indexOf("lista sortable mergetable");
 			var posfin = posini;
@@ -917,7 +917,7 @@ function generaobj(){
 	try{
 		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_objetos");
 		$.get(link, function(data) {
-			var objtabla = data.replace(/(\r\n|\n|\r)/gm,"");
+			var objtabla = data.replaceAll(/(\r\n|\n|\r)/gm,"");
 			
 			var posini = 1;
 			var posfin = 0;
@@ -962,7 +962,7 @@ function generapokes(){
 	try{
 		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_Pok%C3%A9mon");
 		$.get(link, function(data) {
-			var poketabla = data.replace(/(\r\n|\n|\r)/gm,"");
+			var poketabla = data.replaceAll(/(\r\n|\n|\r)/gm,"");
 			
 			var posinitable = poketabla.indexOf("<table class=\"tabpokemon");
 			var posfintable = poketabla.indexOf("</table>", posinitable);
@@ -1096,13 +1096,13 @@ function cargapoke(id, variacion ,titulo, sprite){
 	
 	try{
 		if(titulo == "normal"){
-			link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/" + pokelist2[id][variacion].name.replace(" ", "_"));
+			link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/" + pokelist2[id][variacion].name.replaceAll(" ", "_"));
 		}
 		else{
-			link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/" + (pokelist2[id][variacion].name + "_" + titulo).replace(" ", "_"));
+			link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/" + (pokelist2[id][variacion].name + "_" + titulo).replaceAll(" ", "_"));
 		}
 		$.get(link, function(data) {
-			var pokeinfo = data.replace(/(\r\n|\n|\r)/gm,"").replace("> <", "><");
+			var pokeinfo = data.replaceAll(/(\r\n|\n|\r)/gm,"").replaceAll("> <", "><");
 			
 			var posini = pokeinfo.indexOf("src=\"", pokeinfo.indexOf("alt=\"Ilustración")) + 5;
 			var posfin = pokeinfo.indexOf("\"", posini);
@@ -1392,37 +1392,37 @@ function cargamov(movname){
 	
 	try{
 
-		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/" + movname.replace(" ", "_"));
+		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/" + movname.replaceAll(" ", "_"));
 		
 		$.get(link, function(data) {
 			
 			var idmov = intataq(movname);
-			var movinfo = data.replace(/(\r\n|\n|\r)/gm,"").replace("> <", "><");
+			var movinfo = data.replaceAll(/(\r\n|\n|\r)/gm,"").replaceAll("> <", "><");
 			
-			var posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Movimiento\">Potencia</a>")) + 4;
-			var posfin = pokeinfo.indexOf("<", posini);
+			var posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Movimiento\">Potencia</a>")) + 4;
+			var posfin = movinfo.indexOf("<", posini);
 			
-			pokelist2[0].movs[idmov].stats.potencia = movinfo.substring(posini, posfin).replace("\"", "").replace(" ", "");
+			pokelist2[0].movs[idmov].stats.potencia = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
 			
-			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Precisión\">Precisión</a>")) + 4;
-			posfin = pokeinfo.indexOf("<", posini);
+			posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Precisión\">Precisión</a>")) + 4;
+			posfin = movinfo.indexOf("<", posini);
 			
-			pokelist2[0].movs[idmov].stats.precision = movinfo.substring(posini, posfin).replace("\"", "").replace(" ", "");
+			pokelist2[0].movs[idmov].stats.precision = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
 			
-			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Movimiento\">Efecto secundario</a>")) + 4;
-			posfin = pokeinfo.indexOf("<", posini);
+			posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Movimiento\">Efecto secundario</a>")) + 4;
+			posfin = movinfo.indexOf("<", posini);
 			
-			pokelist2[0].movs[idmov].stats.efecto = movinfo.substring(posini, posfin).replace("\"", "");
+			pokelist2[0].movs[idmov].stats.efecto = movinfo.substring(posini, posfin).replaceAll("\"", "");
 			
-			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Prioridad\">Prioridad</a>")) + 4;
-			posfin = pokeinfo.indexOf("<", posini);
+			posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Prioridad\">Prioridad</a>")) + 4;
+			posfin = movinfo.indexOf("<", posini);
 			
-			pokelist2[0].movs[idmov].stats.prioridad = movinfo.substring(posini, posfin).replace("\"", "").replace(" ", "");
+			pokelist2[0].movs[idmov].stats.prioridad = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
 			
-			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Movimiento\">Contacto</a>")) + 4;
-			posfin = pokeinfo.indexOf("<", posini);
+			posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Movimiento\">Contacto</a>")) + 4;
+			posfin = movinfo.indexOf("<", posini);
 			
-			pokelist2[0].movs[idmov].stats.contacto = movinfo.substring(posini, posfin).replace("\"", "").replace(" ", "");
+			pokelist2[0].movs[idmov].stats.contacto = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
 			
 		});
 	}catch(error){
@@ -1435,7 +1435,7 @@ function inthab(hab){
 
 	var i = 0;
 	try{
-		while(pokelist2[0]["habs"][i]["name"].replace(" ", "") != validanamehab(hab).replace(" ", "") && i < pokelist2[0]["habs"].length){
+		while(pokelist2[0]["habs"][i]["name"].replaceAll(" ", "") != validanamehab(hab).replaceAll(" ", "") && i < pokelist2[0]["habs"].length){
 			i++;
 		}
 			
@@ -1463,7 +1463,7 @@ function intataq(ata){
 	}
 	
 	try{
-		while(pokelist2[0]["movs"][i]["name"].replace(" ", "") != validaname(ataque).replace(" ", "") && i < pokelist2[0]["movs"].length){
+		while(pokelist2[0]["movs"][i]["name"].replaceAll(" ", "") != validaname(ataque).replaceAll(" ", "") && i < pokelist2[0]["movs"].length){
 			i++;
 		}
 			
