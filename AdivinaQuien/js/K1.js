@@ -992,7 +992,7 @@ function generapokes(){
 				};
 				pokelist2[parseInt(idpoke)] = [poke];
 				
-				cargapoke(parseInt(idpoke), 0, "normal");
+				cargapoke(parseInt(idpoke), 0, "normal", 0);
 				
 				if(alola.includes(nombrepoke)){
 					poke = {
@@ -1008,7 +1008,7 @@ function generapokes(){
 						gen: 7
 					};
 					pokelist2[parseInt(idpoke)].push(poke);
-					cargapoke(parseInt(idpoke), pokelist2[parseInt(idpoke)].length - 1, "de Alola");
+					cargapoke(parseInt(idpoke), pokelist2[parseInt(idpoke)].length - 1, "de Alola", 0);
 				}
 				
 				if(galar.includes(nombrepoke)){
@@ -1025,7 +1025,7 @@ function generapokes(){
 						gen: 8
 					};
 					pokelist2[parseInt(idpoke)].push(poke);
-					cargapoke(parseInt(idpoke), pokelist2[parseInt(idpoke)].length - 1, "de Galar");
+					cargapoke(parseInt(idpoke), pokelist2[parseInt(idpoke)].length - 1, "de Galar", 0);
 				}
 				
 				if(hisui.includes(nombrepoke)){
@@ -1042,7 +1042,7 @@ function generapokes(){
 						gen: 8
 					};
 					pokelist2[parseInt(idpoke)].push(poke);
-					cargapoke(parseInt(idpoke), pokelist2[parseInt(idpoke)].length - 1, "de Hisui");
+					cargapoke(parseInt(idpoke), pokelist2[parseInt(idpoke)].length - 1, "de Hisui", 0);
 				}
 				
 				if(paldea.includes(nombrepoke)){
@@ -1059,7 +1059,7 @@ function generapokes(){
 						gen: 9
 					};
 					pokelist2[parseInt(idpoke)].push(poke);
-					cargapoke(parseInt(idpoke), pokelist2[parseInt(idpoke)].length - 1, "de Paldea");
+					cargapoke(parseInt(idpoke), pokelist2[parseInt(idpoke)].length - 1, "de Paldea", 0);
 				}
 				
 				posfin = poketabla.indexOf("</tr>", posini);
@@ -1089,7 +1089,7 @@ function savedata(){
 	alert(filename + " guardado.");
 }
 
-function cargapoke(id, variacion ,titulo){
+function cargapoke(id, variacion ,titulo, sprite){
 	
 	var link;
 	
@@ -1353,9 +1353,8 @@ function cargapoke(id, variacion ,titulo){
 			
 			var spritearray = pokeinfo.substring(posinitable, posfintable).split("src=\"");
 			
-			pokelist2[id][variacion].sprite = spritearray[0].substring(0, spritearray[0].indexOf("\""));
+			pokelist2[id][variacion].img.sprite = spritearray[sprite].substring(0, spritearray[0].indexOf("\""));
 
-			
 			//imgs
 			posinitable = pokeinfo.indexOf("<table class=\"galeria-sprites");
 			posfintable = pokeinfo.indexOf("</table>", posinitable);
@@ -1368,7 +1367,7 @@ function cargapoke(id, variacion ,titulo){
 				
 				while(posini != -1){
 					
-					if(tablesprite.substring(posini, posfin).startsWith("http"))
+					if(tablesprite.substring(posini + 5, posfin).startsWith("http"))
 						pokelist2[id][variacion].img.otros.push(tablesprite.substring(posini + 5, posfin));
 					
 					posini = tablesprite.indexOf("src=\"", posfin);
