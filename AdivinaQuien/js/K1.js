@@ -1180,12 +1180,13 @@ function cargapoke(id, variacion){
 					
 					while(posini != -1 && intmov == -1){
 						
-						console.log(pokelist2[id][0].name + " " + movarray[i] + " " + movarray[i].substring(posini, posfin));
+						if(intmov == -1)
+							console.log(pokelist2[id][0].name + " " + movarray[i] + " " + movarray[i].substring(posini, posfin));
 												
-						posini = movarray[i].indexOf("title=\"", posfin);
-						posfin = movarray[i].indexOf("\"", posini + 7);
+						posini = movarray[i].indexOf("<td>", posfin);
+						posfin = movarray[i].indexOf("\"", movarray[i].indexOf("title=\"", posfin) + 7);
 					
-						intmov = intataq(movarray[i].substring(posini + 7, posfin));
+						intmov = intataq(movarray[i].substring(movarray[i].indexOf("title=\"", posfin) + 7, posfin));
 					
 					}
 					
@@ -1213,12 +1214,13 @@ function cargapoke(id, variacion){
 					
 					while(posini != -1 && intmov == -1){
 						
-						console.log(pokelist2[id][0].name + " " + movarray[i] + " " + movarray[i].substring(posini, posfin));
+						if(intmov == -1)
+							console.log(pokelist2[id][0].name + " " + movarray[i] + " " + movarray[i].substring(posini, posfin));
 												
-						posini = movarray[i].indexOf("title=\"", posfin);
-						posfin = movarray[i].indexOf("\"", posini + 7);
+						posini = movarray[i].indexOf("<td>", posfin);
+						posfin = movarray[i].indexOf("\"", movarray[i].indexOf("title=\"", posfin) + 7);
 					
-						intmov = intataq(movarray[i].substring(posini + 7, posfin));
+						intmov = intataq(movarray[i].substring(movarray[i].indexOf("title=\"", posfin) + 7, posfin));
 
 					}
 					
@@ -1295,12 +1297,10 @@ function inthab(hab){
 		}
 			
 		if (i == pokelist2[0]["habs"].length){
-			console.warn("Habilidad " + hab + " con problemas");
 			return -1;
 		}
 	}
 	catch(error){
-		console.warn("Habilidad " + hab + " fallo");
 		return -1;
 	}
 	return i;
@@ -1316,12 +1316,10 @@ function intataq(ataque){
 		}
 			
 		if (i == pokelist2[0]["movs"].length){
-			console.warn(ataque + " con problemas");
 			return -1;
 		}
 	}
 	catch(error){
-		console.warn("Ataque " + ataque + " fallo");
 		return -1;
 	}
 	return i;
