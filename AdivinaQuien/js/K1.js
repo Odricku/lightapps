@@ -8,7 +8,7 @@ var llave = " 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+";
 
 var tipos = ["acero","agua","bicho","dragón","eléctrico","fantasma","fuego","hada","hielo","lucha","normal","planta","psíquico","roca","siniestro","tierra","veneno","volador"];
 var alola = ["Rattata","Raticate","Raichu","Sandshrew","Sandslash","Vulpix","Ninetales","Diglett","Dugtrio","Meowth","Persian","Geodude","Graveler","Golem","Grimer","Muk","Exeggutor","Marowak"];
-var galar = ["Meowth","Ponyta","Rapidash","Slowpoke","Farfetch'd","Weezing","Mr._Mime","Corsola","Zigzagoon","Linoone","Darumaka","Darmanitan","Yamask","Stunfisk"];
+var galar = ["Meowth","Ponyta","Rapidash","Slowpoke","Farfetch'd","Weezing","Mr. Mime","Corsola","Zigzagoon","Linoone","Darumaka","Darmanitan","Yamask","Stunfisk"];
 var hisui = ["Growlithe", "Arcanine", "Voltorb", "Electrode", "Typhlosion", "Qwilfish", "Sneasel", "Samurott", "Lilligant", "Zorua", "Zoroark", "Braviary", "Sliggoo", "Goodra", "Avalugg", "Decidueye"];
 var paldea = ["Tauros", "Wooper"];
 var mega = ["Mega-Venusaur","Mega-Charizard X","Mega-Charizard Y","Mega-Blastoise","Mega-Alakazam","Mega-Gengar","Mega-Kangaskhan","Mega-Pinsir","Mega-Gyarados","Mega-Aerodactyl","Mega-Mewtwo X","Mega-Mewtwo Y","Mega-Ampharos","Mega-Scizor","Mega-Heracross","Mega-Houndoom","Mega-Tyranitar","Mega-Blaziken","Mega-Gardevoir","Mega-Mawile","Mega-Aggron","Mega-Medicham","Mega-Manectric","Mega-Banette","Mega-Absol","Mega-Garchomp","Mega-Lucario","Mega-Abomasnow","Mega-Beedrill","Mega-Pidgeot","Mega-Slowbro","Mega-Steelix","Mega-Sceptile","Mega-Swampert","Mega-Sableye","Mega-Sharpedo","Mega-Camerupt","Mega-Altaria","Mega-Glalie","Mega-Salamence","Mega-Metagross","Mega-Latias","Mega-Latios","Mega-Rayquaza","Mega-Lopunny","Mega-Gallade","Mega-Audino","Mega-Diancie"];
@@ -59,7 +59,7 @@ function cargajson(){
 	}
 	
 	request.onerror = function() {
-		pokejsonurl = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("./base/pokelist.json");
+		pokejsonurl = encodeURI("./base/pokelist.json");
 		request = new XMLHttpRequest();	
 		request.open('GET', pokejsonurl);
 		request.responseType = 'json';
@@ -591,17 +591,6 @@ function atadelete(item){
 	
 }
 
-function buscapoke(name){
-	
-	for(var i = 1; i < pokelist.length; i++){
-		if(pokelist[i][0].name == name){
-			return i;
-		}
-	}
-	return -1;
-
-}
-
 function formaseval(item){
 	
 	if(!document.getElementById("Otrasformas").checked)
@@ -647,7 +636,6 @@ function showhid(){
 //////////////////////////////////////////////////////
 // Cargas
 //////////////////////////////////////////////////////
-function generacion(){}
 
 function generapokelist(){
 	
@@ -671,8 +659,8 @@ function generapokelist(){
 function generaball(){
 
 	try{
-		var url = "https://www.wikidex.net/wiki/Pok%C3%A9_Ball";
-		$.get("https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI(url), function(data) {
+		var url = "https://www.wikidex.net/wiki/Poké_Ball";
+		$.get(encodeURI(url), function(data) {
 			
 			var posini;
 			var posfin = data.indexOf("<table style=\"padding: 0.5em;");
@@ -711,7 +699,7 @@ function generaball(){
 
 function generatipos(){
 	try{
-		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Tipo");
+		var link = encodeURI("https://www.wikidex.net/wiki/Tipo");
 		$.get(link, function(data) {
 			var tipotabla = data.replaceAll(/(\r\n|\n|\r)/gm,"");
 			var posini = tipotabla.indexOf("<td>", tipotabla.indexOf("class=\"lista"));
@@ -776,10 +764,55 @@ function generatipos(){
 	}
 }
 
+function generaobj(){
+	
+	try{
+		var link = encodeURI("https://www.wikidex.net/wiki/Lista_de_objetos");
+		$.get(link, function(data) {
+			var objtabla = data.replaceAll(/(\r\n|\n|\r)/gm,"");
+			
+			var posini = 1;
+			var posfin = 0;
+			
+			while(posini != -1 && posfin != -1){
+				
+				posini = objtabla.indexOf("class=\"celdaobjeto\"><a", posfin);
+				if(posini != -1){
+					posfin = objtabla.indexOf("</a>", posini);
+					
+					var imgobj = objtabla.substring(posini, posfin).match(/(https:[^"]*[\.png|\.gif])/gi);
+					
+					if(imgobj == null){
+						imgobj = "";
+					}
+					
+					posini = objtabla.indexOf("\">", objtabla.indexOf("</a> <a ", posini)) + 2;
+					posfin = objtabla.indexOf("<", posini);
+			
+					while(objtabla.substring(posini, posfin).length == 0){
+						posini = objtabla.indexOf("\">", objtabla.indexOf("</a> <a ", posini)) + 2;
+						posfin = objtabla.indexOf("<", posini);
+					}
+			
+					var imgdet = {
+						name: objtabla.substring(posini, posfin),
+						img: imgobj[0]
+					};
+					
+					pokelist2[0]["obj"].push(imgdet);
+				}
+			}
+			
+		});
+	}catch(error){
+		console.log(error);
+	}
+}
+
 function generahabs(){
 
 	try{
-		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_habilidades");
+		var link = encodeURI("https://www.wikidex.net/wiki/Lista_de_habilidades");
 		$.get(link, function(data) {
 			var habstabla = data.replaceAll(/(\r\n|\n|\r)/gm,"");
 			var posini = habstabla.indexOf("<tr><td>", habstabla.indexOf("tabpokemon sortable mergetable")) + 4;
@@ -817,7 +850,7 @@ function generahabs(){
 function generamovs(){
 
 	try{
-		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_movimientos");
+		var link = encodeURI("https://www.wikidex.net/wiki/Lista_de_movimientos");
 		$.get(link, function(data) {
 			var movstabla = data.replaceAll(/(\r\n|\n|\r)/gm,"");
 			
@@ -862,7 +895,6 @@ function generamovs(){
 					}
 					
 					pokelist2[0]["movs"].push(movimiento);
-					cargamov(nombremov);
 					
 				}
 				posini = movstabla.indexOf("lista sortable mergetable", posfin);
@@ -886,77 +918,72 @@ function generamovs(){
 				pokelist2[0]["movs"].push(movimiento);
 			}
 			
+			completamov(10);
 		});
 	}catch(error){
 		console.log(error);
 	}
 }
 
-function sacaetiq(linea){
-
-	var salida = linea;
+function completamov(salto){
 	
-	while(salida.indexOf("<") != -1){
-		posini = salida.indexOf("<");
-		posfin = salida.indexOf(">", posini);
-		
-		salida = salida.substring(0, posini) + salida.substring(posfin + 1, salida.length);
-	
+	for(var i = 0; i < salto; i++){
+		if(i < pokelist2[0].movs.length){
+			cargamov(pokelist2[0].movs[i].name, salto);
+		}
 	}
-	
-	return salida;
-	
 }
 
-function generaobj(){
+function cargamov(movname, salto){
 	
 	try{
-		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_objetos");
+
+		var link = encodeURI("https://www.wikidex.net/wiki/" + movname.replaceAll(" ", "_"));
+		
 		$.get(link, function(data) {
-			var objtabla = data.replaceAll(/(\r\n|\n|\r)/gm,"");
 			
-			var posini = 1;
-			var posfin = 0;
+			var idmov = intataq(movname);
+			var movinfo = data.replaceAll(/(\r\n|\n|\r)/gm,"").replaceAll("> <", "><");
 			
-			while(posini != -1 && posfin != -1){
-				
-				posini = objtabla.indexOf("class=\"celdaobjeto\"><a", posfin);
-				if(posini != -1){
-					posfin = objtabla.indexOf("</a>", posini);
-					
-					var imgobj = objtabla.substring(posini, posfin).match(/(https:[^"]*[\.png|\.gif])/gi);
-					
-					if(imgobj == null){
-						imgobj = "";
-					}
-					
-					posini = objtabla.indexOf("\">", objtabla.indexOf("</a> <a ", posini)) + 2;
-					posfin = objtabla.indexOf("<", posini);
+			var posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Movimiento\">Potencia</a>")) + 4;
+			var posfin = movinfo.indexOf("<", posini);
 			
-					while(objtabla.substring(posini, posfin).length == 0){
-						posini = objtabla.indexOf("\">", objtabla.indexOf("</a> <a ", posini)) + 2;
-						posfin = objtabla.indexOf("<", posini);
-					}
+			pokelist2[0].movs[idmov].stats.potencia = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
 			
-					var imgdet = {
-						name: objtabla.substring(posini, posfin),
-						img: imgobj[0]
-					};
-					
-					pokelist2[0]["obj"].push(imgdet);
-				}
+			posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Precisión\">Precisión</a>")) + 4;
+			posfin = movinfo.indexOf("<", posini);
+			
+			pokelist2[0].movs[idmov].stats.precision = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
+			
+			posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Movimiento\">Efecto secundario</a>")) + 4;
+			posfin = movinfo.indexOf("<", posini);
+			
+			pokelist2[0].movs[idmov].stats.efecto = movinfo.substring(posini, posfin).replaceAll("\"", "");
+			
+			posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Prioridad\">Prioridad</a>")) + 4;
+			posfin = movinfo.indexOf("<", posini);
+			
+			pokelist2[0].movs[idmov].stats.prioridad = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
+			
+			posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Movimiento\">Contacto</a>")) + 4;
+			posfin = movinfo.indexOf("<", posini);
+			
+			pokelist2[0].movs[idmov].stats.contacto = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
+			
+			if(idmov + salto < pokelist2[0].movs.length){
+				cargamov(pokelist2[0].movs[idmov + salto].name, salto);
 			}
 			
 		});
 	}catch(error){
-		console.log(error);
+		cargamov(movname);
 	}
 }
 
 function generapokes(){
 
 	try{
-		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/Lista_de_Pok%C3%A9mon");
+		var link = encodeURI("https://www.wikidex.net/wiki/Lista_de_Pokémon");
 		$.get(link, function(data) {
 			var poketabla = data.replaceAll(/(\r\n|\n|\r)/gm,"");
 			
@@ -989,76 +1016,6 @@ function generapokes(){
 				};
 				pokelist2[parseInt(idpoke)] = [poke];
 				
-				cargapoke(parseInt(idpoke), 0, "normal", 0);
-				
-				if(alola.includes(nombrepoke)){
-					poke = {
-						id: idpoke,
-						title: "de Alola",
-						name: nombrepoke,
-						img: {sprite: " ", otros:[]},
-						tipo: [],
-						habs: {normal: [], oculta: []},
-						stats: [0, 0, 0, 0, 0, 0],
-						movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
-						front: " ",
-						gen: 7
-					};
-					pokelist2[parseInt(idpoke)].push(poke);
-					cargapoke(parseInt(idpoke), pokelist2[parseInt(idpoke)].length - 1, "de Alola", 0);
-				}
-				
-				if(galar.includes(nombrepoke)){
-					var poke = {
-						id: idpoke,
-						title: "de Galar",
-						name: nombrepoke,
-						img: {sprite: " ", otros:[]},
-						tipo: [],
-						habs: {normal: [], oculta: []},
-						stats: [0, 0, 0, 0, 0, 0],
-						movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
-						front: " ",
-						gen: 8
-					};
-					pokelist2[parseInt(idpoke)].push(poke);
-					cargapoke(parseInt(idpoke), pokelist2[parseInt(idpoke)].length - 1, "de Galar", 0);
-				}
-				
-				if(hisui.includes(nombrepoke)){
-					var poke = {
-						id: idpoke,
-						title: "de Hisui",
-						name: nombrepoke,
-						img: {sprite: " ", otros:[]},
-						tipo: [],
-						habs: {normal: [], oculta: []},
-						stats: [0, 0, 0, 0, 0, 0],
-						movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
-						front: " ",
-						gen: 8
-					};
-					pokelist2[parseInt(idpoke)].push(poke);
-					cargapoke(parseInt(idpoke), pokelist2[parseInt(idpoke)].length - 1, "de Hisui", 0);
-				}
-				
-				if(paldea.includes(nombrepoke)){
-					var poke = {
-						id: idpoke,
-						title: "de Paldea",
-						name: nombrepoke,
-						img: {sprite: " ", otros:[]},
-						tipo: [],
-						habs: {normal: [], oculta: []},
-						stats: [0, 0, 0, 0, 0, 0],
-						movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
-						front: " ",
-						gen: 9
-					};
-					pokelist2[parseInt(idpoke)].push(poke);
-					cargapoke(parseInt(idpoke), pokelist2[parseInt(idpoke)].length - 1, "de Paldea", 0);
-				}
-				
 				posfin = poketabla.indexOf("</tr>", posini);
 				posini = poketabla.indexOf("<td>", posfin);
 				posfin = poketabla.indexOf("<", posini + 4);
@@ -1069,33 +1026,108 @@ function generapokes(){
 					generacion = generacion + 1;
 				}
 			}
+			completapokes(10);
 		});
 	}catch(error){
 		console.log(error);
 	}
 }
 
-function savedata(){
-	var filename = "pokelist";
-	var a = document.createElement("a");
-	var file = new Blob([JSON.stringify(pokelist2)], {type: "text/plain"});
-	a.href = URL.createObjectURL(file);
-	a.download = filename;
-	a.click();
-	
-	alert(filename + " guardado.");
+function completapokes(salto){
+		
+	for(var i = 1; i < salto + 1; i++){
+		if(i < pokelist2.length){
+			cargapoke(i, 0, "normal", 0, salto);
+		}
+	}
+	for(var i = 0; i < salto; i++){
+		if(i < alola.length){
+			var idpoke = intpoke(alola[i]);
+			poke = {
+				id: idpoke,
+				title: "de Alola",
+				name: alola[i],
+				img: {sprite: " ", otros:[]},
+				tipo: [],
+				habs: {normal: [], oculta: []},
+				stats: [0, 0, 0, 0, 0, 0],
+				movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+				front: " ",
+				gen: 7
+			};
+			pokelist2[idpoke].push(poke);
+			cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Alola", 0, salto);
+		}
+	}
+	for(var i = 0; i < salto; i++){
+		if(i < galar.length){
+			var idpoke = intpoke(galar[i]);
+			var poke = {
+				id: idpoke,
+				title: "de Galar",
+				name: galar[i],
+				img: {sprite: " ", otros:[]},
+				tipo: [],
+				habs: {normal: [], oculta: []},
+				stats: [0, 0, 0, 0, 0, 0],
+				movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+				front: " ",
+				gen: 8
+			};
+			pokelist2[idpoke].push(poke);
+			cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Galar", 0, salto);
+		}
+	}
+	for(var i = 0; i < salto; i++){
+		if(i < hisui.length){
+			var idpoke = intpoke(hisui[i]);
+			var poke = {
+				id: idpoke,
+				title: "de Hisui",
+				name: hisui[i],
+				img: {sprite: " ", otros:[]},
+				tipo: [],
+				habs: {normal: [], oculta: []},
+				stats: [0, 0, 0, 0, 0, 0],
+				movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+				front: " ",
+				gen: 8
+			};
+			pokelist2[idpoke].push(poke);
+			cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Hisui", 0, salto);
+		}
+	}
+	for(var i = 1; i < salto; i++){
+		if(i < paldea.length){
+			var idpoke = intpoke(paldea[i]);
+			var poke = {
+				id: idpoke,
+				title: "de Paldea",
+				name: paldea[i],
+				img: {sprite: " ", otros:[]},
+				tipo: [],
+				habs: {normal: [], oculta: []},
+				stats: [0, 0, 0, 0, 0, 0],
+				movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+				front: " ",
+				gen: 9
+			};
+			pokelist2[idpoke].push(poke);
+			cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Paldea", 0, salto);
+		}
+	}
 }
 
-function cargapoke(id, variacion ,titulo, sprite){
+function cargapoke(id, variacion ,titulo, sprite, salto){
 	
 	var link;
 	
 	try{
 		if(titulo == "normal"){
-			link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/" + pokelist2[id][variacion].name.replaceAll(" ", "_"));
+			link = encodeURI("https://www.wikidex.net/wiki/" + pokelist2[id][variacion].name.replaceAll(" ", "_"));
 		}
 		else{
-			link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/" + (pokelist2[id][variacion].name + "_" + titulo).replaceAll(" ", "_"));
+			link = encodeURI("https://www.wikidex.net/wiki/" + (pokelist2[id][variacion].name + "_" + titulo).replaceAll(" ", "_"));
 		}
 		$.get(link, function(data) {
 			var pokeinfo = data.replaceAll(/(\r\n|\n|\r)/gm,"").replaceAll("> <", "><");
@@ -1377,54 +1409,100 @@ function cargapoke(id, variacion ,titulo, sprite){
 
 			}
 			
+			if (salto > 0){
+				if(titulo == "normal" && (id + salto) < pokelist2.length){
+					cargapoke(id + salto, variacion ,titulo, sprite, salto);
+				}
+				else if(titulo == "de Alola" && (alola.indexOf(pokelist2[id][0].name) + salto) < alola.length){
+					var idpoke = intpoke(alola[alola.indexOf(pokelist2[id][0].name) + salto]);
+					var poke = {
+						id: idpoke,
+						title: titulo,
+						name: pokelist2[idpoke][0].name,
+						img: {sprite: " ", otros:[]},
+						tipo: [],
+						habs: {normal: [], oculta: []},
+						stats: [0, 0, 0, 0, 0, 0],
+						movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+						front: " ",
+						gen: 7
+					};
+					pokelist2[idpoke].push(poke);
+					cargapoke(idpoke, variacion ,titulo, sprite, salto);
+				}
+				else if(titulo == "de Galar" && (galar.indexOf(pokelist2[id][0].name) + salto) < galar.length){
+					var idpoke = intpoke(galar[galar.indexOf(pokelist2[id][0].name) + salto]);
+					var poke = {
+						id: idpoke,
+						title: titulo,
+						name: pokelist2[idpoke][0].name,
+						img: {sprite: " ", otros:[]},
+						tipo: [],
+						habs: {normal: [], oculta: []},
+						stats: [0, 0, 0, 0, 0, 0],
+						movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+						front: " ",
+						gen: 8
+					};
+					pokelist2[idpoke].push(poke);
+					cargapoke(idpoke, variacion ,titulo, sprite, salto);
+				}
+				else if(titulo == "de Hisui" && (hisui.indexOf(pokelist2[id][0].name) + salto) < hisui.length){
+					var idpoke = intpoke(hisui[hisui.indexOf(pokelist2[id][0].name) + salto]);
+					var poke = {
+						id: idpoke,
+						title: titulo,
+						name: pokelist2[idpoke][0].name,
+						img: {sprite: " ", otros:[]},
+						tipo: [],
+						habs: {normal: [], oculta: []},
+						stats: [0, 0, 0, 0, 0, 0],
+						movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+						front: " ",
+						gen: 8
+					};
+					pokelist2[idpoke].push(poke);
+					cargapoke(idpoke, variacion ,titulo, sprite, salto);
+				}
+				else if(titulo == "de Paldea" && (paldea.indexOf(pokelist2[id][0].name) + salto) < paldea.length){
+					var idpoke = intpoke(paldea[paldea.indexOf(pokelist2[id][0].name) + salto]);
+					var poke = {
+						id: idpoke,
+						title: titulo,
+						name: pokelist2[idpoke][0].name,
+						img: {sprite: " ", otros:[]},
+						tipo: [],
+						habs: {normal: [], oculta: []},
+						stats: [0, 0, 0, 0, 0, 0],
+						movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+						front: " ",
+						gen: 9
+					};
+					pokelist2[idpoke].push(poke);
+					cargapoke(idpoke, variacion ,titulo, sprite, salto);
+				}
+			}
 		});
 	}catch(error){
-		console.log(error);
+		//cargapoke(id, variacion ,titulo, sprite);
 	}
 }
 
-function cargamov(movname){
+function sacaetiq(linea){
+
+	var salida = linea;
 	
-	try{
-
-		var link = "https://images"+(~~(Math.random()*32) + 1)+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=" + encodeURI("https://www.wikidex.net/wiki/" + movname.replaceAll(" ", "_"));
+	while(salida.indexOf("<") != -1){
+		posini = salida.indexOf("<");
+		posfin = salida.indexOf(">", posini);
 		
-		$.get(link, function(data) {
-			
-			var idmov = intataq(movname);
-			var movinfo = data.replaceAll(/(\r\n|\n|\r)/gm,"").replaceAll("> <", "><");
-			
-			var posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Movimiento\">Potencia</a>")) + 4;
-			var posfin = movinfo.indexOf("<", posini);
-			
-			pokelist2[0].movs[idmov].stats.potencia = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
-			
-			posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Precisión\">Precisión</a>")) + 4;
-			posfin = movinfo.indexOf("<", posini);
-			
-			pokelist2[0].movs[idmov].stats.precision = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
-			
-			posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Movimiento\">Efecto secundario</a>")) + 4;
-			posfin = movinfo.indexOf("<", posini);
-			
-			pokelist2[0].movs[idmov].stats.efecto = movinfo.substring(posini, posfin).replaceAll("\"", "");
-			
-			posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Prioridad\">Prioridad</a>")) + 4;
-			posfin = movinfo.indexOf("<", posini);
-			
-			pokelist2[0].movs[idmov].stats.prioridad = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
-			
-			posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Movimiento\">Contacto</a>")) + 4;
-			posfin = movinfo.indexOf("<", posini);
-			
-			pokelist2[0].movs[idmov].stats.contacto = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
-			
-		});
-	}catch(error){
-		console.log(error);
+		salida = salida.substring(0, posini) + salida.substring(posfin + 1, salida.length);
+	
 	}
+	
+	return salida;
+	
 }
-
 
 function inthab(hab){
 
@@ -1473,6 +1551,18 @@ function intataq(ata){
 	
 }
 
+function intpoke(name){
+	
+	for(var i = 1; i < pokelist2.length; i++){
+		if(pokelist2[i][0].name.replaceAll(" ", "") == name.replaceAll(" ", "")){
+			return i;
+		}
+	}
+	return -1;
+
+}
+
+
 function validaname(nombre){
 
 	var val = cambios.indexOf(nombre);
@@ -1487,4 +1577,15 @@ function validanamehab(nombre){
 	if(val == -1 || val%2 == 0)
 		return nombre;
 	return cambios2[val-1];
+}
+
+function savedata(){
+	var filename = "pokelist.json";
+	var a = document.createElement("a");
+	var file = new Blob([JSON.stringify(pokelist2)], {type: "text/plain"});
+	a.href = URL.createObjectURL(file);
+	a.download = filename;
+	a.click();
+	
+	alert(filename + " guardado.");
 }
