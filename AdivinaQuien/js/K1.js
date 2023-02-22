@@ -12,7 +12,7 @@ var galar = ["Meowth","Ponyta","Rapidash","Slowpoke","Farfetch'd","Weezing","Mr.
 var paldea = [];
 var mega = ["Mega-Venusaur","Mega-Charizard X","Mega-Charizard Y","Mega-Blastoise","Mega-Alakazam","Mega-Gengar","Mega-Kangaskhan","Mega-Pinsir","Mega-Gyarados","Mega-Aerodactyl","Mega-Mewtwo X","Mega-Mewtwo Y","Mega-Ampharos","Mega-Scizor","Mega-Heracross","Mega-Houndoom","Mega-Tyranitar","Mega-Blaziken","Mega-Gardevoir","Mega-Mawile","Mega-Aggron","Mega-Medicham","Mega-Manectric","Mega-Banette","Mega-Absol","Mega-Garchomp","Mega-Lucario","Mega-Abomasnow","Mega-Beedrill","Mega-Pidgeot","Mega-Slowbro","Mega-Steelix","Mega-Sceptile","Mega-Swampert","Mega-Sableye","Mega-Sharpedo","Mega-Camerupt","Mega-Altaria","Mega-Glalie","Mega-Salamence","Mega-Metagross","Mega-Latias","Mega-Latios","Mega-Rayquaza","Mega-Lopunny","Mega-Gallade","Mega-Audino","Mega-Diancie"];
 var cambios2 = ["Absorbe agua", "Absor. agua","Absorbe electricidad", "Absor. elec.","Electricidad estática", "Elec. estát.","Electricidad estática", "Elect. estát.","Espíritu vital", "Espír. vital","Efecto espora", "Efec. espora","Modo Daruma", "Modo daruma"];
-var cambios = ["Llave vital", "Tiro vital", "Rayo señal", "Doble rayo", "Cascabel cura", "Campana cura", "Saña", "Golpe", "Tormenta de arena", "Tormenta arena", "Meteoros" ,"Rapidez", "Autosugestión", "Más psique", "Bombardeo", "Presa", "Constricción", "Repetición","Contraataque", "Contador","Espejo", "Movimiento espejo","Espejo", "Mov. Espejo","Retribución", "Retroceso","Rodar", "Desenrollar","Sellar", "Cerca","Semilladora", "Recurrente","Sísmico", "Movimiento sísmico","Colmillo ígneo", "Colmillo fuego","Colmillo hielo", "Colmillo Hielo","Golpe cabeza", "Golpe Cabeza","Hidrocañón", "Hidrocañon","Cambio de banda", "Cambio banda", "Treparrocas", "Treparocas","Divide dolor", "Divide Dolor", "Atadura", "atadura","Pantalla de luz", "Pantalla Luz","Pantalla de luz", "Pantalla luz","Pantalla de humo", "Pantallahumo","Cola férrea", "Cola ferrea","Onda voltio", "Onda Voltio","Otra vez", "Otra Vez","Garra metal", "Garra Metal","Onda ígnea", "Onda Ígnea","Foco energía", "Foco energia","Rayo confuso", "Rayo Confuso","Psicorrayo", "Psicorayo","Puño hielo", "Puño Hielo","Represión metal", "Repr. metal","Bomba germen", "Bomba Germen","Trampa rocas", "Trampa Rocas","Pisotón", "Pisoton","Tijera X", "Tijera x","Bola sombra", "Bola Sombra","Látigo cepa", "Latigo cepa","Hierba lazo", "Hierba Lazo","Látigo", "Latigo","Disparo demora", "Disparo Demora"];
+var cambios = ["Ovocuración", "Amortiguador", "Llave vital", "Tiro vital", "Rayo señal", "Doble rayo", "Cascabel cura", "Campana cura", "Saña", "Golpe", "Tormenta de arena", "Tormenta arena", "Meteoros" ,"Rapidez", "Autosugestión", "Más psique", "Bombardeo", "Presa", "Constricción", "Repetición","Contraataque", "Contador","Espejo", "Movimiento espejo","Espejo", "Mov. Espejo","Retribución", "Retroceso","Rodar", "Desenrollar","Sellar", "Cerca","Semilladora", "Recurrente","Sísmico", "Movimiento sísmico","Colmillo ígneo", "Colmillo fuego","Colmillo hielo", "Colmillo Hielo","Golpe cabeza", "Golpe Cabeza","Hidrocañón", "Hidrocañon","Cambio de banda", "Cambio banda", "Treparrocas", "Treparocas","Divide dolor", "Divide Dolor", "Atadura", "atadura","Pantalla de luz", "Pantalla Luz","Pantalla de luz", "Pantalla luz","Pantalla de humo", "Pantallahumo","Cola férrea", "Cola ferrea","Onda voltio", "Onda Voltio","Otra vez", "Otra Vez","Garra metal", "Garra Metal","Onda ígnea", "Onda Ígnea","Foco energía", "Foco energia","Rayo confuso", "Rayo Confuso","Psicorrayo", "Psicorayo","Puño hielo", "Puño Hielo","Represión metal", "Repr. metal","Bomba germen", "Bomba Germen","Trampa rocas", "Trampa Rocas","Pisotón", "Pisoton","Tijera X", "Tijera x","Bola sombra", "Bola Sombra","Látigo cepa", "Latigo cepa","Hierba lazo", "Hierba Lazo","Látigo", "Latigo","Disparo demora", "Disparo Demora"];
 
 var accion = 1;
 	
@@ -1124,7 +1124,7 @@ function cargapoke(id, variacion){
 						console.log(pokelist2[id][0].name);
 					
 					if(!pokelist[id][variacion].movs.niv.includes(intmov)){
-						pokelist[id][variacion].movs.niv.push();
+						pokelist[id][variacion].movs.niv.push(intmov);
 					}
 					
 				}
@@ -1153,7 +1153,7 @@ function cargapoke(id, variacion){
 						console.log(pokelist2[id][0].name);
 					
 					if(!pokelist[id][variacion].movs.mt.includes(intmov)){
-						pokelist[id][variacion].movs.mt.push();
+						pokelist[id][variacion].movs.mt.push(intmov);
 					}
 					
 				}
@@ -1182,7 +1182,7 @@ function cargapoke(id, variacion){
 						console.log(pokelist2[id][0].name);
 					
 					if(!pokelist[id][variacion].movs.tut.includes(intmov)){
-						pokelist[id][variacion].movs.tut.push();
+						pokelist[id][variacion].movs.tut.push(intmov);
 					}
 				}
 			}
@@ -1199,13 +1199,13 @@ function cargapoke(id, variacion){
 					posini = movarray[i].indexOf("title=\"",movarray[i].indexOf("<td>",movarray[i].indexOf("<td>") + 4) + 4) + 7;
 					posfin = movarray[i].indexOf("\"", posini);
 					
-					var intmov = intataq(movarray[i].substring(posini, posfin));
+					var titlemov = movarray[i].substring(posini, posfin);
+					var namemov = movarray[i].substring(movarray[i].indexOf(">", posfin), movarray[i].indexOf("<", posfin));
 					
-					if(intmov == 0)
-						console.log(pokelist2[id][0].name);
-					
-					if(!pokelist[id][variacion].movs.egg.includes(intmov)){
-						pokelist[id][variacion].movs.egg.push();
+					if(titlemov != namemov)
+						console.log(pokelist2[id][0].name + " " + namemov);
+					else if(!pokelist[id][variacion].movs.egg.includes(intataq(namemov))){
+						pokelist[id][variacion].movs.egg.push(intataq(namemov));
 					}
 				}
 			}
@@ -1229,7 +1229,7 @@ function cargapoke(id, variacion){
 							console.log(pokelist2[id][0].name);
 						
 						if(!pokelist[id][variacion].movs.z.includes(intmov)){
-							pokelist[id][variacion].movs.z.push();
+							pokelist[id][variacion].movs.z.push(intmov);
 						}
 						
 					}
