@@ -1131,6 +1131,9 @@ function cargapoke(id, variacion){
 					
 					var intmov = intataq(movarray[i].substring(posini, posfin));
 					
+					if(intmov == 0)
+						console.log(pokelist2[id][0].name);
+					
 					if(!pokelist[id][variacion].movs.niv.includes(intmov)){
 						pokelist[id][variacion].movs.niv.push();
 					}
@@ -1156,6 +1159,9 @@ function cargapoke(id, variacion){
 					posfin = movarray[i].indexOf("\"", posini);
 					
 					var intmov = intataq(movarray[i].substring(posini, posfin));
+					
+					if(intmov == 0)
+						console.log(pokelist2[id][0].name);
 					
 					if(!pokelist[id][variacion].movs.mt.includes(intmov)){
 						pokelist[id][variacion].movs.mt.push();
@@ -1183,6 +1189,9 @@ function cargapoke(id, variacion){
 					
 					var intmov = intataq(movarray[i].substring(posini, posfin));
 					
+					if(intmov == 0)
+						console.log(pokelist2[id][0].name);
+					
 					if(!pokelist[id][variacion].movs.tut.includes(intmov)){
 						pokelist[id][variacion].movs.tut.push();
 					}
@@ -1202,6 +1211,9 @@ function cargapoke(id, variacion){
 					posfin = movarray[i].indexOf("\"", posini);
 					
 					var intmov = intataq(movarray[i].substring(posini, posfin));
+					
+					if(intmov == 0)
+						console.log(pokelist2[id][0].name);
 					
 					if(!pokelist[id][variacion].movs.egg.includes(intmov)){
 						pokelist[id][variacion].movs.egg.push();
@@ -1224,6 +1236,9 @@ function cargapoke(id, variacion){
 						
 						var intmov = intataq(movarray[i].substring(posini, posfin));
 						
+						if(intmov == 0)
+							console.log(pokelist2[id][0].name);
+						
 						if(!pokelist[id][variacion].movs.z.includes(intmov)){
 							pokelist[id][variacion].movs.z.push();
 						}
@@ -1240,6 +1255,9 @@ function cargapoke(id, variacion){
 						posfin = movarray[i].indexOf("\"", posini);
 						
 						var intmov = intataq(movarray[i].substring(posini, posfin));
+						
+						if(intmov == 0)
+							console.log(pokelist2[id][0].name);
 						
 						if(!pokelist[id][variacion].movs.otro.includes(intmov)){
 							pokelist[id][variacion].movs.otro.push();
@@ -1287,10 +1305,10 @@ function intataq(ataque){
 		}
 			
 		if (i == pokelist2[0]["movs"].length)
-			alert(ataque + " con problemas");
+			console.log(ataque + " con problemas");
 	}
 	catch(error){
-		alert("Ataque " + ataque + " fallo");
+		console.log("Ataque " + ataque + " fallo");
 	}
 	return i;
 	
