@@ -1282,7 +1282,7 @@ function intataq(ataque){
 
 	var i = 0;
 	try{
-		while(pokelist2[0]["movs"][i]["name"].replace(" ", "") != ataque.replace(" ", "") && i < pokelist2[0]["movs"].length){
+		while(pokelist2[0]["movs"][i]["name"].replace(" ", "") != validaname(ataque).replace(" ", "") && i < pokelist2[0]["movs"].length){
 			i++;
 		}
 			
