@@ -14,6 +14,8 @@ var mega = ["Mega-Venusaur","Mega-Charizard X","Mega-Charizard Y","Mega-Blastois
 var cambios2 = ["Absorbe agua", "Absor. agua","Absorbe electricidad", "Absor. elec.","Electricidad estática", "Elec. estát.","Electricidad estática", "Elect. estát.","Espíritu vital", "Espír. vital","Efecto espora", "Efec. espora","Modo Daruma", "Modo daruma"];
 var cambios = ["Empapar", "Anegar", "Placaje eléctrico", "Placaje eléc", "Esquirla helada", "Canto helado","Ovocuración", "Amortiguador", "Llave vital", "Tiro vital", "Rayo señal", "Doble rayo", "Cascabel cura", "Campana cura", "Saña", "Golpe", "Tormenta de arena", "Tormenta arena", "Meteoros" ,"Rapidez", "Autosugestión", "Más psique", "Bombardeo", "Presa", "Constricción", "Repetición","Contraataque", "Contador","Espejo", "Movimiento espejo","Espejo", "Mov. Espejo","Retribución", "Retroceso","Rodar", "Desenrollar","Sellar", "Cerca","Semilladora", "Recurrente","Sísmico", "Movimiento sísmico","Colmillo ígneo", "Colmillo fuego","Colmillo hielo", "Colmillo Hielo","Golpe cabeza", "Golpe Cabeza","Hidrocañón", "Hidrocañon","Cambio de banda", "Cambio banda", "Treparrocas", "Treparocas","Divide dolor", "Divide Dolor", "Atadura", "atadura","Pantalla de luz", "Pantalla Luz","Pantalla de luz", "Pantalla luz","Pantalla de humo", "Pantallahumo","Cola férrea", "Cola ferrea","Onda voltio", "Onda Voltio","Otra vez", "Otra Vez","Garra metal", "Garra Metal","Onda ígnea", "Onda Ígnea","Foco energía", "Foco energia","Rayo confuso", "Rayo Confuso","Psicorrayo", "Psicorayo","Puño hielo", "Puño Hielo","Represión metal", "Repr. metal","Bomba germen", "Bomba Germen","Trampa rocas", "Trampa Rocas","Pisotón", "Pisoton","Tijera X", "Tijera x","Bola sombra", "Bola Sombra","Látigo cepa", "Latigo cepa","Hierba lazo", "Hierba Lazo","Látigo", "Latigo","Disparo demora", "Disparo Demora"];
 
+var juegos = [""];
+
 var accion = 1;
 	
 window.onload = function(){
@@ -1178,22 +1180,25 @@ function cargapoke(id, variacion){
 					
 					var intmov = intataq(movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin));
 					
-					while(posini != -1 && intmov == -1){
+					if(!movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin).includes("Pokémon ")){
+					
+						while(posini != -1 && intmov == -1){
+							
+							if(intmov == -1)
+								console.log(pokelist2[id][0].name + " " + movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin));
+													
+							posini = movarray[i].indexOf("<td>", posfin);
+							posfin = movarray[i].indexOf("\"", movarray[i].indexOf("title=\"", posini) + 7);
 						
+							intmov = intataq(movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin));
+						
+						}
+					
 						if(intmov == -1)
-							console.log(pokelist2[id][0].name + " " + movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin));
-												
-						posini = movarray[i].indexOf("<td>", posfin);
-						posfin = movarray[i].indexOf("\"", movarray[i].indexOf("title=\"", posini) + 7);
-					
-						intmov = intataq(movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin));
-					
-					}
-					
-					if(intmov == -1)
-						console.log(pokelist2[id][0].name + " " + movarray[i]);
-					else if(!pokelist2[id][variacion].movs.tut.includes(intmov)){
-						pokelist2[id][variacion].movs.tut.push(intmov);
+							console.log(pokelist2[id][0].name + " " + movarray[i]);
+						else if(!pokelist2[id][variacion].movs.tut.includes(intmov)){
+							pokelist2[id][variacion].movs.tut.push(intmov);
+						}
 					}
 				}
 			}
@@ -1212,22 +1217,24 @@ function cargapoke(id, variacion){
 					
 					var intmov = intataq(movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin));
 					
-					while(posini != -1 && intmov == -1){
+					if(!movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin).includes("Pokémon ")){
+						while(posini != -1 && intmov == -1){
+							
+							if(intmov == -1)
+								console.log(pokelist2[id][0].name + " " + movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin));
+													
+							posini = movarray[i].indexOf("<td>", posfin);
+							posfin = movarray[i].indexOf("\"", movarray[i].indexOf("title=\"", posini) + 7);
+						
+							intmov = intataq(movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin));
+
+						}
 						
 						if(intmov == -1)
-							console.log(pokelist2[id][0].name + " " + movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin));
-												
-						posini = movarray[i].indexOf("<td>", posfin);
-						posfin = movarray[i].indexOf("\"", movarray[i].indexOf("title=\"", posini) + 7);
-					
-						intmov = intataq(movarray[i].substring(movarray[i].indexOf("title=\"", posini) + 7, posfin));
-
-					}
-					
-					if(intmov == -1)
-						console.log(pokelist2[id][0].name + " " + movarray[i]);
-					else if(!pokelist2[id][variacion].movs.egg.includes(intmov)){
-						pokelist2[id][variacion].movs.egg.push(intmov);
+							console.log(pokelist2[id][0].name + " " + movarray[i]);
+						else if(!pokelist2[id][variacion].movs.egg.includes(intmov)){
+							pokelist2[id][variacion].movs.egg.push(intmov);
+						}
 					}
 				}
 			}
