@@ -586,17 +586,6 @@ function atadelete(item){
 	
 }
 
-function savedata(){
-	var filename = "pokelist";
-	var a = document.createElement("a");
-	var file = new Blob([JSON.stringify(pokelist)], {type: "text/plain"});
-	a.href = URL.createObjectURL(file);
-	a.download = filename;
-	a.click();
-	
-	alert(filename + " guardado.");
-}
-
 function buscapoke(name){
 	
 	for(var i = 1; i < pokelist.length; i++){
