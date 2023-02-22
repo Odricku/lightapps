@@ -1337,7 +1337,7 @@ function intataq(ata){
 		return -1;
 	
 	if(ata.includes("(")){
-		ataque = ata.substring(0,ata.indexOf("("));
+		ataque = ata.substring(0, ata.indexOf("(") - 1);
 	}
 	
 	try{
