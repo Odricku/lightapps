@@ -1123,8 +1123,8 @@ function cargapoke(id, variacion){
 					if(intmov == 0)
 						console.log(pokelist2[id][0].name + " " + movarray[i]);
 					
-					if(!pokelist[id][variacion].movs.niv.includes(intmov)){
-						pokelist[id][variacion].movs.niv.push(intmov);
+					if(!pokelist2[id][variacion].movs.niv.includes(intmov)){
+						pokelist2[id][variacion].movs.niv.push(intmov);
 					}
 					
 				}
@@ -1152,8 +1152,8 @@ function cargapoke(id, variacion){
 					if(intmov == 0)
 						console.log(pokelist2[id][0].name + " " + movarray[i]);
 					
-					if(!pokelist[id][variacion].movs.mt.includes(intmov)){
-						pokelist[id][variacion].movs.mt.push(intmov);
+					if(!pokelist2[id][variacion].movs.mt.includes(intmov)){
+						pokelist2[id][variacion].movs.mt.push(intmov);
 					}
 					
 				}
@@ -1189,8 +1189,8 @@ function cargapoke(id, variacion){
 					
 					if(intmov == 0)
 						console.log(pokelist2[id][0].name + " " + movarray[i]);
-					else if(!pokelist[id][variacion].movs.tut.includes(intmov)){
-						pokelist[id][variacion].movs.tut.push(intmov);
+					else if(!pokelist2[id][variacion].movs.tut.includes(intmov)){
+						pokelist2[id][variacion].movs.tut.push(intmov);
 					}
 				}
 			}
