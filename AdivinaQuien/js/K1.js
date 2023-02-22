@@ -1156,13 +1156,12 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Habilidades que puede conocer\"")) + 4;
 			posfin = pokeinfo.indexOf("</td>", posini);
 			
-			var habspoke = pokeinfo.substring(posini, posfin).split("</a><br><a ");
+			var habspoke = pokeinfo.substring(posini, posfin).split("</a><br/><a ");
 			
 			for(var i = 0; i < habspoke.length; i++){
 			
 				posini = habspoke[i].indexOf("title=\"") + 7;
 				posfin = habspoke[i].indexOf("\"", posini);
-				console.log(id + " " + habspoke[i]);
 				
 				pokelist2[id][variacion].habs.normal.push(inthab(habspoke[i].substring(posini, posfin)));
 				
