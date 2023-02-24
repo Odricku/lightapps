@@ -649,6 +649,7 @@ function generapokelist(){
 		tipos: {}
 	}];
 	
+	otrospokes();
 	generaball();
 	generahabs();
 	generaobj();
@@ -1046,7 +1047,7 @@ function completapokes(salto){
 		if(i < alola.length){
 			var idpoke = intpoke(alola[i]);
 			poke = {
-				id: idpoke,
+				id: pokelist2[idpoke][0].id,
 				title: "de Alola",
 				name: alola[i],
 				img: {sprite: " ", otros:[]},
@@ -1065,7 +1066,7 @@ function completapokes(salto){
 		if(i < galar.length){
 			var idpoke = intpoke(galar[i]);
 			var poke = {
-				id: idpoke,
+				id: pokelist2[idpoke][0].id,
 				title: "de Galar",
 				name: galar[i],
 				img: {sprite: " ", otros:[]},
@@ -1084,7 +1085,7 @@ function completapokes(salto){
 		if(i < hisui.length){
 			var idpoke = intpoke(hisui[i]);
 			var poke = {
-				id: idpoke,
+				id: pokelist2[idpoke][0].id,
 				title: "de Hisui",
 				name: hisui[i],
 				img: {sprite: " ", otros:[]},
@@ -1099,11 +1100,11 @@ function completapokes(salto){
 			cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Hisui", 0, salto);
 		}
 	}
-	for(var i = 1; i < salto; i++){
+	for(var i = 0; i < salto; i++){
 		if(i < paldea.length){
 			var idpoke = intpoke(paldea[i]);
 			var poke = {
-				id: idpoke,
+				id: pokelist2[idpoke][0].id,
 				title: "de Paldea",
 				name: paldea[i],
 				img: {sprite: " ", otros:[]},
@@ -1384,7 +1385,54 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 			
 			var spritearray = pokeinfo.substring(posinitable, posfintable).split("src=\"");
 			
+			if(pokelist2[id][0].name == "Basculin"){
+				spritearray.push("https://www.wikidex.net/wiki/Archivo:Basculin_raya_blanca_icono_HD.png\"");
+			}
+			else if(pokelist2[id][0].name == "Dudunsparce"){
+				spritearray.push("https://images.wikidexcdn.net/mwuploads/wikidex/0/04/latest/20221218211059/Dudunsparce_trinodular_icono_HD.png\"");
+			}
+			else if(pokelist2[id][0].name == "Zygarde"){	
+				spritearray = [spritearray[1], spritearray[0], spritearray[2]];
+			}			
+			else if(pokelist2[id][0].name == "Xerneas"){	
+				spritearray = [spritearray[1], spritearray[0]];
+			}
+			else if(pokelist2[id][0].name == "Urshifu"){
+				spritearray.slice(0, 0, spritearray[0]);
+			}
+			else if(pokelist2[id][0].name == "Unown"){
+				spritearray = [spritearray[5], spritearray[0], spritearray[1], spritearray[2], spritearray[3], spritearray[4], spritearray[6], spritearray[7], spritearray[8], spritearray[9], spritearray[10], spritearray[11], spritearray[12], spritearray[13], spritearray[14], spritearray[15], spritearray[16], spritearray[17], spritearray[18], spritearray[19], spritearray[20], spritearray[21], spritearray[22], spritearray[23], spritearray[24], spritearray[25], spritearray[26], spritearray[27]];
+			}
+			
 			pokelist2[id][variacion].img.sprite = spritearray[sprite].substring(0, spritearray[0].indexOf("\""));
+			
+			if(spritearray.length > 1 && !solounaforma.includes(pokelist2[id][0].name)){
+
+				pokextra(pokelist2[id][variacion].name, pokelist2[id][variacion].img.sprite, id, variacion);
+
+				for(var i = 1; i < spritearray.length; i++){
+					if(!spritearray[i].substring(0, spritearray[i].indexOf("\"")).includes("coqueta") && !spritearray[i].substring(0, spritearray[i].indexOf("\"")).includes("inicial")){
+						var poke = {
+							id: pokelist2[id][variacion].id,
+							title: "",
+							name: pokelist2[id][variacion].name,
+							img: {sprite: spritearray[i].substring(0, spritearray[i].indexOf("\"")), otros:[]},
+							tipo: [],
+							habs: pokelist2[id][variacion].habs,
+							stats: [0, 0, 0, 0, 0, 0],
+							movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
+							front: " ",
+							gen: pokelist2[id][variacion].gen
+						};
+						
+						pokelist2[id].push(poke);
+						pokextra(pokelist2[id][0].name, spritearray[i].substring(0, spritearray[i].indexOf("\"")), id, pokelist2[id].length - 1);
+						
+					}
+				}
+				
+				otros[pokelist2[id][0].name]["page"] = pokeinfo;
+			}
 
 			//imgs
 			posinitable = pokeinfo.indexOf("<table class=\"galeria-sprites");
@@ -1418,7 +1466,7 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 				else if(titulo == "de Alola" && (alola.indexOf(pokelist2[id][0].name) + salto) < alola.length){
 					var idpoke = intpoke(alola[alola.indexOf(pokelist2[id][0].name) + salto]);
 					var poke = {
-						id: idpoke,
+						id: pokelist2[idpoke][0].id,
 						title: titulo,
 						name: pokelist2[idpoke][0].name,
 						img: {sprite: " ", otros:[]},
@@ -1435,7 +1483,7 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 				else if(titulo == "de Galar" && (galar.indexOf(pokelist2[id][0].name) + salto) < galar.length){
 					var idpoke = intpoke(galar[galar.indexOf(pokelist2[id][0].name) + salto]);
 					var poke = {
-						id: idpoke,
+						id: pokelist2[idpoke][0].id,
 						title: titulo,
 						name: pokelist2[idpoke][0].name,
 						img: {sprite: " ", otros:[]},
@@ -1452,7 +1500,7 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 				else if(titulo == "de Hisui" && (hisui.indexOf(pokelist2[id][0].name) + salto) < hisui.length){
 					var idpoke = intpoke(hisui[hisui.indexOf(pokelist2[id][0].name) + salto]);
 					var poke = {
-						id: idpoke,
+						id: pokelist2[idpoke][0].id,
 						title: titulo,
 						name: pokelist2[idpoke][0].name,
 						img: {sprite: " ", otros:[]},
@@ -1469,7 +1517,7 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 				else if(titulo == "de Paldea" && (paldea.indexOf(pokelist2[id][0].name) + salto) < paldea.length){
 					var idpoke = intpoke(paldea[paldea.indexOf(pokelist2[id][0].name) + salto]);
 					var poke = {
-						id: idpoke,
+						id: pokelist2[idpoke][0].id,
 						title: titulo,
 						name: pokelist2[idpoke][0].name,
 						img: {sprite: " ", otros:[]},
@@ -1487,6 +1535,222 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 		});
 	}catch(error){
 		//cargapoke(id, variacion ,titulo, sprite);
+	}
+}
+
+function pokextra(nombrepoke, sprite, id, pos){
+	
+	for(var i = 0; i < otros[nombrepoke].length; i++){
+		if(!otros[nombrepoke][i].flag){
+			if(otros[nombrepoke][i].nombre.startsWith("Mega-") && (sprite.toLowerCase()).includes(encodeURI((otros[nombrepoke][i].nombre + "_" + otros[nombrepoke][i].variacion).replace("_normal", "") + "_").toLowerCase())){
+
+				otros[nombrepoke][i].flag = true;
+				pokelist2[id][pos].name = otros[nombrepoke][i].nombre;
+				pokelist2[id][pos].title = otros[nombrepoke][i].variacion;
+				pokelist2[id][pos].tipo = otros[nombrepoke][i].tipos;
+				pokelist2[id][pos].gen = 6;
+				
+			}
+			else{
+				if(otros[nombrepoke][i].variacion != "normal" && otros[nombrepoke][i].variacion != "macho"){
+					
+					var value = ("_" + encodeURI(otros[nombrepoke][i].variacion.replace("vetusto", "vetusta").replace("Signo ", "").replace("Forma al ", "").replace("Forma ", "").replace("Raya ", "").replace("Letra ", "").replace(" de ", " ").replace("Modo ", "").replace("Corte ", "").replace("Con ", "").replace("Color ", "").replace("Núcleo ", "").replace("Estilo ", "").replace("Gorra ", "").replace("Plumaje ", "").replace("Variedad ", "").replace("Motivo ", "").replace("completa", "completo").replaceAll(" ", "_") + "_").toLowerCase()).replace("soleada", "soleado").replace("encapotada", "encapotado").replace("tronco_","").replace("_de_galar_daruma_", "daruma_de_galar_").replace("nocturna", "nocturno").replace("!", "%21").replace("?", "%3f").replace("hembra_", "hembra").replace("_ultra", "ultra").replace("familia_", "");
+
+					if((sprite.toLowerCase()).includes(value)){
+						otros[nombrepoke][i].flag = true;
+						pokelist2[id][pos].title = otros[nombrepoke][i].variacion;
+						pokelist2[id][pos].tipo = otros[nombrepoke][i].tipos;
+					}
+				}
+			}
+		}
+	}
+}
+
+function otrospokes(){
+
+	try{
+		var link = encodeURI("https://www.wikidex.net/wiki/Lista_de_Pokémon_con_diferentes_formas");
+		$.get(link, function(data) {
+			var poketabla = data.replaceAll(/(\r\n|\n|\r)/gm,"");
+			
+			insertaotros({"nombre": "Unfezant", "variacion": "macho", "tipos": ["normal", "volador"], "flag":false});
+			insertaotros({"nombre": "Unfezant", "variacion": "hembra", "tipos": ["normal", "volador"], "flag":false});
+
+			insertaotros({"nombre": "Frillish", "variacion": "macho", "tipos": ["agua", "fantasma"], "flag":false});
+			insertaotros({"nombre": "Frillish", "variacion": "hembra", "tipos": ["agua", "fantasma"], "flag":false});
+			
+			insertaotros({"nombre": "Jellicent", "variacion": "macho", "tipos": ["agua", "fantasma"], "flag":false});
+			insertaotros({"nombre": "Jellicent", "variacion": "hembra", "tipos": ["agua", "fantasma"], "flag":false});
+
+			insertaotros({"nombre": "Pyroar", "variacion": "macho", "tipos": ["fuego", "normal"], "flag":false});
+			insertaotros({"nombre": "Pyroar", "variacion": "hembra", "tipos": ["fuego", "normal"], "flag":false});
+			
+			var listabloques = poketabla.split("<div class=\"cajaflexible");
+			for(var i = 1; i < listabloques.length; i++){
+				var listacajas = listabloques[i].split("<div class=\"float-app cntpad theme-wiki border-theme center-text");
+				if(listacajas.length > 1){
+					for(var j = 1; j < listacajas.length; j++){
+						procesacaja(listacajas[j], j -1);
+					}
+				}
+			}
+		});
+	}catch(error){
+		console.log(error);
+	}
+}
+
+var excepciones = ["inicial", "Letra ", "Signo", "Sin corte", "Sin ROM", "Forma normal", "habitual", "Sin disco", "on tabla", "Autostar", "Con disco", "encubierta", "descubierta", " (inactivo)", "Cuando el tipo", "Patrón ", "Ejemplar ", "Flor ", "Tamaño ", "falsificada", "coqueta", "genuina", "descubierto", "ascendente", "llena", "descubierto", "Ritmo propio", "Vista lince", "Fuerte afecto", "Mutatipo", "Rompeaura", "Agrupamiento"];
+var solounaforma = ["Flabébé", "Floette", "Florges", "Unown"];
+
+var otros = [];
+
+function procesacaja(caja, variacion){
+	
+	var tipos = [];
+	var nombre = "";
+	var nombrevariacion = "";
+	
+	var posini = caja.indexOf("title=\"");
+	var posfin = caja.indexOf("\"", posini + 7);
+	
+	if(caja.length > 0){
+		nombre = caja.substring(posini + 7, posfin);
+		
+		if(nombre.indexOf(" ") != -1){
+			if(nombre.indexOf("Mr. Mime") != -1){
+				nombrevariacion = nombre.substring(nombre.indexOf(" ") + 1, 4).replaceAll(nombre + " ", "");
+				nombre = nombre.substring(0, nombre.indexOf(" ", 4));
+			}
+			else{
+				nombrevariacion = nombre.substring(nombre.indexOf(" ") + 1).replaceAll(nombre + " ", "");
+				nombre = nombre.substring(0, nombre.indexOf(" "));
+			}
+		}
+		
+		posini = caja.indexOf("title=\"Tipo ");
+		var posinivar = caja.indexOf("style=\"border-top:1px solid #88a\"");
+		
+		if(nombre == "Pikachu"){
+			tipos.push("eléctrico");
+		}
+		else{
+			while (posini != -1 && (posinivar == -1 || posinivar > posini)){
+				posfin = caja.indexOf("\"", posini + 12);
+				tipos.push(caja.substring(posini + 12, posfin));
+				
+				posini = caja.indexOf("title=\"Tipo ", posfin);
+			}
+		}
+				
+		posini = posinivar;
+		if(posini != -1){
+			posini = caja.indexOf(">", posini) + 1;
+			posfin = caja.indexOf("</div>", posini);
+			
+			var var2 = sacaetiq(caja.substring(posini, posfin).replaceAll(nombre + " ", "").replaceAll("<br />", " ").replaceAll("&#160;", " ").replace(" (activo)", ""));
+			
+			if(nombrevariacion == "" || var2.includes(nombrevariacion)){
+				nombrevariacion = var2;
+			}
+			else{
+				if(var2 != "normal" && var2 != nombrevariacion){
+					nombrevariacion = nombrevariacion + " " + var2;
+				}
+			}
+		}
+	}
+	
+	if(nombre == "Darmanitan" && tipos.includes("hielo") && variacion == 1){
+		nombrevariacion = "de Galar Modo daruma";
+	}
+	
+	if(nombre == "Meowstic" && variacion == 0){
+		nombrevariacion = "macho";
+	}
+	
+	if(nombre == "Meowstic" && variacion == 1){
+		nombrevariacion = "hembra";
+	}
+	
+	if(nombre == "Indeedee" && variacion == 2){
+		nombrevariacion = "macho";
+		variacion = 0;
+	}
+	
+	if(nombre == "Indeedee" && variacion == 3){
+		nombrevariacion = "hembra";
+	}
+	
+	if(nombre == "Basculegion" && variacion == 4){
+		nombrevariacion = "macho";
+		variacion = 0;
+	}
+	
+	if(nombre == "Basculegion" && variacion == 5){
+		nombrevariacion = "hembra";
+	}
+	
+	if(nombre == "Ultra-Necrozma"){
+		nombre = "Necrozma";
+		nombrevariacion = "Ultra-Necrozma";
+	}
+	
+	if(nombre == "Necrozma" && nombrevariacion != "normal" ){
+		variacion = variacion + 1;
+	}
+	
+	if(nombre == "Zygarde" && variacion == 1){
+		variacion = 0;
+	}
+	
+	if(nombre == "Zygarde" && variacion == 0){
+		variacion = 1;
+	}
+	
+	if(nombre == "Scatterbug") return;
+	if(nombre == "Spewpa") return;
+	
+	
+	var flag = 0;
+	for(var i = 0; i < excepciones.length; i++){
+		if(nombrevariacion.includes(excepciones[i])){
+			flag = 1;
+		}
+	}
+	
+	if(nombrevariacion == "") nombrevariacion = "normal";
+	
+	if (flag == 0){
+		if(nombrevariacion != "de Alola" && nombrevariacion != "de Galar" && nombrevariacion != "de Hisui" && nombrevariacion != "de Paldea"){
+			if(nombre.startsWith("Mega-") || nombrevariacion != "normal"){
+				insertaotros({"nombre": nombre, "variacion": nombrevariacion.replaceAll(nombre + " ", ""), "tipos": tipos, "flag":false});
+			}
+		}
+	}
+}
+
+function insertaotros(poke){
+	
+	var name = poke.nombre;
+	if(poke.nombre.startsWith("Mega-")){
+		name = poke.nombre.replaceAll("Mega-", "");
+	}
+	if(otros[name] == null){
+		otros[name] = [];
+		otros[name].push(poke);
+	}
+	else{
+		var flag = 0;
+		for(var i = 0; i < otros[name].length; i++){
+			if(otros[name][i].nombre == poke.nombre && otros[name][i].variacion == poke.variacion){
+				flag = 1;
+			}
+		}
+		if(flag == 0){
+			otros[name].push(poke);
+		}
 	}
 }
 
@@ -1590,4 +1854,19 @@ function savedata(){
 	a.click();
 	
 	alert(filename + " guardado.");
+}
+
+function completainfo(){
+	
+	for(var i = 1; i < pokelist2.length; i++){
+
+		if(otros[pokelist2[i][0].name] != null){
+			for(var j = 0; j < otros[pokelist2[i][0].name].length; j++){
+				if(!otros[pokelist2[i][0].name][j].flag){
+				   pokelist2[i][0].title = otros[pokelist2[i][0].name][j].variacion;
+				   otros[pokelist2[i][0].name][j].flag = true;
+				}
+			}
+		}
+	}	
 }
