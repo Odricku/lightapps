@@ -1,6 +1,6 @@
 var pokelist;
 
-var pokelist2 = [];
+var pokelist = [];
 	
 var disc = "Pokémon es una marca registrada de Nintendo desde el 1995 a la fecha. Esta pagina es sin animos de lucro y no esta de ninguna manera afiliada a Nintendo ni oficialmente respaldada. Esta pagina solo tiene el objetivo de pasar un buen rato y para el disfrute gratuito de aquellas almas perdidas que se pierdan por estos rincones de internet. La intencion no es competir con la marca registrada de Nintendo.";
 
@@ -14,7 +14,40 @@ var paldea = ["Tauros", "Wooper"];
 var mega = ["Mega-Venusaur","Mega-Charizard X","Mega-Charizard Y","Mega-Blastoise","Mega-Alakazam","Mega-Gengar","Mega-Kangaskhan","Mega-Pinsir","Mega-Gyarados","Mega-Aerodactyl","Mega-Mewtwo X","Mega-Mewtwo Y","Mega-Ampharos","Mega-Scizor","Mega-Heracross","Mega-Houndoom","Mega-Tyranitar","Mega-Blaziken","Mega-Gardevoir","Mega-Mawile","Mega-Aggron","Mega-Medicham","Mega-Manectric","Mega-Banette","Mega-Absol","Mega-Garchomp","Mega-Lucario","Mega-Abomasnow","Mega-Beedrill","Mega-Pidgeot","Mega-Slowbro","Mega-Steelix","Mega-Sceptile","Mega-Swampert","Mega-Sableye","Mega-Sharpedo","Mega-Camerupt","Mega-Altaria","Mega-Glalie","Mega-Salamence","Mega-Metagross","Mega-Latias","Mega-Latios","Mega-Rayquaza","Mega-Lopunny","Mega-Gallade","Mega-Audino","Mega-Diancie"];
 var cambios2 = ["Absorbe agua", "Absor. agua","Absorbe electricidad", "Absor. elec.","Electricidad estática", "Elec. estát.","Electricidad estática", "Elect. estát.","Espíritu vital", "Espír. vital","Efecto espora", "Efec. espora","Modo Daruma", "Modo daruma"];
 var cambios = ["Cabeza de hierro", "Cabeza hierro", "Fulgor semilla", "Fogonazo", "Luminicola", "Ráfaga", "Patada salto alta", "Pat. salto alta", "Velocidad extrema", "Veloc. extrema", "Empapar", "Anegar", "Placaje eléctrico", "Placaje eléc", "Esquirla helada", "Canto helado","Ovocuración", "Amortiguador", "Llave vital", "Tiro vital", "Rayo señal", "Doble rayo", "Cascabel cura", "Campana cura", "Saña", "Golpe", "Tormenta de arena", "Tormenta arena", "Meteoros" ,"Rapidez", "Autosugestión", "Más psique", "Bombardeo", "Presa", "Constricción", "Repetición","Contraataque", "Contador","Espejo", "Movimiento espejo","Espejo", "Mov. Espejo","Retribución", "Retroceso","Rodar", "Desenrollar","Sellar", "Cerca","Semilladora", "Recurrente","Sísmico", "Movimiento sísmico","Colmillo ígneo", "Colmillo fuego","Colmillo hielo", "Colmillo Hielo","Golpe cabeza", "Golpe Cabeza","Hidrocañón", "Hidrocañon","Cambio de banda", "Cambio banda", "Treparrocas", "Treparocas","Divide dolor", "Divide Dolor", "Atadura", "atadura","Pantalla de luz", "Pantalla Luz","Pantalla de luz", "Pantalla luz","Pantalla de humo", "Pantallahumo","Cola férrea", "Cola ferrea","Onda voltio", "Onda Voltio","Otra vez", "Otra Vez","Garra metal", "Garra Metal","Onda ígnea", "Onda Ígnea","Foco energía", "Foco energia","Rayo confuso", "Rayo Confuso","Psicorrayo", "Psicorayo","Puño hielo", "Puño Hielo","Represión metal", "Repr. metal","Bomba germen", "Bomba Germen","Trampa rocas", "Trampa Rocas","Pisotón", "Pisoton","Tijera X", "Tijera x","Bola sombra", "Bola Sombra","Látigo cepa", "Latigo cepa","Hierba lazo", "Hierba Lazo","Látigo", "Latigo","Disparo demora", "Disparo Demora"];
+var excepciones = ["inicial", "Letra ", "Signo", "Sin corte", "Sin ROM", "Forma normal", "habitual", "Sin disco", "on tabla", "Autostar", "Con disco", "encubierta", "descubierta", " (inactivo)", "Cuando el tipo", "Patrón ", "Ejemplar ", "Flor ", "Tamaño ", "falsificada", "coqueta", "genuina", "descubierto", "ascendente", "llena", "descubierto", "Ritmo propio", "Vista lince", "Fuerte afecto", "Mutatipo", "Rompeaura", "Agrupamiento"];
+var solounaforma = ["Flabébé", "Floette", "Florges", "Unown"];
+var parchesfront = {
+		"Lycanroc": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/3/3b/latest/20160920132330/Lycanroc_diurno.png/150px-Lycanroc_diurno.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/5/53/latest/20160920131938/Lycanroc_nocturno.png/150px-Lycanroc_nocturno.png","https://images.wikidexcdn.net/mwuploads/wikidex/thumb/a/a7/latest/20170811134424/Lycanroc_crepuscular.png/155px-Lycanroc_crepuscular.png"],
+		"Darmanitan": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/6/68/latest/20191128022527/Darmanitan.png/180px-Darmanitan.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/7/7e/latest/20171215214153/Darmanitan_daruma.png/180px-Darmanitan_daruma.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/8/8e/latest/20200307024234/Darmanitan_de_Galar.png/180px-Darmanitan_de_Galar.png", "https://images.wikidexcdn.net/mwuploads/wikidex/e/e3/latest/20191115171345/Darmanitan_de_Galar_daruma_EpEc.png"],
+		"Groudon": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/d/d5/latest/20150621183212/Groudon.png/180px-Groudon.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/7/7a/latest/20160922145218/Groudon_primigenio.png/180px-Groudon_primigenio.png"],
+		"Burmy": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/7/73/latest/20200720111309/Burmy_planta.png/180px-Burmy_planta.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/2/29/latest/20200720111604/Burmy_arena.png/180px-Burmy_arena.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/a/a5/latest/20200720111716/Burmy_basura.png/180px-Burmy_basura.png"], 
+		"Wormadam": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/4/42/latest/20150819141822/Wormadam_planta.png/180px-Wormadam_planta.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/3/33/latest/20150819141944/Wormadam_arena.png/180px-Wormadam_arena.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/b/bb/latest/20150819142037/Wormadam_basura.png/180px-Wormadam_basura.png"],
+		"Tauros": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/9/98/latest/20080909115022/Tauros.png/200px-Tauros.png", "https://images.wikidexcdn.net/mwuploads/wikidex/4/4c/latest/20230113084158/Tauros_de_Paldea_combatiente.png", "https://images.wikidexcdn.net/mwuploads/wikidex/9/90/latest/20230113084247/Tauros_de_Paldea_ardiente.png", "https://images.wikidexcdn.net/mwuploads/wikidex/3/3f/latest/20230113084403/Tauros_de_Paldea_acu%C3%A1tica.png"],
+		"Shellos": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/c/cb/latest/20200720161045/Shellos_oeste.png/180px-Shellos_oeste.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/3/35/latest/20200720161208/Shellos_este.png/180px-Shellos_este.png"],
+		"Gastrodon": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/3/31/latest/20200720161434/Gastrodon_oeste.png/180px-Gastrodon_oeste.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/b/b8/latest/20200720161557/Gastrodon_este.png/180px-Gastrodon_este.png"],
+		"Cherrim": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/b/b2/latest/20190819024532/Cherrim_encapotado.png/180px-Cherrim_encapotado.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/7/77/latest/20160604222136/Cherrim_soleado.png/180px-Cherrim_soleado.png"],
+		"Unfezant": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/c/c6/latest/20230202062853/Unfezant_%28macho%29.png/180px-Unfezant_%28macho%29.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/7/75/latest/20230202062952/Unfezant_%28hembra%29.png/180px-Unfezant_%28hembra%29.png"],
+		"Deerling": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/f/f8/latest/20200720123311/Deerling_primavera.png/180px-Deerling_primavera.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/9/9a/latest/20200720123533/Deerling_verano.png/180px-Deerling_verano.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/6/66/latest/20200720124108/Deerling_oto%C3%B1o.png/180px-Deerling_oto%C3%B1o.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/e/e3/latest/20200720124342/Deerling_invierno.png/180px-Deerling_invierno.png"],
+		"Sawsbuck": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/6/63/latest/20200720122314/Sawsbuck_primavera.png/180px-Sawsbuck_primavera.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/0/01/latest/20200720122521/Sawsbuck_verano.png/180px-Sawsbuck_verano.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/3/39/latest/20200720122713/Sawsbuck_oto%C3%B1o.png/180px-Sawsbuck_oto%C3%B1o.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/5/51/latest/20200720122914/Sawsbuck_invierno.png/180px-Sawsbuck_invierno.png"],
+		"Frillish": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/9/99/latest/20110403184010/Frillish_%28macho%29.png/180px-Frillish_%28macho%29.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/5/5a/latest/20110403184030/Frillish_%28hembra%29.png/180px-Frillish_%28hembra%29.png"],
+		"Jellicent": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/f/f9/latest/20151017020603/Jellicent_%28macho%29.png/180px-Jellicent_%28macho%29.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/2/24/latest/20151017021546/Jellicent_%28hembra%29.png/180px-Jellicent_%28hembra%29.png"],
+		"Meowstic": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/d/d3/latest/20150301201353/Meowstic_%28macho%29.png/180px-Meowstic_%28macho%29.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/1/15/latest/20150301215403/Meowstic_%28hembra%29.png/180px-Meowstic_%28hembra%29.png"],
+		"Aegislash":["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/5/5b/latest/20190423163114/Aegislash_escudo.png/180px-Aegislash_escudo.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/3/33/latest/20170615170150/Aegislash_filo.png/180px-Aegislash_filo.png"],
+		"Oricorio": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/3/33/latest/20160801140413/Oricorio_animado.png/180px-Oricorio_animado.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/d/d2/latest/20160801143146/Oricorio_pl%C3%A1cido.png/180px-Oricorio_pl%C3%A1cido.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/5/5d/latest/20160801135918/Oricorio_apasionado.png/180px-Oricorio_apasionado.png","https://images.wikidexcdn.net/mwuploads/wikidex/thumb/9/98/latest/20160801144731/Oricorio_refinado.png/180px-Oricorio_refinado.png"],
+		"Toxtricity":["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/3/31/latest/20200205205551/Toxtricity_aguda.png/180px-Toxtricity_aguda.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/b/b0/latest/20200205205457/Toxtricity_grave.png/180px-Toxtricity_grave.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/b/b5/latest/20200205155134/Toxtricity_Gigamax.png/180px-Toxtricity_Gigamax.png"],
+		"Indeedee": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/f/f8/latest/20220313074627/Indeedee_%28macho%29.png/180px-Indeedee_%28macho%29.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/8/8f/latest/20200207100725/Indeedee_%28hembra%29.png/180px-Indeedee_%28hembra%29.png"],
+		"Morpeko": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/0/05/latest/20190807163025/Morpeko_saciada.png/180px-Morpeko_saciada.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/f/f6/latest/20190807164038/Morpeko_voraz.png/180px-Morpeko_voraz.png"],
+		"Urshifu": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/3/3e/latest/20200604024122/Urshifu_brusco.png/180px-Urshifu_brusco.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/9/9a/latest/20200604210736/Urshifu_fluido.png/180px-Urshifu_fluido.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/6/6f/latest/20200602142230/Urshifu_brusco_Gigamax.png/180px-Urshifu_brusco_Gigamax.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/d/d6/latest/20200602142155/Urshifu_fluido_Gigamax.png/180px-Urshifu_fluido_Gigamax.png"],
+		"Maushold": ["https://images.wikidexcdn.net/mwuploads/wikidex/f/fa/latest/20230220190625/Maushold_familia_de_tres_%28dream_world%29.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/9/9a/latest/20230207191700/Maushold_%28dream_world%29.png/180px-Maushold_%28dream_world%29.png"],
+		"Tatsugiri": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/f/f0/latest/20230113081634/Tatsugiri_curvada.png/180px-Tatsugiri_curvada.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/2/22/latest/20230113081711/Tatsugiri_l%C3%A1nguida.png/180px-Tatsugiri_l%C3%A1nguida.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/8/87/latest/20230113081837/Tatsugiri_recta.png/180px-Tatsugiri_recta.png"],
+		"Pyroar": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/2/29/latest/20130912171144/Pyroar_%28macho%29.png/180px-Pyroar_%28macho%29.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/1/18/latest/20131001145813/Pyroar_%28hembra%29.png/180px-Pyroar_%28hembra%29.png"],
+		"Basculin": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/4/4b/latest/20151017160840/Basculin_raya_roja.png/150px-Basculin_raya_roja.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/b/bf/latest/20151017160613/Basculin_raya_azul.png/150px-Basculin_raya_azul.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/a/ae/latest/20220518205153/Basculin_raya_blanca_HOME.png/150px-Basculin_raya_blanca_HOME.png"],
+		"Basculegion": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/6/69/latest/20220216160854/Basculegion_%28macho%29.png/180px-Basculegion_%28macho%29.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/5/57/latest/20220216071507/Basculegion_%28hembra%29.png/180px-Basculegion_%28hembra%29.png"],
+		"Kyurem": ["https://images.wikidexcdn.net/mwuploads/wikidex/thumb/f/f0/latest/20160510085327/Kyurem.png/150px-Kyurem.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/a/a0/latest/20120613170850/Kyurem_blanco_2.png/200px-Kyurem_blanco_2.png", "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/f/fc/latest/20120613171031/Kyurem_negro_2.png/200px-Kyurem_negro_2.png"]
+	}		
 
+var otros = [];
+var cantotros = 0;
 var juegos = ["USUL", "N2B2", "ROZA", "Rubí Omega"];
 
 var ataquesnoregistrados = [{name: "Lanza glacial",	tipo: "hielo", categoria: "físico"}, {name: "Orbes espectro",	tipo: "fantasma", categoria: "especial"}];
@@ -357,37 +390,36 @@ function cargalista(){
 	var pos = 0;
 	accion = 1;
 	
-	while(i < pokelist.length){
-		
-		try{
-			if(document.getElementById("Otrasformas").checked || key != ""){
+		while(i < pokelist.length){
+			
+			
+				if(document.getElementById("Otrasformas").checked || key != ""){
 
-				for(var j = 0; j < pokelist[i].length; j++){
-					if (key != ""){	
-						if(llave.indexOf(key[Math.trunc(pos/6)]).toString(2).padStart(6,0)[pos%6] == "1"){
-							creaficha(pokelist[i][j], masformas(key, i, j , pos));
+					for(var j = 0; j < pokelist[i].length; j++){
+						if (key != ""){	
+							if(llave.indexOf(key[Math.trunc(pos/6)]).toString(2).padStart(6,0)[pos%6] == "1"){
+								creaficha(pokelist[i][j], masformas(key, i, j , pos));
+							}
 						}
+						else{
+							var poke = pokelist[i][j];
+							if (document.getElementById("Gen" + poke.gen).checked && evalforma(poke, j))
+								creaficha(poke, masformas(key, i, j,  pos));
+						}
+						pos++;
 					}
-					else{
-						var poke = pokelist[i][j];
-						if (document.getElementById("Gen" + poke.gen).checked && evalforma(poke, j))
-							creaficha(poke, masformas(key, i, j,  pos));
-					}
-					pos++;
 				}
-			}
-			else{
-				
-				var poke = pokelist[i][0];
-				if (document.getElementById("Gen" + poke.gen).checked) 
-					creaficha(poke, false);
-				
-			}
-			i++;
-		}catch(error){
-			alert(error);
+				else{
+					
+					var poke = pokelist[i][0];
+					if (document.getElementById("Gen" + poke.gen).checked) 
+						creaficha(poke, false);
+					
+				}
+				i++;
+
 		}
-	}
+
 	
 	if(rand != 0){
 		if(rand > document.getElementsByClassName('pokevista').length){
@@ -641,7 +673,10 @@ function showhid(){
 
 function generapokelist(){
 	
-	pokelist2 = [{
+	otros = [];
+	cantotros = 0;
+	
+	pokelist = [{
 		ball: [],
 		habs: [],
 		movs: [],
@@ -690,7 +725,7 @@ function generaball(){
 					img: imgball[0]
 				}
 				
-				pokelist2[0]["ball"].push(detaball);
+				pokelist[0]["ball"].push(detaball);
 				
 				posfin = data.indexOf("<table style=\"padding: 0.5em;", posfin);
 				
@@ -759,7 +794,7 @@ function generatipos(){
 				}
 			}
 			
-			pokelist2[0]["tipos"] = tabla;
+			pokelist[0]["tipos"] = tabla;
 			
 		});
 	}catch(error){
@@ -802,7 +837,7 @@ function generaobj(){
 						img: imgobj[0]
 					};
 					
-					pokelist2[0]["obj"].push(imgdet);
+					pokelist[0]["obj"].push(imgdet);
 				}
 			}
 			
@@ -840,7 +875,7 @@ function generahabs(){
 					label: labelhab.charAt(0).toUpperCase() + labelhab.slice(1)
 				}
 				
-				pokelist2[0]["habs"].push(habilidad);
+				pokelist[0]["habs"].push(habilidad);
 				
 			}
 			
@@ -897,7 +932,7 @@ function generamovs(){
 						}
 					}
 					
-					pokelist2[0]["movs"].push(movimiento);
+					pokelist[0]["movs"].push(movimiento);
 					
 				}
 				posini = movstabla.indexOf("lista sortable mergetable", posfin);
@@ -918,7 +953,7 @@ function generamovs(){
 					}
 				}
 					
-				pokelist2[0]["movs"].push(movimiento);
+				pokelist[0]["movs"].push(movimiento);
 			}
 			
 			completamov(10);
@@ -931,8 +966,8 @@ function generamovs(){
 function completamov(salto){
 	
 	for(var i = 0; i < salto; i++){
-		if(i < pokelist2[0].movs.length){
-			cargamov(pokelist2[0].movs[i].name, salto);
+		if(i < pokelist[0].movs.length){
+			cargamov(pokelist[0].movs[i].name, salto);
 		}
 	}
 }
@@ -951,30 +986,30 @@ function cargamov(movname, salto){
 			var posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Movimiento\">Potencia</a>")) + 4;
 			var posfin = movinfo.indexOf("<", posini);
 			
-			pokelist2[0].movs[idmov].stats.potencia = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
+			pokelist[0].movs[idmov].stats.potencia = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
 			
 			posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Precisión\">Precisión</a>")) + 4;
 			posfin = movinfo.indexOf("<", posini);
 			
-			pokelist2[0].movs[idmov].stats.precision = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
+			pokelist[0].movs[idmov].stats.precision = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
 			
 			posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Movimiento\">Efecto secundario</a>")) + 4;
 			posfin = movinfo.indexOf("<", posini);
 			
-			pokelist2[0].movs[idmov].stats.efecto = movinfo.substring(posini, posfin).replaceAll("\"", "");
+			pokelist[0].movs[idmov].stats.efecto = movinfo.substring(posini, posfin).replaceAll("\"", "");
 			
 			posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Prioridad\">Prioridad</a>")) + 4;
 			posfin = movinfo.indexOf("<", posini);
 			
-			pokelist2[0].movs[idmov].stats.prioridad = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
+			pokelist[0].movs[idmov].stats.prioridad = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
 			
 			posini = movinfo.indexOf("<td>", movinfo.indexOf("title=\"Movimiento\">Contacto</a>")) + 4;
 			posfin = movinfo.indexOf("<", posini);
 			
-			pokelist2[0].movs[idmov].stats.contacto = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
+			pokelist[0].movs[idmov].stats.contacto = movinfo.substring(posini, posfin).replaceAll("\"", "").replaceAll(" ", "");
 			
-			if(idmov + salto < pokelist2[0].movs.length){
-				cargamov(pokelist2[0].movs[idmov + salto].name, salto);
+			if(idmov + salto < pokelist[0].movs.length){
+				cargamov(pokelist[0].movs[idmov + salto].name, salto);
 			}
 			
 		});
@@ -1015,9 +1050,10 @@ function generapokes(){
 					stats: [0, 0, 0, 0, 0, 0],
 					movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
 					front: " ",
-					gen: generacion
+					gen: generacion,
+					value: "" 
 				};
-				pokelist2[parseInt(idpoke)] = [poke];
+				pokelist[parseInt(idpoke)] = [poke];
 				
 				posfin = poketabla.indexOf("</tr>", posini);
 				posini = poketabla.indexOf("<td>", posfin);
@@ -1039,84 +1075,8 @@ function generapokes(){
 function completapokes(salto){
 		
 	for(var i = 1; i < salto + 1; i++){
-		if(i < pokelist2.length){
+		if(i < pokelist.length){
 			cargapoke(i, 0, "normal", 0, salto);
-		}
-	}
-	for(var i = 0; i < salto; i++){
-		if(i < alola.length){
-			var idpoke = intpoke(alola[i]);
-			poke = {
-				id: pokelist2[idpoke][0].id,
-				title: "de Alola",
-				name: alola[i],
-				img: {sprite: " ", otros:[]},
-				tipo: [],
-				habs: {normal: [], oculta: []},
-				stats: [0, 0, 0, 0, 0, 0],
-				movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
-				front: " ",
-				gen: 7
-			};
-			pokelist2[idpoke].push(poke);
-			cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Alola", 0, salto);
-		}
-	}
-	for(var i = 0; i < salto; i++){
-		if(i < galar.length){
-			var idpoke = intpoke(galar[i]);
-			var poke = {
-				id: pokelist2[idpoke][0].id,
-				title: "de Galar",
-				name: galar[i],
-				img: {sprite: " ", otros:[]},
-				tipo: [],
-				habs: {normal: [], oculta: []},
-				stats: [0, 0, 0, 0, 0, 0],
-				movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
-				front: " ",
-				gen: 8
-			};
-			pokelist2[idpoke].push(poke);
-			cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Galar", 0, salto);
-		}
-	}
-	for(var i = 0; i < salto; i++){
-		if(i < hisui.length){
-			var idpoke = intpoke(hisui[i]);
-			var poke = {
-				id: pokelist2[idpoke][0].id,
-				title: "de Hisui",
-				name: hisui[i],
-				img: {sprite: " ", otros:[]},
-				tipo: [],
-				habs: {normal: [], oculta: []},
-				stats: [0, 0, 0, 0, 0, 0],
-				movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
-				front: " ",
-				gen: 8
-			};
-			pokelist2[idpoke].push(poke);
-			cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Hisui", 0, salto);
-		}
-	}
-	for(var i = 0; i < salto; i++){
-		if(i < paldea.length){
-			var idpoke = intpoke(paldea[i]);
-			var poke = {
-				id: pokelist2[idpoke][0].id,
-				title: "de Paldea",
-				name: paldea[i],
-				img: {sprite: " ", otros:[]},
-				tipo: [],
-				habs: {normal: [], oculta: []},
-				stats: [0, 0, 0, 0, 0, 0],
-				movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
-				front: " ",
-				gen: 9
-			};
-			pokelist2[idpoke].push(poke);
-			cargapoke(idpoke, pokelist2[idpoke].length - 1, "de Paldea", 0, salto);
 		}
 	}
 }
@@ -1127,18 +1087,29 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 	
 	try{
 		if(titulo == "normal"){
-			link = encodeURI("https://www.wikidex.net/wiki/" + pokelist2[id][variacion].name.replaceAll(" ", "_"));
+			link = encodeURI("https://www.wikidex.net/wiki/" + pokelist[id][variacion].name.replaceAll(" ", "_"));
 		}
 		else{
-			link = encodeURI("https://www.wikidex.net/wiki/" + (pokelist2[id][variacion].name + "_" + titulo).replaceAll(" ", "_"));
+			link = encodeURI("https://www.wikidex.net/wiki/" + (pokelist[id][variacion].name + "_" + titulo).replaceAll(" ", "_"));
 		}
 		$.get(link, function(data) {
 			var pokeinfo = data.replaceAll(/(\r\n|\n|\r)/gm,"").replaceAll("> <", "><").replaceAll("<br />", "<br/>");
 			
+
+			if(["Appletun", "Flapple"].includes(pokelist[id][variacion].name)){
+				pokelist[id][variacion].img.otros = pokeinfo.match(new RegExp("(https:[^ ,\"]*(Appletun|Flapple)[^ ,\"]*\.(?:gif|png))", "gi"));
+			}
+			else{
+				pokelist[id][variacion].img.otros = pokeinfo.match(new RegExp("(https:[^ ,\"]*" + pokelist[id][variacion].name + "[^ ,\"]*\.(?:gif|png))", "gi"));
+			}
+			
 			var posini = pokeinfo.indexOf("src=\"", pokeinfo.indexOf("alt=\"Ilustración")) + 5;
 			var posfin = pokeinfo.indexOf("\"", posini);
 			
-			pokelist2[id][variacion].front = pokeinfo.substring(posini, posfin);
+			if(parchesfront[pokelist[id][0].name] != null)
+				pokelist[id][variacion].front = parchesfront[pokelist[id][variacion].name][variacion];
+			else
+				pokelist[id][variacion].front = pokeinfo.substring(posini, posfin);
 
 			posini = pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Tipos a los que pertenece\"")) + 4;
 			posfin = pokeinfo.indexOf("</td>", posini);
@@ -1150,7 +1121,7 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 				posini = tipospoke[i].indexOf("title=\"Tipo ") + 12;
 				posfin = tipospoke[i].indexOf("\"", posini);
 				
-				pokelist2[id][variacion].tipo.push(tipospoke[i].substring(posini, posfin));
+				pokelist[id][variacion].tipo.push(tipospoke[i].substring(posini, posfin).toLowerCase());
 				
 			}
 			
@@ -1164,7 +1135,7 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 				posini = habspoke[i].indexOf("title=\"") + 7;
 				posfin = habspoke[i].indexOf("\"", posini);
 				
-				pokelist2[id][variacion].habs.normal.push(inthab(habspoke[i].substring(posini, posfin)));
+				pokelist[id][variacion].habs.normal.push(inthab(habspoke[i].substring(posini, posfin)));
 				
 			}
 
@@ -1173,7 +1144,7 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 				posini = pokeinfo.indexOf("title=\"", pokeinfo.indexOf("<td>", pokeinfo.indexOf("title=\"Habilidad oculta\""))) + 7;
 				posfin = pokeinfo.indexOf("\"", posini);
 				
-				pokelist2[id][variacion].habs.oculta.push(inthab(pokeinfo.substring(posini, posfin)));
+				pokelist[id][variacion].habs.oculta.push(inthab(pokeinfo.substring(posini, posfin)));
 				
 			}
 			
@@ -1192,10 +1163,10 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 					var intmov = intataq(movarray[i].substring(posini, posfin));
 					
 					if(intmov == -1)
-						console.log(pokelist2[id][variacion].name + " " + movarray[i].substring(posini, posfin));
+						console.log(pokelist[id][variacion].name + " " + movarray[i].substring(posini, posfin));
 					
-					if(!pokelist2[id][variacion].movs.niv.includes(intmov)){
-						pokelist2[id][variacion].movs.niv.push(intmov);
+					if(!pokelist[id][variacion].movs.niv.includes(intmov)){
+						pokelist[id][variacion].movs.niv.push(intmov);
 					}
 					
 				}
@@ -1221,10 +1192,10 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 					var intmov = intataq(movarray[i].substring(posini, posfin));
 					
 					if(intmov == -1)
-						console.log(pokelist2[id][variacion].name + " " + movarray[i].substring(posini, posfin));
+						console.log(pokelist[id][variacion].name + " " + movarray[i].substring(posini, posfin));
 					
-					if(!pokelist2[id][variacion].movs.mt.includes(intmov)){
-						pokelist2[id][variacion].movs.mt.push(intmov);
+					if(!pokelist[id][variacion].movs.mt.includes(intmov)){
+						pokelist[id][variacion].movs.mt.push(intmov);
 					}
 					
 				}
@@ -1261,9 +1232,9 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 						}
 					
 						if(intmov == -1)
-							console.log(pokelist2[id][variacion].name + " " + movarray[i]);
-						else if(!pokelist2[id][variacion].movs.tut.includes(intmov)){
-							pokelist2[id][variacion].movs.tut.push(intmov);
+							console.log(pokelist[id][variacion].name + " " + movarray[i]);
+						else if(!pokelist[id][variacion].movs.tut.includes(intmov)){
+							pokelist[id][variacion].movs.tut.push(intmov);
 						}
 					}
 				}
@@ -1294,9 +1265,9 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 						}
 						
 						if(intmov == -1)
-							console.log(pokelist2[id][variacion].name + " " + movarray[i]);
-						else if(!pokelist2[id][variacion].movs.egg.includes(intmov)){
-							pokelist2[id][variacion].movs.egg.push(intmov);
+							console.log(pokelist[id][variacion].name + " " + movarray[i]);
+						else if(!pokelist[id][variacion].movs.egg.includes(intmov)){
+							pokelist[id][variacion].movs.egg.push(intmov);
 						}
 					}
 				}
@@ -1318,10 +1289,10 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 						var intmov = intataq(movarray[i].substring(posini, posfin));
 						
 						if(intmov == -1)
-							console.log(pokelist2[id][variacion].name + " " + movarray[i].substring(posini, posfin));
+							console.log(pokelist[id][variacion].name + " " + movarray[i].substring(posini, posfin));
 						
-						if(!pokelist2[id][variacion].movs.z.includes(intmov)){
-							pokelist2[id][variacion].movs.z.push(intmov);
+						if(!pokelist[id][variacion].movs.z.includes(intmov)){
+							pokelist[id][variacion].movs.z.push(intmov);
 						}
 						
 					}
@@ -1338,10 +1309,10 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 						var intmov = intataq(movarray[i].substring(posini, posfin));
 						
 						if(intmov == -1)
-							console.log(pokelist2[id][variacion].name + " " + movarray[i].substring(posini, posfin));
+							console.log(pokelist[id][variacion].name + " " + movarray[i].substring(posini, posfin));
 						
-						if(!pokelist2[id][variacion].movs.otro.includes(intmov)){
-							pokelist2[id][variacion].movs.otro.push();
+						if(!pokelist[id][variacion].movs.otro.includes(intmov)){
+							pokelist[id][variacion].movs.otro.push();
 						}
 						
 					}
@@ -1357,27 +1328,27 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 			
 			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td", pokeinfo.indexOf(">PS</a>", posstats)) + 3) + 1;
 			posfin = pokeinfo.indexOf("<", posini);
-			pokelist2[id][variacion].stats[0] = parseInt(pokeinfo.substring(posini, posfin));
+			pokelist[id][variacion].stats[0] = parseInt(pokeinfo.substring(posini, posfin));
 			
 			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td", pokeinfo.indexOf(">Ataque</a>", posstats)) + 3) + 1;
 			posfin = pokeinfo.indexOf("<", posini);
-			pokelist2[id][variacion].stats[1] = parseInt(pokeinfo.substring(posini, posfin));
+			pokelist[id][variacion].stats[1] = parseInt(pokeinfo.substring(posini, posfin));
 			
 			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td", pokeinfo.indexOf(">Defensa</a>", posstats)) + 3) + 1;
 			posfin = pokeinfo.indexOf("<", posini);
-			pokelist2[id][variacion].stats[2] = parseInt(pokeinfo.substring(posini, posfin));
+			pokelist[id][variacion].stats[2] = parseInt(pokeinfo.substring(posini, posfin));
 			
 			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td", pokeinfo.indexOf(">At. esp.</a>", posstats)) + 3) + 1;
 			posfin = pokeinfo.indexOf("<", posini);
-			pokelist2[id][variacion].stats[3] = parseInt(pokeinfo.substring(posini, posfin));
+			pokelist[id][variacion].stats[3] = parseInt(pokeinfo.substring(posini, posfin));
 			
 			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td", pokeinfo.indexOf(">Def. esp.</a>", posstats)) + 3) + 1;
 			posfin = pokeinfo.indexOf("<", posini);
-			pokelist2[id][variacion].stats[4] = parseInt(pokeinfo.substring(posini, posfin));
+			pokelist[id][variacion].stats[4] = parseInt(pokeinfo.substring(posini, posfin));
 
 			posini = pokeinfo.indexOf(">", pokeinfo.indexOf("<td", pokeinfo.indexOf(">Velocidad</a>", posstats)) + 3) + 1;
 			posfin = pokeinfo.indexOf("<", posini);
-			pokelist2[id][variacion].stats[5] = parseInt(pokeinfo.substring(posini, posfin));
+			pokelist[id][variacion].stats[5] = parseInt(pokeinfo.substring(posini, posfin));
 			
 			//sprite
 			posinitable = pokeinfo.indexOf("src=\"", pokeinfo.indexOf("class=\"otrosdatos")) + 5;
@@ -1385,90 +1356,94 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 			
 			var spritearray = pokeinfo.substring(posinitable, posfintable).split("src=\"");
 			
-			if(pokelist2[id][0].name == "Basculin"){
+			if(pokelist[id][0].name == "Basculin"){
 				spritearray.push("https://www.wikidex.net/wiki/Archivo:Basculin_raya_blanca_icono_HD.png\"");
 			}
-			else if(pokelist2[id][0].name == "Dudunsparce"){
+			else if(pokelist[id][0].name == "Dudunsparce"){
 				spritearray.push("https://images.wikidexcdn.net/mwuploads/wikidex/0/04/latest/20221218211059/Dudunsparce_trinodular_icono_HD.png\"");
 			}
-			else if(pokelist2[id][0].name == "Zygarde"){	
+			else if(pokelist[id][0].name == "Zygarde"){	
 				spritearray = [spritearray[1], spritearray[0], spritearray[2]];
 			}			
-			else if(pokelist2[id][0].name == "Xerneas"){	
+			else if(pokelist[id][0].name == "Xerneas"){	
 				spritearray = [spritearray[1], spritearray[0]];
 			}
-			else if(pokelist2[id][0].name == "Urshifu"){
-				spritearray.slice(0, 0, spritearray[0]);
-			}
-			else if(pokelist2[id][0].name == "Unown"){
-				spritearray = [spritearray[5], spritearray[0], spritearray[1], spritearray[2], spritearray[3], spritearray[4], spritearray[6], spritearray[7], spritearray[8], spritearray[9], spritearray[10], spritearray[11], spritearray[12], spritearray[13], spritearray[14], spritearray[15], spritearray[16], spritearray[17], spritearray[18], spritearray[19], spritearray[20], spritearray[21], spritearray[22], spritearray[23], spritearray[24], spritearray[25], spritearray[26], spritearray[27]];
+			else if(pokelist[id][0].name == "Urshifu"){
+				spritearray = [spritearray[0], spritearray[0], spritearray[1], spritearray[2]];
 			}
 			
-			pokelist2[id][variacion].img.sprite = spritearray[sprite].substring(0, spritearray[0].indexOf("\""));
+			pokelist[id][variacion].img.sprite = spritearray[sprite].substring(0, spritearray[0].indexOf("\""));
 			
-			if(spritearray.length > 1 && !solounaforma.includes(pokelist2[id][0].name)){
+			if(spritearray.length > 1 && !solounaforma.includes(pokelist[id][0].name)){
 
-				pokextra(pokelist2[id][variacion].name, pokelist2[id][variacion].img.sprite, id, variacion);
+				pokextra(pokelist[id][variacion].name, pokelist[id][variacion].img.sprite, id, variacion);
 
 				for(var i = 1; i < spritearray.length; i++){
 					if(!spritearray[i].substring(0, spritearray[i].indexOf("\"")).includes("coqueta") && !spritearray[i].substring(0, spritearray[i].indexOf("\"")).includes("inicial")){
 						var poke = {
-							id: pokelist2[id][variacion].id,
+							id: pokelist[id][variacion].id,
 							title: "",
-							name: pokelist2[id][variacion].name,
+							name: pokelist[id][variacion].name,
 							img: {sprite: spritearray[i].substring(0, spritearray[i].indexOf("\"")), otros:[]},
 							tipo: [],
-							habs: pokelist2[id][variacion].habs,
+							habs: {normal: [], oculta: []},
 							stats: [0, 0, 0, 0, 0, 0],
 							movs: {niv:[], mt:[], tut:[], egg:[], z:[], otro:[]},
 							front: " ",
-							gen: pokelist2[id][variacion].gen
+							gen: pokelist[id][variacion].gen
 						};
 						
-						pokelist2[id].push(poke);
-						pokextra(pokelist2[id][0].name, spritearray[i].substring(0, spritearray[i].indexOf("\"")), id, pokelist2[id].length - 1);
+						var posicion = pokelist[id].push(poke);
 						
+						for(var k = 0; k < pokelist[id][variacion].habs.normal.length ;k++){
+							pokelist[id][posicion-1].habs.normal.push(pokelist[id][variacion].habs.normal[k]);
+						}
+						for(var k = 0; k < pokelist[id][variacion].habs.oculta.length ;k++){
+							pokelist[id][posicion-1].habs.oculta.push(pokelist[id][variacion].habs.oculta[k]);
+						}
+						
+						if(parchesfront[pokelist[id][variacion].name] != null){
+							pokelist[id][posicion -1].front = parchesfront[pokelist[id][variacion].name][posicion -1];
+						}
+						pokextra(pokelist[id][0].name, spritearray[i].substring(0, spritearray[i].indexOf("\"")), id, posicion - 1);
+						if(poke.img.sprite.includes("Mega-")){
+							pokelist[id][posicion -1].habs.normal = [inthab(pokeinfo.split("<br/><b>" + poke.img.sprite.substring(poke.img.sprite.indexOf("Mega-" + pokelist[id][0].name), poke.img.sprite.indexOf("_icon")).replaceAll("_", " ") + "</b><br/>")[1].split("Habilidad")[1].split("title=\"")[1].split("\"")[0])];
+							pokelist[id][posicion -1].habs.oculta = [];
+							getimages(id, posicion - 1, poke.img.sprite.substring(poke.img.sprite.indexOf("Mega-" + pokelist[id][0].name) , poke.img.sprite.indexOf("_icon")));
+						}
+						else if(pokelist[id][0].name == "Darmanitan" && posicion == 4){
+							getimages(id, posicion - 1, "Darmanitan_de_Galar_daruma");		
+						}else if(poke.img.sprite.includes("Ultra-Necrozma")){
+							getimages(id, posicion - 1, "Ultra-Necrozma");
+						}else if(poke.img.sprite.includes("Kyurem")){
+							if(poke.img.sprite.includes("negro")){
+								pokelist[id][posicion -1].habs.normal = [inthab("Terravoltaje")];
+							}else if(poke.img.sprite.includes("blanco")){
+								pokelist[id][posicion -1].habs.normal = [inthab("Turbollama")];
+							}
+						}else{
+							getimages(id, posicion - 1, poke.img.sprite.substring(poke.img.sprite.indexOf(pokelist[id][0].name) , poke.img.sprite.indexOf("_icon")));
+						}
 					}
 				}
 				
-				otros[pokelist2[id][0].name]["page"] = pokeinfo;
-			}
-
-			//imgs
-			posinitable = pokeinfo.indexOf("<table class=\"galeria-sprites");
-			posfintable = pokeinfo.indexOf("</table>", posinitable);
-			
-			while(posinitable != -1){
-				
-				var tablesprite = pokeinfo.substring(posinitable, posfintable);
-				posini = tablesprite.indexOf("src=\"");
-				posfin = tablesprite.indexOf("\"", posini + 5);
-				
-				while(posini != -1){
-					
-					if(tablesprite.substring(posini + 5, posfin).startsWith("http"))
-						pokelist2[id][variacion].img.otros.push(tablesprite.substring(posini + 5, posfin));
-					
-					posini = tablesprite.indexOf("src=\"", posfin);
-					posfin = tablesprite.indexOf("\"", posini + 5);
-					
+				otros[pokelist[id][0].name]["page"] = pokeinfo;
+				if(variacion == 0){
+					cantotros++;
+					if(cantotros == Object.keys(otros).length -1)
+						completainfo();
 				}
-				
-				posinitable = pokeinfo.indexOf("<table class=\"galeria-sprites", posfintable);
-				posfintable = pokeinfo.indexOf("</table>", posinitable);
-
 			}
 			
-			if (salto > 0){
-				if(titulo == "normal" && (id + salto) < pokelist2.length){
+			if (variacion == 0){
+				if((id + salto) < pokelist.length){
 					cargapoke(id + salto, variacion ,titulo, sprite, salto);
 				}
-				else if(titulo == "de Alola" && (alola.indexOf(pokelist2[id][0].name) + salto) < alola.length){
-					var idpoke = intpoke(alola[alola.indexOf(pokelist2[id][0].name) + salto]);
-					var poke = {
-						id: pokelist2[idpoke][0].id,
-						title: titulo,
-						name: pokelist2[idpoke][0].name,
+				if(alola.includes(pokelist[id][variacion].name)){
+					var pokealola = {
+						id: pokelist[id][variacion].id,
+						title: "de Alola",
+						name: pokelist[id][variacion].name,
 						img: {sprite: " ", otros:[]},
 						tipo: [],
 						habs: {normal: [], oculta: []},
@@ -1477,15 +1452,14 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 						front: " ",
 						gen: 7
 					};
-					pokelist2[idpoke].push(poke);
-					cargapoke(idpoke, variacion ,titulo, sprite, salto);
+					var posicion = pokelist[id].push(pokealola);
+					cargapoke(id, posicion - 1, "de Alola", sprite, salto);
 				}
-				else if(titulo == "de Galar" && (galar.indexOf(pokelist2[id][0].name) + salto) < galar.length){
-					var idpoke = intpoke(galar[galar.indexOf(pokelist2[id][0].name) + salto]);
-					var poke = {
-						id: pokelist2[idpoke][0].id,
-						title: titulo,
-						name: pokelist2[idpoke][0].name,
+				if(galar.includes(pokelist[id][variacion].name)){
+					var pokegalar = {
+						id: pokelist[id][variacion].id,
+						title: "de Galar",
+						name: pokelist[id][variacion].name,
 						img: {sprite: " ", otros:[]},
 						tipo: [],
 						habs: {normal: [], oculta: []},
@@ -1494,15 +1468,14 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 						front: " ",
 						gen: 8
 					};
-					pokelist2[idpoke].push(poke);
-					cargapoke(idpoke, variacion ,titulo, sprite, salto);
+					var posicion = pokelist[id].push(pokegalar);					
+					cargapoke(id, posicion - 1, "de Galar", sprite, salto);
 				}
-				else if(titulo == "de Hisui" && (hisui.indexOf(pokelist2[id][0].name) + salto) < hisui.length){
-					var idpoke = intpoke(hisui[hisui.indexOf(pokelist2[id][0].name) + salto]);
-					var poke = {
-						id: pokelist2[idpoke][0].id,
-						title: titulo,
-						name: pokelist2[idpoke][0].name,
+				if(hisui.includes(pokelist[id][variacion].name)){
+					var pokehisui = {
+						id: pokelist[id][variacion].id,
+						title: "de Hisui",
+						name: pokelist[id][variacion].name,
 						img: {sprite: " ", otros:[]},
 						tipo: [],
 						habs: {normal: [], oculta: []},
@@ -1511,15 +1484,14 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 						front: " ",
 						gen: 8
 					};
-					pokelist2[idpoke].push(poke);
-					cargapoke(idpoke, variacion ,titulo, sprite, salto);
+					var posicion = pokelist[id].push(pokehisui);					
+					cargapoke(id, posicion - 1, "de Hisui", sprite, salto);
 				}
-				else if(titulo == "de Paldea" && (paldea.indexOf(pokelist2[id][0].name) + salto) < paldea.length){
-					var idpoke = intpoke(paldea[paldea.indexOf(pokelist2[id][0].name) + salto]);
-					var poke = {
-						id: pokelist2[idpoke][0].id,
-						title: titulo,
-						name: pokelist2[idpoke][0].name,
+				if(paldea.includes(pokelist[id][variacion].name)){
+					var pokepaldea = {
+						id: pokelist[id][variacion].id,
+						title: "de Paldea",
+						name: pokelist[id][variacion].name,
 						img: {sprite: " ", otros:[]},
 						tipo: [],
 						habs: {normal: [], oculta: []},
@@ -1528,13 +1500,61 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 						front: " ",
 						gen: 9
 					};
-					pokelist2[idpoke].push(poke);
-					cargapoke(idpoke, variacion ,titulo, sprite, salto);
+					var posicion = pokelist[id].push(pokepaldea);					
+					cargapoke(id, posicion - 1, "de Paldea", sprite, salto);
 				}
 			}
 		});
 	}catch(error){
-		//cargapoke(id, variacion ,titulo, sprite);
+		console.log(error);
+	}
+}
+
+function getimages(id, posicion, regex){
+	
+	for(var i = posicion - 1; i > -1; i--){
+		for(var j = 0; j < pokelist[id][i].img.otros.length; j++){
+			
+			if(pokelist[id][0].name == "Urshifu"){
+				if(regex.includes("Gigamax")){
+					if(pokelist[id][i].img.otros[j].includes(regex)){
+						var posimg = pokelist[id][posicion].img.otros.push(pokelist[id][i].img.otros[j]);
+						pokelist[id][i].img.otros.splice(j, 1);
+						if(!pokelist[id][posicion].img.otros[posimg - 1].includes("_icon.png") && pokelist[id][posicion].front == " "){
+							pokelist[id][posicion].front = pokelist[id][posicion].img.otros[posimg - 1];
+						}
+						j--;
+					}
+				}
+				else if(pokelist[id][i].img.otros[j].includes(regex) && !pokelist[id][i].img.otros[j].includes("Gigamax")){
+					var posimg = pokelist[id][posicion].img.otros.push(pokelist[id][i].img.otros[j]);
+					pokelist[id][i].img.otros.splice(j, 1);
+					if(!pokelist[id][posicion].img.otros[posimg - 1].includes("_icon.png") && pokelist[id][posicion].front == " "){
+						pokelist[id][posicion].front = pokelist[id][posicion].img.otros[posimg - 1];
+					}
+					j--;
+				}
+			}
+			else{
+				if(regex.includes("Gigamax") && pokelist[id][i].img.otros[j].includes("Gigamax")){
+					var posimg = pokelist[id][posicion].img.otros.push(pokelist[id][i].img.otros[j]);
+					pokelist[id][i].img.otros.splice(j, 1);
+					if(!pokelist[id][posicion].img.otros[posimg - 1].includes("_icon.png") && pokelist[id][posicion].front == " "){
+						pokelist[id][posicion].front = pokelist[id][posicion].img.otros[posimg - 1];
+					}
+					j--;
+				}
+				else if(pokelist[id][i].img.otros[j].includes(regex)){
+					
+					var posimg = pokelist[id][posicion].img.otros.push(pokelist[id][i].img.otros[j]);
+					pokelist[id][i].img.otros.splice(j, 1);
+					if(!pokelist[id][posicion].img.otros[posimg - 1].includes("_icon.png") && pokelist[id][posicion].front == " "){
+						pokelist[id][posicion].front = pokelist[id][posicion].img.otros[posimg - 1];
+					}
+					j--;
+				}
+			}	
+		}	
 	}
 }
 
@@ -1545,21 +1565,22 @@ function pokextra(nombrepoke, sprite, id, pos){
 			if(otros[nombrepoke][i].nombre.startsWith("Mega-") && (sprite.toLowerCase()).includes(encodeURI((otros[nombrepoke][i].nombre + "_" + otros[nombrepoke][i].variacion).replace("_normal", "") + "_").toLowerCase())){
 
 				otros[nombrepoke][i].flag = true;
-				pokelist2[id][pos].name = otros[nombrepoke][i].nombre;
-				pokelist2[id][pos].title = otros[nombrepoke][i].variacion;
-				pokelist2[id][pos].tipo = otros[nombrepoke][i].tipos;
-				pokelist2[id][pos].gen = 6;
+				pokelist[id][pos].name = otros[nombrepoke][i].nombre;
+				pokelist[id][pos].title = otros[nombrepoke][i].variacion;
+				pokelist[id][pos].tipo = otros[nombrepoke][i].tipos;
+				pokelist[id][pos].gen = 6;
 				
 			}
 			else{
 				if(otros[nombrepoke][i].variacion != "normal" && otros[nombrepoke][i].variacion != "macho"){
-					
 					var value = ("_" + encodeURI(otros[nombrepoke][i].variacion.replace("vetusto", "vetusta").replace("Signo ", "").replace("Forma al ", "").replace("Forma ", "").replace("Raya ", "").replace("Letra ", "").replace(" de ", " ").replace("Modo ", "").replace("Corte ", "").replace("Con ", "").replace("Color ", "").replace("Núcleo ", "").replace("Estilo ", "").replace("Gorra ", "").replace("Plumaje ", "").replace("Variedad ", "").replace("Motivo ", "").replace("completa", "completo").replaceAll(" ", "_") + "_").toLowerCase()).replace("soleada", "soleado").replace("encapotada", "encapotado").replace("tronco_","").replace("_de_galar_daruma_", "daruma_de_galar_").replace("nocturna", "nocturno").replace("!", "%21").replace("?", "%3f").replace("hembra_", "hembra").replace("_ultra", "ultra").replace("familia_", "");
 
-					if((sprite.toLowerCase()).includes(value)){
-						otros[nombrepoke][i].flag = true;
-						pokelist2[id][pos].title = otros[nombrepoke][i].variacion;
-						pokelist2[id][pos].tipo = otros[nombrepoke][i].tipos;
+					if(sprite.toUpperCase().includes("GIGAMAX") && otros[nombrepoke][i].variacion.includes("Gigamax") || !sprite.toUpperCase().includes("GIGAMAX") && !otros[nombrepoke][i].variacion.includes("Gigamax")){
+						if((sprite.toLowerCase()).includes(value)){
+							otros[nombrepoke][i].flag = true;
+							pokelist[id][pos].title = otros[nombrepoke][i].variacion;
+							pokelist[id][pos].tipo = otros[nombrepoke][i].tipos;
+						}
 					}
 				}
 			}
@@ -1601,11 +1622,6 @@ function otrospokes(){
 	}
 }
 
-var excepciones = ["inicial", "Letra ", "Signo", "Sin corte", "Sin ROM", "Forma normal", "habitual", "Sin disco", "on tabla", "Autostar", "Con disco", "encubierta", "descubierta", " (inactivo)", "Cuando el tipo", "Patrón ", "Ejemplar ", "Flor ", "Tamaño ", "falsificada", "coqueta", "genuina", "descubierto", "ascendente", "llena", "descubierto", "Ritmo propio", "Vista lince", "Fuerte afecto", "Mutatipo", "Rompeaura", "Agrupamiento"];
-var solounaforma = ["Flabébé", "Floette", "Florges", "Unown"];
-
-var otros = [];
-
 function procesacaja(caja, variacion){
 	
 	var tipos = [];
@@ -1638,7 +1654,7 @@ function procesacaja(caja, variacion){
 		else{
 			while (posini != -1 && (posinivar == -1 || posinivar > posini)){
 				posfin = caja.indexOf("\"", posini + 12);
-				tipos.push(caja.substring(posini + 12, posfin));
+				tipos.push(caja.substring(posini + 12, posfin).toLowerCase());
 				
 				posini = caja.indexOf("title=\"Tipo ", posfin);
 			}
@@ -1774,11 +1790,11 @@ function inthab(hab){
 
 	var i = 0;
 	try{
-		while(pokelist2[0]["habs"][i]["name"].replaceAll(" ", "") != validanamehab(hab).replaceAll(" ", "") && i < pokelist2[0]["habs"].length){
+		while(pokelist[0]["habs"][i]["name"].replaceAll(" ", "") != validanamehab(hab).replaceAll(" ", "") && i < pokelist[0]["habs"].length){
 			i++;
 		}
 			
-		if (i == pokelist2[0]["habs"].length){
+		if (i == pokelist[0]["habs"].length){
 			return -1;
 		}
 	}
@@ -1802,11 +1818,11 @@ function intataq(ata){
 	}
 	
 	try{
-		while(pokelist2[0]["movs"][i]["name"].replaceAll(" ", "") != validaname(ataque).replaceAll(" ", "") && i < pokelist2[0]["movs"].length){
+		while(pokelist[0]["movs"][i]["name"].replaceAll(" ", "") != validaname(ataque).replaceAll(" ", "") && i < pokelist[0]["movs"].length){
 			i++;
 		}
 			
-		if (i == pokelist2[0]["movs"].length){
+		if (i == pokelist[0]["movs"].length){
 			return -1;
 		}
 	}
@@ -1819,8 +1835,8 @@ function intataq(ata){
 
 function intpoke(name){
 	
-	for(var i = 1; i < pokelist2.length; i++){
-		if(pokelist2[i][0].name.replaceAll(" ", "") == name.replaceAll(" ", "")){
+	for(var i = 1; i < pokelist.length; i++){
+		if(pokelist[i][0].name.replaceAll(" ", "") == name.replaceAll(" ", "")){
 			return i;
 		}
 	}
@@ -1848,7 +1864,7 @@ function validanamehab(nombre){
 function savedata(){
 	var filename = "pokelist.json";
 	var a = document.createElement("a");
-	var file = new Blob([JSON.stringify(pokelist2)], {type: "text/plain"});
+	var file = new Blob([JSON.stringify(pokelist)], {type: "text/plain"});
 	a.href = URL.createObjectURL(file);
 	a.download = filename;
 	a.click();
@@ -1858,15 +1874,39 @@ function savedata(){
 
 function completainfo(){
 	
-	for(var i = 1; i < pokelist2.length; i++){
+	for(var i = 1; i < pokelist.length; i++){
 
-		if(otros[pokelist2[i][0].name] != null){
-			for(var j = 0; j < otros[pokelist2[i][0].name].length; j++){
-				if(!otros[pokelist2[i][0].name][j].flag){
-				   pokelist2[i][0].title = otros[pokelist2[i][0].name][j].variacion;
-				   otros[pokelist2[i][0].name][j].flag = true;
+		if(otros[pokelist[i][0].name] != null){
+			var flag2 = false;
+			for(var j = 0; j < otros[pokelist[i][0].name].length; j++){
+				if(!otros[pokelist[i][0].name][j].flag){
+					if(!flag2){
+						pokelist[i][0].title = otros[pokelist[i][0].name][j].variacion;
+						pokelist[i][0].tipo = otros[pokelist[i][0].name][j].tipos;
+						flag2 = true;
+					}
+					else{
+						pokelist[i][1].title = otros[pokelist[i][0].name][j].variacion;
+						pokelist[i][1].tipo = otros[pokelist[i][0].name][j].tipos;
+					}
+					otros[pokelist[i][0].name][j].flag = true;
 				}
 			}
 		}
-	}	
+	}
+	habilitacion();	
+}
+
+function habilitacion(){
+	document.getElementById("pokelist").innerHTML = "";
+	document.getElementById("Gen1").disabled = false;
+	document.getElementById("Gen2").disabled = false;
+	document.getElementById("Gen3").disabled = false;
+	document.getElementById("Gen4").disabled = false;
+	document.getElementById("Gen5").disabled = false;
+	document.getElementById("Gen6").disabled = false;
+	document.getElementById("Gen7").disabled = false;
+	document.getElementById("Gen8").disabled = false;
+	document.getElementById("Gen9").disabled = false;
+	document.getElementById("Otrasformas").disabled = false;
 }
