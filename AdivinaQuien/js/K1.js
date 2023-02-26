@@ -393,30 +393,30 @@ function cargalista(){
 		while(i < pokelist.length){
 			
 			
-				if(document.getElementById("Otrasformas").checked || key != ""){
+			if(document.getElementById("Otrasformas").checked || key != ""){
 
-					for(var j = 0; j < pokelist[i].length; j++){
-						if (key != ""){	
-							if(llave.indexOf(key[Math.trunc(pos/6)]).toString(2).padStart(6,0)[pos%6] == "1"){
-								creaficha(pokelist[i][j], masformas(key, i, j , pos));
-							}
+				for(var j = 0; j < pokelist[i].length; j++){
+					if (key != ""){	
+						if(llave.indexOf(key[Math.trunc(pos/6)]).toString(2).padStart(6,0)[pos%6] == "1"){
+							creaficha(pokelist[i][j], masformas(key, i, j , pos));
 						}
-						else{
-							var poke = pokelist[i][j];
-							if (document.getElementById("Gen" + poke.gen).checked && evalforma(poke, j))
-								creaficha(poke, masformas(key, i, j,  pos));
-						}
-						pos++;
 					}
+					else{
+						var poke = pokelist[i][j];
+						if (document.getElementById("Gen" + poke.gen).checked && evalforma(poke, j))
+							creaficha(poke, masformas(key, i, j,  pos));
+					}
+					pos++;
 				}
-				else{
-					
-					var poke = pokelist[i][0];
-					if (document.getElementById("Gen" + poke.gen).checked) 
-						creaficha(poke, false);
-					
-				}
-				i++;
+			}
+			else{
+				
+				var poke = pokelist[i][0];
+				if (document.getElementById("Gen" + poke.gen).checked) 
+					creaficha(poke, false);
+				
+			}
+			i++;
 
 		}
 
@@ -475,15 +475,12 @@ function tacha2tipo(){
 }
 
 function exportar(){
-	
-	var key1 = "";
-	var key2 = "¡";
-	var elem = "";
-	
-	var pos = 0;
-	
+
 	var lista = document.getElementsByClassName("pokevista");
-		
+	var elem =" ";
+	
+	var bytearr = [];
+	
 	for(var i = 1; i < pokelist.length; i++){
 		for(var j = 0; j< pokelist[i].length; j++){
 			var temp = 0;
@@ -498,58 +495,95 @@ function exportar(){
 			
 			elem = elem + temp;
 			
-			if(Math.trunc(pos % 6) == 5 || (i == pokelist.length - 1) && (j == pokelist[i].length - 1)){
-				var char1 = llave.charAt(parseInt(elem.padEnd(6,0),2));
-				key1 = key1 + char1 ;
-				key2 = key2 + llave.charAt(llave.length - 1 - llave.indexOf(char1));
+			if(elem.length == 8){
+				bytearr.push(elem);
 				elem = "";
 			}
-			
-			pos++;
 		}
 	}
 	
-	key1 = transform(("!" + key1).trim().slice(1));
-	key2 = transform(("!" + key2).trim().slice(1));
+	if(elem.length > 0){
+		for (var i = elem.length; i < 8; i++){
+			elem = elem + "0";
+		}
+		bytearr.push(elem);
+		elem = "";
+	}
 	
-	if(key1.length <= key2.length)
-		document.getElementById("detatipo").value = key1;
-	else
-		document.getElementById("detatipo").value = key2;
+	
+	while(bytearr[bytearr.length - 1] == "00000000"){
+		bytearr.pop();
+	}
+		
+	document.getElementById("detatipo").value = "http://www.odricku.cl/AdivinaQuien?" + encode(bytearr);
 
 	veracciones();
 }
 
-function transform(key){
+function encode(arrbytes){
 	
-	var i = 0;
-	var espini = -1;
-	var espfin = -1;
-	var salida = "";
-	while(i < key.length){
-		if(key.charAt(i) == " "){
-			if(espini == -1)
-				espini = i;
-			espfin = i;
-		}
-		else{
-			if(espini != espfin){
-				if(espfin - espini >= 2)
-					salida = salida +  "!" + (espfin - espini + 1).toString(36).padStart(2,0);
-				else
-					salida = salida + " ".padStart(espfin - espini + 1, " ");				
-			}
-			else if(espini != -1)
-				salida = salida + " ";
-			
-			espini = -1;
-			espfin = -1;
-			salida = salida + key.charAt(i);
-		}
-		i++;
+	var base64 = "";
+	var exclusiones = [];
+	var extext = "";
+	
+	for (var i = 0; i < arrbytes.length; i++) {
+		if(arrbytes[i] == "00000000" && (arrbytes[i + 1] == "00000000" || arrbytes[i - 1] == "00000000"))
+			exclusiones.push(i);
+		else
+			base64 =  base64 + String.fromCharCode(parseInt(arrbytes[i], 2));
 	}
-	return salida;
 	
+	if(exclusiones.length > 0){
+		for(var i = 0; i < exclusiones.length; i++){
+			exclusiones.includes(exclusiones[i] - 1){
+				extext = extext.substring(0, extext.lastIndexOf("-")) + (parseInt(extext.substring(extext.lastIndexOf("-")) + 1);
+			}
+			else{
+				extext = extext + "," + i + "-1"; 
+			}
+		}
+		extext = extext.substring(1);
+	}
+	
+	return encodeURI(extext + ";" + window.btoa(base64));
+}
+
+function decode(base64){
+	
+	var entrada = "";
+	var exclusionesentrada = [];
+	var exclusiones = [];
+	
+	if(base64.startsWith(";")){
+		entrada = decodeURI(base64.substring(1));
+	}
+	else{
+		entrada = base64.substring(base64.indexOf(";") + 1);
+		exclusionesentrada = base64.substring(0, base64.indexOf(";")).split(",");
+	}
+	for(var i = 0; i < exclusionesentrada.length; i++){
+		var asubir = exclusionesentrada[i].split("-");
+		exclusiones.push(parseInt(asubir[0]));
+		for(var j = 1; j < parseInt(parseInt(asubir[1])); j++){
+			exclusiones.push(parseInt(asubir[0]) + j);
+		}
+	}
+	
+	var raw = window.atob(entrada);
+	var array = [];
+
+	var pos = 0;
+
+	for(i = 0; i < raw.length + exclusiones.length; i++) {
+		if(exlusiones.includes(i)){
+			array[i - pos] = "00000000";
+			pos++;
+		}else{
+			array[i - pos] = raw.charCodeAt(i).toString(2);
+		}
+	}
+	return array;
+
 }
 
 function invtransform(seed){
