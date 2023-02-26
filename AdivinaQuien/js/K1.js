@@ -4,8 +4,6 @@ var pokelist = [];
 	
 var disc = "Pokémon es una marca registrada de Nintendo desde el 1995 a la fecha. Esta pagina es sin animos de lucro y no esta de ninguna manera afiliada a Nintendo ni oficialmente respaldada. Esta pagina solo tiene el objetivo de pasar un buen rato y para el disfrute gratuito de aquellas almas perdidas que se pierdan por estos rincones de internet. La intencion no es competir con la marca registrada de Nintendo.";
 
-var llave = " 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+";
-
 var tipos = ["acero","agua","bicho","dragón","eléctrico","fantasma","fuego","hada","hielo","lucha","normal","planta","psíquico","roca","siniestro","tierra","veneno","volador"];
 var alola = ["Rattata","Raticate","Raichu","Sandshrew","Sandslash","Vulpix","Ninetales","Diglett","Dugtrio","Meowth","Persian","Geodude","Graveler","Golem","Grimer","Muk","Exeggutor","Marowak"];
 var galar = ["Meowth","Ponyta","Rapidash","Slowpoke","Farfetch'd","Weezing","Mr. Mime","Corsola","Zigzagoon","Linoone","Darumaka","Darmanitan","Yamask","Stunfisk"];
@@ -369,7 +367,7 @@ function cargalista(){
 				alert("Debe indicar una seed");
 				return;
 			}
-			key = invtransform(document.getElementById("semilla").value);
+			key = decode(document.getElementById("semilla").value).join("");
 		}
 	
 	try{
@@ -397,14 +395,14 @@ function cargalista(){
 
 				for(var j = 0; j < pokelist[i].length; j++){
 					if (key != ""){	
-						if(llave.indexOf(key[Math.trunc(pos/6)]).toString(2).padStart(6,0)[pos%6] == "1"){
-							creaficha(pokelist[i][j], masformas(key, i, j , pos));
+						if(key[pos] == "1"){
+							creaficha(pokelist[i][j], masformas(i, j , pos));
 						}
 					}
 					else{
 						var poke = pokelist[i][j];
 						if (document.getElementById("Gen" + poke.gen).checked && evalforma(poke, j))
-							creaficha(poke, masformas(key, i, j,  pos));
+							creaficha(poke, masformas(i, j,  pos));
 					}
 					pos++;
 				}
@@ -443,13 +441,10 @@ function cargalista(){
 	}catch(error){};
 }
 
-function masformas(key, i, j, pos){
+function masformas(i, j, pos){
 	if(pokelist[i].length == 1) return false;
 	if(j != 0) return true;
 	
-	for(var j = 1; j < pokelist[i].length; j++)
-		if(llave.indexOf(key[Math.trunc((pos + j)/6)]).toString(2).padStart(6,0)[(pos + j) % 6] == "1")
-			return true;
 	return false;
 }
 
@@ -535,8 +530,8 @@ function encode(arrbytes){
 	
 	if(exclusiones.length > 0){
 		for(var i = 0; i < exclusiones.length; i++){
-			if(exclusiones.includes(exclusiones[i] - 1){
-				extext = extext.substring(0, extext.lastIndexOf("-")) + (parseInt(extext.substring(extext.lastIndexOf("-")) + 1);
+			if(exclusiones.includes(exclusiones[i] - 1)){
+				extext = extext.substring(0, extext.lastIndexOf("-")) + (parseInt(extext.substring(extext.lastIndexOf("-")) + 1));
 			}
 			else{
 				extext = extext + "," + i + "-1"; 
@@ -568,51 +563,22 @@ function decode(base64){
 			exclusiones.push(parseInt(asubir[0]) + j);
 		}
 	}
-	
 	var raw = window.atob(entrada);
 	var array = [];
 
 	var pos = 0;
 
 	for(i = 0; i < raw.length + exclusiones.length; i++) {
-		if(exlusiones.includes(i)){
-			array[i - pos] = "00000000";
+		if(exclusiones.includes(i)){
+			array[i] = "00000000";
 			pos++;
 		}else{
-			array[i - pos] = raw.charCodeAt(i).toString(2);
+			array[i] = raw.charCodeAt(i - pos).toString(2);
 		}
 	}
+	
 	return array;
 
-}
-
-function invtransform(seed){
-	
-	var semilla = "";
-	
-	var cant = 0;
-		for(var f = 1; f < pokelist.length; f++)
-			cant = cant + pokelist[f].length;
-		
-	var llenado = llave.charAt(0);
-	if(seed.charAt(0) == "¡")
-		llenado = llave.charAt(llave.length - 1);
-	
-	for(var i = 0; i < seed.length; i++){
-		
-		if(seed.charAt(i) == "!"){
-			semilla = semilla + "".padStart( parseInt(seed.substring(i + 1, i + 3), 36) , llenado);
-			i = i + 2;
-		}
-		else{
-			if(seed.charAt(0) != "¡")
-				semilla = semilla + seed.charAt(i);
-			else if(i != 0)
-				semilla = semilla + llave.charAt(llave.length - 1 - llave.indexOf(seed.charAt(i)));
-		}
-	}
-	
-	return semilla.padEnd(Math.trunc(cant/6) + 1, llenado);
 }
 
 function evalforma(poke, pos){
