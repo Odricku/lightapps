@@ -3,7 +3,7 @@ var pokelist;
 var pokelist = [];
 	
 var disc = "Pokémon es una marca registrada de Nintendo desde el 1995 a la fecha. Esta pagina es sin animos de lucro y no esta de ninguna manera afiliada a Nintendo ni oficialmente respaldada. Esta pagina solo tiene el objetivo de pasar un buen rato y para el disfrute gratuito de aquellas almas perdidas que se pierdan por estos rincones de internet. La intencion no es competir con la marca registrada de Nintendo.";
-
+	
 var tipos = ["acero","agua","bicho","dragón","eléctrico","fantasma","fuego","hada","hielo","lucha","normal","planta","psíquico","roca","siniestro","tierra","veneno","volador"];
 var alola = ["Rattata","Raticate","Raichu","Sandshrew","Sandslash","Vulpix","Ninetales","Diglett","Dugtrio","Meowth","Persian","Geodude","Graveler","Golem","Grimer","Muk","Exeggutor","Marowak"];
 var galar = ["Meowth","Ponyta","Rapidash","Slowpoke","Farfetch'd","Weezing","Mr. Mime","Corsola","Zigzagoon","Linoone","Darumaka","Darmanitan","Yamask","Stunfisk"];
@@ -60,7 +60,7 @@ function cargajson(){
 	
 	var bandera = 0;
 	
-	var pokejsonurl = encodeURI("./base/pokelist.json");
+	var pokejsonurl = encodeURI("https://www.odricku.cl/AdivinaQuien/base/pokelist.json");
 	request = new XMLHttpRequest();	
 	request.open('GET', pokejsonurl);
 	request.responseType = 'json';
@@ -231,8 +231,8 @@ function tachatipo(tipostr){
 	for(var i = 0; i < document.getElementsByClassName("pokevista").length; i++){
 		var pokeactual = document.getElementsByClassName("pokevista")[i];
 		
-		var pokenum = parseInt(pokeactual.id.substring(0, 3));
-		var poketipo = pokeactual.id.substring(3, pokeactual.id.length);
+		var pokenum = parseInt(pokeactual.id.substring(0, 4));
+		var poketipo = pokeactual.id.substring(4, pokeactual.id.length);
 		
 		var nombrepoke = pokeactual.name;
 		var j = 0;
@@ -315,7 +315,7 @@ function deshacer(){
 function creaficha(poke, forma){
 	
 	var opcion = document.createElement("a");
-	opcion.id = poke["id"] + poke.title;
+	opcion.id = poke["id"].padStart(4, "0") + poke.title;
 	opcion.value = 0;
 	opcion.name = poke["name"];
 	opcion.setAttribute("class", "pokevista");
@@ -472,7 +472,7 @@ function tacha2tipo(){
 function exportar(){
 
 	var lista = document.getElementsByClassName("pokevista");
-	var elem =" ";
+	var elem = "";
 	
 	var bytearr = [];
 	
@@ -482,7 +482,7 @@ function exportar(){
 			
 			for(var k = 0; k < lista.length; k++){
 				var poke = lista[k];
-				if(pokelist[i][j]["name"] == poke.name && pokelist[i][j]["title"] == poke.id.substring(3, poke.id.length) && !poke.classList.contains("oculto")){
+				if(pokelist[i][j]["name"] == poke.name && pokelist[i][j]["title"] == poke.id.substring(4, poke.id.length) && !poke.classList.contains("oculto")){
 					temp = 1;
 					k = document.getElementsByClassName("pokevista").length;
 				}
@@ -509,7 +509,7 @@ function exportar(){
 	while(bytearr[bytearr.length - 1] == "00000000"){
 		bytearr.pop();
 	}
-		
+	
 	document.getElementById("detatipo").value = "http://www.odricku.cl/AdivinaQuien?" + encode(bytearr);
 
 	veracciones();
@@ -530,11 +530,12 @@ function encode(arrbytes){
 	
 	if(exclusiones.length > 0){
 		for(var i = 0; i < exclusiones.length; i++){
-			if(exclusiones.includes(exclusiones[i] - 1)){
-				extext = extext.substring(0, extext.lastIndexOf("-")) + (parseInt(extext.substring(extext.lastIndexOf("-")) + 1));
+			if(i != 0 && exclusiones.includes(exclusiones[i] - 1)){
+				cantidad = parseInt(extext.substring(extext.lastIndexOf("-") + 1)) + 1;
+				extext = extext.substring(0, extext.lastIndexOf("-") + 1) + (cantidad);
 			}
 			else{
-				extext = extext + "," + i + "-1"; 
+				extext = extext + "," + exclusiones[i] + "-1"; 
 			}
 		}
 		extext = extext.substring(1);
@@ -553,7 +554,7 @@ function decode(base64){
 		entrada = decodeURI(base64.substring(1));
 	}
 	else{
-		entrada = base64.substring(base64.indexOf(";") + 1);
+		entrada = decodeURI(base64.substring(base64.indexOf(";") + 1));
 		exclusionesentrada = base64.substring(0, base64.indexOf(";")).split(",");
 	}
 	for(var i = 0; i < exclusionesentrada.length; i++){
@@ -573,7 +574,7 @@ function decode(base64){
 			array[i] = "00000000";
 			pos++;
 		}else{
-			array[i] = raw.charCodeAt(i - pos).toString(2);
+			array[i] = (raw.charCodeAt(i - pos).toString(2)).padStart(8, "0");
 		}
 	}
 	
