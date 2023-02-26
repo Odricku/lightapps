@@ -1,69 +1,68 @@
 <!DOCTYPE html>
 <html>
-<title>PP</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<head>
+	<title>Ligth APP</title>
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<style>
-		.navbar {
-		  overflow: hidden;
-		  background-color: #007bff;
-		  font-family: Arial, Helvetica, sans-serif;
-		  min-width: 1150px;
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<style>
+			.navbar {
+			  overflow: hidden;
+			  background-color: #007bff;
+			  font-family: Arial, Helvetica, sans-serif;
+			  min-width: 1150px;
+			}
+
+			.input {
+			  float: left;
+			  font-size: 16px;
+			  color: white;
+			  text-align: center;
+			  padding: 14px 16px;
+			  text-decoration: none
+			  
+			}
+			
+			.imgicon{
+				width: 50px;
+				filter: invert(100%);
+			}
+			
+			iframe {
+				width:100%;
+				min-width:1150px;
+				min-height:1000px;
+				transform-origin: 0% 0%;
+			}
+
 		}
 
-		.input {
-		  float: left;
-		  font-size: 16px;
-		  color: white;
-		  text-align: center;
-		  padding: 14px 16px;
-		  text-decoration: none
-		  
-		}
-		
-		iframe {
-			width:100%;
-			min-width:1150px;
-			min-height:1000px;
-			transform-origin: 0% 0%;
-		}
+		</style>
 
-	}
+	</head>
+	<body style="margin:0px 0px 0px 0px">
 
-	</style>
+		<div class="navbar">
+			<table>
+				<tbody>
+					<tr>
+						<td>
+							<input href="http://www.odricku.cl/magicroulette" type="button" name="boton" class="btn btn lg btn-primary btn-block">Ruleta Magica</input>
+						</td>
+						<td>
+							<input href="http://www.odricku.cl/adivinaquien" type="button" name="boton" class="btn btn lg btn-primary btn-block">Adivina Quien</input>
+						</td>
+						<td>
+							<input href="http://www.odricku.cl/dice" type="button" name="boton" class="btn btn lg btn-primary btn-block"><img class="imgicon" src="https://www.odricku.cl/resources/da2.png">Dudo</input>
+						</td>
+				</tbody>
+			</table>
+		</div>
 
-</head>
-<body style="margin:0px 0px 0px 0px">
+		<div>
 
-<div class="navbar">
-	<table>
-		<tbody>
-			<tr>
-				<td>
-					<input onclick="frame.src='/welcome/index.html';" type="button" name="boton" value="Odricku" class="btn btn lg btn-primary btn-block">
-				</td>
-				<td>
-					<input onclick="frame.src='/magicroulette/index.html';" type="button" name="boton" value="Ruleta Magica" class="btn btn lg btn-primary btn-block">
-				</td>
-				<td>
-					<input onclick="frame.src='/adivinaquien/index.html';" type="button" name="boton" value="Adivina Quien" class="btn btn lg btn-primary btn-block">
-				</td>
-				<td>
-					<input onclick="frame.src='/oddslector/index.html';" type="button" name="boton" value="Odds Lector" class="btn btn lg btn-primary btn-block">
-				</td>
-				<td>
-					<input onclick="frame.src='/dice/index.html';" type="button" name="boton" value="Dado Virtual" class="btn btn lg btn-primary btn-block">
-				</td>
-		</tbody>
-	</table>
-</div>
-
-<iframe id="frame" src="welcome/index.html" title="menu" frameBorder="0"></iframe>
-
-
-</body>
+		</div>
+	</body>
 </html>

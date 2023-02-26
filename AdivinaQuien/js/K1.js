@@ -261,8 +261,8 @@ function tachanotipo(tipostr){
 			for(var i = 0; i < document.getElementsByClassName("pokevista").length; i++){
 				var pokeactual = document.getElementsByClassName("pokevista")[i];
 				
-				var pokenum = parseInt(pokeactual.id.substring(0, 3));
-				var poketipo = pokeactual.id.substring(3, pokeactual.id.length);
+				var pokenum = parseInt(pokeactual.id.substring(0, 4));
+				var poketipo = pokeactual.id.substring(4, pokeactual.id.length);
 				
 				var nombrepoke = pokeactual.name;
 				
