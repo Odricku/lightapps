@@ -535,7 +535,7 @@ function encode(arrbytes){
 	
 	if(exclusiones.length > 0){
 		for(var i = 0; i < exclusiones.length; i++){
-			exclusiones.includes(exclusiones[i] - 1){
+			if(exclusiones.includes(exclusiones[i] - 1){
 				extext = extext.substring(0, extext.lastIndexOf("-")) + (parseInt(extext.substring(extext.lastIndexOf("-")) + 1);
 			}
 			else{
