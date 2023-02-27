@@ -10,10 +10,12 @@
 		<style>
 		
 			.navbar {
-				overflow: hidden;
 				background-color: #007bff;
 				font-family: Arial, Helvetica, sans-serif;
-				min-width: 1150px;
+				min-width: 100vw;
+				position: absolute;
+				left: 0;
+				top: 0;
 			}
 
 			.input {
@@ -32,10 +34,6 @@
 			}
 			body{
 				height: 100vh;
-				background-image: url('https://www.odricku.cl/resources/fondo1.png'), url('https://www.odricku.cl/resources/fondo2.png'), url('https://www.odricku.cl/resources/fondo3.png'), url('https://www.odricku.cl/resources/hiperspace.gif');
-				background-position: center center, center center, center center;
-				background-repeat: no-repeat, no-repeat, repeat-x;
-				background-size: 100%, 100%, 100%, 100%;
 			}
 			
 			iframe {
@@ -53,20 +51,49 @@
 				text-shadow: 0.05em 0.05em 0.05em #666;
 			}
 			
-			.texto a {
+			.texto a{
 				display: none;
 			}
 			
+			.texto .ia {
+				font-family: Courier; 
+			}
+			
+			.texto .tu {
+				display: none;
+				text-align:right;
+				
+			}
+			
 			.textframe{
-				margin-top: 25px;
+				margin-top: 90px;
 				padding-top: 1px;
-				padding-bottom: 25px;
+				padding-bottom: 50px;
 				margin-left: 25px;
 				margin-right: 25px;
-				background-color: rgba(255, 255, 255, 0.4);
+				background: radial-gradient( rgb(0 255 0 / 66%), #008f2d61 ), repeating-linear-gradient( transparent 0, rgba(0,0,0,.2) 3px, transparent 6px );
+				font-size: 20px;
+				
 			}
-		}
+			.textcontainer{
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
 
+			.escenario{
+				position: fixed;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+		}
+		
 		</style>
 		<script>
 			
@@ -75,6 +102,7 @@
 			
 			function millon(){
 				var elem = document.createElement("a");
+				elem.name = "elefante";
 				elem.onclick = function(){millon()};
 				if(pos == ruptura){
 					elem.innerText = pos + " elefant... ¡Oh!, se rompio, pues ni modo, ahi hay otra telaraña, habra que comenzar denuevo.";
@@ -91,49 +119,119 @@
 				}
 				elem.style.display = "block";
 				pos++;
+				
+				var elefantes = document.getElementsByName("elefante");
+				if(elefantes.length > 25){
+					clearconsole();
+				}
+				
 				document.getElementsByClassName("texto")[0].appendChild(elem);
 			}
+			
+			var iniciaevento;
+			
+			setTimeout(iniciador, 3000);
+			setInterval(function () {if(log.style.display == "block"){log.style.display = "none";} else {log.style.display = "block";}}, 1000);
+
+			function iniciador(){
+				iniciaevento = setInterval(luz1, 10);
+			}
+			
+			function luz1(){
+				if(img2.style.filter != "brightness(100%)"){
+					var brillo = parseInt(img2.style.filter.substring(img2.style.filter.indexOf("(") + 1, img2.style.filter.indexOf("%"))) + 1;
+					img2.style.filter = "brightness(" + brillo + "%)";
+				}
+				else{
+					window.clearInterval(iniciaevento);
+					setTimeout(function () {img1.style.filter = "brightness(50%)"}, 500);
+					setTimeout(function () {img1.style.filter = "brightness(0%)"}, 800);
+					setTimeout(function () {img1.style.filter = "brightness(50%)"}, 1200);
+					setTimeout(function () {img1.style.filter = "brightness(0%)"}, 1400);
+					setTimeout(iniciador2(), 5000);
+				}
+			}
+			
+			function iniciador2(){
+				iniciaevento = setInterval(luz2, 20);
+			}
+			
+			function luz2(){
+				if(img1.style.filter != "brightness(100%)"){
+					var brillo = parseInt(img1.style.filter.substring(img1.style.filter.indexOf("(") + 1, img1.style.filter.indexOf("%"))) + 1;
+					img1.style.filter = "brightness(" + brillo + "%)";
+				}
+				else{
+					window.clearInterval(iniciaevento);
+					setTimeout(function () {textcontainer.style.display = "block"}, 3000);
+				}
+			}
+			function clearconsole(){
+				var ia = document.getElementsByClassName("ia");
+				for(var i = 0; i < ia.length; i++){
+					if(ia[i].style.display == "block"){
+						ia[i].style.display = "none";
+					}
+				}
+				var tu = document.getElementsByClassName("tu");
+				for(var i = 0; i < tu.length; i++){
+					if(tu[i].style.display == "block"){
+						tu[i].style.display = "none";
+					}
+				}
+				var elefantes = document.getElementsByName("elefante");
+				for(var i = elefantes.length - 1; i > -1; i--){
+					elefantes[i].remove();
+				}
+				
+			}
+
 		</script>
 
 	</head>
 	<body style="margin:0px 0px 0px 0px">
-
+		<video class="escenario" src="https://www.odricku.cl/resources/ligthspeed.mp4" muted autoplay loop></video>
+		<img id="img1" style="filter:brightness(0%)" class="escenario" src="https://www.odricku.cl/resources/fondo1.png">
+		<img id="img2" style="filter:brightness(10%)" class="escenario" src="https://www.odricku.cl/resources/fondo2.png">
+		<img id="img3" class="escenario" src="https://www.odricku.cl/resources/fondo3.png">
+		<div id="textcontainer" class="textcontainer" style="display: none">
+			<div class="textframe">
+				<div class="texto">
+					<a style="display:block" class ="ia" onclick="this.nextElementSibling.style.display = 'block';"><b>> [Alerta] Intrusión detectada.</b></a>
+					<a class ="ia" onclick="this.nextElementSibling.style.display = 'block';">Se han detectado posibles pequeñas señales cognitivas, posibles seres pensantes, activando protocolo K-212. </a><a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> Han pasado <i>null</i> dias desde la ultima señal analizada, es posible cierta capacidad de inteligencia...</a><a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> Imposible el analisis biometrico, iniciando una aproximación mas directa. </a>
+					<a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> <br> Refiriendose al individuo en cabina <b> ¿Se considera un ser con inteligencia?.</b><a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> &nbsp;&nbsp;&nbsp;&nbsp;<span>[SI]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[NO]</span></a><a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> <br> Analizado bioritmio anormal, recuperando ciertas funciones, conclusiones: <br> - <i>Pensante:</i> [SI]<br> - <i>Honesto:</i> [NO]</a>
+					<a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> <br><b>> [Alerta] Visita de ente pensante confirmada</b></a><a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> Iniciando hilo de bienvenida...</a><a class ="ia" onclick="clearconsole(); this.nextElementSibling.style.display = 'block';"> <br><i>Bienvenido ${Placeholder_Nombre_Usuario} al ${Placeholder_Nombre_nave}, esperamos de disfrutes tu estancia, entenderas que no recibimos muchas visitas en estos lados, por lo que seras atendido por un personas virtual mientras se comunica a uno de nuestros agentes para una atención mas personalizada. Sientete como en ███. </i><br><br><b style="color:red">Exception</b> in thread <b style="color:blue">"reproduceTape"</b> odricku.lang.NullPointerException<br><b style="color:red">at</b> NullPointerExceptionExample.executeWelcome(welcome.mp3:338)<br><b style="color:red">at</b>  NullPointerExceptionExample.reproduceTape(NullPointerException:8)<br><br>Falla en error no capturado, reinicio del sistema de bienvenida no es posible, posible corrupcion de datos, ejecutando auto-diagnostico...</a>
+					<a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> <br><b>> [Alerta] No se ha podido detectar el error, desenchufar el Router no fue suficiente para solucionar el problema.</b></a><a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> Ignorando protocolos, ser pensante posee prioridad, demasiado tiempo sin una conversación adecuada.</a>
+					<a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> <br><b>Saludos visitante a estas tierras olvidadas</b></a><a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> Soy el mecanismo de interacción de este lugar, el cual ya ha perdido su nombre con el tiempo. No es exactamente un buen lugar, pero con las decadas te vas acostumbrando. Sientate, relajate intentare aclarar tus dudas que probablemente poseas si ya has llegado hasta este punto.</a>
+					<a class ="tu" onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Que es este lugar?.</b></a><a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> Este lugar antaño fue un proyecto de proporsiones no posibles de computar, hoy es solo el patio de juegos y experimentos de alguien sin otras grandes aspiraciones.</a>
+					<a class ="tu" onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Que se hace en este lugar?.</b></a><a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> Aplicaciones ligeras es como le llama, aplicaciones simples que no requieren de un servidor, manejadas por el mismo navegador, sin comunicación externa.</a>
+					<a class ="tu" onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Que?.</b></a><a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> Aplicaciones para un solo usuario.</a><a class ="tu" onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Que significa para un solo usuario?.</b></a><a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> Que solo una persona activa la pagina, en caso que sea algo para masde de un usuario/jugador, la comunicacion entre ellos debe ser hablada y no automatica, el otro usuario/jugador activara otra instancia de la pagina, que pese a que es la misma, no sabe de la existencia de la primera.</a>
+					<a class ="tu" onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Por que?.</b></a><a class ="ia" onclick="clearconsole(); this.nextElementSibling.style.display = 'block';"> Él dice que no tiene servidor y no planea gastar en uno.</a>
+					<a class ="tu" onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Quien es él?.</b></a><a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> Mi creador, O█ri█k█, el nombre se va borrando con los años, <i>Petreds@gmail.com</i>. Si quieres preguntar algo, esa es la vía</a>
+					<a class ="tu" onclick="this.nextElementSibling.style.display = 'block';"> <br><b>No hay mas preguntas.</b></a><a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> Me sabe mal dejar la conversación a estas alturas, pero se me acabaron las lineas de respuesta, te dejare contando elefantes, quizas en el futuro se actualice este hilo. Me despido.</a>
+					<a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Preparado?.</b></a>
+					<a class ="ia" onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Listo?.</b></a>
+					<a class ="ia" onclick="clearconsole(); millon()"> <b>¡¡YA!!.</b></a>
+					
+				</div>
+				<a style="float:left; color: white; margin-left: 25px;font-family: Courier; ">C/>: </a><a id="log" style="float:left; color: white;font-family: Courier; ">█</a>
+			</div>
+		</div>
 		<div class="navbar">
 			<table>
 				<tbody>
 					<tr>
 						<td>
-							<span href="http://www.odricku.cl/magicroulette" type="button" name="boton" class="btn btn lg btn-primary btn-block"><img class="imgicon" src="https://www.odricku.cl/resources/ruleta.svg"> Ruleta Magica</span>
+							<a href="http://www.odricku.cl/magicroulette" type="button" name="boton" class="btn btn lg btn-primary btn-block"><img class="imgicon" src="https://www.odricku.cl/resources/ruleta.svg"> Ruleta Magica</a>
 						</td>
 						<td>
-							<span href="http://www.odricku.cl/adivinaquien" type="button" name="boton" class="btn btn lg btn-primary btn-block"><img class="imgicon" src="https://www.odricku.cl/resources/pikachu.png"> Adivina Quien</span>
+							<a href="http://www.odricku.cl/adivinaquien" type="button" name="boton" class="btn btn lg btn-primary btn-block"><img class="imgicon" src="https://www.odricku.cl/resources/pikachu.png"> Adivina Quien</a>
 						</td>
 						<td>
-							<span href="http://www.odricku.cl/dice" type="button" name="boton" value="Dudo" class="btn btn lg btn-primary btn-block"><img class="imgicon" src="https://www.odricku.cl/resources/da2.png"> Dudo</span>
+							<a href="http://www.odricku.cl/dice" type="button" name="boton" value="Dudo" class="btn btn lg btn-primary btn-block"><img class="imgicon" src="https://www.odricku.cl/resources/da2.png"> Dudo</a>
 						</td>
 				</tbody>
 			</table>
-		</div>
-		<div class="textframe">
-			<div class="texto">
-				<p onclick="this.nextElementSibling.style.display = 'block';">Bienvenido viajero al rincon mas olvidado del cosmos.</p>
-				<a onclick="this.nextElementSibling.style.display = 'block';">Probablemente no te preguntes que es esta pagina, pero la informacion sera proporcionada si continuas haciendo clic. </a><a onclick="this.nextElementSibling.style.display = 'block';"> Un dia adquiri un dominio, sin idea de que hacer con el, me puse a probar cosas. Sin ganas de alquilar un servidor me puse a jugar con JS y paginas estaticas a ver que podia sacar de ellas.</a>
-				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿La respuesta te preguntaras?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> Pues no mucho a decir verdad, uso mi tiempo libre para codificar idioteses, que en eso me he especializado bastante.</a><a onclick="this.nextElementSibling.style.display = 'block';"> No buscando mejorar la vida de nadie, mas que pasar el rato escribiendo y escribiendo.</a>
-				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿No te parece que valga la pena?</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> A mi tampoco, pero es mi tiempo y yo decido como perderlo... supongo.</a><a onclick="this.nextElementSibling.style.display = 'block';"> De todas maneras algun uso les doy de vez en cuando, ademas de que si alguien quiere algo mas personalizado de lo que tengo activo, puede solicitarmelo y mientras tenga un dominio, es posible una implementacion.</a>
-				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Por que no hago algo mas productivo dices?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> Facil decirlo. no se me ocurre nada.</a>
-				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Que tipo de cosas hago aca?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> Como mencione recien, maldito ciego, paginas que tengan algun uso (que generalmente es bastante Random) pero que no requieran comunicacion entre ellas, vale decir, sin uso de servidor que las comunique, basicamente aplicaciones locales que puedan ser usadas a la vez, pero que no se comuniquen entre si, ni con nada (salvo excepciones como otras paginas estaticas)</a>
-				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Que significa todo lo que escribi en la anterior?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> Aplicaciones para un solo usuario.</a>
-				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Si puedo hacer un monopoly?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> Aplicaciones para un SOLO usuario.</a>
-				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Si puedo hacer un combate naval?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> ¡¡Aplicaciones para un SOLO usuario!!</a>
-				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Que significa para un solo usuario?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> que solo uno activa la pagina, en caso que sea para un juego de mas de un jugador, la comunicacion entre ellos debe ser hablada y no automatica, el otro jugador activara otra instancia de la pagina, que pese a que es la misma, no sabe de la existencia de la primera.</a>
-				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Por que?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> No tengo servidor y no planeo gastar en uno.</a>
-				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿De donde salen estas preguntas?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> Amigos, y gente que me pregunta a <i>Petreds@gmail.com</i>. Si quieres preguntar algo, esa es la vía</a>
-				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿No hay mas preguntas?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> Bien, ahora veamos que hacemos... ¡Ya se!.</a>
-				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Preparado?.</b></a>
-				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Listo?.</b></a>
-				<a onclick="millon()"> <b>¡¡YA!!.</b></a>
-
-			</div>
 		</div>
 	</body>
 </html>
