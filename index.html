@@ -8,6 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<style>
+		
 			.navbar {
 				overflow: hidden;
 				background-color: #007bff;
@@ -29,6 +30,9 @@
 				filter: invert(100%);
 				float: left;
 			}
+			body{
+				background: url("https://www.odricku.cl/resources/hiperspace.gif") center center no-repeat;
+			}
 			
 			iframe {
 				width:100%;
@@ -36,10 +40,56 @@
 				min-height:1000px;
 				transform-origin: 0% 0%;
 			}
-
+			
+			.texto {
+				margin-top: 25px;
+				margin-left: 25px;
+				margin-right: 25px;
+				color: white;
+				text-shadow: 0.05em 0.05em 0.05em #666;
+			}
+			
+			.texto a {
+				display: none;
+			}
+			
+			.textframe{
+				margin-top: 25px;
+				padding-top: 1px;
+				padding-bottom: 25px;
+				margin-left: 25px;
+				margin-right: 25px;
+				background-color: rgba(255, 255, 255, 0.4);
+			}
 		}
 
 		</style>
+		<script>
+			
+			pos = 1;
+			ruptura = Math.ceil(Math.random() * 999) + 1;
+			
+			function millon(){
+				var elem = document.createElement("a");
+				elem.onclick = function(){millon()};
+				if(pos == ruptura){
+					elem.innerText = pos + " elefant... ¡Oh!, se rompio, pues ni modo, ahi hay otra telaraña, habra que comenzar denuevo.";
+					pos = 0;
+					ruptura = Math.ceil(Math.random() * 999) + 1;
+				}
+				else{
+					if(pos > 1){
+						elem.innerText = pos + " elefantes se columpiaban sobre la tela de una araña... Como veian, que resistia, fueron a buscar a otro elefante...";
+					}
+					else{
+						elem.innerText = pos + " elefante se columpiaba sobre la tela de una araña... Como veia, que resistia, fue a buscar a otro elefante...";
+					}
+				}
+				elem.style.display = "block";
+				pos++;
+				document.getElementsByClassName("texto")[0].appendChild(elem);
+			}
+		</script>
 
 	</head>
 	<body style="margin:0px 0px 0px 0px">
@@ -59,10 +109,27 @@
 						</td>
 				</tbody>
 			</table>
+		</div>
+		<div class="textframe">
+			<div class="texto">
+				<p onclick="this.nextElementSibling.style.display = 'block';">Bienvenido viajero al rincon mas olvidado del cosmos.</p>
+				<a onclick="this.nextElementSibling.style.display = 'block';">Probablemente no te preguntes que es esta pagina, pero la informacion sera proporcionada si continuas haciendo clic. </a><a onclick="this.nextElementSibling.style.display = 'block';"> Un dia adquiri un dominio, sin idea de que hacer con el, me puse a probar cosas. Sin ganas de alquilar un servidor me puse a jugar con JS y paginas estaticas a ver que podia sacar de ellas.</a>
+				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿La respuesta te preguntaras?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> Pues no mucho a decir verdad, uso mi tiempo libre para codificar idioteses, que en eso me he especializado bastante.</a><a onclick="this.nextElementSibling.style.display = 'block';"> No buscando mejorar la vida de nadie, mas que pasar el rato escribiendo y escribiendo.</a>
+				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿No te parece que valga la pena?</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> A mi tampoco, pero es mi tiempo y yo decido como perderlo... supongo.</a><a onclick="this.nextElementSibling.style.display = 'block';"> De todas maneras algun uso les doy de vez en cuando, ademas de que si alguien quiere algo mas personalizado de lo que tengo activo, puede solicitarmelo y mientras tenga un dominio, es posible una implementacion.</a>
+				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Por que no hago algo mas productivo dices?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> Facil decirlo. no se me ocurre nada.</a>
+				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Que tipo de cosas hago aca?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> Como mencione recien, maldito ciego, paginas que tengan algun uso (que generalmente es bastante Random) pero que no requieran comunicacion entre ellas, vale decir, sin uso de servidor que las comunique, basicamente aplicaciones locales que puedan ser usadas a la vez, pero que no se comuniquen entre si, ni con nada (salvo excepciones como otras paginas estaticas)</a>
+				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Que significa todo lo que escribi en la anterior?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> Aplicaciones para un solo usuario.</a>
+				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Si puedo hacer un monopoly?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> Aplicaciones para un SOLO usuario.</a>
+				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Si puedo hacer un combate naval?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> ¡¡Aplicaciones para un SOLO usuario!!</a>
+				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Que significa para un solo usuario?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> que solo uno activa la pagina, en caso que sea para un juego de mas de un jugador, la comunicacion entre ellos debe ser hablada y no automatica, el otro jugador activara otra instancia de la pagina, que pese a que es la misma, no sabe de la existencia de la primera.</a>
+				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Por que?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> No tengo servidor y no planeo gastar en uno.</a>
+				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿De donde salen estas preguntas?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> Amigos, y gente que me pregunta a <i>Petreds@gmail.com</i>. Si quieres preguntar algo, esa es la vía</a>
+				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿No hay mas preguntas?.</b></a><a onclick="this.nextElementSibling.style.display = 'block';"> Bien, ahora veamos que hacemos... ¡Ya se!.</a>
+				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Preparado?.</b></a>
+				<a onclick="this.nextElementSibling.style.display = 'block';"> <br><b>¿Listo?.</b></a>
+				<a onclick="millon()"> <b>¡¡YA!!.</b></a>
+
 			</div>
-
-			<div>
-
 		</div>
 	</body>
 </html>
