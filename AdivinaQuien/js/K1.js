@@ -594,7 +594,7 @@ function evalforma(poke, pos){
 		return true;
 	}
 	
-	if(poke.title.indexOf("de Alola") != -1 || poke.title.indexOf("de Galar") != -1 || poke.title.indexOf("de Paldea") != -1){
+	if(poke.title.indexOf("de Alola") != -1 || poke.title.indexOf("de Galar") != -1 || poke.title.indexOf("de Hisui") != -1 || poke.title.indexOf("de Paldea") != -1){
 		if(!document.getElementById("Reg").checked) return false;
 		return true;
 	}
