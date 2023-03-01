@@ -15,11 +15,11 @@
 	</div>
 
 	<div id="editdice">
-		<input type="text" style="width:100%" id="nombreDado" placeholder="NOMBRE" value="" onchange="changesbutton()"></br>
-		<input type="color" id="colorDado" value="#FFFFFF" onchange="changesbutton()">
-		<input type="color" style="float:right" id="colorPunto" value="#FFFFFF" onchange="changesbutton()"></br></br>
+		<input type="text" style="width:100%" id="nombreDado" placeholder="NOMBRE" value="" onchange="changenombre()"></br></br>
+		<input type="color" id="colorDado" value="#FFFFFF" onchange="changecolor()">
+		<input type="color" style="float:right" id="colorPunto" value="#FFFFFF" onchange="changepunto()"></br></br>
 		<button type="button" style="width:40%" id="changesbutton" onclick="removeDado()"><img style="filter:invert(100%)" src="https://odricku.cl/resources/img/icons/trash.png" width="12px"/></button>
-		<button type="button" style="width:40%;float:right"" id="addbutton" onclick="addDado()">+</button>
+		<button type="button" style="width:40%;float:right" id="addbutton" onclick="addDado()">+</button>
 	</div>
   
     <script src="./d1.js"></script>

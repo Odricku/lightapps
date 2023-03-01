@@ -31,8 +31,9 @@ var dicefocus;
 function addDado(){
 	
 	container.innerHTML = container.innerHTML + "<div><ol onclick=\"changeName(this)\" class=\"die-list even-roll\" data-roll=\"1\" id=\"die-" + (cantDado + 1) + "\">" + xPuntitos(1) + xPuntitos(2) + xPuntitos(3) + xPuntitos(4) + xPuntitos(5) + xPuntitos(6) + "</ol><div style=\"text-align:center;width:100%;margin-top:-140px\" id=\"die-" + (cantDado + 1) + "name\"></div></div>";
+	dicefocus = document.getElementById("die-" + (cantDado + 1));
+	
 	cantDado++;
-	ocultarEdit();
 	
 }
 
@@ -57,9 +58,9 @@ function xPuntitos(num){
 function changeName(node){
 
 	dicefocus = node;
-	if(node.nextElementSibling.style.color != null)
-		colorDado.value = node.nextElementSibling.style.color;
-	colorPunto.value = node.firstChild.firstChild.style.backgroundColor;
+	if(dicefocus.firstElementChild.style.backgroundColor != "")
+		colorDado.value = dicefocus.firstElementChild.style.backgroundColor;
+	colorPunto.value = node.firstElementChild.firstElementChild.style.Color;
 	nombreDado.value = dicefocus.nextElementSibling.innerHTML
 	editdice.style.display = "block";
 	nombreDado.value = node.nextElementSibling.innerHTML;
