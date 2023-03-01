@@ -26,6 +26,7 @@ function addDado(){
 	
 	container.innerHTML = container.innerHTML + "<div><ol onclick=\"changeName(this)\" class=\"die-list even-roll\" data-roll=\"1\" id=\"die-" + (cantDado + 1) + "\">" + xPuntitos(1) + xPuntitos(2) + xPuntitos(3) + xPuntitos(4) + xPuntitos(5) + xPuntitos(6) + "</ol><div style=\"text-align:center;width:100%;margin-top:-140px\" id=\"die-" + (cantDado + 1) + "\"></div></div>";
 	cantDado++;
+	ocultarEdit();
 	
 }
 
