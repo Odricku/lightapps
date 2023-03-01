@@ -12,8 +12,9 @@ body {
 	grid-template-columns: 1fr;
 	height: 100vh;
 	overflow: hidden;
-	width: 100%;
+	width: 100vw;
 }
+
 .dice {
 	align-items: center;
 	display: grid;
@@ -220,8 +221,7 @@ button:hover {
 	z-index:6	
 }
 
-#backeditdice{
-	display: none;
+#backdice{
 	float:left; 
 	position:fixed; 
 	top:0px; 
@@ -231,4 +231,22 @@ button:hover {
 	background-color:gray; 
 	opacity:0.6; 
 	z-index:5;
+}
+
+
+#container{
+	width:100vw;
+	height:100vh
+}
+
+@media (orientation: landscape) {
+	#container{
+		transform: rotate(0deg);
+	}
+}
+
+@media (orientation: portrait) {
+	#container{
+		transform: rotate(90deg);
+	}
 }
