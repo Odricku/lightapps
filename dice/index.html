@@ -10,17 +10,15 @@
   <body>
     
     <div id="container" class="dice">
-		<div id="backdice" onclick="rollDice()"></div>
+		<a id="backdice" onclick="rollDice()"></a>
 		<div><ol class="die-list even-roll" onclick="changeName(this)" data-roll="1" id="die-1"><li class="die-item" data-side="1"><span class="dot"></span></li><li class="die-item" data-side="2"><span class="dot"></span><span class="dot"></span></li><li class="die-item" data-side="3"><span class="dot"></span><span class="dot"></span><span class="dot"></span></li><li class="die-item" data-side="4"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></li><li class="die-item" data-side="5"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></li><li class="die-item" data-side="6"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></li></ol><div style="text-align:center;width:100%;margin-top:-140px" id="die-1"></div></div>
 	</div>
+
 	<div id="editdice">
-		<label for="nombre">Nombre del dado:</label></br>
-		<input type="text" id="nombreDado" value=""></br></br>
-		<label for="colorpicker">Color del Dado:</label>
-		<input type="color" id="colorDado" value="#FFFFFF"></br></br>
-		<button type="button" id="changesbutton" onclick="changesbutton()">GUARDAR</button></br></br>
+		<input type="text" style="width:100%"id="nombreDado" placeholder="NOMBRE" value="" onchange="changesbutton()"></br>
+		<input type="color" id="colorDado" value="#FFFFFF" onchange="changesbutton()"><input type="color" style="float:right" id="colorPunto" value="#FFFFFF" onchange="changesbutton()"></br></br>
+		<button type="button" id="changesbutton" onclick="removeDado()"><img src="https://odricku.cl/adivinaquien/img/icons/trash.png"/></button>
 		<button type="button" id="changesbutton" onclick="removeDado()">BORRAR</button>
-		<button type="button" id="changesbutton" onclick="addDado()">AGREGAR</button>
 	</div>
     <script src="./d1.js"></script>
   </body>

@@ -19,8 +19,6 @@ function getRandomNumber(min, max) {
   
 }
 
-document.getElementById("roll-button").addEventListener("click", rollDice);
-
 var cantDado = 1;
 var dicefocus;
 
@@ -52,13 +50,15 @@ function xPuntitos(num){
 function changeName(node){
 
 	dicefocus = node;
+	colorDado.value = node.nextElementSibling.style.color;
+	nombreDado.value = dicefocus.nextElementSibling.innerHTML
 	editdice.style.display = "block";
 	nombreDado.value = node.nextElementSibling.innerHTML;
 
 }
 
 function changesbutton(){
-	dicefocus.nextElementSibling.innerHTML = nombreDado.value
+	dicefocus.nextElementSibling.innerHTML = nombreDado.value;
 	dicefocus.nextElementSibling.style.color = colorDado.value;
 	dicefocus.children[0].style.backgroundColor = colorDado.value;
 	dicefocus.children[1].style.backgroundColor = colorDado.value;
@@ -66,8 +66,7 @@ function changesbutton(){
 	dicefocus.children[3].style.backgroundColor = colorDado.value;
 	dicefocus.children[4].style.backgroundColor = colorDado.value;
 	dicefocus.children[5].style.backgroundColor = colorDado.value;
-	
-	ocultarEdit();
+
 }
 
 function ocultarEdit(){
