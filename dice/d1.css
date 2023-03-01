@@ -215,7 +215,6 @@ button:hover {
 	position:fixed; 
 	top:0px;
 	width: 200px; 
-	height: 205px; 
 	border-right-style: double; 
 	border-bottom-style: double;
 	z-index:6	
