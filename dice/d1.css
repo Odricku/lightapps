@@ -214,7 +214,7 @@ button:hover {
 	border-bottom-right-radius: 15px;
 	position:fixed; 
 	top:0px;
-	width: 200px; 
+	width: 115px; 
 	border-right-style: double; 
 	border-bottom-style: double;
 	z-index:6	
@@ -228,7 +228,7 @@ button:hover {
 	width:100vw; 
 	height:100vh; 
 	background-color:gray; 
-	opacity:0.6; 
+	opacity:0.6;
 }
 
 

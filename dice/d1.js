@@ -1,10 +1,16 @@
 function rollDice() {
 	const dice = [...document.querySelectorAll(".die-list")];
+	if(dice.length == 0){
+		cantDado = 0;
+		addDado();
+	}
+	else{
 	dice.forEach(die => {
 		toggleClasses(die);
 		die.dataset.roll = getRandomNumber(1, 6);
 	});
 	editdice.style.display = "none";
+	}
 }
 
 function toggleClasses(die) {
@@ -24,7 +30,7 @@ var dicefocus;
 
 function addDado(){
 	
-	container.innerHTML = container.innerHTML + "<div><ol onclick=\"changeName(this)\" class=\"die-list even-roll\" data-roll=\"1\" id=\"die-" + (cantDado + 1) + "\">" + xPuntitos(1) + xPuntitos(2) + xPuntitos(3) + xPuntitos(4) + xPuntitos(5) + xPuntitos(6) + "</ol><div style=\"text-align:center;width:100%;margin-top:-140px\" id=\"die-" + (cantDado + 1) + "\"></div></div>";
+	container.innerHTML = container.innerHTML + "<div><ol onclick=\"changeName(this)\" class=\"die-list even-roll\" data-roll=\"1\" id=\"die-" + (cantDado + 1) + "\">" + xPuntitos(1) + xPuntitos(2) + xPuntitos(3) + xPuntitos(4) + xPuntitos(5) + xPuntitos(6) + "</ol><div style=\"text-align:center;width:100%;margin-top:-140px\" id=\"die-" + (cantDado + 1) + "name\"></div></div>";
 	cantDado++;
 	ocultarEdit();
 	
@@ -51,23 +57,36 @@ function xPuntitos(num){
 function changeName(node){
 
 	dicefocus = node;
-	colorDado.value = node.nextElementSibling.style.color;
+	if(node.nextElementSibling.style.color != null)
+		colorDado.value = node.nextElementSibling.style.color;
+	colorPunto.value = node.firstChild.firstChild.style.backgroundColor;
 	nombreDado.value = dicefocus.nextElementSibling.innerHTML
 	editdice.style.display = "block";
 	nombreDado.value = node.nextElementSibling.innerHTML;
 
 }
 
-function changesbutton(){
+function changenombre(){
+	
 	dicefocus.nextElementSibling.innerHTML = nombreDado.value;
-	dicefocus.nextElementSibling.style.color = colorDado.value;
-	dicefocus.children[0].style.backgroundColor = colorDado.value;
-	dicefocus.children[1].style.backgroundColor = colorDado.value;
-	dicefocus.children[2].style.backgroundColor = colorDado.value;
-	dicefocus.children[3].style.backgroundColor = colorDado.value;
-	dicefocus.children[4].style.backgroundColor = colorDado.value;
-	dicefocus.children[5].style.backgroundColor = colorDado.value;
 
+}
+
+function changecolor(){
+	
+	dicefocus.nextElementSibling.style.color = colorDado.value;
+	[...dicefocus.querySelectorAll(".die-item")].forEach(side => {
+		side.style.backgroundColor = colorDado.value;
+	});
+
+}
+
+function changepunto(){
+	
+	[...dicefocus.querySelectorAll(".dot")].forEach(dot => {
+		dot.style.backgroundColor = colorPunto.value;
+	});
+	
 }
 
 function ocultarEdit(){
