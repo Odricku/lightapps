@@ -1,5 +1,29 @@
-var largo = 180;
+var largo = 170;
 var escala = 1;
+
+const idinterval = setInterval(function () {
+		dice = [...document.querySelectorAll(".die-list")];
+
+		dice.forEach(die => {
+			posactual = die.parentElement.style.transform.match(/-*[0-9]*px/g);
+			
+			if(parseInt(posactual[0].replace("px","")) > container.clientWidth -120)
+				die.parentElement.style.transform = die.parentElement.style.transform.replace(/-*[0-9]*px, -*[0-9]*px/, container.clientWidth -120 + "px, " + posactual[1] + "px");
+			if(parseInt(posactual[0].replace("px","")) < 100)
+				die.parentElement.style.transform = die.parentElement.style.transform.replace(/-*[0-9]*px, -*[0-9]*px/, 100 + "px, " + posactual[1] + "px");
+			
+			if(parseInt(posactual[1].replace("px","")) > container.clientHeight -180)
+				die.parentElement.style.transform = die.parentElement.style.transform.replace(/-*[0-9]*px, -*[0-9]*px/, posactual[0] + "px, " + container.clientHeight -180 + "px");
+			if(parseInt(posactual[1].replace("px","")) < 13)
+				die.parentElement.style.transform = die.parentElement.style.transform.replace(/-*[0-9]*px, -*[0-9]*px/, posactual[0] + "px, " + 13 + "px");
+			
+		})
+		}
+	, 1000);
+
+function recuperadado(){
+	
+}
 
 function rollDice() {
 	const dice = [...document.querySelectorAll(".die-list")];
