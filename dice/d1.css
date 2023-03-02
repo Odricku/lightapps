@@ -15,23 +15,21 @@ body {
 }
 
 .dice {
-	align-items: center;
-	display: grid;
-	grid-gap: 2rem;
-	grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
-	grid-template-rows: auto;
-	justify-items: center;
-	padding: 2rem;
-	perspective: 600px;
+	transform-origin: center center;
+	transition: transform 1.25s ease-out;
 }
 .die-list {
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr;
 	height: 6rem;
+	width: 6rem;
 	list-style-type: none;
 	transform-style: preserve-3d;
-	width: 6rem;
+	position: absolute;
+	top:0;
+	left:0;
+	
 }
 .even-roll {
 	transition: transform 1.5s ease-out;
@@ -226,6 +224,12 @@ button:hover {
 
 
 #container{
+	align-items: center;
+	display: grid;
+	grid-gap: 2rem;
+	grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+	grid-template-rows: auto;
+	justify-items: center;
 	width:100%;
 	height:100%
 }
