@@ -1,4 +1,5 @@
-var largo = 140;
+var largo = 150;
+var escala = 1;
 
 function rollDice() {
 	const dice = [...document.querySelectorAll(".die-list")];
@@ -8,23 +9,24 @@ function rollDice() {
 	}
 	else{
 		posiciones = [];
+		transformaciones = {};
 		redflag = false;
 		dice.forEach(die => {
-			revolver(die);
+			preparaescala(die);
 		});
 		if(redflag){
+			rollDice();
+		}else{
 			dice.forEach(die => {
-				die.parentElement.style.transform = die.parentElement.style.transform.replace(/-*[0-9]*px, -*[0-9]*px/, "0px, 0px");
+				lanzar(die, true);
 			});
 		}
 	editdice.style.display = "none";
 	}
 }
 
-function revolver(die){
+function preparaescala(die){
 	
-	toggleClasses(die);
-	die.dataset.roll = getRandomNumber(1, 6);
 	var pos = die.parentElement.getBoundingClientRect();
 	var posactual = die.parentElement.style.transform.match(/-*[0-9]*px/g);
 		
@@ -35,7 +37,13 @@ function revolver(die){
 		var posx = getRandomNumber(100, container.clientWidth - 120);
 		var posy = getRandomNumber(13, container.clientHeight - 180);
 		var equis = posx - pos.x + parseInt(posactual[0].replace("px",""));
+		if(equis > container.clientWidth -120){
+			equis = container.clientWidth -120;
+		}
 		var ygriega = posy - pos.y + parseInt(posactual[1].replace("px",""));
+		if(ygriega > container.clientHeight -180){
+			ygriega = container.clientHeight - 180;
+		}
 		var angulo = getRandomNumber(0, 45);
 	
 		cont = 0;
@@ -60,21 +68,33 @@ function revolver(die){
 		
 		if(cont == 0){
 			fc["id"] = die.id;
+			transformaciones[die.id] = die.parentElement.style.transform.replace(/-*[0-9]*deg/, angulo + "deg").replace(/-*[0-9]*px, -*[0-9]*px/, Math.trunc(equis) + "px, " + Math.trunc(ygriega) + "px").replace(/scale\(.*\)/, "scale(" + escala + ")");
 			posiciones.push(fc);
-			die.parentElement.style.transform = die.parentElement.style.transform.replace(/-*[0-9]*deg/, angulo + "deg").replace(/-*[0-9]*px, -*[0-9]*px/, Math.trunc(equis) + "px, " + Math.trunc(ygriega) + "px");
+			die.parentElement.style.transform = 
 			flag = false;
 		}
 		if(global >= 50){
-			die.parentElement.style.transform = die.parentElement.style.transform.replace(/-*[0-9]*deg/, angulo + "deg").replace(/-*[0-9]*px, -*[0-9]*px/, "0px, 0px");
-			flag = false;
+			escala = escala - 0.1;
+			largo = largo * escala;
 			redflag = true;
+			flag = false;
 		}
 	}
+}
+
+function lanzar(die, lanzamiento){
+	if(lanzamiento){
+		toggleClasses(die);
+		die.dataset.roll = getRandomNumber(1, 6);
+	}
+	die.parentElement.style.transform = transformaciones[die.id];
+	
 }
 
 var redflag = false;
 
 var posiciones = [];
+var transformaciones = {};
 
 function centros(posicion, fc){
 	
@@ -199,7 +219,7 @@ function addDado(){
 	dice.style.cssFloat = "left";
 	dice.style.top = "0";
 	dice.style.left = "0";
-	dice.style.transform = "translate(0px,0px) rotate(" + getRandomNumber(0,45) + "deg)";
+	dice.style.transform = "translate(0px,0px) rotate(0deg) scale(" + escala + ")";
 		
 	var forma = document.createElement("ol");
 	forma.setAttribute("onclick","changeName(this)");
@@ -234,16 +254,22 @@ function addDado(){
 	cantDado++;
 	
 	const dados = [...document.querySelectorAll(".die-list")];
+
+	redflag = true;
 	
-	dados.forEach(die => {
-		var pos = die.parentElement.getBoundingClientRect();
-		var posactual = die.parentElement.style.transform.match(/-*[0-9]*px/g);
-		var equis = getRandomNumber(100, container.clientWidth - 120) - pos.x + parseInt(posactual[0].replace("px",""));
-		var ygriega = getRandomNumber(13, container.clientHeight - 180) - pos.y + parseInt(posactual[1].replace("px",""));
-		
-		die.parentElement.style.transform = die.parentElement.style.transform.replace(/-*[0-9]*deg/, getRandomNumber(0, 45) + "deg").replace(/-*[0-9]*px, -*[0-9]*px/, Math.trunc(equis) + "px, " + Math.trunc(ygriega) + "px");
-	});
-	
+	while(redflag){
+		redflag = false;
+		posiciones = [];
+		transformaciones = {};
+		dados.forEach(die => {
+			preparaescala(die);
+		});
+		if(!redflag){
+			dados.forEach(die => {
+				lanzar(die, false);
+			});
+		}
+	}
 
 }
 
