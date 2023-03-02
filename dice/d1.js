@@ -1,29 +1,6 @@
 var largo = 170;
 var escala = 1;
 
-const idinterval = setInterval(function () {
-		dice = [...document.querySelectorAll(".die-list")];
-
-		dice.forEach(die => {
-			posactual = die.parentElement.style.transform.match(/-*[0-9]*px/g);
-			
-			if(parseInt(posactual[0].replace("px","")) > container.clientWidth -120)
-				die.parentElement.style.transform = die.parentElement.style.transform.replace(/-*[0-9]*px, -*[0-9]*px/, container.clientWidth -120 + "px, " + posactual[1] + "px");
-			if(parseInt(posactual[0].replace("px","")) < 100)
-				die.parentElement.style.transform = die.parentElement.style.transform.replace(/-*[0-9]*px, -*[0-9]*px/, 100 + "px, " + posactual[1] + "px");
-			
-			if(parseInt(posactual[1].replace("px","")) > container.clientHeight -180)
-				die.parentElement.style.transform = die.parentElement.style.transform.replace(/-*[0-9]*px, -*[0-9]*px/, posactual[0] + "px, " + container.clientHeight -180 + "px");
-			if(parseInt(posactual[1].replace("px","")) < 13)
-				die.parentElement.style.transform = die.parentElement.style.transform.replace(/-*[0-9]*px, -*[0-9]*px/, posactual[0] + "px, " + 13 + "px");
-			
-		})
-		}
-	, 1000);
-
-function recuperadado(){
-	
-}
 
 function rollDice() {
 	const dice = [...document.querySelectorAll(".die-list")];
@@ -94,12 +71,10 @@ function preparaescala(die){
 			fc["id"] = die.id;
 			transformaciones[die.id] = die.parentElement.style.transform.replace(/-*[0-9]*deg/, angulo + "deg").replace(/-*[0-9]*px, -*[0-9]*px/, Math.trunc(equis) + "px, " + Math.trunc(ygriega) + "px").replace(/scale\(.*\)/, "scale(" + escala + ")");
 			posiciones.push(fc);
-			die.parentElement.style.transform = 
 			flag = false;
 		}
 		if(global >= 50){
 			escala = escala - 0.1;
-			largo = largo * escala;
 			redflag = true;
 			flag = false;
 		}
@@ -122,7 +97,7 @@ var transformaciones = {};
 
 function centros(posicion, fc){
 	
-	if(Math.pow((posicion.n.x + posicion.s.x)/2 - (fc.n.x + fc.s.x)/2 , 2) + Math.pow((posicion.n.y + posicion.s.y)/2 - (fc.n.y + fc.s.y)/2 , 2) <= Math.pow(largo, 2))
+	if(Math.pow((posicion.n.x + posicion.s.x)/2 - (fc.n.x + fc.s.x)/2 , 2) + Math.pow((posicion.n.y + posicion.s.y)/2 - (fc.n.y + fc.s.y)/2 , 2) <= Math.pow(largo * escala, 2))
 		return true;
 	return false;
 	
@@ -132,16 +107,16 @@ function inside(x, y , pos){
 	
 	var contlargos = 0;
 	
-	if(Math.pow(x - pos.n.x, 2) + Math.pow(y - pos.n.y,2) <= 2* Math.pow(largo, 2)){
+	if(Math.pow(x - pos.n.x, 2) + Math.pow(y - pos.n.y,2) <= 2* Math.pow(largo * escala, 2)){
 		contlargos++;
 	}
-	if(Math.pow(x - pos.e.x, 2) + Math.pow(y - pos.e.y,2) <= 2* Math.pow(largo, 2)){
+	if(Math.pow(x - pos.e.x, 2) + Math.pow(y - pos.e.y,2) <= 2* Math.pow(largo * escala, 2)){
 		contlargos++;
 	} 
-	if(Math.pow(x - pos.o.x, 2) + Math.pow(y - pos.o.y,2) <= 2* Math.pow(largo, 2)){
+	if(Math.pow(x - pos.o.x, 2) + Math.pow(y - pos.o.y,2) <= 2* Math.pow(largo * escala, 2)){
 		contlargos++;
 	} 
-	if(Math.pow(x - pos.s.x, 2) + Math.pow(y - pos.s.y,2) <= 2* Math.pow(largo, 2)){
+	if(Math.pow(x - pos.s.x, 2) + Math.pow(y - pos.s.y,2) <= 2* Math.pow(largo * escala, 2)){
 		contlargos++
 	}
 	if(contlargos >= 3){
@@ -196,7 +171,7 @@ function choque(){
 	
 	dice.forEach(die => {
 		dice.forEach(die2 => {
-			if(die.id != die2.id && Math.abs(die.parentElement.getBoundingClientRect().x - die2.parentElement.getBoundingClientRect().x) + Math.abs(die.parentElement.getBoundingClientRect().y - die2.parentElement.getBoundingClientRect().y) < largo){
+			if(die.id != die2.id && Math.abs(die.parentElement.getBoundingClientRect().x - die2.parentElement.getBoundingClientRect().x) + Math.abs(die.parentElement.getBoundingClientRect().y - die2.parentElement.getBoundingClientRect().y) < largo * escala){
 				revolver(die);
 			}
 		});
@@ -211,9 +186,9 @@ function getfuturecoords(angulo, posx, posy){
 	
 	return {
 		n:{x: posx, y: posy},
-		e:{x: Math.trunc(posx + largo * Math.cos(Math.PI * angulo/180)), y: Math.trunc(posy + largo * Math.sin(Math.PI * angulo/180))},
-		o:{x: Math.trunc(posx - largo * Math.sin(Math.PI * angulo/180)), y: Math.trunc(posy + largo * Math.cos(Math.PI * angulo/180))},
-		s:{x: Math.trunc(posx - largo * Math.sin(Math.PI * angulo/180) + largo * Math.cos(Math.PI * angulo/180)), y: Math.trunc(posy + largo * Math.cos(Math.PI * angulo/180) + largo * Math.sin(Math.PI * angulo/180))}
+		e:{x: Math.trunc(posx + largo * escala * Math.cos(Math.PI * angulo/180)), y: Math.trunc(posy + largo * escala * Math.sin(Math.PI * angulo/180))},
+		o:{x: Math.trunc(posx - largo * escala * Math.sin(Math.PI * angulo/180)), y: Math.trunc(posy + largo * escala * Math.cos(Math.PI * angulo/180))},
+		s:{x: Math.trunc(posx - largo * escala * Math.sin(Math.PI * angulo/180) + largo * escala * Math.cos(Math.PI * angulo/180)), y: Math.trunc(posy + largo * escala * Math.cos(Math.PI * angulo/180) + largo * escala * Math.sin(Math.PI * angulo/180))}
 	};
 	
 	
@@ -352,3 +327,4 @@ function changepunto(){
 function ocultarEdit(){
 	editdice.style.display = "none";
 }
+
