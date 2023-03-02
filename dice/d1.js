@@ -1,4 +1,4 @@
-var largo = 150;
+var largo = 160;
 var escala = 1;
 
 function rollDice() {
