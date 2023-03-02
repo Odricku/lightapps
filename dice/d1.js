@@ -1,4 +1,4 @@
-var largo = 170;
+var largo = 130;
 var escala = 1;
 
 
@@ -16,8 +16,11 @@ function rollDice() {
 			preparaescala(die);
 		});
 		if(redflag){
+			escala = escala - 0.1;
 			rollDice();
 		}else{
+			if(escala < 1)
+				escala = escala + 0.1;
 			dice.forEach(die => {
 				lanzar(die, true);
 			});
@@ -73,8 +76,7 @@ function preparaescala(die){
 			posiciones.push(fc);
 			flag = false;
 		}
-		if(global >= 50){
-			escala = escala - 0.1;
+		if(global >= 100){
 			redflag = true;
 			flag = false;
 		}
@@ -166,21 +168,6 @@ function dibujadots(posi){
 	
 }
 
-function choque(){
-	const dice = [...document.querySelectorAll(".die-list")];
-	
-	dice.forEach(die => {
-		dice.forEach(die2 => {
-			if(die.id != die2.id && Math.abs(die.parentElement.getBoundingClientRect().x - die2.parentElement.getBoundingClientRect().x) + Math.abs(die.parentElement.getBoundingClientRect().y - die2.parentElement.getBoundingClientRect().y) < largo * escala){
-				revolver(die);
-			}
-		});
-	});
-	
-	return false;
-	
-}
-
 
 function getfuturecoords(angulo, posx, posy){
 	
@@ -264,9 +251,14 @@ function addDado(){
 			preparaescala(die);
 		});
 		if(!redflag){
+			if(escala < 1)
+				escala = escala + 0.1;
 			dados.forEach(die => {
 				lanzar(die, false);
 			});
+		}
+		else{
+			escala = escala - 0.1;
 		}
 	}
 
