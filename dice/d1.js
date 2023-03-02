@@ -32,7 +32,7 @@ function rollDice() {
 function preparaescala(die){
 	
 	var pos = die.parentElement.getBoundingClientRect();
-	var posactual = die.parentElement.style.transform.match(/-*[0-9]*px/g);
+	var posactual = die.parentElement.style.transform.match(/-*[0-9\.]*px/g);
 		
 	flag = true;
 	global = 0;
@@ -72,7 +72,7 @@ function preparaescala(die){
 		
 		if(cont == 0){
 			fc["id"] = die.id;
-			transformaciones[die.id] = die.parentElement.style.transform.replace(/-*[0-9]*deg/, angulo + "deg").replace(/-*[0-9]*px, -*[0-9]*px/, Math.trunc(equis) + "px, " + Math.trunc(ygriega) + "px").replace(/scale\(.*\)/, "scale(" + escala + ")");
+			transformaciones[die.id] = die.parentElement.style.transform.replace(/-*[0-9\.]*deg/, angulo + "deg").replace(/-*[0-9\.]*px, -*[0-9\.]*px/, Math.trunc(equis) + "px, " + Math.trunc(ygriega) + "px").replace(/scale\(.*\)/, "scale(" + escala + ")");
 			posiciones.push(fc);
 			flag = false;
 		}
@@ -199,6 +199,12 @@ var dicefocus;
 
 function addDado(){
 	
+	dados = [...document.querySelectorAll(".die-list")];
+
+	dados.forEach(die => {
+		die.parentElement.style.transform = die.parentElement.style.transform.replace(/-*[0-9\.]*px, -*[0-9\.]*px/, "0px, 0px");
+	});
+	
 	var dice = document.createElement("div");
 	
 	dice.classList.add("dice");
@@ -238,8 +244,8 @@ function addDado(){
 	
 	dicefocus = forma;
 	cantDado++;
-	
-	const dados = [...document.querySelectorAll(".die-list")];
+
+	dados = [...document.querySelectorAll(".die-list")];
 
 	redflag = true;
 	
@@ -254,7 +260,7 @@ function addDado(){
 			if(escala < 1)
 				escala = escala + 0.1;
 			dados.forEach(die => {
-				lanzar(die, false);
+				die.parentElement.style.transform = transformaciones[die.id].replace(/-*[0-9\.]*px, -*[0-9\.]*px/, "0px, 0px").replace(/-*[0-9\.]*deg/, "0deg");
 			});
 		}
 		else{
