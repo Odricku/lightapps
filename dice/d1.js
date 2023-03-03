@@ -1,6 +1,5 @@
-var largo = 130;
+var largo = 128;
 var escala = 1;
-
 
 function rollDice() {
 	const dice = [...document.querySelectorAll(".die-list")];
@@ -32,37 +31,29 @@ function rollDice() {
 function preparaescala(die){
 	
 	var pos = die.parentElement.getBoundingClientRect();
+	
 	var posactual = die.parentElement.style.transform.match(/-*[0-9\.]*px/g);
 		
 	flag = true;
 	global = 0;
 	
 	while(flag){
-		var posx = getRandomNumber(100, container.clientWidth - 120);
-		var posy = getRandomNumber(13, container.clientHeight - 180);
-		var equis = posx - pos.x + parseInt(posactual[0].replace("px",""));
-		if(equis > container.clientWidth -120){
-			equis = container.clientWidth -120;
-		}
-		var ygriega = posy - pos.y + parseInt(posactual[1].replace("px",""));
-		if(ygriega > container.clientHeight -180){
-			ygriega = container.clientHeight - 180;
-		}
 		var angulo = getRandomNumber(0, 45);
-	
+		
+		var posx = getRandomNumber(Math.min(0 + angulo * 1.4 * largo * escala/90,), container.clientWidth - 1.4 * largo * escala);
+		var posy = getRandomNumber(0, container.clientHeight - Math.max(largo * escala, angulo * 1.4 * largo * escala/45));
+		var equis = Math.min(posx - pos.x + parseInt(posactual[0].replace("px","")), container.clientWidth - 1.4 * largo * escala);
+		var ygriega = Math.min(posy - pos.y + parseInt(posactual[1].replace("px","")), container.clientHeight - Math.max(largo * escala, angulo * 1.4 * largo * escala/45));
+
 		cont = 0;
 		
 		var fc = getfuturecoords(angulo, posx, posy);
 		posiciones.forEach(posicion => {
-			if(inside(fc.n.x, fc.n.y, posicion)
+			if(centros(posicion, fc) 
+				||inside(fc.n.x, fc.n.y, posicion)
 				||inside(fc.e.x, fc.e.y, posicion)
 				||inside(fc.o.x, fc.o.y, posicion)
 				||inside(fc.s.x, fc.s.y, posicion)
-				||inside(posicion.n.x, posicion.n.y, fc)
-				||inside(posicion.e.x, posicion.e.y, fc)
-				||inside(posicion.o.x, posicion.o.y, fc)
-				||inside(posicion.s.x, posicion.s.y, fc)
-				||centros(posicion, fc)
 			){
 				cont++;
 			}
@@ -140,26 +131,26 @@ function dibujadots(posi){
 	dot1.style.position = "absolute";
 	dot1.classList.add("dot");
 	dot1.style.float = "left";
-	dot1.style.top = posiciones[posi].n.y + "px";
-	dot1.style.left = posiciones[posi].n.x + "px";
+	dot1.style.top = posiciones[posi].n.y - 10 + "px";
+	dot1.style.left = posiciones[posi].n.x - 10 + "px";
 	
 	dot2.style.position = "absolute";
 	dot2.classList.add("dot");
 	dot2.style.float = "left";
-	dot2.style.top = posiciones[posi].e.y + "px";
-	dot2.style.left = posiciones[posi].e.x + "px";
+	dot2.style.top = posiciones[posi].e.y - 10 + "px";
+	dot2.style.left = posiciones[posi].e.x - 10 + "px";
 	
 	dot3.style.position = "absolute";
 	dot3.classList.add("dot");
 	dot3.style.float = "left";
-	dot3.style.top = posiciones[posi].o.y + "px";
-	dot3.style.left = posiciones[posi].o.x + "px";
+	dot3.style.top = posiciones[posi].o.y - 10 + "px";
+	dot3.style.left = posiciones[posi].o.x - 10 + "px";
 	
 	dot4.style.position = "absolute";
 	dot4.classList.add("dot");
 	dot4.style.float = "left";
-	dot4.style.top = posiciones[posi].s.y + "px";
-	dot4.style.left = posiciones[posi].s.x + "px";
+	dot4.style.top = posiciones[posi].s.y - 10 + "px";
+	dot4.style.left = posiciones[posi].s.x - 10 + "px";
 	
 	document.getElementsByTagName("body")[0].appendChild(dot1);
 	document.getElementsByTagName("body")[0].appendChild(dot2);

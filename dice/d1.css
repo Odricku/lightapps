@@ -16,7 +16,7 @@ body {
 
 .dice {
 	box-shadow: 45px 45px 80px 60px black;
-	transform-origin: center center;
+	transform-origin: 0 0;
 	transition: transform 1.25s ease-out;
 }
 .die-list {
@@ -29,8 +29,6 @@ body {
 	list-style-type: none;
 	transform-style: preserve-3d;
 	position: absolute;
-	top:0;
-	left:0;
 	
 }
 .even-roll {
@@ -70,36 +68,46 @@ body {
 	transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg);
 }
 .even-roll[data-roll="2"] {
+	margin-top:16px;
 	transform: rotateX(450deg) rotateY(720deg) rotateZ(360deg);
 }
 .even-roll[data-roll="3"] {
+	margin-left: 16px;
 	transform: rotateX(360deg) rotateY(630deg) rotateZ(360deg);
 }
 .even-roll[data-roll="4"] {
+	margin-left:16px;
 	transform: rotateX(360deg) rotateY(810deg) rotateZ(360deg);
 }
 .even-roll[data-roll="5"] {
+	margin-top: 16px;
 	transform: rotateX(270deg) rotateY(720deg) rotateZ(360deg);
 }
 .even-roll[data-roll="6"] {
+	margin-left: 32px;
 	transform: rotateX(360deg) rotateY(900deg) rotateZ(360deg);
 }
 .odd-roll[data-roll="1"] {
 	transform: rotateX(-360deg) rotateY(-720deg) rotateZ(-360deg);
 }
 .odd-roll[data-roll="2"] {
+	margin-top:16px;
 	transform: rotateX(-270deg) rotateY(-720deg) rotateZ(-360deg);
 }
 .odd-roll[data-roll="3"] {
+	margin-left: 16px;
 	transform: rotateX(-360deg) rotateY(-810deg) rotateZ(-360deg);
 }
 .odd-roll[data-roll="4"] {
+	margin-left: 16px;
 	transform: rotateX(-360deg) rotateY(-630deg) rotateZ(-360deg);
 }
 .odd-roll[data-roll="5"] {
+	margin-top: 16px;
 	transform: rotateX(-450deg) rotateY(-720deg) rotateZ(-360deg);
 }
 .odd-roll[data-roll="6"] {
+	margin-left: 32px;
 	transform: rotateX(-360deg) rotateY(-900deg) rotateZ(-360deg);
 }
 [data-side="1"] {
