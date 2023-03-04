@@ -314,24 +314,56 @@ button {
 
 }
 
-@keyframes pulsate {
+@media screen and (min-width: 801px) {
+
+	.neon{
+		animation: pulsate 3s infinite alternate;
+	}
+
+	.on{
+		animation: pulsatext 3s infinite alternate;
+	}
+
+	@keyframes pulsate {
     
-100% {
-	box-shadow:
-		0 0 3px,
-		0 0 6px #fff,
-		0 0 9px,
-		0 0 12px,
-		inset 0 0 3px #fff,
-		inset 0 0 6px;
-}
+		100% {
+			box-shadow:
+				0 0 3px,
+				0 0 6px #fff,
+				0 0 9px,
+				0 0 12px,
+				inset 0 0 3px #fff,
+				inset 0 0 6px;
+		}
+		  
+		0% {
+			box-shadow:
+				0 0 2px,
+				0 0 4px,
+				0 0 6px #fff,
+				0 0 8px,
+				inset 0 0 1px,
+				inset 0 0 3px #fff;
+		}
+	}
+
+	@keyframes pulsatext {
+		
+		100% {
+			text-shadow:
+				0 0 2px #fff,
+				0 0 5px,
+				0 0 11px,
+				0 0 20px;
+		}
+		  
+		0% {	
+			text-shadow:
+				0 0 1px,
+				0 0 2px,
+				0 0 3px #fff,
+				0 0 5px;
+		}
+	}
   
-0% {
-    box-shadow:
-		0 0 2px,
-		0 0 4px,
-		0 0 6px #fff,
-		0 0 8px,
-		inset 0 0 1px,
-		inset 0 0 3px #fff;
 }
