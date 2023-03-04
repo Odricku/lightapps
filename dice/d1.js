@@ -358,6 +358,7 @@ function doneon(){
 			lado.style.backgroundColor = "";
 		});
 		container.classList.remove("mesa");
+		container.classList.add("neonback");
 		editdice.classList.add("neon");
 		onoff.classList.remove("off");
 		onoff.classList.add("on");
@@ -371,6 +372,7 @@ function doneon(){
 			lado.classList.remove("neon");
 			lado.style.backgroundColor = lado.style.color;
 		});
+		container.classList.remove("neonback");
 		container.classList.add("mesa");
 		editdice.classList.remove("neon");
 		onoff.classList.add("off");
