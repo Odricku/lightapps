@@ -5,6 +5,8 @@ var neon = false;
 var movs = ["transition: transform 1.25s ease-out;", "transition: transform 1s ease 0.25s;", ""]
 
 function rollDice() {
+	backdice.setAttribute("onclick","");
+	setTimeout(function(){ backdice.setAttribute("onclick","rollDice()"); }, 2000);
 	const dice = [...document.querySelectorAll(".die-list")];
 	if(dice.length == 0){
 		cantDado = 0;
