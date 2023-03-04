@@ -1,5 +1,8 @@
 var largo = 128;
 var escala = 1;
+var neon = false;
+
+var movs = ["transition: transform 1.25s ease-out;", "transition: transform 1s ease 0.25s;", ""]
 
 function rollDice() {
 	const dice = [...document.querySelectorAll(".die-list")];
@@ -38,10 +41,10 @@ function preparaescala(die){
 	global = 0;
 	
 	while(flag){
-		var angulo = getRandomNumber(0, 45);
+		var angulo = getRandomNumber(-45, 45);
 		
-		var posx = getRandomNumber(Math.min(0 + angulo * 1.4 * largo * escala/90,), container.clientWidth - 1.4 * largo * escala);
-		var posy = getRandomNumber(0, container.clientHeight - Math.max(largo * escala, angulo * 1.4 * largo * escala/45));
+		var posx = getRandomNumber(Math.max(0, 0 + angulo * 1.4 * largo * escala/90), container.clientWidth - 1.4 * largo * escala);
+		var posy = getRandomNumber(Math.max(0, - angulo * 1.4 * largo * escala/90), container.clientHeight - Math.max(largo * escala, angulo * 1.4 * largo * escala/45));
 		var equis = Math.min(posx - pos.x + parseInt(posactual[0].replace("px","")), container.clientWidth - 1.4 * largo * escala);
 		var ygriega = Math.min(posy - pos.y + parseInt(posactual[1].replace("px","")), container.clientHeight - Math.max(largo * escala, angulo * 1.4 * largo * escala/45));
 
@@ -185,7 +188,7 @@ function getRandomNumber(min, max) {
   
 }
 
-var cantDado = 1;
+var cantDado = 0;
 var dicefocus;
 
 function addDado(){
@@ -199,9 +202,6 @@ function addDado(){
 	var dice = document.createElement("div");
 	
 	dice.classList.add("dice");
-	dice.style.cssFloat = "left";
-	dice.style.top = "0";
-	dice.style.left = "0";
 	dice.style.transform = "translate(0px,0px) rotate(0deg) scale(" + escala + ")";
 		
 	var forma = document.createElement("ol");
@@ -220,11 +220,34 @@ function addDado(){
 	for(var i = 1; i < 7; i++){
 		var face = document.createElement("li");
 		face.classList.add("die-item");
+		if(cantDado == 0){
+			face.style.color = "#fefefe";
+		}
+		else{
+			face.style.color = colorDado.value;
+		}
+		if(!neon){
+			face.style.backgroundColor = colorDado.value;
+		}else{
+			face.classList.add("neon");
+		}
+		
 		face.dataset.side = i.toString();
 
 		for(var k = 0; k < i;k++){
 			var dot = document.createElement("span");
 			dot.classList.add("dot");
+			if(cantDado == 0){
+				dot.style.color = "#676767";
+				dot.style.backgroundColor = "#676767";
+			}
+			else{
+				dot.style.color = colorPunto.value;
+				dot.style.backgroundColor = colorPunto.value;
+				if(neon){
+					dot.classList.add("neon");
+				}
+			}
 			face.appendChild(dot);
 		}
 		forma.appendChild(face);
@@ -271,22 +294,23 @@ function removeDado(){
 function changeName(node){
 
 	dicefocus = node;
-	if(dicefocus.style.backgroundColor != ""){
-		colorDado.value = dicefocus.style.backgroundColor;
+	if(dicefocus.firstElementChild.style.color != ""){
+		var color = dicefocus.firstElementChild.style.color.replace("rgb(","").replace(")").split(",");
+		colorDado.value = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
 	}
 	else{
 		colorDado.value = "#FFFFFF";
 	}
-	if(dicefocus.firstElementChild.firstElementChild.style.Color != ""){
-		colorPunto.value = dicefocus.firstElementChild.firstElementChild.style.Color
+	if(dicefocus.firstElementChild.firstElementChild.style.color != ""){
+		var color = dicefocus.firstElementChild.firstElementChild.style.color.replace("rgb(","").replace(")").split(",");
+		colorPunto.value = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
+		
 	}
 	else{
-		colorPunto.value = "#676767";
+		colorPunto.value = "#FFFFFF";
 	}
-	colorPunto.value = dicefocus.firstElementChild.firstElementChild.style.Color;
 	nombreDado.value = dicefocus.nextElementSibling.innerHTML
 	editdice.style.display = "block";
-	nombreDado.value = dicefocus.nextElementSibling.innerHTML;
 
 }
 
@@ -300,7 +324,10 @@ function changecolor(){
 	
 	dicefocus.nextElementSibling.style.color = colorDado.value;
 	[...dicefocus.querySelectorAll(".die-item")].forEach(side => {
-		side.style.backgroundColor = colorDado.value;
+		if(!neon){
+			side.style.backgroundColor = colorDado.value;
+		}
+		side.style.color = colorDado.value;
 	});
 
 }
@@ -309,6 +336,7 @@ function changepunto(){
 	
 	[...dicefocus.querySelectorAll(".dot")].forEach(dot => {
 		dot.style.backgroundColor = colorPunto.value;
+		dot.style.color = colorPunto.value;
 	});
 	
 }
@@ -317,3 +345,36 @@ function ocultarEdit(){
 	editdice.style.display = "none";
 }
 
+function doneon(){
+	if(!neon){
+		neon = true;
+		[...document.querySelectorAll(".dot")].forEach(dot => {
+			dot.classList.add("neon");
+		});
+		[...document.querySelectorAll(".die-item")].forEach(lado => {
+			lado.classList.add("neon");
+			lado.style.backgroundColor = "";
+		});
+		container.classList.remove("mesa");
+		editdice.classList.add("neon");
+		onoff.classList.remove("off");
+		onoff.classList.add("on");
+	}
+	else{
+		neon = false;
+		[...document.querySelectorAll(".dot")].forEach(dot => {
+			dot.classList.remove("neon");
+		});
+		[...document.querySelectorAll(".die-item")].forEach(lado => {
+			lado.classList.remove("neon");
+			lado.style.backgroundColor = lado.style.color;
+		});
+		container.classList.add("mesa");
+		editdice.classList.remove("neon");
+		onoff.classList.add("off");
+		onoff.classList.remove("on");
+	}
+	
+}
+
+addDado();

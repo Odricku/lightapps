@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Dice Roll</title>
     <link rel="stylesheet" href="./d1.css" />
+	<link href='https://fonts.googleapis.com/css?family=Sacramento:400' rel='stylesheet' type='text/css'>
   </head>
   <body>
     
-    <div id="container">
+    <div id="container" class="mesa">
 		<a id="backdice" onclick="rollDice()"></a>
-		<div class="dice" style="transform:translate(0px, 0px) rotate(0deg) scale(1)"><ol class="die-list even-roll" onclick="changeName(this)" data-roll="1" id="die-1"><li class="die-item" data-side="1"><span class="dot"></span></li><li class="die-item" data-side="2"><span class="dot"></span><span class="dot"></span></li><li class="die-item" data-side="3"><span class="dot"></span><span class="dot"></span><span class="dot"></span></li><li class="die-item" data-side="4"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></li><li class="die-item" data-side="5"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></li><li class="die-item" data-side="6"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></li></ol><div style="text-align:center;width:100%;margin-top:-140px" id="die-1name"></div></div>
 	</div>
 
 	<div id="editdice">
@@ -20,7 +20,9 @@
 		<input type="color" style="float:right" id="colorPunto" value="#FFFFFF" onchange="changepunto()"></br></br>
 		<button type="button" style="width:40%" id="changesbutton" onclick="removeDado()"><img style="filter:invert(100%)" src="https://odricku.cl/resources/img/icons/trash.png" width="12px"/></button>
 		<button type="button" style="width:40%;float:right" id="addbutton" onclick="addDado()">+</button>
+		<div><span id="onoff" onclick="doneon()" class="sign off"><u><b>&nbsp;&nbsp;&nbsp;neon ligth</b></u></span></div>
 	</div>
+	
   
     <script src="./d1.js"></script>
   </body>
