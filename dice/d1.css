@@ -287,7 +287,7 @@ button {
 }
 
 .on{
-	animation: pulsatext 1.5s infinite alternate;
+	animation: pulsatext 3s infinite alternate;
 	color: #bc13fe;
 	text-shadow:
 		0 0 4px #fff,
@@ -299,7 +299,7 @@ button {
 .neon{
 	border-radius: 0%;
 	background-color: #111111;
-	animation: pulsate 1.5s infinite alternate;
+	animation: pulsate 3s infinite alternate;
 	margin-top: 1px;
 	margin-left: 1px;
 	box-shadow: 
