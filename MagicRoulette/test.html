@@ -276,7 +276,7 @@
 						
 			if (listTrozos.length > 3){
 						//i
-				pizza.style.transform = "translate(-1000px, " + (-109 - 800/listTrozos.length) + "px) scale(0.33)";
+				pizza.style.transform = "translate(-1000px, " + (-100 - 800/listTrozos.length) + "px) scale(0.33)";
 				
 				for (var i = 0; i < listTrozos.length; i++){
 					listTrozos[i].style.height =  2* apotema * Math.tan(Math.PI/listTrozos.length) + "px";
@@ -306,86 +306,38 @@
 		
     </script>
 	<style>
-	.slice {
-		height: 100%;
-		width: 2326px;
-		transform-origin: 0% 50% 0;
-		transform: perspective(10em) translateZ(4rem) rotateY(8.53deg);
-	}
-
-	.slice-cont {
-		max-width:2326px;
-		position:absolute;
-		transform-origin: 43% 50% 0;
-		transition: linear 0.01s;	
-	}
 	
-	.pizza-cont{   
+	.pizza{
+		margin-top: auto;
 		margin-left: auto;
-		position: absolute;
-		top: 0;
-		left: 50%;
-		width: 2000px;
-		height: 1200px;
 	}
 	
-	
-	.tarjetapizza{
-	
+	.slice{
+		position:absolute;
 	}	
+	
+	.container{ 
+		width: 100vw;
+		height: 100vh;
+	}
+	
     </style>
 </head>
-<body onload="rellenoInicial(0)">
-<div>
-	<div id="tombola" style="width:100%; min-height:600px;text-align: center;">
-		<img src="fondo.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
-		<img src="palillo.png" id="palillo" style="transform-origin: 50% 100%;transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(480px, 30px);top:45px; position:absolute">
-		<img id="slot1" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
-		<img id="slot2" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
-		<img id="slot3" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
-		<img id="slot4" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
-		<img src="ruleta magica.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">	
-		<img src="perilla.png" id="perilla" style="transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(470px, 0px);top:45px; position:absolute" onclick="palanca();girar(10)">		
+	<div class="container">
+		<div class="pizza">
+			<div id="slice1" class="slice">
+				<img width="800px" height="200px" src="https://sm.ign.com/ign_es/preview/p/pokemon-tr/pokemon-trading-card-game-live-preview-a-new-way-to-play-the_654t.jpg"></img>
+			</div>
+			<div id="slice2" class="slice">
+				<img width="800px" height="200px" src="https://sm.ign.com/ign_es/preview/p/pokemon-tr/pokemon-trading-card-game-live-preview-a-new-way-to-play-the_654t.jpg"></img>
+			</div>
+			<div id="slice3" class="slice">
+				<img width="800px" height="200px" src="https://sm.ign.com/ign_es/preview/p/pokemon-tr/pokemon-trading-card-game-live-preview-a-new-way-to-play-the_654t.jpg"></img>
+			</div>
+			<div id="slice4" class="slice">
+				<img width="800px" height="200px" src="https://sm.ign.com/ign_es/preview/p/pokemon-tr/pokemon-trading-card-game-live-preview-a-new-way-to-play-the_654t.jpg"></img>
+			</div>
+		</div>
 	</div>
-	
-	<div style="display:none;background: url(fondoPizza.png) center no-repeat; width:100%; max-height:600px;min-height:600px;text-align: center;">
-		<div id= "pizza" class="pizza-cont"></div>
-		<img src="clip.png"  style="margin-top:18px; transform: translate(-138px,188px);">
-		<img src="cono.png"  style="margin-top:18px; transform: translate(-136px,188px);width: 168px;" onclick="girar(10)">
-	
-	</div>
-
-	<div style="position: relative;text-align:center;max-width:700px; margin-left:auto; margin-right:auto;">
-		<table style="width:100%">
-			<tbody>
-				<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-				<tr>
-					<td>
-						<input type="button" name="boton" value="TIRA LA RULETA" class="btn btn lg btn-primary btn-block" onclick="girar(10)">
-					</td>
-					<td>
-						<input type="button" name="boton" value="CON MAS SUSPENSO" class="btn btn lg btn-primary btn-block" onclick="girar(5)">
-					</td>
-					<td>
-						<input type="button" name="boton" value="AUN MAS SUSPENSO 😱" class="btn btn lg btn-primary btn-block" onclick="girar(3)">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="button" name="boton" value="VERSION CELULAR" class="btn btn lg btn-primary btn-block" onclick="rellenoInicial(1)">
-					</td>
-					<td>
-						<input type="button" name="boton" value="VERSION DE PC" class="btn btn lg btn-primary btn-block" onclick="rellenoInicial(0)">
-					</td>
-					<td>
-						<input type="button" name="boton" value="CAMBIAR RULETA" class="btn btn lg btn-primary btn-block" onclick="cambio()">
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		</br></br>
-		¿Quieres hacer tu propia ruleta? <a href="custom.html">Entra Aca</a>
-	</div>
-</div>
 </body>
 </html>
