@@ -345,6 +345,14 @@ function crearPizza(){
 	}
 }
 
+function inicio(){
+	resize();
+	trozar();
+	
+}
+
+function resize(){}
+
 function trozar(){
 
 	if(flag == 1){
