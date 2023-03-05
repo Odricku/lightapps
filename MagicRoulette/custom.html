@@ -8,10 +8,12 @@
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<style>
-	.body{
+	
+	body{
 		height: 100vh;
 		max-width: 100vw;
 		overflow-x: hidden;
+		position:relative;
 	}
 	
 	.slice {
@@ -20,6 +22,7 @@
 		transform-origin: 0% 50% 0;
 		transform: perspective(10em) translateZ(4rem) rotateY(8.53deg);
 		z-index:-1;
+		overflow-x: hidden;
 	}
 
 	.slice-cont {
@@ -27,6 +30,7 @@
 		position:absolute;
 		transform-origin: 43% 50% 0;
 		transition: linear 0.01s;	
+		overflow-x: hidden;
 	}
 	
 	.pizza-cont{   
@@ -36,6 +40,7 @@
 		left: 50%;
 		width: 2000px;
 		height: 1200px;
+		overflow-x: hidden;
 	}
 	
 	
@@ -94,7 +99,7 @@
 		<img src="perilla.png" id="perilla" style="transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(470px, 0px);top:45px; position:absolute" onclick="palanca();girar(10)">		
 	</div>
 	
-	<div style="display:none; width:100%; max-height:600px;min-height:600px;text-align: center;">
+	<div style="display:none; width:100%;height:600px;text-align: center;">
 		<div class="borde borde-back"></div>
 		<div id= "pizza" class="pizza-cont"></div>
 		<div class="borde borde-top"></div>
