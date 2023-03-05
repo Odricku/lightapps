@@ -138,7 +138,7 @@ function pizzaGiro(velGiro){
 	timerId = setInterval(()=> {
 		console.log(velGiro);
 		for(var i = 0; i < listTarj.length; i++){
-			listTarj[i].style.transform = "rotateZ(" + (parseInt(listTarj[i].style.transform.match(regex)[0]) + 15)%360 + "deg)";
+			listTarj[i].style.transform = "rotateZ(" + (parseInt(listTarj[i].style.transform.match(regex)[0]) + 15) + "deg)";
 			listTarj[i].style.transition = "linear " + (velGiro/1000 + 0.25) + "s";
 		}
 		if(flag2 == 1){
@@ -150,7 +150,7 @@ function pizzaGiro(velGiro){
 			else{
 				clearInterval(timerId);
 				for(var i = 0; i < listTarj.length; i++){
-					listTarj[i].style.transform = "rotateZ(" + (parseInt(listTarj[i].style.transform.match(regex)[0]) + 45)%360 + "deg)";
+					listTarj[i].style.transform = "rotateZ(" + (parseInt(listTarj[i].style.transform.match(regex)[0]) + 45) + "deg)";
 					listTarj[i].style.transition = "ease-out " + (10 * velGiro/1000) + "s";
 				}
 				setTimeout(() => { audioLoop.pause(); audioEnd.play(); flag = 1;}, 1500 + 5 * velGiro/1000);
@@ -168,24 +168,24 @@ function girar2(velGiro){
 		var angel = parseInt(elem.style.transform.match(regex)[3])
 		
 		if(angel > 74){
-			elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4)%360 + "deg)";
+			elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
 			elem.width = elem.width + 16;
 			elem.height = elem.height + 6;
 		}
 		else if(angel > 42){
-			elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4)%360 + "deg)";
+			elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
 			elem.width = elem.width + 16;
 			elem.height = elem.height + 6;
 			elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 11) + "px";
 
 		}
 		else if(angel > -42){
-			elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 21)%360 + "deg)";
+			elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 21) + "deg)";
 			elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 49) + "px";
 		}
 		
 		else if(angel > -74){
-			elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4)%360 + "deg)";
+			elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
 			elem.width = elem.width - 16;
 			elem.height = elem.height - 6;
 			elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 17) + "px";
@@ -193,7 +193,7 @@ function girar2(velGiro){
 		}
 		
 		else if(angel > -90){
-			elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4)%360 + "deg)";
+			elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
 			elem.width = elem.width - 16;
 			elem.height = elem.height - 6;
 			elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 9) + "px";
@@ -357,7 +357,7 @@ function trozar(){
 			for (var i = 0; i < listTrozos.length; i++){
 				listTrozos[i].style.height =  2* apotema * Math.tan(Math.PI/listTrozos.length) + "px";
 				
-				listTrozos[i].style.transform = "rotateZ(" + (i * 360/ listTrozos.length)%360 + "deg)";
+				listTrozos[i].style.transform = "rotateZ(" + (i * 360/ listTrozos.length) + "deg)";
 				listTrozos[i].children[0].children[0].style.height =  2* apotema * Math.tan(Math.PI/listTrozos.length) + "px";	
 									
 			}
