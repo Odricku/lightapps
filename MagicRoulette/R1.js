@@ -480,7 +480,7 @@ function trozar(){
 	var listTrozos = document.getElementsByClassName("slice-cont");
 				
 	if (listTrozos.length > 3){
-		pizza.style.transform = "translate(-50.5%, " + (-116 - 694/listTrozos.length) + "px) scale(0.33)";
+		pizza.style.transform = "translate(-50%, " + (-114.5 -685.2/listTrozos.length) + "px) scale(0.33)";
 		
 		for (var i = 0; i < listTrozos.length; i++){
 			listTrozos[i].style.height =  2 * apotema * Math.tan(Math.PI/listTrozos.length) + "px";
@@ -498,6 +498,7 @@ function trozar(){
 				if(maxpalabra < 3){
 					listTrozos[i].firstElementChild.firstElementChild.style.textAlign = "center";
 					listTrozos[i].firstElementChild.firstElementChild.style.paddingLeft =  "250px";
+					listTrozos[i].firstElementChild.firstElementChild.style.fontSize = 0.8 * apotema * Math.PI/names.length + "px";
 				}
 				else if(maxpalabra > 6){
 					if(names.length < 8){
@@ -519,6 +520,9 @@ function trozar(){
 					listTrozos[i].firstElementChild.firstElementChild.style.fontSize = 0.8 * apotema * Math.PI/names.length + "px";
 					listTrozos[i].firstElementChild.firstElementChild.style.paddingLeft =  "105px";
 				}
+			}
+			else if(names.length == 6){
+				pizza.style.transform = "translate(-50%, -232px) scale(0.33)";
 			}
 		}
 	} 
