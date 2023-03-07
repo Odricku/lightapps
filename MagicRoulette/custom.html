@@ -5,83 +5,89 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="./R1.css" />
-<script src="./custom.js"></script>
+<script src="./R1.js"></script>
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body id="cuerpo" onload="trozar()">
-<div>
-	<div id= "tombola" style="width:100%; min-height:600px;text-align: center;">
-		<img src="fondo.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
-		<img src="palillo.png" id="palillo" style="transform-origin: 50% 100%;transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(480px, 30px);top:45px; position:absolute">
-		<img id="slot1" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
-		<img id="slot2" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
-		<img id="slot3" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
-		<img id="slot4" src="" width="408" style="transform: translate(-50%, 0%) perspective(50em) rotateX(90deg);left: 50%;top:0px; position:absolute">
-		<img src="ruleta magica.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
-				<svg id="perilla" style="background: radial-gradient(circle at 100% 0%, #AAAAAA, #333 50%, #111111 75%, #333 100%);width: 90px;height: 90px;border-radius: 50%;transition: all 0.5s ease 0s; transform: translate(470px, 0px) scale(1);top: 45px;position: absolute;" onclick="palanca();girar(10)"></svg>		
+<body id="cuerpo" onload="rellenoInicial(2)">
+	<div id="stream" class="streamsign streamoff" onclick="streammode()">
+		<b>Stream Mode</b>
 	</div>
-	
-	<div style="display:none; width:100%;min-height:600px;text-align: center;overflow:hidden">
-		<div class="borde borde-back"></div>
-		<div id= "pizza" class="pizza-cont"></div>
-		<div class="borde borde-top"></div>
-		<div class="arrow" style="transform: translate(-352px,216px);"></div>
-		<div class="arrow" style="border-left: 70px solid #b70000;transform: translate(-283px, 216px);"></div>
-		<div class="arrow" style="transform: translate(-313px,216px);"></div>
-		<img src="cono.png" width="185px" height="185px" style="position: absolute;left: 50vw; transform: translate(-100px, 192px);" onclick="girar(10)">
-	
-	</div>
-	
-	<div style="position: relative;text-align:center;max-width:100vw; margin-left:auto; margin-right:auto">
-		<table style="width:100%">
-			<tbody>
-				<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-				<tr>
-					<td>
-						<input type="button" name="boton" value="TIRA LA RULETA" class="btn btn lg btn-primary btn-block" onclick="girar(10)">
-					</td>
-					<td>
-						<input type="button" name="boton" value="CON MAS SUSPENSO" class="btn btn lg btn-primary btn-block" onclick="girar(5)">
-					</td>
-					<td>
-						<input type="button" name="boton" value="AUN MAS SUSPENSO 😱" class="btn btn lg btn-primary btn-block" onclick="girar(3)">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="button" name="boton" value="AGREGAR OPCION" class="btn btn lg btn-primary btn-block" onclick="urltarj.focus()">
-					</td>
-					<td>
-						<input type="button" name="boton" value="LIMPIAR" class="btn btn lg btn-primary btn-block" onclick="limpiar()">
-					</td>
-					<td>
-						<input type="button" name="boton" value="CAMBIAR RULETA" class="btn btn lg btn-primary btn-block" onclick="cambio()">
-					</td>
-					
-				</tr>
-			</tbody>
-		</table>
+	<div>
+		<div id="tombola" style="width:100%; min-height:600px;text-align: center;">
+			<img src="fondo.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
+			<img src="palillo.png" id="palillo" style="transform-origin: 50% 100%;transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(480px, 30px);top:45px; position:absolute">
+			<div id="slot1" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(60deg)"></div>
+			<div id="slot2" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(0deg)"></div>
+			<div id="slot3" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(-60deg)"></div>
+			<div id="slot4" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(-120deg)"></div>
+			<div id="slot5" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(-180deg)"></div>
+			<div id="slot6" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(-240deg)"></div>
+			<img src="ruleta magica.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
+			<svg id="perilla" style="perilla" onclick="palanca();girar(10)"></svg>		
+		</div>
+		
+		<div style="display:none; width:100%;min-height:600px;text-align: center;overflow:hidden">
+			<div class="borde borde-back"></div>
+			<div id= "pizza" class="pizza-cont"></div>
+			<div class="borde borde-top"></div>
+			<div class="arrow" style="transform: translate(-354px,213px);"></div>
+			<div class="arrow" style="border-left: 70px solid #b70000;transform: translate(-303px, 213px);"></div>
+			<div class="arrow" style="transform: translate(-315px,213px);"></div>
+			<svg id="cono" onclick="girar(10)"></svg>
+		
+		</div>
+		
+		<div id="adicional" style="position: relative;text-align:center;max-width:100vw; margin-left:auto; margin-right:auto;">
+			<table style="width:100%">
+				<tbody>
+					<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+					<tr>
+						<td>
+							<input type="button" name="boton" value="TIRA LA RULETA" class="btn btn lg btn-primary btn-block" onclick="girar(10)">
+						</td>
+						<td>
+							<input type="button" name="boton" value="CON MAS SUSPENSO" class="btn btn lg btn-primary btn-block" onclick="girar(20)">
+						</td>
+						<td>
+							<input type="button" name="boton" value="AUN MAS SUSPENSO 😱" class="btn btn lg btn-primary btn-block" onclick="girar(30)">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="button" name="boton" value="AGREGAR OPCION" class="btn btn lg btn-primary btn-block" onclick="urltarj.focus()">
+						</td>
+						<td>
+							<input type="button" name="boton" value="LIMPIAR" class="btn btn lg btn-primary btn-block" onclick="limpiar()">
+						</td>
+						<td>
+							<input type="button" name="boton" value="CAMBIAR RULETA" class="btn btn lg btn-primary btn-block" onclick="cambio()">
+						</td>
+						
+					</tr>
+				</tbody>
+			</table>
+			<div class="acciones">
+				<table style="width:100%">
+					<tbody id="tarjetacontainer">
+						<tr id="customT1">
+							<td>
+								TARJETA
+							</td>
+							<td>
+								ACCIONES
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div>
+					<input type="text" id="urltarj" placeholder="Arrastra, pega imagen o escribe su URL (Se reescalara a 500x200)" class="btn btn lg btn-dark btn-block"><input type="button" name="boton" value="AGREGAR TARJETA" class="btn btn lg btn-primary btn-block" onclick="addTarjeta()">
+				</div>
+			</div>
+			
+		</div>
 		
 	</div>
-	<div class="acciones">
-		<table style="width:100%">
-			<tbody id="tarjetacontainer">
-				<tr id="customT1">
-					<td>
-						TARJETA
-					</td>
-					<td>
-						ACCIONES
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<div>
-			<input type="text" id="urltarj" placeholder="Arrastra, pega imagen o escribe su URL (Se reescalara a 500x200)" class="btn btn lg btn-dark btn-block"><input type="button" name="boton" value="AGREGAR TARJETA" class="btn btn lg btn-primary btn-block" onclick="addTarjeta()">
-		</div>
-	</div>
-</div>
-
+	<canvas width="100%" id="confetticontainer" class="confetti"></canvas>
 </body>
 </html>

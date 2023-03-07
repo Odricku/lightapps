@@ -5,17 +5,9 @@ var names = [];
 var num;
 
 var regex = /\-{0,1}(\d+)/g;
-var lap = 10;
-var per = 8;
-var rand = 0;
-
-var topValue = 0;
-
-var slots = [];
 
 let timerId;
 var flag = 1;
-var flag2 = 0;
 
 var audioLoop = new Audio('Item roulette Loop.mp3');
 audioLoop.loop = true;
@@ -27,13 +19,19 @@ function rellenoInicial(mode){
 
 	if(mode == 0){
 		custom = pc;
-		names = pc;
 	}else if(mode == 1){
 		custom = cel;
-		names = cel;
-	}else if(mode == 2){
-		names = custom;
 	}
+		
+	slot1.innerHTML = "";
+	slot2.innerHTML = "";
+	slot3.innerHTML = "";
+	slot4.innerHTML = "";
+	slot5.innerHTML = "";
+	slot6.innerHTML = "";
+	
+	names = null;
+	names = Object.create(custom);
 
 	for(var i = 0; i < names.length; i++){
 
@@ -41,188 +39,175 @@ function rellenoInicial(mode){
 		[names[i], names[num]] = [names[num], names[i]];
 	
 	}
+	if(names.length != 0){
+		var iteracion = 0;
+		while(names.length < 6){
+			for(var i = 0; i < custom.length; i++){
+				names.push(custom[i]);
+			}
+			iteracion++;
+		}
+		slot1.appendChild(createContent(names[num++ % names.length], "elem"));
+		slot2.appendChild(createContent(names[num++ % names.length], "elem"));
+		slot3.appendChild(createContent(names[num++ % names.length], "elem"));
+		slot4.appendChild(createContent(names[num++ % names.length], "elem"));
+		slot5.appendChild(createContent(names[num++ % names.length], "elem"));
+		slot6.appendChild(createContent(names[num++ % names.length], "elem"));
+		
 	
-	if(names.length > 5){
-
-		document.getElementById("slot1").src = names[(num++) % names.length];
-		document.getElementById("slot2").src = names[(num++) % names.length];
-		document.getElementById("slot3").src = names[(num++) % names.length];
-		document.getElementById("slot4").src = names[(num++) % names.length];
-				
-		slots = [document.getElementById("slot1"), document.getElementById("slot2"), document.getElementById("slot3"), document.getElementById("slot4")];
-		rellenoRes();
-		crearPizza();
 	}
 	else{
-		document.getElementById("slot1").src = "Placeholder.png";
-		document.getElementById("slot2").src = "Placeholder.png";
-		document.getElementById("slot3").src = "Placeholder.png";
-		document.getElementById("slot4").src = "Placeholder.png";
 		
-		pizza.innerHTML = "";
+		slot1.appendChild(createContent("Placeholder.png", "elem"));
+		slot2.appendChild(createContent("Placeholder.png", "elem"));
+		slot3.appendChild(createContent("Placeholder.png", "elem"));
+		slot4.appendChild(createContent("Placeholder.png", "elem"));
+		slot5.appendChild(createContent("Placeholder.png", "elem"));
+		slot6.appendChild(createContent("Placeholder.png", "elem"));
+		
+		names.push("Placeholder.png");
+		names.push("Placeholder.png");
+		names.push("Placeholder.png");
+		names.push("Placeholder.png");
+		names.push("Placeholder.png");
+		names.push("Placeholder.png");
 	}
+		
+	crearPizza();
+	
 }
 
-function rellenoRes(){
-
-	var num = [parseInt(slots[0].style.top.match(regex)[0]), parseInt(slots[1].style.top.match(regex)[0]), parseInt(slots[2].style.top.match(regex)[0]),parseInt(slots[3].style.top.match(regex)[0])];
-	
-	var pos1 = num.indexOf(Math.min(...num));
-	num[pos1] = 9999;
-	var pos2 = num.indexOf(Math.min(...num));
-	num[pos2] = 9999;
-	var pos3 = num.indexOf(Math.min(...num));
-	num[pos3] = 9999;
-	var pos4 = num.indexOf(Math.min(...num));
-	num[pos4] = 9999;
-	
-	slots[pos1].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(66deg)";
-	slots[pos1].width = 504;
-	slots[pos1].height = 202; 
-	slots[pos1].style.top = topValue + 22 + "px";
-	
-	slots[pos2].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(0deg)";
-	slots[pos2].width = 600;
-	slots[pos2].height = 240;
-	slots[pos2].style.top = topValue + 186 + "px";
-	
-	slots[pos3].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(-66deg)";
-	slots[pos3].width = 504;
-	slots[pos3].height = 202;
-	slots[pos3].style.top = topValue + 386 + "px";
-	
-	slots[pos4].style.transform = "translate(-50%, 0%) perspective(50em) rotateX(-86deg)";
-	slots[pos4].width = 424;
-	slots[pos4].height = 170;
-	slots[pos4].style.top = topValue + 447 + "px";
-	
-	
+function createContent(content, clase){
+	if(content.startsWith("text:")){
+		var divelem = document.createElement("div");
+		divelem.classList.add(clase);
+		var infoelem = content.split(";");
+		divelem.innerText = infoelem[0].replace("text:", "");
+		divelem.style.color = infoelem[infoelem.length - 2];
+		divelem.style.backgroundColor = infoelem[infoelem.length - 1];
+		divelem.style.fontSize = "50px";
+		divelem.style.display = "flex";
+		divelem.style.alignItems = "center";
+		
+		return divelem;
+	}
+	else{
+		var imgelem = document.createElement("img");
+		imgelem.classList.add(clase);
+		imgelem.src = content;
+		
+		return imgelem;
+	}	
 }
 
 function girar(velGiro){
 	if(names.length > 3){
 	
 		if(flag == 1){
-		
+			audioLoop.play();
+			flag = 0;
 			if(tombola.style.display != 'none'){
-				audioLoop.play();
-					
-				flag = 0;
-				flag2 = 0;
-			
-				slots = [document.getElementById("slot1"), document.getElementById("slot2"), document.getElementById("slot3"), document.getElementById("slot4")];
 				
-				timerId = setInterval(() => girar2(velGiro), velGiro);
-				setTimeout(() => { flag = 1;}, (30000/velGiro) + Math.floor(Math.random() * 1000));
+				var angulo = 60 * (Math.floor(Math.random() * (10 * names.length + 1)) + names.length * velGiro);
+				
+				var finales = ["(0.3,0.18,0.83,1.05)", "(0.14,0.13,0.42,1)", "(.32,1.01,.99,1.02)"];
+				var finalactual = Math.floor(Math.random() * finales.length);
+				
+				[...tombola.querySelectorAll(".divcontainer")].forEach(elem => {
+					elem.style.transition = "transform " + velGiro + "s cubic-bezier" + finales[finalactual];
+					elem.vuelta = true;
+					elem.style.transform = elem.style.transform.replace(/-*[0-9\.]*deg/, parseInt(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg","")) + angulo + "deg");
+				});
+				
+				timerId = setInterval(()=> {
+					
+					[...tombola.querySelectorAll(".divcontainer")].forEach(elem => {
+						var anguloactual = parseFloat(window.getComputedStyle(elem,null)['-webkit-transform'].split(',')[5]);
+						if(anguloactual > 0){
+							if(!elem.vuelta){
+								elem.vuelta = true;
+							}
+						}else{
+							if(elem.vuelta){
+								elem.firstElementChild.remove();
+								elem.appendChild(createContent(names[num++ % names.length], "elem"));
+							
+								elem.vuelta = false;
+							}
+						}
+					});
+				},50);
+				
+				setTimeout(() => { 
+					clearInterval(timerId);
+					[...tombola.querySelectorAll(".divcontainer")].forEach(elem => {
+						elem.style.transition = "";
+						var angulomaestro = parseInt(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg",""))%360;
+						if(angulomaestro > 90 ){
+							elem.style.transform = elem.style.transform.replace(/-*[0-9\.]*deg/, (angulomaestro - 360) + "deg");
+						}
+						else{
+							elem.style.transform = elem.style.transform.replace(/-*[0-9\.]*deg/, angulomaestro + "deg");
+						}
+					});
+					flag = 1;
+					audioLoop.pause();
+					console.log("si");
+					audioEnd.play();
+					confetticontainer.style.display = "block";
+					initConfetti();
+
+					num = num % names.length;
+					
+					setTimeout(() => { 
+						confetticontainer.style.display = "none";
+					}, (5000));
+					
+				}, (1000 * velGiro));
+				
 			}
 			else if(pizza.parentElement.style.display != 'none'){
-				audioLoop.play();
 				
-				flag = 0;
-				flag2 = 0;
+				var listTarj = [...pizza.querySelectorAll(".slice-cont")];
+
+				var angulo = 360/listTarj.length * (Math.floor(Math.random() * (10 * listTarj.length + 1)) + listTarj.length * velGiro);
 				
-				pizzaGiro(velGiro);
-				setTimeout(() => { flag = 1;}, (20000/velGiro) + Math.floor(Math.random() * 1000));
+				var finales = ["(0.14, 0.62, 0.44, 1)", "(0.11, 0.68, 0.73, 1.02)", "(0.11, 0.68, 0.77, 0.96)"];
+				var finalactual = Math.floor(Math.random() * finales.length);
+				
+				listTarj.forEach(elem => {
+					elem.style.transition = "transform " + velGiro + "s cubic-bezier" + finales[finalactual];
+					elem.style.transform = elem.style.transform.replace(/-*[0-9\.]*deg/, parseInt(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg","")) + angulo + "deg");
+				});
+				
+				setTimeout(() => { 
+					clearInterval(timerId);
+					listTarj.forEach(elem => {
+						elem.style.transition = "";
+						elem.style.transform = elem.style.transform.replace(/-*[0-9\.]*deg/, parseInt(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg",""))%360 + "deg");
+					});
+					flag = 1;
+					audioLoop.pause();
+					audioEnd.play();
+					
+					confetticontainer.style.display = "block";
+					initConfetti();
+					
+					setTimeout(() => { 
+						confetticontainer.style.display = "none";
+					}, (5000));
+					
+				}, (1000 * velGiro));
 			}
 		}
-	}else{
-		alert("Deben haber al menos 4 opciones");
+	}
+	if (flagrender){
+		render();
+		flagrender = false;
 	}
 }
 
-function pizzaGiro(velGiro){
-	var listTarj = document.getElementsByClassName("slice-cont"); 
-	
-	timerId = setInterval(()=> {
-		console.log(velGiro);
-		for(var i = 0; i < listTarj.length; i++){
-			listTarj[i].style.transform = "rotateZ(" + (parseInt(listTarj[i].style.transform.match(regex)[0]) + 15)+ "deg)";
-			listTarj[i].style.transition = "linear " + (velGiro/1000 + 0.25) + "s";
-		}
-		if(flag == 1){
-			clearInterval(timerId);
-			if(velGiro < 160){
-				girar(2 * velGiro);
-			}
-			else{
-				clearInterval(timerId);
-				for(var i = 0; i < listTarj.length; i++){
-					listTarj[i].style.transform = "rotateZ(" + (parseInt(listTarj[i].style.transform.match(regex)[0]) + 45)+ "deg)";
-					listTarj[i].style.transition = "ease-out " + (10 * velGiro/1000) + "s";
-				}
-				setTimeout(() => { audioLoop.pause(); audioEnd.play();}, 1500 + 5 * velGiro/1000);
-			}
-		}
-	},velGiro);
-	
-	
-	
-}
-
-function girar2(velGiro){
-
-	for (var i = 0; i < slots.length; i++) {
-
-		var elem = slots[i];
-		
-		var angel = parseInt(elem.style.transform.match(regex)[3])
-		
-		if(angel > 74){
-			elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
-			elem.width = elem.width + 16;
-			elem.height = elem.height + 6;
-		}
-		else if(angel > 42){
-			elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
-			elem.width = elem.width + 16;
-			elem.height = elem.height + 6;
-			elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 11) + "px";
-
-		}
-		else if(angel > -42){
-			elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 21) + "deg)";
-			elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 49) + "px";
-		}
-		
-		else if(angel > -74){
-			elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
-			elem.width = elem.width - 16;
-			elem.height = elem.height - 6;
-			elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 17) + "px";
-
-		}
-		
-		else if(angel > -90){
-			elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(" + ((angel) - 4) + "deg)";
-			elem.width = elem.width - 16;
-			elem.height = elem.height - 6;
-			elem.style.top = (parseInt(elem.style.top.match(regex)[0]) + 9) + "px";
-
-		}
-		else{
-			elem.src = names[(num++) % names.length];
-			elem.style.transform = "translate(-50%, 0%) perspective(50em) rotateX(90deg)";
-			elem.width = 408;
-			elem.height = 166;
-			elem.style.top = topValue + "px";
-		}
-		
-		if(angel == 21 && flag == 1){
-			flag2 = 1;
-		}
-	}	
-	if(flag2 == 1){
-		clearInterval(timerId);
-		rellenoRes();
-		if(velGiro < 40){
-			girar(2 * velGiro);
-		}
-		else{
-			audioLoop.pause();
-			audioEnd.play();
-		}
-	}			
-}
+var flagrender = true;
 
 function limpiar(){
 	var res = confirm("Esto eliminara todo y no puede deshacerse, ¿estas seguro?")
@@ -246,27 +231,174 @@ function thereallimpiar(){
 function addTarjeta(){
 	
 	if(urltarj.value.length != 0){
-		tarjetacontainer.innerHTML = tarjetacontainer.innerHTML + "<tr><td><img src=\"" + urltarj.value + "\" width=\"400\" height=\"160\"></td><td><input type=\"button\" value=\"ELIMINAR\" class=\"btn btn lg btn-primary btn-block\" onclick=\"deleteTarjeta(this)\"></td></tr>"
-		custom.push(urltarj.value);
-		urltarj.value = "";
-		rellenoInicial(2);
+		
+		var trelem = document.createElement("tr");
+		var tdelem = document.createElement("td");
+		var td2elem = document.createElement("td");
+		var imagelem = document.createElement("img");
+		imagelem.src = urltarj.value;
+		imagelem.width = "400";
+		imagelem.height = "160";
+		
+		tdelem.appendChild(imagelem);
+
+		var inputelem = document.createElement("input");
+		inputelem.type = "button";
+		inputelem.value = "ELIMINAR";
+		inputelem.classList.add("btn");
+		inputelem.classList.add("lg");
+		inputelem.classList.add("btn-primary");
+		inputelem.classList.add("btn-block");
+		inputelem.setAttribute("onclick","deleteTarjeta(this)");
+		
+		td2elem.appendChild(inputelem);
+		
+		trelem.appendChild(tdelem);
+		trelem.appendChild(td2elem);
+		
+		tarjetacontainer.appendChild(trelem);
+		
+		new Promise(() => {
+			imagelem.onload = () => { 
+				custom.push(urltarj.value); 
+				urltarj.value = "";
+				rellenoInicial(2)
+			};
+			imagelem.onerror = () => {
+				var divelem = document.createElement("div");
+				divelem.style.backgroundColor = "#000000";
+				divelem.style.color = "#FFFFFF";
+				divelem.style.fontSize = "50px";
+				divelem.style.display = "flex";
+				divelem.style.justifyContent = "center";
+				divelem.style.alignItems = "center";
+				divelem.style.margin = "auto";
+				divelem.style.width = "400px";
+				divelem.style.height = "160px";
+				divelem.innerText = urltarj.value;
+				divelem.setAttribute("onclick","changecolor(this)");
+				
+				var colortext = document.createElement("input");
+				colortext.setAttribute("type","color");
+				colortext.classList.add("colortarj");
+				colortext.value = "ffffff#";
+				colortext.setAttribute("onchange","changetextcolor(this)");
+				colortext.style.display = "none";
+			
+				var colorback = document.createElement("input");
+				colorback.setAttribute("type","color");
+				colorback.classList.add("colortarj");
+				colorback.value = "#000000";
+				colorback.setAttribute("onchange","changebackcolor(this)");
+				colorback.style.display = "none";
+				
+				divelem.appendChild(colortext);
+				divelem.appendChild(colorback);
+			
+				imagelem.remove();
+				tdelem.appendChild(divelem);
+				
+				custom.push("text:" + urltarj.value + ";#ffffff;#000000");
+				urltarj.value = "";
+				rellenoInicial(2);
+				
+			}
+		});
 	}			
 }
 
-function pasteTarjeta(fil){
+function changecolor(elem){
 	
-	if(fil){
-		var urlpaste = URL.createObjectURL(fil);
+	elem.firstElementChild.click();
 	
-		tarjetacontainer.innerHTML = tarjetacontainer.innerHTML + "<tr><td><img src=\"" + urlpaste + "\" width=\"400\" height=\"160\"></td><td><input type=\"button\" value=\"ELIMINAR\" class=\"btn btn lg btn-primary btn-block\" onclick=\"deleteTarjeta(this)\"></td></tr>"
-		custom.push(urlpaste);
+}
+
+function changetextcolor(elem){
+	
+	var colortextoactual = elem.parentElement.style.color;
+	var colorbackactual = elem.parentElement.style.backgroundColor;
+	var colorelem = elem.value;
+	
+	if(colortextoactual.startsWith("rgb(")){
+		color = colortextoactual.replace("rgb(","").replace(")").split(",");
+		colortextoactual = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
+	}
+	if(colorbackactual.startsWith("rgb(")){
+		color = colorbackactual.replace("rgb(","").replace(")").split(",");
+		colorbackactual = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
+	}
+	if(colorelem.startsWith("rgb(")){
+		color = colorelem.replace("rgb(","").replace(")").split(",");
+		colorelem = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
+	}
+	
+	var elemanterior = custom.indexOf("text:" + elem.parentElement.innerText + ";" + colortextoactual +";" + colorbackactual);
+	
+	if(elemanterior != -1){
+		elem.parentElement.style.color = colorelem;
+		custom[elemanterior] = "text:" + elem.parentElement.innerText + ";" + colorelem +";" + colorbackactual;
+		elem.parentElement.lastElementChild.click();
 		rellenoInicial(2);
+	}
+}
+
+function changebackcolor(elem){
+	
+	var colortextoactual = elem.parentElement.style.color;
+	var colorbackactual = elem.parentElement.style.backgroundColor;
+	var colorelem = elem.value;
+	
+	if(colortextoactual.startsWith("rgb(")){
+		color = colortextoactual.replace("rgb(","").replace(")").split(",");
+		colortextoactual = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
+	}
+	if(colorbackactual.startsWith("rgb(")){
+		color = colorbackactual.replace("rgb(","").replace(")").split(",");
+		colorbackactual = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
+	}
+	if(colorelem.startsWith("rgb(")){
+		color = colorelem.replace("rgb(","").replace(")").split(",");
+		colorelem = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
+	}
+	
+	var elemanterior = custom.indexOf("text:" + elem.parentElement.innerText + ";" + colortextoactual +";" + colorbackactual);
+	
+	if(elemanterior != -1){
+		elem.parentElement.style.backgroundColor = colorelem;
+		custom[elemanterior] = "text:" + elem.parentElement.innerText + ";" + colortextoactual +";" + colorelem;
+		rellenoInicial(2);
+	}
+}
+
+function pasteTarjeta(fil){
+		
+	if(fil){
+		urltarj.value = URL.createObjectURL(fil);
+		addTarjeta();
 	}			
 }
 
 function deleteTarjeta(node){
 
-	custom.splice(custom.indexOf(node.parentElement.parentElement.children[0].children[0].src),1);
+	if(node.parentElement.parentElement.firstElementChild.firstElementChild.src != null){
+		custom.splice(custom.indexOf(node.parentElement.parentElement.firstElementChild.firstElementChild.src),1);
+	}
+	else{
+		var colortextoactual = node.parentElement.parentElement.firstElementChild.firstElementChild.style.color;
+		var colorbackactual = node.parentElement.parentElement.firstElementChild.firstElementChild.style.backgroundColor;
+	
+		if(colortextoactual.startsWith("rgb(")){
+			color = colortextoactual.replace("rgb(","").replace(")").split(",");
+			colortextoactual = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
+		}
+		if(colorbackactual.startsWith("rgb(")){
+			color = colorbackactual.replace("rgb(","").replace(")").split(",");
+			colorbackactual = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
+		}
+		
+		custom.splice(custom.indexOf("text:" + node.parentElement.parentElement.firstElementChild.firstElementChild.innerText + ";" + colortextoactual + ";" + colorbackactual),1);
+		
+	}
 	node.parentElement.parentElement.remove();
 	rellenoInicial(2);
 
@@ -274,7 +406,7 @@ function deleteTarjeta(node){
 
 function palanca(){
 
-	if(flag == 1 && custom.length > 3){
+	if(flag == 1 && names.length > 3){
 		perilla.style.transform = 'translate(470px, 350px) scale(1)';
 		palillo.style.transform = 'translate(480px, 30px) scaleY(-1)';
 		setTimeout(()=> {
@@ -324,30 +456,85 @@ function crearPizza(){
 	pizza.innerHTML = "";
 
 	for(var i = 0; i < names.length; i++){
-		pizza.innerHTML = pizza.innerHTML + "<div class=\"slice-cont\"><div class=\"slice\"><img class=\"tarjetapizza\" src=\"" + names[i] + "\"></div></div>";
-	}
+		var elem = document.createElement("div");
+		elem.classList.add("slice-cont");
 	
+		var eleminterno = document.createElement("div");
+		eleminterno.classList.add("slice");
+		
+		
+		eleminterno.appendChild(createContent(names[i], "tarjetapizza"));
+		elem.appendChild(eleminterno);
+		
+		pizza.appendChild(elem);
+		
+	}
 	trozar();
 
 }
+
+var listTrozos = document.getElementsByClassName("slice-cont");
 
 function trozar(){
 
 	var listTrozos = document.getElementsByClassName("slice-cont");
 				
 	if (listTrozos.length > 3){
-				//i
-		pizza.style.transform = "translate(-1000px, " + (-100 - 800/listTrozos.length) + "px) scale(0.33)";
+		pizza.style.transform = "translate(-50.5%, " + (-116 - 694/listTrozos.length) + "px) scale(0.33)";
 		
 		for (var i = 0; i < listTrozos.length; i++){
-			listTrozos[i].style.height =  2* apotema * Math.tan(Math.PI/listTrozos.length) + "px";
+			listTrozos[i].style.height =  2 * apotema * Math.tan(Math.PI/listTrozos.length) + "px";
 			
-			listTrozos[i].style.transform = "rotateZ(" + (i * 360/ listTrozos.length)+ "deg)";
-			listTrozos[i].children[0].children[0].style.height =  2* apotema * Math.tan(Math.PI/listTrozos.length) + "px";	
-			listTrozos[i].children[0].children[0].style.width =  "75%";	
-		
+			listTrozos[i].style.transform = "rotate(" + (i * 360/ listTrozos.length)+ "deg)";
+			listTrozos[i].firstElementChild.firstElementChild.style.height =  2 * apotema * Math.tan(Math.PI/listTrozos.length) + "px";	
+			
+			listTrozos[i].firstElementChild.firstElementChild.style.width =  "75%";
+
+			if(listTrozos[i].firstElementChild.firstElementChild.src == null){
+				listTrozos[i].firstElementChild.firstElementChild.style.width =  "95%";
+				listTrozos[i].firstElementChild.firstElementChild.style.marginLeft =  "293px";
+				
+				var maxpalabra = palabralarga(listTrozos[i].firstElementChild.firstElementChild.innerText);
+				if(maxpalabra < 3){
+					listTrozos[i].firstElementChild.firstElementChild.style.textAlign = "center";
+					listTrozos[i].firstElementChild.firstElementChild.style.paddingLeft =  "250px";
+				}
+				else if(maxpalabra > 6){
+					if(names.length < 8){
+						if(maxpalabra > 15){
+							listTrozos[i].firstElementChild.firstElementChild.style.fontSize = 0.4 * apotema * Math.PI/names.length + "px";
+							listTrozos[i].firstElementChild.firstElementChild.style.paddingLeft =  "105px";
+						}
+						else{
+							listTrozos[i].firstElementChild.firstElementChild.style.fontSize = 0.5 * apotema * Math.PI/names.length + "px";
+							listTrozos[i].firstElementChild.firstElementChild.style.paddingLeft =  "105px";
+						}
+					}						
+					else{
+						listTrozos[i].firstElementChild.firstElementChild.style.fontSize = 0.6 * apotema * Math.PI/names.length + "px";
+						listTrozos[i].firstElementChild.firstElementChild.style.paddingLeft =  "105px";
+					}
+				}
+				else{
+					listTrozos[i].firstElementChild.firstElementChild.style.fontSize = 0.8 * apotema * Math.PI/names.length + "px";
+					listTrozos[i].firstElementChild.firstElementChild.style.paddingLeft =  "105px";
+				}
+			}
 		}
-	} //-300 = i           f = -50
+	} 
+}
+
+function palabralarga(texto){
+	var sentence = texto.split(" ");
+	var largo = 0;
+	
+	for(var i = 0; i < sentence.length; i++){
+		if(sentence[i].length > largo){
+			largo = sentence[i].length;
+		}
+	}
+	
+	return largo;
 }
 
 var apotema = 600;
@@ -362,3 +549,117 @@ function cambio(){
 		pizza.parentElement.style.display = "none";
 	}
 }
+
+function streammode(){
+	
+	if(stream.classList.contains("streamoff")){
+		stream.classList.remove("streamoff")
+		stream.classList.add("streamon")
+		cuerpo.classList.add("cuerpostream");
+		adicional.style.display = "none";
+	}
+	else{
+		stream.classList.remove("streamon")
+		stream.classList.add("streamoff")
+		cuerpo.classList.remove("cuerpostream");
+		adicional.style.display = "block";
+	}
+}
+
+let confetti = [];
+const confettiCount = 100;
+const gravity = 0.5;
+const terminalVelocity = 5;
+const drag = 0.075;
+const colors = [
+{ front: 'red', back: 'darkred' },
+{ front: 'green', back: 'darkgreen' },
+{ front: 'blue', back: 'darkblue' },
+{ front: 'yellow', back: 'darkyellow' },
+{ front: 'orange', back: 'darkorange' },
+{ front: 'pink', back: 'darkpink' },
+{ front: 'purple', back: 'darkpurple' },
+{ front: 'turquoise', back: 'darkturquoise' }];
+
+
+//-----------Confetti--------------
+var ctx;
+var cx;
+var cy;
+
+function resizeCanvas(){
+  confetticontainer.width = window.innerWidth;
+  confetticontainer.height = window.innerHeight;
+  cx = window.innerWidth / 2;
+  cy = window.innerHeight / 2;
+};
+
+randomRange = (min, max) => Math.random() * (max - min) + min;
+
+function initConfetti(){
+  for (let i = 0; i < confettiCount; i++) {
+    confetti.push({
+      color: colors[Math.floor(randomRange(0, colors.length))],
+      dimensions: {
+        x: randomRange(10, 20),
+        y: randomRange(10, 30) },
+
+      position: {
+        x: randomRange(0, confetticontainer.width),
+        y: confetticontainer.height - 1 },
+
+      rotation: randomRange(0, 2 * Math.PI),
+      scale: {
+        x: 1,
+        y: 1 },
+
+      velocity: {
+        x: randomRange(-20, 20),
+        y: randomRange(0, -30) } });
+
+  }
+};
+
+function render(){
+	resizeCanvas();
+	ctx = confetticontainer.getContext("2d");
+	ctx.clearRect(0, 0, confetticontainer.width, confetticontainer.height);
+
+	confetti.forEach((confetto, index) => {
+		let width = confetto.dimensions.x * confetto.scale.x;
+		let height = confetto.dimensions.y * confetto.scale.y;
+
+		ctx.translate(confetto.position.x, confetto.position.y);
+		ctx.rotate(confetto.rotation);
+
+		confetto.velocity.x -= confetto.velocity.x * drag;
+		
+		confetto.velocity.y = Math.min(confetto.velocity.y + gravity, terminalVelocity);
+		confetto.velocity.x += Math.random() > 0.5 ? Math.random() : -Math.random();
+
+		confetto.position.x += confetto.velocity.x;
+		confetto.position.y += confetto.velocity.y;
+
+		if (confetto.position.y >= confetticontainer.height) confetti.splice(index, 1);
+
+		if (confetto.position.x > confetticontainer.width) confetto.position.x = 0;
+		if (confetto.position.x < 0) confetto.position.x = confetticontainer.width;
+
+		confetto.scale.y = Math.cos(confetto.position.y * 0.1);
+		ctx.fillStyle = confetto.scale.y > 0 ? confetto.color.front : confetto.color.back;
+
+		ctx.fillRect(-width / 2, -height / 2, width, height);
+
+		ctx.setTransform(1, 0, 0, 1, 0, 0);
+	});
+
+	window.requestAnimationFrame(render);
+};
+
+window.addEventListener('resize', function () {
+	resizeCanvas();
+});
+
+window.addEventListener('click', function () {
+	initConfetti();
+});
