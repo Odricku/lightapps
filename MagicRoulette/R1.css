@@ -96,6 +96,7 @@ body{
 	position: absolute;
 	left: 50vw;
 	transform: translate(-95px, 204px);
+	box-shadow: 7px 0px;
 }
 
 #perilla{

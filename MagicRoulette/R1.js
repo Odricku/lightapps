@@ -488,7 +488,7 @@ function trozar(){
 			listTrozos[i].style.transform = "rotate(" + (i * 360/ listTrozos.length)+ "deg)";
 			listTrozos[i].firstElementChild.firstElementChild.style.height =  2 * apotema * Math.tan(Math.PI/listTrozos.length) + "px";	
 			
-			listTrozos[i].firstElementChild.firstElementChild.style.width =  "76%";
+			listTrozos[i].firstElementChild.firstElementChild.style.width =  "75%";
 
 			if(listTrozos[i].firstElementChild.firstElementChild.src == null){
 				listTrozos[i].firstElementChild.firstElementChild.style.width =  "95%";
