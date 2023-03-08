@@ -1,5 +1,5 @@
-var pc = ["https://www.odricku.cl/resources/img/tarjetas/Tarjeta DG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta DRAW.png","https://www.odricku.cl/resources/img/tarjetas/tarjeta FG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta GB.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta GMOD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta GTA.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta HFF.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta HS.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta JMC.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta JMD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta JMP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta LL.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta MOD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta OC2.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta PA.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta PP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta PU.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta RL.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta SR.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta UCH.png"];
-var cel =["https://www.odricku.cl/resources/img/tarjetas/Tarjeta JMD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta JMP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta PU.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta SG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta BF.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta UNO.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta DRAW.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta PS.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta G.png"];
+var pc = ["https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20DG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20DRAW.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20FG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20GB.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20GMOD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta GTA.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20HFF.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20HS.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMC.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20LL.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20MOD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20OC2.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PA.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PU.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20RL.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20SR.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20UCH.png"];
+var cel =["https://www.odricku.cl/resources/img/tarjetas/Tarjeta JMD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PU.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20SG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20BF.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20UNO.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20DRAW.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PS.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20G.png"];
 var custom = []
 var names = [];
 var num = 0;
@@ -446,8 +446,17 @@ function pasteTarjeta(fil){
 
 function deleteTarjeta(node){
 	if(flag == 1 && custom.length > 0){
-		if(node.parentElement.parentElement.firstElementChild.firstElementChild.src != null){
-			custom.splice(custom.indexOf(node.parentElement.parentElement.firstElementChild.firstElementChild.src),1);
+		if(node.parentElement.parentElement.firstElementChild.firstElementChild.naturalHeight != null){
+			var indice = custom.indexOf(node.parentElement.parentElement.firstElementChild.firstElementChild.src);
+			if(indice == -1)
+				indice = custom.indexOf(decodeURI(node.parentElement.parentElement.firstElementChild.firstElementChild.src));
+			if(indice == -1)
+				indice = custom.indexOf(encodeURI(node.parentElement.parentElement.firstElementChild.firstElementChild.src));
+			if(indice == -1)
+				log.error("La tarjeta con info: " + node.parentElement.parentElement.firstElementChild.firstElementChild.src + " no parece ser una URL valida.");
+			else
+				custom.splice(indice,1);
+				
 		}
 		else{
 			var colortextoactual = node.parentElement.parentElement.firstElementChild.firstElementChild.style.color;
