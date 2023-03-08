@@ -1,5 +1,5 @@
-var pc = ["Tarjeta DG.png","Tarjeta DRAW.png","tarjeta FG.png","Tarjeta GB.png","Tarjeta GMOD.png","Tarjeta GTA.png","Tarjeta HFF.png","Tarjeta HS.png","Tarjeta JMC.png","Tarjeta JMD.png","Tarjeta JMP.png","Tarjeta LL.png","Tarjeta MOD.png","Tarjeta OC2.png","Tarjeta PA.png","Tarjeta PP.png","Tarjeta PU.png", "Tarjeta RL.png", "Tarjeta SR.png","Tarjeta UCH.png"];
-var cel =["Tarjeta JMD.png","Tarjeta JMP.png","Tarjeta PU.png","Tarjeta SG.png","Tarjeta BF.png","Tarjeta UNO.png","Tarjeta DRAW.png","Tarjeta PS.png", "Tarjeta G.png"];
+var pc = ["https://www.odricku.cl/resources/img/tarjetas/Tarjeta DG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta DRAW.png","https://www.odricku.cl/resources/img/tarjetas/tarjeta FG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta GB.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta GMOD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta GTA.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta HFF.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta HS.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta JMC.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta JMD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta JMP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta LL.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta MOD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta OC2.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta PA.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta PP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta PU.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta RL.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta SR.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta UCH.png"];
+var cel =["https://www.odricku.cl/resources/img/tarjetas/Tarjeta JMD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta JMP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta PU.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta SG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta BF.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta UNO.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta DRAW.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta PS.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta G.png"];
 var custom = []
 var names = [];
 var num = 0;
@@ -9,10 +9,10 @@ var regex = /\-{0,1}(\d+)/g;
 let timerId;
 var flag = 1;
 
-var audioLoop = new Audio('Item roulette Loop.mp3');
+var audioLoop = new Audio('https://www.odricku.cl/resources/media/audio/Item roulette Loop.mp3');
 audioLoop.loop = true;
 audioLoop.volume = 0.3;
-var audioEnd = new Audio('Item roulette End.mp3');
+var audioEnd = new Audio('https://www.odricku.cl/resources/media/audio/Item roulette End.mp3');
 audioEnd.volume = 0.3;
 
 function rellenoInicial(mode){
@@ -59,12 +59,12 @@ function rellenoInicial(mode){
 		}
 		else{
 			
-			slot1.appendChild(createContent("Placeholder.png", "elem"));
-			slot2.appendChild(createContent("Placeholder.png", "elem"));
-			slot3.appendChild(createContent("Placeholder.png", "elem"));
-			slot4.appendChild(createContent("Placeholder.png", "elem"));
-			slot5.appendChild(createContent("Placeholder.png", "elem"));
-			slot6.appendChild(createContent("Placeholder.png", "elem"));
+			slot1.appendChild(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
+			slot2.appendChild(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
+			slot3.appendChild(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
+			slot4.appendChild(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
+			slot5.appendChild(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
+			slot6.appendChild(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
 			
 			names.push("Placeholder.png");
 			names.push("Placeholder.png");
@@ -246,7 +246,6 @@ function winnerunshow(){
 	setTimeout(() => {
 		if(winnercontainer.children.length > 0)
 			winnercontainer.firstElementChild.remove();
-		}
 	}, (300));
 	
 }
@@ -309,7 +308,7 @@ function addTarjeta(){
 			tarjetacontainer.appendChild(trelem);
 			
 			new Promise(() => {
-				imagelem.onload = () => { 
+				imagelem.onload = () => {
 					custom.push(urltarj.value); 
 					urltarj.value = "";
 					rellenoInicial(2)
