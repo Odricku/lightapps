@@ -53,17 +53,21 @@ function preparaescala(die){
 		cont = 0;
 		
 		var fc = getfuturecoords(angulo, posx, posy);
-		posiciones.forEach(posicion => {
-			if(centros(posicion, fc) 
-				||inside(fc.n.x, fc.n.y, posicion)
-				||inside(fc.e.x, fc.e.y, posicion)
-				||inside(fc.o.x, fc.o.y, posicion)
-				||inside(fc.s.x, fc.s.y, posicion)
-			){
-				cont++;
-			}
-		});
-		
+		if(fc.e.x < 0 || fc.o.x > container.clientWidth || fc.n.y < 0 || fc.s.y > container.clientHeight){
+			cont = 1;
+		}
+		else{
+			posiciones.forEach(posicion => {
+				if(centros(posicion, fc) 
+					||inside(fc.n.x, fc.n.y, posicion)
+					||inside(fc.e.x, fc.e.y, posicion)
+					||inside(fc.o.x, fc.o.y, posicion)
+					||inside(fc.s.x, fc.s.y, posicion)
+				){
+					cont++;
+				}
+			});
+		}
 		global++;
 		
 		if(cont == 0){
@@ -104,26 +108,19 @@ function centros(posicion, fc){
 function inside(x, y , pos){
 	
 	var contlargos = 0;
-	
-	if(Math.pow(x - pos.n.x, 2) + Math.pow(y - pos.n.y,2) <= 2* Math.pow(largo * escala, 2)){
+		
+	if(Math.pow(x - pos.n.x, 2) + Math.pow(y - pos.n.y,2) <= 2* Math.pow(largo * escala, 2))
 		contlargos++;
-	}
-	if(Math.pow(x - pos.e.x, 2) + Math.pow(y - pos.e.y,2) <= 2* Math.pow(largo * escala, 2)){
+	if(Math.pow(x - pos.e.x, 2) + Math.pow(y - pos.e.y,2) <= 2* Math.pow(largo * escala, 2))
 		contlargos++;
-	} 
-	if(Math.pow(x - pos.o.x, 2) + Math.pow(y - pos.o.y,2) <= 2* Math.pow(largo * escala, 2)){
+	if(Math.pow(x - pos.o.x, 2) + Math.pow(y - pos.o.y,2) <= 2* Math.pow(largo * escala, 2))
 		contlargos++;
-	} 
-	if(Math.pow(x - pos.s.x, 2) + Math.pow(y - pos.s.y,2) <= 2* Math.pow(largo * escala, 2)){
+	if(Math.pow(x - pos.s.x, 2) + Math.pow(y - pos.s.y,2) <= 2* Math.pow(largo * escala, 2))
 		contlargos++
-	}
-	if(contlargos >= 3){
+	if(contlargos >= 3)
 		return true;
-	}
-	
-	
 	return false;
-
+	
 }
 
 function dibujadots(posi){
@@ -167,15 +164,21 @@ function dibujadots(posi){
 
 function getfuturecoords(angulo, posx, posy){
 	
+	if(angulo >= 0){
+		return {
+			n:{x: posx, y: posy},
+			e:{x: Math.trunc(posx + largo * escala * Math.cos(Math.PI * angulo/180)), y: Math.trunc(posy + largo * escala * Math.sin(Math.PI * angulo/180))},
+			o:{x: Math.trunc(posx - largo * escala * Math.sin(Math.PI * angulo/180)), y: Math.trunc(posy + largo * escala * Math.cos(Math.PI * angulo/180))},
+			s:{x: Math.trunc(posx - largo * escala * Math.sin(Math.PI * angulo/180) + largo * escala * Math.cos(Math.PI * angulo/180)), y: Math.trunc(posy + largo * escala * Math.cos(Math.PI * angulo/180) + largo * escala * Math.sin(Math.PI * angulo/180))}
+		};
+	}
+	
 	return {
-		n:{x: posx, y: posy},
-		e:{x: Math.trunc(posx + largo * escala * Math.cos(Math.PI * angulo/180)), y: Math.trunc(posy + largo * escala * Math.sin(Math.PI * angulo/180))},
-		o:{x: Math.trunc(posx - largo * escala * Math.sin(Math.PI * angulo/180)), y: Math.trunc(posy + largo * escala * Math.cos(Math.PI * angulo/180))},
-		s:{x: Math.trunc(posx - largo * escala * Math.sin(Math.PI * angulo/180) + largo * escala * Math.cos(Math.PI * angulo/180)), y: Math.trunc(posy + largo * escala * Math.cos(Math.PI * angulo/180) + largo * escala * Math.sin(Math.PI * angulo/180))}
+		e:{x: posx, y: posy},
+		n:{x: Math.trunc(posx + largo * escala * Math.cos(Math.PI * angulo/180)), y: Math.trunc(posy + largo * escala * Math.sin(Math.PI * angulo/180))},
+		s:{x: Math.trunc(posx - largo * escala * Math.sin(Math.PI * angulo/180)), y: Math.trunc(posy + largo * escala * Math.cos(Math.PI * angulo/180))},
+		o:{x: Math.trunc(posx - largo * escala * Math.sin(Math.PI * angulo/180) + largo * escala * Math.cos(Math.PI * angulo/180)), y: Math.trunc(posy + largo * escala * Math.cos(Math.PI * angulo/180) + largo * escala * Math.sin(Math.PI * angulo/180))}
 	};
-	
-	
-
 }
 
 function toggleClasses(die) {

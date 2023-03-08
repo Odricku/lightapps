@@ -327,8 +327,8 @@ button {
 
 .streamsign{
 	position: fixed;
-	top: 10;
-	left: 10;
+	top: 0;
+	left: 0;
 	border-radius: 10px;
 	margin: 5px;
 	padding: 1px 10px 1px 10px;
@@ -342,6 +342,7 @@ button {
 .streamon{
 	color: #06BD00;
 	border: solid 3px #06BD00;
+	opacity: 0.1;
 }
 
 
