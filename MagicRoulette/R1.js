@@ -2,7 +2,7 @@ var pc = ["Tarjeta DG.png","Tarjeta DRAW.png","tarjeta FG.png","Tarjeta GB.png",
 var cel =["Tarjeta JMD.png","Tarjeta JMP.png","Tarjeta PU.png","Tarjeta SG.png","Tarjeta BF.png","Tarjeta UNO.png","Tarjeta DRAW.png","Tarjeta PS.png", "Tarjeta G.png"];
 var custom = []
 var names = [];
-var num;
+var num = 0;
 
 var regex = /\-{0,1}(\d+)/g;
 
@@ -16,65 +16,66 @@ var audioEnd = new Audio('Item roulette End.mp3');
 audioEnd.volume = 0.3;
 
 function rellenoInicial(mode){
+	if(flag == 1){
 
-	if(mode == 0){
-		custom = pc;
-	}else if(mode == 1){
-		custom = cel;
-	}
-		
-	slot1.innerHTML = "";
-	slot2.innerHTML = "";
-	slot3.innerHTML = "";
-	slot4.innerHTML = "";
-	slot5.innerHTML = "";
-	slot6.innerHTML = "";
-	
-	names = null;
-	names = Object.create(custom);
-
-	for(var i = 0; i < names.length; i++){
-
-		num = Math.floor(Math.random() * names.length);
-		[names[i], names[num]] = [names[num], names[i]];
-	
-	}
-	if(names.length != 0){
-		var iteracion = 0;
-		while(names.length < 6){
-			for(var i = 0; i < custom.length; i++){
-				names.push(custom[i]);
-			}
-			iteracion++;
+		if(mode == 0){
+			custom = pc;
+		}else if(mode == 1){
+			custom = cel;
 		}
-		slot1.appendChild(createContent(names[num++ % names.length], "elem"));
-		slot2.appendChild(createContent(names[num++ % names.length], "elem"));
-		slot3.appendChild(createContent(names[num++ % names.length], "elem"));
-		slot4.appendChild(createContent(names[num++ % names.length], "elem"));
-		slot5.appendChild(createContent(names[num++ % names.length], "elem"));
-		slot6.appendChild(createContent(names[num++ % names.length], "elem"));
+			
+		slot1.innerHTML = "";
+		slot2.innerHTML = "";
+		slot3.innerHTML = "";
+		slot4.innerHTML = "";
+		slot5.innerHTML = "";
+		slot6.innerHTML = "";
 		
-	
-	}
-	else{
+		names = null;
+		names = Object.create(custom);
+
+		for(var i = 0; i < names.length; i++){
+
+			num = Math.floor(Math.random() * names.length);
+			[names[i], names[num]] = [names[num], names[i]];
 		
-		slot1.appendChild(createContent("Placeholder.png", "elem"));
-		slot2.appendChild(createContent("Placeholder.png", "elem"));
-		slot3.appendChild(createContent("Placeholder.png", "elem"));
-		slot4.appendChild(createContent("Placeholder.png", "elem"));
-		slot5.appendChild(createContent("Placeholder.png", "elem"));
-		slot6.appendChild(createContent("Placeholder.png", "elem"));
+		}
+		if(names.length != 0){
+			var iteracion = 0;
+			while(names.length < 6){
+				for(var i = 0; i < custom.length; i++){
+					names.push(custom[i]);
+				}
+				iteracion++;
+			}
+			slot1.appendChild(createContent(names[num++ % names.length], "elem"));
+			slot2.appendChild(createContent(names[num++ % names.length], "elem"));
+			slot3.appendChild(createContent(names[num++ % names.length], "elem"));
+			slot4.appendChild(createContent(names[num++ % names.length], "elem"));
+			slot5.appendChild(createContent(names[num++ % names.length], "elem"));
+			slot6.appendChild(createContent(names[num++ % names.length], "elem"));
+			
 		
-		names.push("Placeholder.png");
-		names.push("Placeholder.png");
-		names.push("Placeholder.png");
-		names.push("Placeholder.png");
-		names.push("Placeholder.png");
-		names.push("Placeholder.png");
-	}
-		
-	crearPizza();
-	
+		}
+		else{
+			
+			slot1.appendChild(createContent("Placeholder.png", "elem"));
+			slot2.appendChild(createContent("Placeholder.png", "elem"));
+			slot3.appendChild(createContent("Placeholder.png", "elem"));
+			slot4.appendChild(createContent("Placeholder.png", "elem"));
+			slot5.appendChild(createContent("Placeholder.png", "elem"));
+			slot6.appendChild(createContent("Placeholder.png", "elem"));
+			
+			names.push("Placeholder.png");
+			names.push("Placeholder.png");
+			names.push("Placeholder.png");
+			names.push("Placeholder.png");
+			names.push("Placeholder.png");
+			names.push("Placeholder.png");
+		}
+			
+		crearPizza();
+	}	
 }
 
 function createContent(content, clase){
@@ -131,7 +132,6 @@ function girar(velGiro){
 							if(elem.vuelta){
 								elem.firstElementChild.remove();
 								elem.appendChild(createContent(names[num++ % names.length], "elem"));
-							
 								elem.vuelta = false;
 							}
 						}
@@ -143,7 +143,13 @@ function girar(velGiro){
 					[...tombola.querySelectorAll(".divcontainer")].forEach(elem => {
 						elem.style.transition = "";
 						var angulomaestro = parseInt(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg",""))%360;
-						if(angulomaestro > 90 ){
+						if(angulomaestro == 0){
+							winnershow(elem.firstElementChild);
+							setTimeout(() => { 
+								winnerunshow();
+							}, (5000));
+						}
+						else if(angulomaestro > 90 ){
 							elem.style.transform = elem.style.transform.replace(/-*[0-9\.]*deg/, (angulomaestro - 360) + "deg");
 						}
 						else{
@@ -152,10 +158,7 @@ function girar(velGiro){
 					});
 					flag = 1;
 					audioLoop.pause();
-					console.log("si");
 					audioEnd.play();
-					confetticontainer.style.display = "block";
-					initConfetti();
 
 					num = num % names.length;
 					
@@ -182,21 +185,23 @@ function girar(velGiro){
 				
 				setTimeout(() => { 
 					clearInterval(timerId);
+					
 					listTarj.forEach(elem => {
 						elem.style.transition = "";
-						elem.style.transform = elem.style.transform.replace(/-*[0-9\.]*deg/, parseInt(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg",""))%360 + "deg");
+						var angulofinal = parseInt(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg",""))%360;
+						elem.style.transform = elem.style.transform.replace(/-*[0-9\.]*deg/, angulofinal + "deg");
+						if (angulofinal == 0){
+							winnershow(elem.firstElementChild.firstElementChild);
+							setTimeout(() => { 
+								winnerunshow();
+							}, (5000));
+							
+						}
 					});
 					flag = 1;
 					audioLoop.pause();
 					audioEnd.play();
-					
-					confetticontainer.style.display = "block";
-					initConfetti();
-					
-					setTimeout(() => { 
-						confetticontainer.style.display = "none";
-					}, (5000));
-					
+										
 				}, (1000 * velGiro));
 			}
 		}
@@ -207,110 +212,154 @@ function girar(velGiro){
 	}
 }
 
+function winnershow(winnerelem){
+	
+	if(winnerelem.naturalHeight == null){
+								
+		var colortexto = winnerelem.style.color;
+		var colorback = winnerelem.style.backgroundColor;
+
+		if(colortexto.startsWith("rgb(")){
+			color = colortexto.replace("rgb(","").replace(")").split(",");
+			colortexto = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
+		}
+		if(colorback.startsWith("rgb(")){
+			color = colorback.replace("rgb(","").replace(")").split(",");
+			colorback = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
+		}
+		
+		winnercontainer.appendChild(createContent("text:" + winnerelem.innerText + ";" + colortexto +";" + colorback), "winner");
+	}
+	else{
+		winnercontainer.appendChild(createContent(winnerelem.src, "winner"));
+	}
+	
+	winnercontainer.style.transform = "scale(1.5)";
+	confetticontainer.style.display = "block";
+	initConfetti();
+	
+}
+
+function winnerunshow(){
+	confetticontainer.style.display = "none";
+	winnercontainer.style.transform = "scale(0)";
+	setTimeout(() => { 
+		winnercontainer.firstElementChild.remove();
+	}, (300));
+	
+}
+
 var flagrender = true;
 
 function limpiar(){
-	var res = confirm("Esto eliminara todo y no puede deshacerse, ¿estas seguro?")
-	if (res == true){
-		thereallimpiar();
+	if(flag == 1){
+		var res = confirm("Esto eliminara todo y no puede deshacerse, ¿estas seguro?")
+		if (res == true){
+			thereallimpiar();
+		}
 	}
 }
 
 function thereallimpiar(){
+	if(flag == 1){
 
-	var listTarj = document.getElementById("tarjetacontainer").children;
-	
-	for(var i = listTarj.length - 1; i > 0 ; i--){
-		listTarj[i].remove();
+		var listTarj = document.getElementById("tarjetacontainer").children;
+		
+		for(var i = listTarj.length - 1; i > 0 ; i--){
+			listTarj[i].remove();
+		}
+		
+		custom = [];
+		rellenoInicial(2);
 	}
-	
-	custom = [];
-	rellenoInicial(2);
 }
 
 function addTarjeta(){
 	
-	if(urltarj.value.length != 0){
-		
-		var trelem = document.createElement("tr");
-		var tdelem = document.createElement("td");
-		var td2elem = document.createElement("td");
-		var imagelem = document.createElement("img");
-		imagelem.src = urltarj.value;
-		imagelem.width = "400";
-		imagelem.height = "160";
-		
-		tdelem.appendChild(imagelem);
+	if(flag == 1){
+	
+		if(urltarj.value.length != 0){
+			
+			var trelem = document.createElement("tr");
+			var tdelem = document.createElement("td");
+			var td2elem = document.createElement("td");
+			var imagelem = document.createElement("img");
+			imagelem.src = urltarj.value;
+			imagelem.width = "400";
+			imagelem.height = "160";
+			
+			tdelem.appendChild(imagelem);
 
-		var inputelem = document.createElement("input");
-		inputelem.type = "button";
-		inputelem.value = "ELIMINAR";
-		inputelem.classList.add("btn");
-		inputelem.classList.add("lg");
-		inputelem.classList.add("btn-primary");
-		inputelem.classList.add("btn-block");
-		inputelem.setAttribute("onclick","deleteTarjeta(this)");
-		
-		td2elem.appendChild(inputelem);
-		
-		trelem.appendChild(tdelem);
-		trelem.appendChild(td2elem);
-		
-		tarjetacontainer.appendChild(trelem);
-		
-		new Promise(() => {
-			imagelem.onload = () => { 
-				custom.push(urltarj.value); 
-				urltarj.value = "";
-				rellenoInicial(2)
-			};
-			imagelem.onerror = () => {
-				var divelem = document.createElement("div");
-				divelem.style.backgroundColor = "#000000";
-				divelem.style.color = "#FFFFFF";
-				divelem.style.fontSize = "50px";
-				divelem.style.display = "flex";
-				divelem.style.justifyContent = "center";
-				divelem.style.alignItems = "center";
-				divelem.style.margin = "auto";
-				divelem.style.width = "400px";
-				divelem.style.height = "160px";
-				divelem.innerText = urltarj.value;
-				divelem.setAttribute("onclick","changecolor(this)");
-				
-				var colortext = document.createElement("input");
-				colortext.setAttribute("type","color");
-				colortext.classList.add("colortarj");
-				colortext.value = "ffffff#";
-				colortext.setAttribute("onchange","changetextcolor(this)");
-				colortext.style.display = "none";
+			var inputelem = document.createElement("input");
+			inputelem.type = "button";
+			inputelem.value = "ELIMINAR";
+			inputelem.classList.add("btn");
+			inputelem.classList.add("lg");
+			inputelem.classList.add("btn-primary");
+			inputelem.classList.add("btn-block");
+			inputelem.setAttribute("onclick","deleteTarjeta(this)");
 			
-				var colorback = document.createElement("input");
-				colorback.setAttribute("type","color");
-				colorback.classList.add("colortarj");
-				colorback.value = "#000000";
-				colorback.setAttribute("onchange","changebackcolor(this)");
-				colorback.style.display = "none";
-				
-				divelem.appendChild(colortext);
-				divelem.appendChild(colorback);
+			td2elem.appendChild(inputelem);
 			
-				imagelem.remove();
-				tdelem.appendChild(divelem);
+			trelem.appendChild(tdelem);
+			trelem.appendChild(td2elem);
+			
+			tarjetacontainer.appendChild(trelem);
+			
+			new Promise(() => {
+				imagelem.onload = () => { 
+					custom.push(urltarj.value); 
+					urltarj.value = "";
+					rellenoInicial(2)
+				};
+				imagelem.onerror = () => {
+					var divelem = document.createElement("div");
+					divelem.style.backgroundColor = "#000000";
+					divelem.style.color = "#FFFFFF";
+					divelem.style.fontSize = "50px";
+					divelem.style.display = "flex";
+					divelem.style.justifyContent = "center";
+					divelem.style.alignItems = "center";
+					divelem.style.margin = "auto";
+					divelem.style.width = "400px";
+					divelem.style.height = "160px";
+					divelem.innerText = urltarj.value;
+					divelem.setAttribute("onclick","changecolor(this)");
+					
+					var colortext = document.createElement("input");
+					colortext.setAttribute("type","color");
+					colortext.classList.add("colortarj");
+					colortext.value = "ffffff#";
+					colortext.setAttribute("onchange","changetextcolor(this)");
+					colortext.style.display = "none";
 				
-				custom.push("text:" + urltarj.value + ";#ffffff;#000000");
-				urltarj.value = "";
-				rellenoInicial(2);
+					var colorback = document.createElement("input");
+					colorback.setAttribute("type","color");
+					colorback.classList.add("colortarj");
+					colorback.value = "#000000";
+					colorback.setAttribute("onchange","changebackcolor(this)");
+					colorback.style.display = "none";
+					
+					divelem.appendChild(colortext);
+					divelem.appendChild(colorback);
 				
-			}
-		});
-	}			
+					imagelem.remove();
+					tdelem.appendChild(divelem);
+					
+					custom.push("text:" + urltarj.value + ";#ffffff;#000000");
+					urltarj.value = "";
+					rellenoInicial(2);
+					
+				}
+			});
+		}			
+	}
 }
 
 function changecolor(elem){
-	
-	elem.firstElementChild.click();
-	
+	if(flag == 1){
+		elem.firstElementChild.click();
+	}
 }
 
 function changetextcolor(elem){
@@ -371,37 +420,39 @@ function changebackcolor(elem){
 }
 
 function pasteTarjeta(fil){
+	if(flag == 1){
 		
-	if(fil){
-		urltarj.value = URL.createObjectURL(fil);
-		addTarjeta();
-	}			
+		if(fil){
+			urltarj.value = URL.createObjectURL(fil);
+			addTarjeta();
+		}			
+	}
 }
 
 function deleteTarjeta(node){
-
-	if(node.parentElement.parentElement.firstElementChild.firstElementChild.src != null){
-		custom.splice(custom.indexOf(node.parentElement.parentElement.firstElementChild.firstElementChild.src),1);
-	}
-	else{
-		var colortextoactual = node.parentElement.parentElement.firstElementChild.firstElementChild.style.color;
-		var colorbackactual = node.parentElement.parentElement.firstElementChild.firstElementChild.style.backgroundColor;
-	
-		if(colortextoactual.startsWith("rgb(")){
-			color = colortextoactual.replace("rgb(","").replace(")").split(",");
-			colortextoactual = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
+	if(flag == 1){
+		if(node.parentElement.parentElement.firstElementChild.firstElementChild.src != null){
+			custom.splice(custom.indexOf(node.parentElement.parentElement.firstElementChild.firstElementChild.src),1);
 		}
-		if(colorbackactual.startsWith("rgb(")){
-			color = colorbackactual.replace("rgb(","").replace(")").split(",");
-			colorbackactual = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
+		else{
+			var colortextoactual = node.parentElement.parentElement.firstElementChild.firstElementChild.style.color;
+			var colorbackactual = node.parentElement.parentElement.firstElementChild.firstElementChild.style.backgroundColor;
+		
+			if(colortextoactual.startsWith("rgb(")){
+				color = colortextoactual.replace("rgb(","").replace(")").split(",");
+				colortextoactual = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
+			}
+			if(colorbackactual.startsWith("rgb(")){
+				color = colorbackactual.replace("rgb(","").replace(")").split(",");
+				colorbackactual = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
+			}
+			
+			custom.splice(custom.indexOf("text:" + node.parentElement.parentElement.firstElementChild.firstElementChild.innerText + ";" + colortextoactual + ";" + colorbackactual),1);
+			
 		}
-		
-		custom.splice(custom.indexOf("text:" + node.parentElement.parentElement.firstElementChild.firstElementChild.innerText + ";" + colortextoactual + ";" + colorbackactual),1);
-		
+		node.parentElement.parentElement.remove();
+		rellenoInicial(2);
 	}
-	node.parentElement.parentElement.remove();
-	rellenoInicial(2);
-
 }
 
 function palanca(){
@@ -439,14 +490,18 @@ window.addEventListener('paste', e => {
 });
 
 window.addEventListener("dragover", (e)=>{
-	e.preventDefault();
+	if(flag == 1){
+		e.preventDefault();
+	}
 });
 
 window.addEventListener("drop", (e)=>{
-	e.preventDefault(); 
 	if(flag == 1){
-		for(var i = 0; i < event.dataTransfer.files.length; i++){
-			pasteTarjeta(event.dataTransfer.files[i]);
+		e.preventDefault(); 
+		if(flag == 1){
+			for(var i = 0; i < event.dataTransfer.files.length; i++){
+				pasteTarjeta(event.dataTransfer.files[i]);
+			}
 		}
 	}
 });
@@ -480,7 +535,6 @@ function trozar(){
 	var listTrozos = document.getElementsByClassName("slice-cont");
 				
 	if (listTrozos.length > 3){
-		pizza.style.transform = "translate(-50%, " + (-114.5 -685.2/listTrozos.length) + "px) scale(0.33)";
 		
 		for (var i = 0; i < listTrozos.length; i++){
 			listTrozos[i].style.height =  2 * apotema * Math.tan(Math.PI/listTrozos.length) + "px";
@@ -490,7 +544,7 @@ function trozar(){
 			
 			listTrozos[i].firstElementChild.firstElementChild.style.width =  "75%";
 
-			if(listTrozos[i].firstElementChild.firstElementChild.src == null){
+			if(listTrozos[i].firstElementChild.firstElementChild.naturalHeight == null){
 				listTrozos[i].firstElementChild.firstElementChild.style.width =  "95%";
 				listTrozos[i].firstElementChild.firstElementChild.style.marginLeft =  "293px";
 				
@@ -521,9 +575,6 @@ function trozar(){
 					listTrozos[i].firstElementChild.firstElementChild.style.paddingLeft =  "105px";
 				}
 			}
-			else if(names.length == 6){
-				pizza.style.transform = "translate(-50%, -232px) scale(0.33)";
-			}
 		}
 	} 
 }
@@ -544,13 +595,15 @@ function palabralarga(texto){
 var apotema = 600;
 
 function cambio(){
-	if(pizza.parentElement.style.display == "none"){
-		pizza.parentElement.style.display = "block";
-		tombola.style.display = "none";
-	}
-	else{
-		tombola.style.display = "block";
-		pizza.parentElement.style.display = "none";
+	if (flag == 1){
+		if(pizza.parentElement.style.display == "none"){
+			pizza.parentElement.style.display = "block";
+			tombola.style.display = "none";
+		}
+		else{
+			tombola.style.display = "block";
+			pizza.parentElement.style.display = "none";
+		}
 	}
 }
 
