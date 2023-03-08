@@ -348,6 +348,7 @@ function ocultarEdit(){
 }
 
 function doneon(){
+	
 	if(!neon){
 		neon = true;
 		[...document.querySelectorAll(".dot")].forEach(dot => {
@@ -357,8 +358,10 @@ function doneon(){
 			lado.classList.add("neon");
 			lado.style.backgroundColor = "";
 		});
-		container.classList.remove("mesa");
-		container.classList.add("neonback");
+		if (!container.classList.contains("streamback")){
+			container.classList.remove("mesa");
+			container.classList.add("neonback");
+		}
 		editdice.classList.add("neon");
 		onoff.classList.remove("off");
 		onoff.classList.add("on");
@@ -372,13 +375,40 @@ function doneon(){
 			lado.classList.remove("neon");
 			lado.style.backgroundColor = lado.style.color;
 		});
-		container.classList.remove("neonback");
-		container.classList.add("mesa");
+		if (!container.classList.contains("streamback")){
+			container.classList.remove("neonback");
+			container.classList.add("mesa");
+		}
 		editdice.classList.remove("neon");
 		onoff.classList.add("off");
 		onoff.classList.remove("on");
 	}
+}
+
+function streammode(){
 	
+	if(stream.classList.contains("streamoff")){
+		stream.classList.remove("streamoff")
+		stream.classList.add("streamon")
+		if(neon){
+			container.classList.remove("neonback");
+		}
+		else{
+			container.classList.remove("mesa");
+		}
+		container.classList.add("streamback");
+	}
+	else{
+		stream.classList.remove("streamon")
+		stream.classList.add("streamoff")
+		container.classList.remove("streamback");
+		if(neon){
+			container.classList.add("neonback");
+		}
+		else{
+			container.classList.add("mesa");
+		}			
+	}
 }
 
 addDado();

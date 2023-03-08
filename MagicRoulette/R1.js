@@ -145,7 +145,7 @@ function girar(velGiro){
 						var angulomaestro = parseInt(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg",""))%360;
 						if(angulomaestro == 0){
 							winnershow(elem.firstElementChild);
-							setTimeout(() => { 
+							setTimeout(() => {
 								winnerunshow();
 							}, (5000));
 						}
@@ -243,8 +243,10 @@ function winnershow(winnerelem){
 function winnerunshow(){
 	confetticontainer.style.display = "none";
 	winnercontainer.style.transform = "scale(0)";
-	setTimeout(() => { 
-		winnercontainer.firstElementChild.remove();
+	setTimeout(() => {
+		if(winnercontainer.children.length > 0)
+			winnercontainer.firstElementChild.remove();
+		}
 	}, (300));
 	
 }
@@ -430,7 +432,7 @@ function pasteTarjeta(fil){
 }
 
 function deleteTarjeta(node){
-	if(flag == 1){
+	if(flag == 1 && custom.length > 0){
 		if(node.parentElement.parentElement.firstElementChild.firstElementChild.src != null){
 			custom.splice(custom.indexOf(node.parentElement.parentElement.firstElementChild.firstElementChild.src),1);
 		}

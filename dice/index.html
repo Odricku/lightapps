@@ -9,11 +9,13 @@
 	<link href='https://fonts.googleapis.com/css?family=Sacramento:400' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    
+
     <div id="container" class="mesa">
 		<a id="backdice" onclick="rollDice()"></a>
 	</div>
-
+	<div id="stream" class="streamsign streamoff" onclick="streammode()">
+		<b>Stream Mode</b>
+	</div>
 	<div id="editdice">
 		<input type="text" style="width:100%" id="nombreDado" placeholder="NOMBRE" value="" onchange="changenombre()"></br></br>
 		<input type="color" id="colorDado" value="#FFFFFF" onchange="changecolor()">
