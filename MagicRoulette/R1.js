@@ -15,6 +15,55 @@ audioLoop.volume = 0.3;
 var audioEnd = new Audio('https://www.odricku.cl/resources/media/audio/Item roulette End.mp3');
 audioEnd.volume = 0.3;
 
+window.onload = function(){
+	if(document.URL.indexOf("?") != -1){
+		var url = document.URL.split("?");
+		url.splice(0,1);
+		try {
+			custom = JSON.parse(window.atob(decodeURI(url.join("?"))));
+			rellenoInicial(2);
+		} catch (error) {
+			console.error("Importación invalida");
+		}
+	}else{
+		rellenoinicial(2);
+	}
+}
+
+function cargajson(){
+	
+	var bandera = 0;
+	
+	var pokejsonurl = encodeURI("https://www.odricku.cl/AdivinaQuien/base/pokelist.json");
+	request = new XMLHttpRequest();	
+	request.open('GET', pokejsonurl);
+	request.responseType = 'json';
+	request.send();
+	request.onload = function() {
+		pokelist = request.response;
+		document.getElementById("pokelist").innerHTML = "";
+		document.getElementById("Gen1").disabled = false;
+		document.getElementById("Gen2").disabled = false;
+		document.getElementById("Gen3").disabled = false;
+		document.getElementById("Gen4").disabled = false;
+		document.getElementById("Gen5").disabled = false;
+		document.getElementById("Gen6").disabled = false;
+		document.getElementById("Gen7").disabled = false;
+		document.getElementById("Gen8").disabled = false;
+		document.getElementById("Gen9").disabled = false;
+		document.getElementById("Otrasformas").disabled = false;
+		
+		if(document.URL.indexOf("?") != -1){
+			var key = document.URL.slice(document.URL.split("?")[0].length + 1).replaceAll(/%20/g, " ");
+			if(key.length > 0){
+				showhid();
+				verseed();
+				document.getElementById("semilla").value = key;
+				cargalista();
+			}
+		}
+
+
 function rellenoInicial(mode){
 	if(flag == 1){
 
@@ -721,3 +770,25 @@ window.addEventListener('resize', function () {
 window.addEventListener('click', function () {
 	initConfetti();
 });
+
+function exportar(){
+	
+	var flagtemporales = false;
+	
+	custom.forEach((item) => {
+		if(!flagtemporales && item.startsWith("blob:"))
+			flagtemporales = true;
+	});
+	
+	if(flagtemporales){
+		if(confirm("Al menos una de las opciones ha sido cargada a la sesion (imagen copiada y pegada directamente), estas imagenes no son aceptables para la exportacion.\n Si desea evitar esto, por favor reemplazelas con la url directa de la imagen. ¿Deseas resaltar las opciones no aceptables? Se demarcaran en un cuadro rojo.") == true){
+			custom.forEach((item) => {
+				if(item.startsWith("blob:"))
+					item.parentElement.classList.add("temporal");
+			});
+		}	
+	}
+	else{
+		return "https://odricku.cl/magicroulette/?" + encodeURI(btoa(JSON.stringify(custom)));
+	}
+}

@@ -9,7 +9,7 @@
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body id="cuerpo" onload="rellenoInicial(2)">
+<body id="cuerpo"">
 	<div id="stream" class="streamsign streamoff" onclick="streammode()">
 		<b>Stream Mode</b>
 	</div>
@@ -37,7 +37,7 @@
 			<svg id="cono" onclick="girar(10)"></svg>
 		
 		</div>
-		
+
 		<div id="adicional" style="position: relative;text-align:center;max-width:100vw; margin-left:auto; margin-right:auto;">
 			<table style="width:100%">
 				<tbody>
@@ -55,40 +55,21 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="button" name="boton" value="AGREGAR OPCION" class="btn btn lg btn-primary btn-block" onclick="urltarj.focus()">
+							<input type="button" name="boton" value="VERSION CELULAR" class="btn btn lg btn-primary btn-block" onclick="rellenoInicial(1)">
 						</td>
 						<td>
-							<input type="button" name="boton" value="LIMPIAR" class="btn btn lg btn-primary btn-block" onclick="limpiar()">
+							<input type="button" name="boton" value="VERSION DE PC" class="btn btn lg btn-primary btn-block" onclick="rellenoInicial(0)">
 						</td>
 						<td>
 							<input type="button" name="boton" value="CAMBIAR RULETA" class="btn btn lg btn-primary btn-block" onclick="cambio()">
 						</td>
-						
 					</tr>
 				</tbody>
 			</table>
-			<div class="acciones">
-				<table style="width:100%">
-					<tbody id="tarjetacontainer">
-						<tr id="customT1">
-							<td>
-								TARJETA
-							</td>
-							<td>
-								ACCIONES
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				<div>
-					<input type="text" id="urltarj" placeholder="Arrastra, pega imagen o escribe su URL (Se reescalara a 500x200)" class="btn btn lg btn-dark btn-block"><input type="button" name="boton" value="AGREGAR TARJETA" class="btn btn lg btn-primary btn-block" onclick="addTarjeta()">
-				</div>
-			</div>
-			
+			</br></br>
+			¿Quieres hacer tu propia ruleta? <a href="https://www.odricku.cl/magicroulette">Entra Aca</a>
 		</div>
-		
-	</div>
-	<canvas width="100%" id="confetticontainer" class="confetti"></canvas>
-	<div id="winnercontainer" style="transform: scale(0)" onclick="winnerunshow()"></div>
-</body>
+		<canvas width="100%" id="confetticontainer" class="confetti"></canvas>
+		<div id="winnercontainer" style="transform: scale(0)" onclick="winnerunshow()"></div>
+	</body>
 </html>
