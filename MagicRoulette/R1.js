@@ -15,54 +15,19 @@ audioLoop.volume = 0.3;
 var audioEnd = new Audio('https://www.odricku.cl/resources/media/audio/Item roulette End.mp3');
 audioEnd.volume = 0.3;
 
-window.onload = function(){
+function init(){
 	if(document.URL.indexOf("?") != -1){
-		var url = document.URL.split("?");
-		url.splice(0,1);
 		try {
-			custom = JSON.parse(window.atob(decodeURI(url.join("?"))));
+			custom = JSON.parse(window.atob(decodeURI(document.URL.split("?")[1])));
+			importar();
 			rellenoInicial(2);
 		} catch (error) {
-			console.error("Importación invalida");
+			console.error("Importación Invalida");
 		}
 	}else{
-		rellenoinicial(2);
+		rellenoInicial(2);
 	}
 }
-
-function cargajson(){
-	
-	var bandera = 0;
-	
-	var pokejsonurl = encodeURI("https://www.odricku.cl/AdivinaQuien/base/pokelist.json");
-	request = new XMLHttpRequest();	
-	request.open('GET', pokejsonurl);
-	request.responseType = 'json';
-	request.send();
-	request.onload = function() {
-		pokelist = request.response;
-		document.getElementById("pokelist").innerHTML = "";
-		document.getElementById("Gen1").disabled = false;
-		document.getElementById("Gen2").disabled = false;
-		document.getElementById("Gen3").disabled = false;
-		document.getElementById("Gen4").disabled = false;
-		document.getElementById("Gen5").disabled = false;
-		document.getElementById("Gen6").disabled = false;
-		document.getElementById("Gen7").disabled = false;
-		document.getElementById("Gen8").disabled = false;
-		document.getElementById("Gen9").disabled = false;
-		document.getElementById("Otrasformas").disabled = false;
-		
-		if(document.URL.indexOf("?") != -1){
-			var key = document.URL.slice(document.URL.split("?")[0].length + 1).replaceAll(/%20/g, " ");
-			if(key.length > 0){
-				showhid();
-				verseed();
-				document.getElementById("semilla").value = key;
-				cargalista();
-			}
-		}
-
 
 function rellenoInicial(mode){
 	if(flag == 1){
@@ -115,12 +80,12 @@ function rellenoInicial(mode){
 			slot5.appendChild(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
 			slot6.appendChild(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
 			
-			names.push("Placeholder.png");
-			names.push("Placeholder.png");
-			names.push("Placeholder.png");
-			names.push("Placeholder.png");
-			names.push("Placeholder.png");
-			names.push("Placeholder.png");
+			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
+			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
+			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
+			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
+			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
+			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
 		}
 			
 		crearPizza();
@@ -773,22 +738,95 @@ window.addEventListener('click', function () {
 
 function exportar(){
 	
-	var flagtemporales = false;
+	if(custom.length == 0)
+		alert("La ruleta esta vacia.");
+	else{
+	
+		var flagtemporales = false;
+		
+		custom.forEach((item) => {
+			if(!flagtemporales && item.startsWith("blob:"))
+				flagtemporales = true;
+		});
+		
+		if(flagtemporales){
+			if(confirm("Al menos una de las opciones ha sido cargada a la sesion (imagen copiada y pegada directamente), estas imagenes no son aceptables para la exportacion.\n Si desea evitar esto, por favor reemplazelas con la url directa de la imagen. ¿Deseas resaltar las opciones no aceptables? Se demarcaran en un cuadro rojo.") == true){
+				custom.forEach((item) => {
+					if(item.startsWith("blob:"))
+						item.parentElement.classList.add("temporal");
+				});
+			}	
+		}
+		else{
+			return "https://odricku.cl/magicroulette/?" + encodeURI(btoa(JSON.stringify(custom)));
+		}
+	}
+}
+
+function importar(){
 	
 	custom.forEach((item) => {
-		if(!flagtemporales && item.startsWith("blob:"))
-			flagtemporales = true;
+		var trelem = document.createElement("tr");
+		var tdelem = document.createElement("td");
+		var td2elem = document.createElement("td");
+		if(item.startsWith("text:")){
+			var elem = document.createElement("div");
+			var infoelem = item.split(";");
+			
+			elem.style.backgroundColor = infoelem[infoelem.length - 1];
+			elem.style.color = infoelem[infoelem.length - 2];
+			elem.style.fontSize = "50px";
+			elem.style.display = "flex";
+			elem.style.justifyContent = "center";
+			elem.style.alignItems = "center";
+			elem.style.margin = "auto";
+			elem.style.width = "400px";
+			elem.style.height = "160px";
+			elem.innerText = infoelem[0].replace("text:", "");
+			elem.setAttribute("onclick","changecolor(this)");
+			
+			var colortext = document.createElement("input");
+			colortext.setAttribute("type","color");
+			colortext.classList.add("colortarj");
+			colortext.value = infoelem[infoelem.length - 2];
+			colortext.setAttribute("onchange","changetextcolor(this)");
+			colortext.style.display = "none";
+		
+			var colorback = document.createElement("input");
+			colorback.setAttribute("type","color");
+			colorback.classList.add("colortarj");
+			colorback.value = infoelem[infoelem.length - 1];
+			colorback.setAttribute("onchange","changebackcolor(this)");
+			colorback.style.display = "none";
+			
+			elem.appendChild(colortext);
+			elem.appendChild(colorback);
+	}
+		else{
+			var elem = document.createElement("img");
+			elem.src = item;
+			elem.width = "400";
+			elem.height = "160";
+		}
+		
+		tdelem.appendChild(elem);
+
+		var inputelem = document.createElement("input");
+		inputelem.type = "button";
+		inputelem.value = "ELIMINAR";
+		inputelem.classList.add("btn");
+		inputelem.classList.add("lg");
+		inputelem.classList.add("btn-primary");
+		inputelem.classList.add("btn-block");
+		inputelem.setAttribute("onclick","deleteTarjeta(this)");
+		
+		td2elem.appendChild(inputelem);
+		
+		trelem.appendChild(tdelem);
+		trelem.appendChild(td2elem);
+		
+		tarjetacontainer.appendChild(trelem);
+		
 	});
 	
-	if(flagtemporales){
-		if(confirm("Al menos una de las opciones ha sido cargada a la sesion (imagen copiada y pegada directamente), estas imagenes no son aceptables para la exportacion.\n Si desea evitar esto, por favor reemplazelas con la url directa de la imagen. ¿Deseas resaltar las opciones no aceptables? Se demarcaran en un cuadro rojo.") == true){
-			custom.forEach((item) => {
-				if(item.startsWith("blob:"))
-					item.parentElement.classList.add("temporal");
-			});
-		}	
-	}
-	else{
-		return "https://odricku.cl/magicroulette/?" + encodeURI(btoa(JSON.stringify(custom)));
-	}
 }
