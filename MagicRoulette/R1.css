@@ -151,6 +151,8 @@ div.tarjetapizza{
 }
 
 .streamsign{
+	color: #CCCCCC;
+	border: solid 3px #CCCCCC;
 	position: fixed;
 	top: 10;
 	left: 10;
@@ -160,13 +162,10 @@ div.tarjetapizza{
 }
 
 .streamoff{
-	color: #CCCCCC;
-	border: solid 3px #CCCCCC;
+	opacity: 1;
 }
 
 .streamon{
-	color: #06BD00;
-	border: solid 3px #06BD00;
 	opacity: 0.1;
 }
 

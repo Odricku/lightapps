@@ -326,6 +326,8 @@ button {
 }
 
 .streamsign{
+	color: #CCCCCC;
+	border: solid 3px #CCCCCC;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -335,13 +337,10 @@ button {
 }
 
 .streamoff{
-	color: #CCCCCC;
-	border: solid 3px #CCCCCC;
+	opacity: 1;
 }
 
 .streamon{
-	color: #06BD00;
-	border: solid 3px #06BD00;
 	opacity: 0.1;
 }
 
