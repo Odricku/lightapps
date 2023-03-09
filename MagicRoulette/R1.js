@@ -1,15 +1,15 @@
 var pc = ["https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20DG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20DRAW.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20FG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20GB.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20GMOD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta GTA.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20HFF.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20HS.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMC.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20LL.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20MOD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20OC2.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PA.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PU.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20RL.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20SR.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20UCH.png"];
 var cel =["https://www.odricku.cl/resources/img/tarjetas/Tarjeta JMD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PU.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20SG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20BF.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20UNO.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20DRAW.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PS.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20G.png"];
+var ruletaclasica =['text:1;#ffffff;#ff0000', 'text:2;#ffffff;#000000', 'text:3;#ffffff;#ff0000', 'text:4;#ffffff;#000000', 'text:5;#ffffff;#ff0000', 'text:6;#ffffff;#000000', 'text:7;#ffffff;#ff0000', 'text:8;#ffffff;#000000', 'text:9;#ffffff;#ff0000', 'text:10;#ffffff;#000000', 'text:11;#ffffff;#000000', 'text:12;#ffffff;#ff0000', 'text:13;#ffffff;#000000', 'text:14;#ffffff;#ff0000', 'text:15;#ffffff;#000000', 'text:16;#ffffff;#ff0000', 'text:17;#ffffff;#000000', 'text:18;#ffffff;#ff0000', 'text:19;#ffffff;#ff0000', 'text:20;#ffffff;#000000', 'text:21;#ffffff;#ff0000', 'text:22;#ffffff;#000000', 'text:23;#ffffff;#ff0000', 'text:24;#ffffff;#000000', 'text:25;#ffffff;#ff0000', 'text:26;#ffffff;#000000', 'text:27;#ffffff;#ff0000', 'text:28;#ffffff;#000000', 'text:29;#ffffff;#000000', 'text:30;#ffffff;#ff0000', 'text:31;#ffffff;#000000', 'text:32;#ffffff;#ff0000', 'text:33;#ffffff;#000000', 'text:34;#ffffff;#ff0000', 'text:35;#ffffff;#000000', 'text:36;#ffffff;#ff0000', 'text:0;#ffffff;#008f18'];
 var custom = []
 var names = [];
 var num = 0;
-
-var flagrandom = true;
 
 var regex = /\-{0,1}(\d+)/g;
 
 let timerId;
 var flag = 1;
+var flaggirointerno = true;
 
 var audioLoop = new Audio('https://www.odricku.cl/resources/media/audio/Item roulette Loop.mp3');
 audioLoop.loop = true;
@@ -52,7 +52,7 @@ function rellenoInicial(mode){
 		names = null;
 		names = Object.create(custom);
 
-		if(flagrandom){
+		if(flagrandom.checked){
 			for(var i = 0; i < names.length; i++){
 
 				num = Math.floor(Math.random() * names.length);
@@ -126,6 +126,7 @@ function createContent(content, clase){
 }
 
 function girar(velGiro){
+	edit.style.display = "none";
 	if(names.length > 3){
 	
 		if(flag == 1){
@@ -204,9 +205,18 @@ function girar(velGiro){
 				
 				var angulofinal = parseFloat(pizza.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg","")) + angulo;
 				
-				pizza.style.transition = "transform " + velGiro + "s cubic-bezier" + finales[finalactual];
-				pizza.style.transform = pizza.style.transform.replace(/-*[0-9\.]*deg/, angulofinal + "deg");
-				
+				cono.style.transition = "transform 5s cubic-bezier" + finales[1];
+				cono.style.transform = cono.style.transform.replace(/-*[0-9\.]*deg/, "3600deg");
+				if(flaggirointerno){
+					pizza.style.transition = "transform " + velGiro + "s cubic-bezier" + finales[finalactual];
+					pizza.style.transform = pizza.style.transform.replace(/-*[0-9\.]*deg/, angulofinal + "deg");
+				}
+				else{
+					bolacontainer.style.transition = "transform " + velGiro + "s cubic-bezier" + finales[finalactual];
+					arrowcontainer.style.transition = "transform " + velGiro + "s cubic-bezier" + finales[finalactual];
+					bolacontainer.style.transform = bolacontainer.style.transform.replace(/-*[0-9\.]*deg/, angulofinal + "deg");	
+					arrowcontainer.style.transform = arrowcontainer.style.transform.replace(/-*[0-9\.]*deg/, angulofinal + "deg");
+				}				
 				setTimeout(() => { 
 					clearInterval(timerId);
 					var minerror = 360;
@@ -214,8 +224,12 @@ function girar(velGiro){
 					anguloganador = 360;
 					
 					listTarj.forEach(elem => {
+						
 						angulofinal = angulofinal % 360;
-						var anguloactual = 360 - parseFloat(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg",""));
+						if(flaggirointerno)
+							var anguloactual = 360 - parseFloat(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg",""));
+						else
+							var anguloactual = parseFloat(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg",""));
 						if(Math.abs(anguloactual - angulofinal) < minerror){
 							minerror = Math.abs(anguloactual - angulofinal);
 							ganador = elem.firstElementChild.firstElementChild.dataset.id;
@@ -223,12 +237,21 @@ function girar(velGiro){
 						}
 					});
 
-					console.log(anguloganador + "<>" + angulofinal);
 					winnershow(pizza.querySelector(".tarjetapizza[data-id='" + ganador + "']"));
 					
-					setTimeout(() => { 
-						pizza.style.transition = "transform 0s linear";
-						pizza.style.transform = pizza.style.transform.replace(/-*[0-9\.]*deg/, anguloganador + "deg");
+					setTimeout(() => {
+						if(flaggirointerno){
+							pizza.style.transition = "transform 0s linear";
+							pizza.style.transform = pizza.style.transform.replace(/-*[0-9\.]*deg/, anguloganador + "deg");
+						}
+						else{
+							bolacontainer.style.transition = "transform 0s linear";							
+							arrowcontainer.style.transition = "transform 0s linear";
+							bolacontainer.style.transform = bolacontainer.style.transform.replace(/-*[0-9\.]*deg/, anguloganador + "deg");
+							arrowcontainer.style.transform = arrowcontainer.style.transform.replace(/-*[0-9\.]*deg/, anguloganador + "deg");
+						}
+						cono.style.transition = "transform 0s linear";
+						cono.style.transform = cono.style.transform.replace(/-*[0-9\.]*deg/, "0deg");
 					}, (200));
 
 					setTimeout(() => { 
@@ -274,8 +297,10 @@ function winnershow(winnerelem){
 	}
 	
 	winnercontainer.style.transform = "scale(1.5)";
-	confetticontainer.style.display = "block";
-	initConfetti();
+	if(flagconfeti.checked){
+		confetticontainer.style.display = "block";
+		initConfetti();
+	}
 	
 }
 
@@ -292,6 +317,7 @@ function winnerunshow(){
 var flagrender = true;
 
 function limpiar(){
+	edit.style.display = "none";
 	if(flag == 1){
 		var res = confirm("Esto eliminara todo y no puede deshacerse, ¿estas seguro?")
 		if (res == true){
@@ -315,7 +341,7 @@ function thereallimpiar(){
 }
 
 function addTarjeta(){
-	
+	edit.style.display = "none";
 	if(flag == 1){
 	
 		if(urltarj.value.length != 0){
@@ -364,21 +390,18 @@ function addTarjeta(){
 					divelem.style.width = "400px";
 					divelem.style.height = "160px";
 					divelem.innerText = urltarj.value.trim();
-					divelem.setAttribute("onclick","changecolor(this)");
 					
 					var colortext = document.createElement("input");
 					colortext.setAttribute("type","color");
 					colortext.classList.add("colortarj");
 					colortext.value = "ffffff#";
 					colortext.setAttribute("onchange","changetextcolor(this)");
-					colortext.style.display = "none";
 				
 					var colorback = document.createElement("input");
 					colorback.setAttribute("type","color");
 					colorback.classList.add("colortarj");
 					colorback.value = "#000000";
 					colorback.setAttribute("onchange","changebackcolor(this)");
-					colorback.style.display = "none";
 					
 					divelem.appendChild(colortext);
 					divelem.appendChild(colorback);
@@ -396,58 +419,34 @@ function addTarjeta(){
 	}
 }
 
-function changecolor(elem){
-	if(flag == 1){
-		elem.firstElementChild.click();
-	}
-}
-
 function changetextcolor(elem){
 	
-	var colortextoactual = elem.parentElement.style.color;
-	var colorbackactual = elem.parentElement.style.backgroundColor;
 	var colorelem = elem.value;
 	
-	if(colortextoactual.startsWith("rgb(")){
-		color = colortextoactual.replace("rgb(","").replace(")").split(",");
-		colortextoactual = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
-	}
-	if(colorbackactual.startsWith("rgb(")){
-		color = colorbackactual.replace("rgb(","").replace(")").split(",");
-		colorbackactual = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
-	}
 	if(colorelem.startsWith("rgb(")){
 		color = colorelem.replace("rgb(","").replace(")").split(",");
 		colorelem = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
 	}
-
-	elem.parentElement.style.color = colorelem;
-	custom[elem.dataset.id] = "text:" + elem.parentElement.innerText.trim() + ";" + colorelem +";" + colorbackactual;
-	elem.parentElement.lastElementChild.click();
+	
+	var data = custom[elem.parentElement.dataset.id].split(";#");
+	custom[elem.parentElement.dataset.id] = data[0] + ";" + colorelem + ";#" + data[2];
+	elem.parentElement.style.color = elem.value;
 	rellenoInicial(2);
 		
 }
 
 function changebackcolor(elem){
 	
-	var colortextoactual = elem.parentElement.style.color;
-	var colorbackactual = elem.parentElement.style.backgroundColor;
 	var colorelem = elem.value;
 	
-	if(colortextoactual.startsWith("rgb(")){
-		color = colortextoactual.replace("rgb(","").replace(")").split(",");
-		colortextoactual = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
-	}
-	if(colorbackactual.startsWith("rgb(")){
-		color = colorbackactual.replace("rgb(","").replace(")").split(",");
-		colorbackactual = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
-	}
 	if(colorelem.startsWith("rgb(")){
 		color = colorelem.replace("rgb(","").replace(")").split(",");
 		colorelem = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
 	}
 	
-	custom[elem.dataset.id] = "text:" + elem.parentElement.innerText.trim() + ";" + colortextoactual +";" + colorelem;
+	var data = custom[elem.parentElement.dataset.id].split(";#");
+	custom[elem.parentElement.dataset.id] = data[0] + ";#" + data[1] + ";" + colorelem;
+	elem.parentElement.style.backgroundColor = elem.value;
 	rellenoInicial(2);
 }
 
@@ -525,24 +524,31 @@ function fixPalanca(){
 }
 
 window.addEventListener('paste', e => {
-	for(var i = 0; i < e.clipboardData.files.length; i++){
-		pasteTarjeta(e.clipboardData.files[i]);
+	if(flag == 1){
+		if(edit.style.display == "block"){
+			for(var i = 0; i < e.clipboardData.files.length; i++){
+				urltapa = e.clipboardData.files[i];
+				addtapa();
+			}
+		}
+		else{
+			for(var i = 0; i < e.clipboardData.files.length; i++){
+				pasteTarjeta(e.clipboardData.files[0]);
+			}
+		}
 	}
 });
 
 window.addEventListener("dragover", (e)=>{
-	if(flag == 1){
-		e.preventDefault();
-	}
+	e.preventDefault();
 });
 
 window.addEventListener("drop", (e)=>{
 	if(flag == 1){
 		e.preventDefault(); 
-		if(flag == 1){
-			for(var i = 0; i < event.dataTransfer.files.length; i++){
-				pasteTarjeta(event.dataTransfer.files[i]);
-			}
+		
+		for(var i = 0; i < event.dataTransfer.files.length; i++){
+			pasteTarjeta(event.dataTransfer.files[i]);
 		}
 	}
 });
@@ -604,13 +610,20 @@ function palabralarga(texto){
 var apotema = 600;
 
 function cambio(){
+	edit.style.display = "none";
 	if (flag == 1){
 		if(pizza.parentElement.style.display == "none"){
 			pizza.parentElement.style.display = "block";
+			flagtombola.checked = false;
+			flagclasic.checked = true;
+			editruleta.style.display = "block";
 			tombola.style.display = "none";
 		}
 		else{
 			tombola.style.display = "block";
+			flagtombola.checked = true;
+			flagclasic.checked = false;
+			editruleta.style.display = "none";
 			pizza.parentElement.style.display = "none";
 		}
 	}
@@ -777,21 +790,18 @@ function importar(){
 			elem.style.width = "400px";
 			elem.style.height = "160px";
 			elem.innerText = infoelem[0].replace("text:", "");
-			elem.setAttribute("onclick","changecolor(this)");
 			
 			var colortext = document.createElement("input");
 			colortext.setAttribute("type","color");
 			colortext.classList.add("colortarj");
 			colortext.value = infoelem[infoelem.length - 2];
 			colortext.setAttribute("onchange","changetextcolor(this)");
-			colortext.style.display = "none";
 		
 			var colorback = document.createElement("input");
 			colorback.setAttribute("type","color");
 			colorback.classList.add("colortarj");
 			colorback.value = infoelem[infoelem.length - 1];
 			colorback.setAttribute("onchange","changebackcolor(this)");
-			colorback.style.display = "none";
 			
 			elem.appendChild(colortext);
 			elem.appendChild(colorback);
@@ -828,14 +838,108 @@ function importar(){
 }
 
 function editar(){
-	edit.style.display = "flex";
+	if(flag == 1){
+		edit.style.display = "block";
+	}
 }
 
 function rotaletras(){
 	if(flag == 1){
-		if(pizza.classList.contains("rotado"))
+		if(!flagletras.checked)
 			pizza.classList.remove("rotado");
 		else
 			pizza.classList.add("rotado");
+	}else{
+		if(pizza.classList.contains("rotado"))
+			flagletras.checked = true;
+		else
+			flagletras.checked = false;
+		
+	}
+}
+
+function refreshsettings(){
+	if (flag == 1){
+		if(!flagtombola.checked){
+			pizza.parentElement.style.display = "block";
+			editruleta.style.display = "block";
+			tombola.style.display = "none";
+		}
+		else{
+			tombola.style.display = "block";
+			editruleta.style.display = "none";
+			pizza.parentElement.style.display = "none";
+		}
+	}
+	else{
+		if(pizza.parentElement.style.display == "none"){
+			flagclasic.cheched = false;
+			flagtombola.checked = true;
+		}
+		else{
+			flagclasic.checked = true;
+			flagclasic.checked = false;
+		}
+	}
+}
+
+function addtapa(){
+	if(flag == 1){
+		tapa.src = urltapa.value;
+		tapa.style.display = "block";
+		url.value = "";
+	}
+	
+}
+
+function deletetapa(){
+	if(flag == 1)
+		tapa.style.display = "none";
+	
+}
+
+function editflecha(){
+	if(flag == 1){
+		if (flagflecha.checked){
+			arrowcontainer.style.display = "block";
+			bolacontainer.style.display = "none";
+		}
+		else{
+			arrowcontainer.style.display = "none";
+			bolacontainer.style.display = "block";
+		}
+	}else{
+		if(arrowcontainer.style.display = "block"){
+			flagflecha.checked = true;
+			flagbolita.checked = false;
+		}else{
+			flagflecha.checked = false;
+			flagbolita.checked = true;
+		}
+	}
+}
+
+
+
+function editformagiro(){
+	if(flag == 1){
+		if (flaginterior.checked){
+			flaggirointerno = true;
+		}
+		else{
+			flaggirointerno = false;
+		}
+		
+		bolacontainer.style.transform = bolacontainer.style.transform.replace(/-*[0-9\.]*deg/, "0deg");
+		arrowcontainer.style.transform = arrowcontainer.style.transform.replace(/-*[0-9\.]*deg/, "0deg");
+		pizza.style.transform = pizza.style.transform.replace(/-*[0-9\.]*deg/, "0deg");
+	}else{
+		if(flaggirointerno){
+			flaginterior.checked = true;
+			flagexterior.checked = false;
+		}else{
+			flaginterior.checked = false;
+			flagexterior.checked = true;
+		}
 	}
 }

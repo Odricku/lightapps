@@ -53,8 +53,29 @@ body{
     transform-origin: 310px 50%;
 }
 
+#bolacontainer{
+    display: none;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 50vw;
+    top: 275px;
+	transform-origin:174px 50%;
+}
+
+.bola{
+	background: radial-gradient(circle at 75% 25%, rgba(213,204,188,1) 0%, rgba(255,255,255,1) 8%, rgba(153,153,153,1) 59%, rgba(223,237,242,1) 95%, rgba(131,131,131,1) 99%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    box-shadow: 3px 3px 8px white;
+    position: absolute;
+    transform: translate(-50%,0%);
+}
+
 .rotado a{
 	text-align:center;
+	font-size: 90%;
 	transform-origin: 50% 50%;
 	transform: translate(-50%, 0px) rotate(90deg);
 } 
@@ -71,6 +92,7 @@ body{
 
 .borde-top{
 	background: radial-gradient(circle, rgba(0,157,0,0) 0%, rgba(0,0,0,0) 55%, rgba(120,0,0,1) 54%, rgba(130,1,0,1) 52%, rgba(204,7,0,1) 67%, rgba(177,0,0,1) 44%, rgba(73,0,0,1) 72%);
+	filter: saturate(0.6);
 }
 
 .borde-back{
@@ -87,11 +109,11 @@ body{
 }
 
 div.tarjetapizza{
-	text-align:left;
-	padding-left: 3%;
+    text-align: left;
+    padding-left: 3%;
     padding-right: 15%;
-	box-shadow: inset -30px 20px 30px 0px #CCCCCC;
-	overflow:hidden;
+    box-shadow: inset -15px 0px 9px -1px #cccccc;
+    overflow: hidden;
 }
 .girarconfig{
 	transition: transform 10s cubic-bezier(0.11, 0.68, 0.77, 0.96) 0s;
@@ -124,6 +146,10 @@ div.tarjetapizza{
 	margin: 2rem;
 }
 
+#editruleta{
+	display:none;
+}
+
 #tapacontainer{
 	height: 375px;
     width: 375px;
@@ -136,7 +162,12 @@ div.tarjetapizza{
     transform: translate(-50%, 0);
     border-radius: 50%;
     overflow: hidden;
+	background: rgb(0,0,0,0.3);
 
+}
+
+#tapa{
+	display: none;
 }
 
 #cono{
@@ -182,10 +213,6 @@ div.tarjetapizza{
 .lado{
 	-webkit-transform: translate3d(0,0,0);
 	-webkit-backface-visibility: hidden;
-}
-
-.colortarj{
-	display: none
 }
 
 .streamsign{
@@ -244,17 +271,54 @@ div.tarjetapizza{
 }
 
 #edit{
-	color: red;
+	color: #5B4700;
+	font-size: 13px;
+	text-shadow: 0 2px 0px #dbb457;
 	display: none;
 	flex-wrap: wrap;
 	padding: 15px;
 	border-bottom-right-radius: 15px;
 	position:fixed; 
 	top:0px;
-	width: 115px; 
+	width: 200px; 
 	border-right-style: double; 
 	border-bottom-style: double;
 	z-index:6;
 	background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
                 radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+}
+
+#changesbutton{
+	align-self: center;
+	border: none;
+	color: #FFFFFF;
+	justify-self: center;
+	padding: 0.5rem 1rem;
+	border-radius: 3px;
+	width: 200px;
+	height: 35px;
+	
+	border: 1px solid #565656;
+	box-shadow:
+		2px 2px 0.5em rgba(0, 0, 0, 0.55),
+		inset 1px 1px 0 rgba(255, 255, 255, 0.55),
+		inset -1px -1px 0 rgba(0, 0, 0, 0.5)
+	;
+	background:
+		-moz-repeating-linear-gradient(
+		top, #565656, #131313 2px, #565656 1px
+	);
+	background:
+		-o-repeating-linear-gradient(
+		top, #565656, #131313 2px, #565656 1px
+	);
+	background:
+		-webkit-repeating-linear-gradient(
+		top, #565656, #131313 2px, #565656 1px
+	);
+	background:
+		repeating-linear-gradient(
+		top, #565656, #131313 2px, #565656 1px
+	);
+
 }

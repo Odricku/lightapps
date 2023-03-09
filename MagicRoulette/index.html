@@ -16,7 +16,7 @@
 		<b>Stream Mode</b>
 	</div>
 	<div>
-		<div id="tombola" style="width:100%; min-height:600px;text-align: center;">
+		<div id="tombola" style="width:100%; min-height:600px;text-align: center;" onclick="edit.style.display = 'none'">
 			<img src="https://www.odricku.cl/resources/img/fondos/fondoBE.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
 			<img src="https://www.odricku.cl/resources/img/utils/palillo.png" id="palillo" style="transform-origin: 50% 100%;transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(480px, 30px);top:45px; position:absolute">
 			<div id="slot1" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(60deg)"></div>
@@ -29,17 +29,20 @@
 			<svg id="perilla" style="perilla" onclick="palanca();girar(10)"></svg>		
 		</div>
 		
-		<div style="display:none; width:100%;min-height:600px;text-align: center;overflow:hidden">
+		<div style="display:none; width:100%;min-height:600px;text-align: center;overflow:hidden" onclick="edit.style.display = 'none'">
 			<div class="borde borde-back"></div>
 			<div id= "pizza" class="pizza-cont" style="transform:rotate(0deg) translate(19px, 4px) scale(0.33);"></div>
 			<div class="borde borde-top"></div>
 			<div id="tapacontainer">
-				<img class="tapa" src="https://www.odricku.cl/resources/img/utils/roulettetable.png"/>
+				<img id="tapa" src="https://www.odricku.cl/resources/img/utils/roulettetable2.png"/>
 				<div id="cono" onclick="girar(10)" style="transform:rotate(0deg)"></div>
 			</div>
 			<div id="arrowcontainer" style="transform: translate(-310px,0px) rotate(0deg)">
 				<div class="arrow" style="border-left: 70px solid #b70000; transform: translate(10px,0px);"></div>
 				<div class="arrow"></div>
+			</div>
+			<div id="bolacontainer" style="transform: translate(-174px,0px) rotate(0deg);">
+				<div class="bola"></div>
 			</div>
 		
 		</div>
@@ -61,7 +64,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="button" name="boton" value="AGREGAR OPCION" class="btn btn lg btn-primary btn-block" onclick="urltarj.focus()">
+							<input type="button" name="boton" value="PERSONALIZAR" class="btn btn lg btn-primary btn-block" onclick="editar()">
 						</td>
 						<td>
 							<input type="button" name="boton" value="LIMPIAR" class="btn btn lg btn-primary btn-block" onclick="limpiar()">
@@ -87,7 +90,7 @@
 					</tbody>
 				</table>
 				<div>
-					<input type="text" id="urltarj" placeholder="Arrastra, pega imagen o escribe su URL (Se reescalara a 500x200)" class="btn btn lg btn-dark btn-block"><input type="button" name="boton" value="AGREGAR TARJETA" class="btn btn lg btn-primary btn-block" onclick="addTarjeta()">
+					<input type="text" id="urltarj" placeholder="Arrastra, pega imagen o escribe su URL (Se reescalara a 500x200)" class="btn btn lg btn-dark btn-block" onfocus="edit.style.display = 'none'"><input type="button" name="boton" value="AGREGAR TARJETA" class="btn btn lg btn-primary btn-block" onclick="addTarjeta()">
 				</div>
 			</div>
 			
@@ -95,28 +98,33 @@
 		
 	</div>
 	<div id="edit">
-		<b>Tipo Ruleta:</b>
-		<input type="radio" checked="checked" value="clasica" name="tiporuleta">&nbsp;Clasica<br>
-		<input type="radio" value="tombola" name="tiporuleta">&nbsp;Tombola<br>
-		<b>Tipo Flecha:</b>
-		<input type="radio" checked="checked" value="flecha" name="tipoflecha">&nbsp;Flecha<br>
-		<input type="radio" value="bolita" name="tipoflecha">&nbsp;Bolita<br>
-		<b>Tipo Giro:</b>
-		<input type="radio" checked="checked" value="int" name="tipogiro">&nbsp;Interior<br>
-		<input type="radio" value="ext" name="tipogiro">&nbsp;Exterior<br>
-		<b>Girar Letras:</b>
-		<input type="radio" checked="checked" value="int" name="giroletra">&nbsp;Interior<br>
-		<input type="radio" value="ext" name="giroletra">&nbsp;Exterior<br>
-		<b>Orden Random:</b>
-		<input type="radio" checked="checked" value="si" name="orden">&nbsp;Interior<br>
-		<input type="radio" value="no" name="orden">&nbsp;Exterior<br>
-		<b>Tapa Perzonaliz:</b>
-		<input type="radio" checked="checked" value="no" name="tapa">&nbsp;Quitar<br>
-		<b>Set precargados</b>
-		<input type="radio" checked="checked" value="clasica" name="set">&nbsp;Ruleta<br>
-		<input type="radio" value="bolita" name="set">&nbsp;Colores<br>
-		<input type="radio" value="numeros" name="set">&nbsp;Juegos PC<br>
-		<input type="radio" value="" name="set">&nbsp;Juegos Cel.<br>
+		<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Configuraciones</b><br>
+		<b>─═─═─═─═─═─═─═─═─═─</b><br>
+		<b>Tipo Ruleta:</b><br>
+		<input type="radio" onclick="refreshsettings()" checked="checked" id="flagclasic" name="tiporuleta">&nbsp;Clasica<br>
+		<input type="radio" checked="checked" onclick="refreshsettings()" id="flagtombola" name="tiporuleta">&nbsp;Tombola<br>
+		<div id="editruleta">
+			<b>Tipo Flecha:</b><br>
+			<input onclick="editflecha()" type="radio" checked="checked" id="flagflecha" name="tipoflecha">&nbsp;Flecha<br>
+			<input onclick="editflecha()" type="radio" id="flagbolita" name="tipoflecha">&nbsp;Bolita<br>
+			<b>Tipo Giro:</b><br>
+			<input type="radio" onclick="editformagiro()" checked="checked" id="flaginterior" name="tipogiro">&nbsp;Interior<br>
+			<input type="radio" onclick="editformagiro()" id="flagexterior" name="tipogiro">&nbsp;Exterior<br>
+			<b>─═─═─═─═─═─═─═─═─═─</b><br>
+			<input type="checkbox" onclick="rotaletras()" id="flagletras" name="giroletra">&nbsp;Girar Letras:<br>
+			<input type="checkbox" id="flagrandom" name="orden">&nbsp;Orden Random<br>
+			<input type="checkbox" id="flagconfeti" name="confeticheck">&nbsp;Confetti<br>
+			<b>─═─═─═─═─═─═─═─═─═─</b><br>
+			<b>Tapa Perzonaliz:</b><br>
+			<input type="text" style="width:70%" id="urltapa" placeholder="URL IMAGEN" value="" onchange="addtapa()">
+			<button type="button" style="width:27%" id="changesbutton" onclick="deleteTapa();"><img style="filter:invert(100%)" src="https://odricku.cl/resources/img/icons/trash.png" width="12px"/></button>
+		</div>
+		<b>─═─═─═─═─═─═─═─═─═─</b><br>
+		<b>Set precargados</b><br>
+		<a onclick="">&nbsp;Ruleta</a><br>
+		<a onclick="">&nbsp;Colores</a><br>
+		<a onclick="">&nbsp;Juegos PC</a><br>
+		<a onclick="">&nbsp;Juegos Cel.</a><br>
 	</div>  
 	<canvas width="100%" id="confetticontainer" class="confetti"></canvas>
 	<div id="winnercontainer" style="transform: scale(0)" onclick="winnerunshow()"></div>

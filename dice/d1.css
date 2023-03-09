@@ -242,7 +242,6 @@ button {
 		repeating-linear-gradient(
 		top, #565656, #131313 2px, #565656 1px
 	);
-
 }
 
 #editdice{
@@ -297,7 +296,7 @@ button {
 .off{
 
 	color: #111111;
-	text-shadow:0 4px 2px grey,
+	text-shadow:0 4px 2px grey;
 }
 
 .on{
