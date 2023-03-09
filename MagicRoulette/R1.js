@@ -1,6 +1,6 @@
 var pc = ["https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20DG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20DRAW.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20FG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20GB.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20GMOD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta GTA.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20HFF.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20HS.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMC.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20LL.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20MOD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20OC2.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PA.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PU.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20RL.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20SR.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20UCH.png"];
 var cel =["https://www.odricku.cl/resources/img/tarjetas/Tarjeta JMD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PU.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20SG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20BF.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20UNO.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20DRAW.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PS.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20G.png"];
-var ruletaclasica =['text:1;#ffffff;#ff0000', 'text:2;#ffffff;#000000', 'text:3;#ffffff;#ff0000', 'text:4;#ffffff;#000000', 'text:5;#ffffff;#ff0000', 'text:6;#ffffff;#000000', 'text:7;#ffffff;#ff0000', 'text:8;#ffffff;#000000', 'text:9;#ffffff;#ff0000', 'text:10;#ffffff;#000000', 'text:11;#ffffff;#000000', 'text:12;#ffffff;#ff0000', 'text:13;#ffffff;#000000', 'text:14;#ffffff;#ff0000', 'text:15;#ffffff;#000000', 'text:16;#ffffff;#ff0000', 'text:17;#ffffff;#000000', 'text:18;#ffffff;#ff0000', 'text:19;#ffffff;#ff0000', 'text:20;#ffffff;#000000', 'text:21;#ffffff;#ff0000', 'text:22;#ffffff;#000000', 'text:23;#ffffff;#ff0000', 'text:24;#ffffff;#000000', 'text:25;#ffffff;#ff0000', 'text:26;#ffffff;#000000', 'text:27;#ffffff;#ff0000', 'text:28;#ffffff;#000000', 'text:29;#ffffff;#000000', 'text:30;#ffffff;#ff0000', 'text:31;#ffffff;#000000', 'text:32;#ffffff;#ff0000', 'text:33;#ffffff;#000000', 'text:34;#ffffff;#ff0000', 'text:35;#ffffff;#000000', 'text:36;#ffffff;#ff0000', 'text:0;#ffffff;#008f18'];
+var ruletaclasica ={"flags":[true, false, false, true, false, false, true],"img": "http://www.odricku.cl/resources/img/utils/roulettetable2.png","custom":['text:1;#ffffff;#ff0000', 'text:2;#ffffff;#000000', 'text:3;#ffffff;#ff0000', 'text:4;#ffffff;#000000', 'text:5;#ffffff;#ff0000', 'text:6;#ffffff;#000000', 'text:7;#ffffff;#ff0000', 'text:8;#ffffff;#000000', 'text:9;#ffffff;#ff0000', 'text:10;#ffffff;#000000', 'text:11;#ffffff;#000000', 'text:12;#ffffff;#ff0000', 'text:13;#ffffff;#000000', 'text:14;#ffffff;#ff0000', 'text:15;#ffffff;#000000', 'text:16;#ffffff;#ff0000', 'text:17;#ffffff;#000000', 'text:18;#ffffff;#ff0000', 'text:19;#ffffff;#ff0000', 'text:20;#ffffff;#000000', 'text:21;#ffffff;#ff0000', 'text:22;#ffffff;#000000', 'text:23;#ffffff;#ff0000', 'text:24;#ffffff;#000000', 'text:25;#ffffff;#ff0000', 'text:26;#ffffff;#000000', 'text:27;#ffffff;#ff0000', 'text:28;#ffffff;#000000', 'text:29;#ffffff;#000000', 'text:30;#ffffff;#ff0000', 'text:31;#ffffff;#000000', 'text:32;#ffffff;#ff0000', 'text:33;#ffffff;#000000', 'text:34;#ffffff;#ff0000', 'text:35;#ffffff;#000000', 'text:36;#ffffff;#ff0000', 'text:0;#ffffff;#008f18']};
 var custom = []
 var names = [];
 var num = 0;
@@ -20,9 +20,7 @@ audioEnd.volume = 0.3;
 function init(){
 	if(document.URL.indexOf("?") != -1){
 		try {
-			custom = JSON.parse(window.atob(decodeURI(document.URL.split("?")[1])));
-			importar();
-			rellenoInicial(2);
+			importar(JSON.parse(window.atob(decodeURI(document.URL.split("?")[1]))));
 		} catch (error) {
 			//console.error("Importación Invalida");
 			
@@ -764,15 +762,20 @@ function exportar(){
 				});
 			}	
 		}
-		else{
-			return "https://odricku.cl/magicroulette/?" + encodeURI(btoa(JSON.stringify(custom)));
-		}
+		var imgtapa = "";
+		var booltapa = (tapa.style.display == "block");
+		if(booltapa)
+			imgtapa = tapa.src;
+		
+		return "https://odricku.cl/magicroulette/?" + encodeURI(btoa(JSON.stringify({"flags":[flagclasic.checked, flagflecha.cheched, flaginterior.checked, flagletras.checked, flagrandom.checked, flagconfeti.checked, booltapa] ,"img": imgtapa,"custom": custom})));
+		
 	}
 }
 
-function importar(){
+function importar(jsondata){
 	
-	custom.forEach((item) => {
+	custom = jsondata.custom;
+	jsondata.custom.forEach((item) => {
 		var trelem = document.createElement("tr");
 		var tdelem = document.createElement("td");
 		var td2elem = document.createElement("td");
@@ -835,6 +838,56 @@ function importar(){
 		
 	});
 	
+	flagclasic.checked = jsondata.flags[0];
+	flagtombola.checked = !jsondata.flags[0];
+	
+	if(jsondata.flags[0]){
+		pizza.parentElement.style.display = "block";
+		editruleta.style.display = "block";
+		tombola.style.display = "none";
+	}
+	else{
+		tombola.style.display = "block";
+		pizza.parentElement.style.display = "none";
+		editruleta.style.display = "none";
+	}
+	
+	flagflecha.checked = jsondata.flags[1];
+	flagbolita.checked = !jsondata.flags[1];
+	
+	if(jsondata.flags[1]){
+		arrowcontainer.style.display = "block";
+		bolacontainer.style.display = "none";
+	}
+	else{
+		arrowcontainer.style.display = "none";
+		bolacontainer.style.display = "block";
+	}
+	
+	flaginterior.checked = jsondata.flags[2];
+	flagexterior.checked = !jsondata.flags[2];
+	
+	if(jsondata.flags[2])		
+		flaggirointerno = true;
+	else
+		flaggirointerno = false;
+
+	flagletras.checked = jsondata.flags[3];
+	
+	if(jsondata.flags[3])
+		pizza.classList.add("rotado");
+		
+	
+	flagrandom.checked = jsondata.flags[4];
+	flagconfeti.checked = jsondata.flags[5];
+	
+	if(jsondata.flags[6]){
+		urltapa.value = jsondata.img;
+		addtapa();
+	}
+	
+	rellenoInicial(2);
+	
 }
 
 function editar(){
@@ -887,7 +940,7 @@ function addtapa(){
 	if(flag == 1){
 		tapa.src = urltapa.value;
 		tapa.style.display = "block";
-		url.value = "";
+		urltapa.value = "";
 	}
 	
 }
