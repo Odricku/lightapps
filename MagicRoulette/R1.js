@@ -22,7 +22,9 @@ function init(){
 			importar();
 			rellenoInicial(2);
 		} catch (error) {
-			console.error("Importación Invalida");
+			//console.error("Importación Invalida");
+			
+			console.error(error);
 		}
 	}else{
 		rellenoInicial(2);
@@ -97,12 +99,14 @@ function createContent(content, clase){
 		var divelem = document.createElement("div");
 		divelem.classList.add(clase);
 		var infoelem = content.split(";");
-		divelem.innerText = infoelem[0].replace("text:", "");
+		var a = document.createElement("a");
+		a.innerText = infoelem[0].replace("text:", "");
+		divelem.appendChild(a);
+		 
 		divelem.style.color = infoelem[infoelem.length - 2];
 		divelem.style.backgroundColor = infoelem[infoelem.length - 1];
 		divelem.style.fontSize = "50px";
-		divelem.style.display = "flex";
-		divelem.style.alignItems = "center";
+		divelem.dataset.id = custom.indexOf(content);
 		
 		return divelem;
 	}
@@ -110,6 +114,7 @@ function createContent(content, clase){
 		var imgelem = document.createElement("img");
 		imgelem.classList.add(clase);
 		imgelem.src = content;
+		imgelem.dataset.id = custom.indexOf(content);
 		
 		return imgelem;
 	}	
@@ -154,7 +159,7 @@ function girar(velGiro){
 				
 				setTimeout(() => { 
 					clearInterval(timerId);
-					[...tombola.querySelectorAll(".divcontainer")].forEach(elem => {
+					tombola.querySelectorAll(".divcontainer").forEach(elem => {
 						elem.style.transition = "";
 						var angulomaestro = parseInt(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg",""))%360;
 						if(angulomaestro == 0){
@@ -185,34 +190,48 @@ function girar(velGiro){
 			}
 			else if(pizza.parentElement.style.display != 'none'){
 				
-				var listTarj = [...pizza.querySelectorAll(".slice-cont")];
+				var listTarj = pizza.querySelectorAll(".slice-cont");
 
 				var angulo = 360/listTarj.length * (Math.floor(Math.random() * (10 * listTarj.length + 1)) + listTarj.length * velGiro);
 				
 				var finales = ["(0.14, 0.62, 0.44, 1)", "(0.11, 0.68, 0.73, 1.02)", "(0.11, 0.68, 0.77, 0.96)"];
 				var finalactual = Math.floor(Math.random() * finales.length);
 				
-				listTarj.forEach(elem => {
-					elem.style.transition = "transform " + velGiro + "s cubic-bezier" + finales[finalactual];
-					elem.style.transform = elem.style.transform.replace(/-*[0-9\.]*deg/, parseInt(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg","")) + angulo + "deg");
-				});
+				var angulofinal = parseFloat(pizza.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg","")) + angulo;
+				
+				pizza.style.transition = "transform " + velGiro + "s cubic-bezier" + finales[finalactual];
+				pizza.style.transform = pizza.style.transform.replace(/-*[0-9\.]*deg/, angulofinal + "deg");
 				
 				setTimeout(() => { 
 					clearInterval(timerId);
+					var minerror = 360;
+					ganador = -1;
+					anguloganador = 360;
 					
 					listTarj.forEach(elem => {
-						elem.style.transition = "";
-						var angulofinal = parseInt(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg",""))%360;
-						elem.style.transform = elem.style.transform.replace(/-*[0-9\.]*deg/, angulofinal + "deg");
-						if (angulofinal == 0){
-							winnershow(elem.firstElementChild.firstElementChild);
-							setTimeout(() => { 
-								winnerunshow();
-							}, (5000));
-							
+						angulofinal = angulofinal % 360;
+						var anguloactual = 360 - parseFloat(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg",""));
+						if(Math.abs(anguloactual - angulofinal) < minerror){
+							minerror = Math.abs(anguloactual - angulofinal);
+							ganador = elem.firstElementChild.firstElementChild.dataset.id;
+							anguloganador = anguloactual;
 						}
 					});
-					flag = 1;
+
+					console.log(anguloganador + "<>" + angulofinal);
+					winnershow(pizza.querySelector(".tarjetapizza[data-id='" + ganador + "']"));
+					
+					setTimeout(() => { 
+						pizza.style.transition = "transform 0s linear";
+						pizza.style.transform = pizza.style.transform.replace(/-*[0-9\.]*deg/, anguloganador + "deg");
+					}, (200));
+
+					setTimeout(() => { 
+						
+						winnerunshow();
+						flag = 1;
+					}, (5000));
+					
 					audioLoop.pause();
 					audioEnd.play();
 										
@@ -225,6 +244,7 @@ function girar(velGiro){
 		flagrender = false;
 	}
 }
+var anguloganador = null;
 
 function winnershow(winnerelem){
 	
@@ -241,8 +261,8 @@ function winnershow(winnerelem){
 			color = colorback.replace("rgb(","").replace(")").split(",");
 			colorback = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
 		}
-		
-		winnercontainer.appendChild(createContent("text:" + winnerelem.innerText + ";" + colortexto +";" + colorback), "winner");
+		var winnertarj = createContent(custom[winnerelem.dataset.id], "winner");
+		winnercontainer.appendChild(winnertarj);
 	}
 	else{
 		winnercontainer.appendChild(createContent(winnerelem.src, "winner"));
@@ -323,7 +343,7 @@ function addTarjeta(){
 			
 			new Promise(() => {
 				imagelem.onload = () => {
-					custom.push(urltarj.value); 
+					imagelem.dataset.id = custom.push(urltarj.value) - 1; 
 					urltarj.value = "";
 					rellenoInicial(2)
 				};
@@ -338,7 +358,7 @@ function addTarjeta(){
 					divelem.style.margin = "auto";
 					divelem.style.width = "400px";
 					divelem.style.height = "160px";
-					divelem.innerText = urltarj.value;
+					divelem.innerText = urltarj.value.trim();
 					divelem.setAttribute("onclick","changecolor(this)");
 					
 					var colortext = document.createElement("input");
@@ -361,7 +381,7 @@ function addTarjeta(){
 					imagelem.remove();
 					tdelem.appendChild(divelem);
 					
-					custom.push("text:" + urltarj.value + ";#ffffff;#000000");
+					divelem.dataset.id = custom.push("text:" + urltarj.value.trim() + ";#ffffff;#000000") - 1;
 					urltarj.value = "";
 					rellenoInicial(2);
 					
@@ -395,15 +415,12 @@ function changetextcolor(elem){
 		color = colorelem.replace("rgb(","").replace(")").split(",");
 		colorelem = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
 	}
-	
-	var elemanterior = custom.indexOf("text:" + elem.parentElement.innerText + ";" + colortextoactual +";" + colorbackactual);
-	
-	if(elemanterior != -1){
-		elem.parentElement.style.color = colorelem;
-		custom[elemanterior] = "text:" + elem.parentElement.innerText + ";" + colorelem +";" + colorbackactual;
-		elem.parentElement.lastElementChild.click();
-		rellenoInicial(2);
-	}
+
+	elem.parentElement.style.color = colorelem;
+	custom[elem.dataset.id] = "text:" + elem.parentElement.innerText.trim() + ";" + colorelem +";" + colorbackactual;
+	elem.parentElement.lastElementChild.click();
+	rellenoInicial(2);
+		
 }
 
 function changebackcolor(elem){
@@ -425,20 +442,15 @@ function changebackcolor(elem){
 		colorelem = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
 	}
 	
-	var elemanterior = custom.indexOf("text:" + elem.parentElement.innerText + ";" + colortextoactual +";" + colorbackactual);
-	
-	if(elemanterior != -1){
-		elem.parentElement.style.backgroundColor = colorelem;
-		custom[elemanterior] = "text:" + elem.parentElement.innerText + ";" + colortextoactual +";" + colorelem;
-		rellenoInicial(2);
-	}
+	custom[elem.dataset.id] = "text:" + elem.parentElement.innerText.trim() + ";" + colortextoactual +";" + colorelem;
+	rellenoInicial(2);
 }
 
 function pasteTarjeta(fil){
 	if(flag == 1){
 		
 		if(fil){
-			urltarj.value = URL.createObjectURL(fil);
+			urltarj.value = URL.createObjectURL(fil).trim();
 			addTarjeta();
 		}			
 	}
@@ -446,17 +458,10 @@ function pasteTarjeta(fil){
 
 function deleteTarjeta(node){
 	if(flag == 1 && custom.length > 0){
+		
+		var identif = node.parentElement.parentElement.firstElementChild.firstElementChild.dataset.id;
 		if(node.parentElement.parentElement.firstElementChild.firstElementChild.naturalHeight != null){
-			var indice = custom.indexOf(node.parentElement.parentElement.firstElementChild.firstElementChild.src);
-			if(indice == -1)
-				indice = custom.indexOf(decodeURI(node.parentElement.parentElement.firstElementChild.firstElementChild.src));
-			if(indice == -1)
-				indice = custom.indexOf(encodeURI(node.parentElement.parentElement.firstElementChild.firstElementChild.src));
-			if(indice == -1)
-				log.error("La tarjeta con info: " + node.parentElement.parentElement.firstElementChild.firstElementChild.src + " no parece ser una URL valida.");
-			else
-				custom.splice(indice,1);
-				
+			custom.splice(node.parentElement.parentElement.firstElementChild.firstElementChild.dataset.id, 1);				
 		}
 		else{
 			var colortextoactual = node.parentElement.parentElement.firstElementChild.firstElementChild.style.color;
@@ -471,10 +476,17 @@ function deleteTarjeta(node){
 				colorbackactual = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
 			}
 			
-			custom.splice(custom.indexOf("text:" + node.parentElement.parentElement.firstElementChild.firstElementChild.innerText + ";" + colortextoactual + ";" + colorbackactual),1);
+			custom.splice(identif ,1);
 			
 		}
 		node.parentElement.parentElement.remove();
+		
+		document.querySelectorAll("#tarjetacontainer div, #tarjetacontainer img").forEach((elem) => {
+			if(elem.dataset.id > identif){
+				elem.dataset.id = elem.dataset.id - 1;
+			}
+		});
+		
 		rellenoInicial(2);
 	}
 }
@@ -541,7 +553,6 @@ function crearPizza(){
 		var eleminterno = document.createElement("div");
 		eleminterno.classList.add("slice");
 		
-		
 		eleminterno.appendChild(createContent(names[i], "tarjetapizza"));
 		elem.appendChild(eleminterno);
 		
@@ -564,41 +575,10 @@ function trozar(){
 			listTrozos[i].style.height =  2 * apotema * Math.tan(Math.PI/listTrozos.length) + "px";
 			
 			listTrozos[i].style.transform = "rotate(" + (i * 360/ listTrozos.length)+ "deg)";
-			listTrozos[i].firstElementChild.firstElementChild.style.height =  2 * apotema * Math.tan(Math.PI/listTrozos.length) + "px";	
+			var tamano = 2 * apotema * Math.tan(Math.PI/listTrozos.length);
+			listTrozos[i].firstElementChild.firstElementChild.style.height = tamano + "px";	
+			listTrozos[i].firstElementChild.firstElementChild.style.fontSize =  Math.min(166, 4/3 * apotema * Math.tan(Math.PI/listTrozos.length)) + "px";	
 			
-			listTrozos[i].firstElementChild.firstElementChild.style.width =  "75%";
-
-			if(listTrozos[i].firstElementChild.firstElementChild.naturalHeight == null){
-				listTrozos[i].firstElementChild.firstElementChild.style.width =  "95%";
-				listTrozos[i].firstElementChild.firstElementChild.style.marginLeft =  "293px";
-				
-				var maxpalabra = palabralarga(listTrozos[i].firstElementChild.firstElementChild.innerText);
-				if(maxpalabra < 3){
-					listTrozos[i].firstElementChild.firstElementChild.style.textAlign = "center";
-					listTrozos[i].firstElementChild.firstElementChild.style.paddingLeft =  "250px";
-					listTrozos[i].firstElementChild.firstElementChild.style.fontSize = 0.8 * apotema * Math.PI/names.length + "px";
-				}
-				else if(maxpalabra > 6){
-					if(names.length < 8){
-						if(maxpalabra > 15){
-							listTrozos[i].firstElementChild.firstElementChild.style.fontSize = 0.4 * apotema * Math.PI/names.length + "px";
-							listTrozos[i].firstElementChild.firstElementChild.style.paddingLeft =  "105px";
-						}
-						else{
-							listTrozos[i].firstElementChild.firstElementChild.style.fontSize = 0.5 * apotema * Math.PI/names.length + "px";
-							listTrozos[i].firstElementChild.firstElementChild.style.paddingLeft =  "105px";
-						}
-					}						
-					else{
-						listTrozos[i].firstElementChild.firstElementChild.style.fontSize = 0.6 * apotema * Math.PI/names.length + "px";
-						listTrozos[i].firstElementChild.firstElementChild.style.paddingLeft =  "105px";
-					}
-				}
-				else{
-					listTrozos[i].firstElementChild.firstElementChild.style.fontSize = 0.8 * apotema * Math.PI/names.length + "px";
-					listTrozos[i].firstElementChild.firstElementChild.style.paddingLeft =  "105px";
-				}
-			}
 		}
 	} 
 }
@@ -810,7 +790,7 @@ function importar(){
 			
 			elem.appendChild(colortext);
 			elem.appendChild(colorback);
-	}
+		}
 		else{
 			var elem = document.createElement("img");
 			elem.src = item;
@@ -836,6 +816,21 @@ function importar(){
 		
 		tarjetacontainer.appendChild(trelem);
 		
+		elem.dataset.id = custom.indexOf(item);
+		
 	});
 	
+}
+
+function editar(){
+	edit.style.display = "flex";
+}
+
+function rotaletras(){
+	if(flag == 1){
+		if(pizza.classList.contains("rotado"))
+			pizza.classList.remove("rotado");
+		else
+			pizza.classList.add("rotado");
+	}
 }

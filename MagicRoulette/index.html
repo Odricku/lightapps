@@ -3,11 +3,13 @@
 <title>Ha hablado la Ruleta Magica!</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="./R1.css" />
+<script src="nouislider.min.js"></script>
 <script src="./R1.js"></script>
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="nouislider.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="./R1.css" />
 </head>
 <body id="cuerpo" onload="init()">
 	<div id="stream" class="streamsign streamoff" onclick="streammode()">
@@ -29,12 +31,16 @@
 		
 		<div style="display:none; width:100%;min-height:600px;text-align: center;overflow:hidden">
 			<div class="borde borde-back"></div>
-			<div id= "pizza" class="pizza-cont"></div>
+			<div id= "pizza" class="pizza-cont" style="transform:rotate(0deg) translate(19px, 4px) scale(0.33);"></div>
 			<div class="borde borde-top"></div>
-			<div class="arrow" style="transform: translate(-354px,218px);"></div>
-			<div class="arrow" style="border-left: 70px solid #b70000;transform: translate(-303px, 218px);"></div>
-			<div class="arrow" style="transform: translate(-315px,218px);"></div>
-			<svg id="cono" onclick="girar(10)"></svg>
+			<div id="tapacontainer">
+				<img class="tapa" src="https://www.odricku.cl/resources/img/utils/roulettetable.png"/>
+				<div id="cono" onclick="girar(10)" style="transform:rotate(0deg)"></div>
+			</div>
+			<div id="arrowcontainer" style="transform: translate(-310px,0px) rotate(0deg)">
+				<div class="arrow" style="border-left: 70px solid #b70000; transform: translate(10px,0px);"></div>
+				<div class="arrow"></div>
+			</div>
 		
 		</div>
 		
@@ -88,6 +94,30 @@
 		</div>
 		
 	</div>
+	<div id="edit">
+		<b>Tipo Ruleta:</b>
+		<input type="radio" checked="checked" value="clasica" name="tiporuleta">&nbsp;Clasica<br>
+		<input type="radio" value="tombola" name="tiporuleta">&nbsp;Tombola<br>
+		<b>Tipo Flecha:</b>
+		<input type="radio" checked="checked" value="flecha" name="tipoflecha">&nbsp;Flecha<br>
+		<input type="radio" value="bolita" name="tipoflecha">&nbsp;Bolita<br>
+		<b>Tipo Giro:</b>
+		<input type="radio" checked="checked" value="int" name="tipogiro">&nbsp;Interior<br>
+		<input type="radio" value="ext" name="tipogiro">&nbsp;Exterior<br>
+		<b>Girar Letras:</b>
+		<input type="radio" checked="checked" value="int" name="giroletra">&nbsp;Interior<br>
+		<input type="radio" value="ext" name="giroletra">&nbsp;Exterior<br>
+		<b>Orden Random:</b>
+		<input type="radio" checked="checked" value="si" name="orden">&nbsp;Interior<br>
+		<input type="radio" value="no" name="orden">&nbsp;Exterior<br>
+		<b>Tapa Perzonaliz:</b>
+		<input type="radio" checked="checked" value="no" name="tapa">&nbsp;Quitar<br>
+		<b>Set precargados</b>
+		<input type="radio" checked="checked" value="clasica" name="set">&nbsp;Ruleta<br>
+		<input type="radio" value="bolita" name="set">&nbsp;Colores<br>
+		<input type="radio" value="numeros" name="set">&nbsp;Juegos PC<br>
+		<input type="radio" value="" name="set">&nbsp;Juegos Cel.<br>
+	</div>  
 	<canvas width="100%" id="confetticontainer" class="confetti"></canvas>
 	<div id="winnercontainer" style="transform: scale(0)" onclick="winnerunshow()"></div>
 </body>
