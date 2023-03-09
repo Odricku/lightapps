@@ -4,6 +4,8 @@ var custom = []
 var names = [];
 var num = 0;
 
+var flagrandom = true;
+
 var regex = /\-{0,1}(\d+)/g;
 
 let timerId;
@@ -50,12 +52,15 @@ function rellenoInicial(mode){
 		names = null;
 		names = Object.create(custom);
 
-		for(var i = 0; i < names.length; i++){
+		if(flagrandom){
+			for(var i = 0; i < names.length; i++){
 
-			num = Math.floor(Math.random() * names.length);
-			[names[i], names[num]] = [names[num], names[i]];
-		
+				num = Math.floor(Math.random() * names.length);
+				[names[i], names[num]] = [names[num], names[i]];
+			
+			}
 		}
+		
 		if(names.length != 0){
 			var iteracion = 0;
 			while(names.length < 6){
