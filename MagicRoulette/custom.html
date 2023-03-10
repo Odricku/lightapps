@@ -8,68 +8,30 @@
 <script src="./R1.js"></script>
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<style>
+		.pedazo{
+			position:absolute;
+			top:50vh; 
+			left:50vw;
+			width:400px;
+			height:400px;
+			transform-origin:120% 50%;
+		}
+		
+		.pedazoint{
+			transform-origin:80% 50%;
+			transform: perspective(50em) rotateY(71deg);
+		}
+	</style>
 </head>
-<body id="cuerpo" onload="init()">
-	<div id="stream" class="streamsign streamoff" onclick="streammode()">
-		<b>Stream Mode</b>
-	</div>
-	<div>
-		<div id="tombola" style="width:100%; min-height:600px;text-align: center;">
-			<img src="https://www.odricku.cl/resources/img/fondos/fondoBE.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
-			<img src="https://www.odricku.cl/resources/img/utils/palillo.png" id="palillo" style="transform-origin: 50% 100%;transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(480px, 30px);top:45px; position:absolute">
-			<div id="slot1" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(60deg)"></div>
-			<div id="slot2" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(0deg)"></div>
-			<div id="slot3" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(-60deg)"></div>
-			<div id="slot4" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(-120deg)"></div>
-			<div id="slot5" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(-180deg)"></div>
-			<div id="slot6" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(-240deg)"></div>
-			<img src="https://www.odricku.cl/resources/img/utils/ruleta magica.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
-			<svg id="perilla" style="perilla" onclick="palanca();girar(10)"></svg>		
+	<body id="cuerpo">
+		<div>
+			<div class="pedazo" style="transform:rotate(0deg)"><img class="pedazoint" width="400" height="400" src="https://www.perfectly-nintendo.com/wp-content/uploads/2016/12/Pokemon-2.png"/></div>
+			<div class="pedazo" style="transform:rotate(60deg)"><img class="pedazoint" width="400" height="400" src="https://www.pokemon.com/static-assets/content-assets/cms2/img/watch-pokemon-tv/_tiles/2023/new-animated-series-169.png"/></div>
+			<div class="pedazo" style="transform:rotate(120deg)"><img class="pedazoint" width="400" height="400" src="https://www.perfectly-nintendo.com/wp-content/uploads/2016/12/Pokemon-2.png"/></div>
+			<div class="pedazo" style="transform:rotate(180deg)"><img class="pedazoint" width="400" height="400" src="https://www.pokemon.com/static-assets/content-assets/cms2/img/watch-pokemon-tv/_tiles/2023/new-animated-series-169.png"/></div>
+			<div class="pedazo" style="transform:rotate(240deg)"><img class="pedazoint" width="400" height="400" src="https://www.perfectly-nintendo.com/wp-content/uploads/2016/12/Pokemon-2.png"/></div>
+			<div class="pedazo" style="transform:rotate(300deg)"><img class="pedazoint" width="400" height="400" src="https://www.pokemon.com/static-assets/content-assets/cms2/img/watch-pokemon-tv/_tiles/2023/new-animated-series-169.png"/></div>
 		</div>
-		
-		<div style="display:none; width:100%;min-height:600px;text-align: center;overflow:hidden">
-			<div class="borde borde-back"></div>
-			<div id= "pizza" class="pizza-cont"></div>
-			<div class="borde borde-top"></div>
-			<div class="arrow" style="transform: translate(-354px,218px);"></div>
-			<div class="arrow" style="border-left: 70px solid #b70000;transform: translate(-303px, 218px);"></div>
-			<div class="arrow" style="transform: translate(-315px,218px);"></div>
-			<svg id="cono" onclick="girar(10)"></svg>
-		
-		</div>
-
-		<div id="adicional" style="position: relative;text-align:center;max-width:100vw; margin-left:auto; margin-right:auto;">
-			<table style="width:100%">
-				<tbody>
-					<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-					<tr>
-						<td>
-							<input type="button" name="boton" value="TIRA LA RULETA" class="btn btn lg btn-primary btn-block" onclick="girar(10)">
-						</td>
-						<td>
-							<input type="button" name="boton" value="CON MAS SUSPENSO" class="btn btn lg btn-primary btn-block" onclick="girar(20)">
-						</td>
-						<td>
-							<input type="button" name="boton" value="AUN MAS SUSPENSO 😱" class="btn btn lg btn-primary btn-block" onclick="girar(30)">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="button" name="boton" value="VERSION CELULAR" class="btn btn lg btn-primary btn-block" onclick="rellenoInicial(1)">
-						</td>
-						<td>
-							<input type="button" name="boton" value="VERSION DE PC" class="btn btn lg btn-primary btn-block" onclick="rellenoInicial(0)">
-						</td>
-						<td>
-							<input type="button" name="boton" value="CAMBIAR RULETA" class="btn btn lg btn-primary btn-block" onclick="cambio()">
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			</br></br>
-			¿Quieres hacer tu propia ruleta? <a href="https://www.odricku.cl/magicroulette">Entra Aca</a>
-		</div>
-		<canvas width="100%" id="confetticontainer" class="confetti"></canvas>
-		<div id="winnercontainer" style="transform: scale(0)" onclick="winnerunshow()"></div>
 	</body>
 </html>
