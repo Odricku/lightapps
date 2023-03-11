@@ -336,6 +336,7 @@ function thereallimpiar(){
 		}
 		
 		custom = [];
+		tapa.style.display = "none";
 		rellenoInicial(2);
 	}
 }
