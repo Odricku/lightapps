@@ -413,5 +413,3 @@ function streammode(){
 		}			
 	}
 }
-
-addDado();
