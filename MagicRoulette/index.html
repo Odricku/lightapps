@@ -15,7 +15,7 @@
 	<div id="stream" class="streamsign streamoff" onclick="streammode()">
 		<b>Stream Mode</b>
 	</div>
-	<div>
+	<div class="wrapper">
 		<div id="tombola" style="width:100%; min-height:600px;text-align: center;" onclick="edit.style.display = 'none'">
 			<img src="https://www.odricku.cl/resources/img/fondos/fondoBE.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
 			<img src="https://www.odricku.cl/resources/img/utils/palillo.png" id="palillo" style="transform-origin: 50% 100%;transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(480px, 30px);top:45px; position:absolute">
@@ -103,6 +103,7 @@
 		<b>Tipo Ruleta:</b><br>
 		<input type="radio" onclick="refreshsettings()" checked="checked" id="flagclasic" name="tiporuleta">&nbsp;Clasica<br>
 		<input type="radio" checked="checked" onclick="refreshsettings()" id="flagtombola" name="tiporuleta">&nbsp;Tombola<br>
+		<b>─═─═─═─═─═─═─═─═─═─</b><br>
 		<div id="editruleta">
 			<b>Tipo Flecha:</b><br>
 			<input onclick="editflecha()" type="radio" checked="checked" id="flagflecha" name="tipoflecha">&nbsp;Flecha<br>
@@ -111,18 +112,18 @@
 			<input type="radio" onclick="editformagiro()" checked="checked" id="flaginterior" name="tipogiro">&nbsp;Interior<br>
 			<input type="radio" onclick="editformagiro()" id="flagexterior" name="tipogiro">&nbsp;Exterior<br>
 			<b>─═─═─═─═─═─═─═─═─═─</b><br>
-			<input type="checkbox" onclick="rotaletras()" id="flagletras" name="giroletra">&nbsp;Girar Letras:<br>
-			<input type="checkbox" onclick="rellenoInicial(2)" id="flagrandom" name="orden">&nbsp;Orden Random<br>
-			<input type="checkbox" id="flagconfeti" name="confeticheck">&nbsp;Confetti<br>
-			<b>─═─═─═─═─═─═─═─═─═─</b><br>
 			<b>Tapa Perzonaliz:</b><br>
 			<input type="text" style="width:70%" id="urltapa" placeholder="URL IMAGEN" value="" onchange="addtapa()">
 			<button type="button" style="width:27%" id="changesbutton" onclick="deleteTapa();"><img style="filter:invert(100%)" src="https://odricku.cl/resources/img/icons/trash.png" width="12px"/></button>
+			<b>─═─═─═─═─═─═─═─═─═─</b><br>
+			<input type="checkbox" onclick="rotaletras()" id="flagletras" name="giroletra">&nbsp;Girar Letras:<br>
 		</div>
+		<input type="checkbox" onclick="rellenoInicial(2)" id="flagrandom" name="orden">&nbsp;Orden Random<br>
+		<input type="checkbox" id="flagconfeti" name="confeticheck">&nbsp;Confetti<br>
 		<b>─═─═─═─═─═─═─═─═─═─</b><br>
 		<b>Set precargados</b><br>
 		<a onclick="importar(ruletaclasica)">&nbsp;Ruleta</a><br>
-		<a onclick="">&nbsp;Colores</a><br>
+		<a onclick="importar(colores)">&nbsp;Colores</a><br>
 		<a onclick="importar(pc)">&nbsp;Juegos PC</a><br>
 		<a onclick="importal(cel)">&nbsp;Juegos Cel.</a><br>
 	</div>  

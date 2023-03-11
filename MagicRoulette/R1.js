@@ -1,10 +1,11 @@
 var pc = {"flags":[false, true, true, false, true, true, false],"img": "","custom":["https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20DG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20DRAW.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20FG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20GB.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20GMOD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta GTA.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20HFF.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20HS.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMC.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20LL.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20MOD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20OC2.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PA.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PU.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20RL.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20SR.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20UCH.png"]};
 var cel ={"flags":[true, true, true, false, true, true, false],"img": "","custom":["https://www.odricku.cl/resources/img/tarjetas/Tarjeta JMD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PU.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20SG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20BF.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20UNO.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20DRAW.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PS.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20G.png"]};
 var ruletaclasica ={"flags":[true, false, false, true, false, false, true],"img": "http://www.odricku.cl/resources/img/utils/roulettetable2.png","custom":['text:9;#ffffff;#ff0000','text:22;#ffffff;#000000', 'text:18;#ffffff;#ff0000', 'text:29;#ffffff;#000000', 'text:7;#ffffff;#ff0000', 'text:28;#ffffff;#000000', 'text:12;#ffffff;#ff0000', 'text:35;#ffffff;#000000', 'text:3;#ffffff;#ff0000', 'text:26;#ffffff;#000000', 'text:0;#ffffff;#008f18', 'text:32;#ffffff;#ff0000', 'text:15;#ffffff;#000000', 'text:19;#ffffff;#ff0000', 'text:4;#ffffff;#000000','text:21;#ffffff;#ff0000', 'text:2;#ffffff;#000000', 'text:25;#ffffff;#ff0000', 'text:17;#ffffff;#000000', 'text:34;#ffffff;#ff0000', 'text:6;#ffffff;#000000', 'text:27;#ffffff;#ff0000', 'text:13;#ffffff;#000000', 'text:36;#ffffff;#ff0000', 'text:11;#ffffff;#000000', 'text:30;#ffffff;#ff0000', 'text:8;#ffffff;#000000', 'text:23;#ffffff;#ff0000', 'text:10;#ffffff;#000000','text:5;#ffffff;#ff0000', 'text:24;#ffffff;#000000', 'text:16;#ffffff;#ff0000', 'text:33;#ffffff;#000000', 'text:1;#ffffff;#ff0000', 'text:20;#ffffff;#000000', 'text:14;#ffffff;#ff0000',            'text:31;#ffffff;#000000']};
+var colores = {"flags":[true, true, true, false, true, true, false], "img":"", "custom": ['text:;#ffffff;#ffffff', 'text:;#ffffff;#804a00', 'text:;#ffffff;#ff0000', 'text:;#ffffff;#ff9500', 'text:;#ffffff;#fff700', 'text:;#ffffff;#659a60', 'text:;#ffffff;#009dff', 'text:;#ffffff;#0008ff', 'text:;#ffffff;#e100ff', 'text:;#ffffff;#ff8080', 'text:;#ffffff;#000000']}
 var custom = []
 var names = [];
+var elementostombola = [];
 var num = 0;
-9 22 18 29 7 28 12 35 3 26 0 32 15 19 4 21 2 25 17 34 6 27 13 36 11 30 8 23 10 5 24 16 33 1 20 14 31 
 
 var regex = /\-{0,1}(\d+)/g;
 
@@ -49,7 +50,12 @@ function rellenoInicial(mode){
 		slot6.innerHTML = "";
 		
 		names = null;
+		elementostombola = [];
 		names = Object.create(custom);
+		
+		for(var i = 0; i < names.length; i++){
+			elementostombola.push(createContent(custom[i], "elem"));
+		}
 
 		if(flagrandom.checked){
 			for(var i = 0; i < names.length; i++){
@@ -65,34 +71,44 @@ function rellenoInicial(mode){
 			while(names.length < 6){
 				for(var i = 0; i < custom.length; i++){
 					names.push(custom[i]);
+					elementostombola.push(createContent(custom[i], "elem"));
 				}
 				iteracion++;
 			}
-			slot1.appendChild(createContent(names[num++ % names.length], "elem"));
-			slot2.appendChild(createContent(names[num++ % names.length], "elem"));
-			slot3.appendChild(createContent(names[num++ % names.length], "elem"));
-			slot4.appendChild(createContent(names[num++ % names.length], "elem"));
-			slot5.appendChild(createContent(names[num++ % names.length], "elem"));
-			slot6.appendChild(createContent(names[num++ % names.length], "elem"));
-			
-		
+			slot1.appendChild(elementostombola[num++ % names.length]);
+			slot2.appendChild(elementostombola[num++ % names.length]);
+			slot3.appendChild(elementostombola[num++ % names.length]);
+			slot4.appendChild(elementostombola[num++ % names.length]);
+			slot5.appendChild(elementostombola[num++ % names.length]);
+			slot6.appendChild(elementostombola[num++ % names.length]);
+
 		}
 		else{
 			
-			slot1.appendChild(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
-			slot2.appendChild(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
-			slot3.appendChild(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
-			slot4.appendChild(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
-			slot5.appendChild(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
-			slot6.appendChild(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
+			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
+			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
+			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
+			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
+			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
+			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
 			
-			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
-			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
-			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
-			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
-			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
-			names.push("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png");
+			elementostombola.push(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
+			elementostombola.push(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
+			elementostombola.push(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
+			elementostombola.push(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
+			elementostombola.push(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
+			elementostombola.push(createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem"));
+			
+			slot1.appendChild(elementostombola[0]);
+			slot2.appendChild(elementostombola[1]);
+			slot3.appendChild(elementostombola[2]);
+			slot4.appendChild(elementostombola[3]);
+			slot5.appendChild(elementostombola[4]);
+			slot6.appendChild(elementostombola[5]);
+
 		}
+		
+		elementostombola[-1] = createContent("https://www.odricku.cl/resources/img/tarjetas/Placeholder.png", "elem");
 			
 		crearPizza();
 	}	
@@ -131,36 +147,34 @@ function girar(velGiro){
 		if(flag == 1){
 			audioLoop.play();
 			flag = 0;
+			var finales = ["(0.14, 0.62, 0.44, 1)", "(0.11, 0.68, 0.73, 1.02)", "(0.11, 0.68, 0.77, 0.96)"];
+			
 			if(tombola.style.display != 'none'){
 				
 				var angulo = 60 * (Math.floor(Math.random() * (10 * names.length + 1)) + names.length * velGiro);
-				
-				var finales = ["(0.3,0.18,0.83,1.05)", "(0.14,0.13,0.42,1)", "(.32,1.01,.99,1.02)"];
 				var finalactual = Math.floor(Math.random() * finales.length);
 				
-				[...tombola.querySelectorAll(".divcontainer")].forEach(elem => {
+				tombola.querySelectorAll(".divcontainer").forEach(elem => {
 					elem.style.transition = "transform " + velGiro + "s cubic-bezier" + finales[finalactual];
-					elem.vuelta = true;
+					elem.vuelta = false;
 					elem.style.transform = elem.style.transform.replace(/-*[0-9\.]*deg/, parseInt(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg","")) + angulo + "deg");
-				});
+				});			
 				
 				timerId = setInterval(()=> {
 					
-					[...tombola.querySelectorAll(".divcontainer")].forEach(elem => {
-						var anguloactual = parseFloat(window.getComputedStyle(elem,null)['-webkit-transform'].split(',')[5]);
-						if(anguloactual > 0){
+					tombola.querySelectorAll(".divcontainer").forEach(elem => {
+						if( window.getComputedStyle(elem,null)['-webkit-transform'].split(',')[5] > 0){
 							if(!elem.vuelta){
 								elem.vuelta = true;
 							}
 						}else{
-							if(elem.vuelta){
-								elem.firstElementChild.remove();
-								elem.appendChild(createContent(names[num++ % names.length], "elem"));
+							if(elem.vuelta){								
+								elem.replaceChild(elementostombola[num++ % names.length], elem.childNodes[0]);								
 								elem.vuelta = false;
 							}
 						}
 					});
-				},50);
+				},10);
 				
 				setTimeout(() => { 
 					clearInterval(timerId);
@@ -168,9 +182,10 @@ function girar(velGiro){
 						elem.style.transition = "";
 						var angulomaestro = parseInt(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg",""))%360;
 						if(angulomaestro == 0){
-							winnershow(elem.firstElementChild);
+							winnershow(elem.firstElementChild.dataset.id);
 							setTimeout(() => {
-								winnerunshow();
+								if (flag != 1)
+									winnerunshow();
 							}, (5000));
 						}
 						else if(angulomaestro > 90 ){
@@ -199,7 +214,6 @@ function girar(velGiro){
 
 				var angulo = 360/listTarj.length * (Math.floor(Math.random() * (10 * listTarj.length + 1)) + listTarj.length * velGiro);
 				
-				var finales = ["(0.14, 0.62, 0.44, 1)", "(0.11, 0.68, 0.73, 1.02)", "(0.11, 0.68, 0.77, 0.96)"];
 				var finalactual = Math.floor(Math.random() * finales.length);
 				
 				var angulofinal = parseFloat(pizza.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg","")) + angulo;
@@ -235,8 +249,10 @@ function girar(velGiro){
 							anguloganador = anguloactual;
 						}
 					});
+					
+					console.log(ganador);
 
-					winnershow(pizza.querySelector(".tarjetapizza[data-id='" + ganador + "']"));
+					winnershow(ganador);
 					
 					setTimeout(() => {
 						if(flaggirointerno){
@@ -254,9 +270,9 @@ function girar(velGiro){
 					}, (200));
 
 					setTimeout(() => { 
-						
+					if (flag != 1)
 						winnerunshow();
-						flag = 1;
+						
 					}, (5000));
 					
 					audioLoop.pause();
@@ -274,43 +290,28 @@ function girar(velGiro){
 var anguloganador = null;
 
 function winnershow(winnerelem){
-	
-	if(winnerelem.naturalHeight == null){
-								
-		var colortexto = winnerelem.style.color;
-		var colorback = winnerelem.style.backgroundColor;
+	var winner = elementostombola[winnerelem].cloneNode(true);
+	winner.innerText = elementostombola[winnerelem].innerText;
+	winner.classList.remove("elem");
+	winner.classList.add("winner");
+	winnercontainer.appendChild(winner);
 
-		if(colortexto.startsWith("rgb(")){
-			color = colortexto.replace("rgb(","").replace(")").split(",");
-			colortexto = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
+	setTimeout(() => { 			
+		winnercontainer.style.transform = "scale(1.5)";
+		if(flagconfeti.checked){
+			confetticontainer.style.display = "block";
+			initConfetti();
 		}
-		if(colorback.startsWith("rgb(")){
-			color = colorback.replace("rgb(","").replace(")").split(",");
-			colorback = "#" + (parseInt(color[0])).toString(16).padStart(2, "0") + (parseInt(color[1])).toString(16).padStart(2, "0") + (parseInt(color[2])).toString(16).padStart(2, "0");
-		}
-		var winnertarj = createContent(custom[winnerelem.dataset.id], "winner");
-		winnercontainer.appendChild(winnertarj);
-	}
-	else{
-		winnercontainer.appendChild(createContent(winnerelem.src, "winner"));
-	}
-	
-	winnercontainer.style.transform = "scale(1.5)";
-	if(flagconfeti.checked){
-		confetticontainer.style.display = "block";
-		initConfetti();
-	}
-	
+	}, (300));	
 }
 
 function winnerunshow(){
-	confetticontainer.style.display = "none";
 	winnercontainer.style.transform = "scale(0)";
-	setTimeout(() => {
-		if(winnercontainer.children.length > 0)
-			winnercontainer.firstElementChild.remove();
-	}, (300));
+	winnercontainer.firstElementChild.remove();
+	confetticontainer.style.display = "none";
 	
+	flag = 1;
+
 }
 
 var flagrender = true;
