@@ -776,120 +776,124 @@ function exportar(){
 
 function importar(jsondata){
 	
-	custom = jsondata.custom;
-	jsondata.custom.forEach((item) => {
-		var trelem = document.createElement("tr");
-		var tdelem = document.createElement("td");
-		var td2elem = document.createElement("td");
-		if(item.startsWith("text:")){
-			var elem = document.createElement("div");
-			var infoelem = item.split(";");
-			
-			elem.style.backgroundColor = infoelem[infoelem.length - 1];
-			elem.style.color = infoelem[infoelem.length - 2];
-			elem.style.fontSize = "50px";
-			elem.style.display = "flex";
-			elem.style.justifyContent = "center";
-			elem.style.alignItems = "center";
-			elem.style.margin = "auto";
-			elem.style.width = "400px";
-			elem.style.height = "160px";
-			elem.innerText = infoelem[0].replace("text:", "");
-			
-			var colortext = document.createElement("input");
-			colortext.setAttribute("type","color");
-			colortext.classList.add("colortarj");
-			colortext.value = infoelem[infoelem.length - 2];
-			colortext.setAttribute("onchange","changetextcolor(this)");
+	if (flag == 1){
 		
-			var colorback = document.createElement("input");
-			colorback.setAttribute("type","color");
-			colorback.classList.add("colortarj");
-			colorback.value = infoelem[infoelem.length - 1];
-			colorback.setAttribute("onchange","changebackcolor(this)");
+		thereallimpiar();
+	
+		custom = jsondata.custom;
+		jsondata.custom.forEach((item) => {
+			var trelem = document.createElement("tr");
+			var tdelem = document.createElement("td");
+			var td2elem = document.createElement("td");
+			if(item.startsWith("text:")){
+				var elem = document.createElement("div");
+				var infoelem = item.split(";");
+				
+				elem.style.backgroundColor = infoelem[infoelem.length - 1];
+				elem.style.color = infoelem[infoelem.length - 2];
+				elem.style.fontSize = "50px";
+				elem.style.display = "flex";
+				elem.style.justifyContent = "center";
+				elem.style.alignItems = "center";
+				elem.style.margin = "auto";
+				elem.style.width = "400px";
+				elem.style.height = "160px";
+				elem.innerText = infoelem[0].replace("text:", "");
+				
+				var colortext = document.createElement("input");
+				colortext.setAttribute("type","color");
+				colortext.classList.add("colortarj");
+				colortext.value = infoelem[infoelem.length - 2];
+				colortext.setAttribute("onchange","changetextcolor(this)");
 			
-			elem.appendChild(colortext);
-			elem.appendChild(colorback);
+				var colorback = document.createElement("input");
+				colorback.setAttribute("type","color");
+				colorback.classList.add("colortarj");
+				colorback.value = infoelem[infoelem.length - 1];
+				colorback.setAttribute("onchange","changebackcolor(this)");
+				
+				elem.appendChild(colortext);
+				elem.appendChild(colorback);
+			}
+			else{
+				var elem = document.createElement("img");
+				elem.src = item;
+				elem.width = "400";
+				elem.height = "160";
+			}
+			
+			tdelem.appendChild(elem);
+
+			var inputelem = document.createElement("input");
+			inputelem.type = "button";
+			inputelem.value = "ELIMINAR";
+			inputelem.classList.add("btn");
+			inputelem.classList.add("lg");
+			inputelem.classList.add("btn-primary");
+			inputelem.classList.add("btn-block");
+			inputelem.setAttribute("onclick","deleteTarjeta(this)");
+			
+			td2elem.appendChild(inputelem);
+			
+			trelem.appendChild(tdelem);
+			trelem.appendChild(td2elem);
+			
+			tarjetacontainer.appendChild(trelem);
+			
+			elem.dataset.id = custom.indexOf(item);
+			
+		});
+		
+		flagclasic.checked = jsondata.flags[0];
+		flagtombola.checked = !jsondata.flags[0];
+		
+		if(jsondata.flags[0]){
+			pizza.parentElement.style.display = "block";
+			editruleta.style.display = "block";
+			tombola.style.display = "none";
 		}
 		else{
-			var elem = document.createElement("img");
-			elem.src = item;
-			elem.width = "400";
-			elem.height = "160";
+			tombola.style.display = "block";
+			pizza.parentElement.style.display = "none";
+			editruleta.style.display = "none";
 		}
 		
-		tdelem.appendChild(elem);
+		flagflecha.checked = jsondata.flags[1];
+		flagbolita.checked = !jsondata.flags[1];
+		
+		if(jsondata.flags[1]){
+			arrowcontainer.style.display = "block";
+			bolacontainer.style.display = "none";
+		}
+		else{
+			arrowcontainer.style.display = "none";
+			bolacontainer.style.display = "block";
+		}
+		
+		flaginterior.checked = jsondata.flags[2];
+		flagexterior.checked = !jsondata.flags[2];
+		
+		if(jsondata.flags[2])		
+			flaggirointerno = true;
+		else
+			flaggirointerno = false;
 
-		var inputelem = document.createElement("input");
-		inputelem.type = "button";
-		inputelem.value = "ELIMINAR";
-		inputelem.classList.add("btn");
-		inputelem.classList.add("lg");
-		inputelem.classList.add("btn-primary");
-		inputelem.classList.add("btn-block");
-		inputelem.setAttribute("onclick","deleteTarjeta(this)");
+		flagletras.checked = jsondata.flags[3];
 		
-		td2elem.appendChild(inputelem);
+		if(jsondata.flags[3])
+			pizza.classList.add("rotado");
+			
 		
-		trelem.appendChild(tdelem);
-		trelem.appendChild(td2elem);
+		flagrandom.checked = jsondata.flags[4];
+		flagconfeti.checked = jsondata.flags[5];
 		
-		tarjetacontainer.appendChild(trelem);
+		if(jsondata.flags[6]){
+			urltapa.value = jsondata.img;
+			addtapa();
+		}
 		
-		elem.dataset.id = custom.indexOf(item);
-		
-	});
-	
-	flagclasic.checked = jsondata.flags[0];
-	flagtombola.checked = !jsondata.flags[0];
-	
-	if(jsondata.flags[0]){
-		pizza.parentElement.style.display = "block";
-		editruleta.style.display = "block";
-		tombola.style.display = "none";
+		rellenoInicial(2);
 	}
-	else{
-		tombola.style.display = "block";
-		pizza.parentElement.style.display = "none";
-		editruleta.style.display = "none";
-	}
-	
-	flagflecha.checked = jsondata.flags[1];
-	flagbolita.checked = !jsondata.flags[1];
-	
-	if(jsondata.flags[1]){
-		arrowcontainer.style.display = "block";
-		bolacontainer.style.display = "none";
-	}
-	else{
-		arrowcontainer.style.display = "none";
-		bolacontainer.style.display = "block";
-	}
-	
-	flaginterior.checked = jsondata.flags[2];
-	flagexterior.checked = !jsondata.flags[2];
-	
-	if(jsondata.flags[2])		
-		flaggirointerno = true;
-	else
-		flaggirointerno = false;
-
-	flagletras.checked = jsondata.flags[3];
-	
-	if(jsondata.flags[3])
-		pizza.classList.add("rotado");
-		
-	
-	flagrandom.checked = jsondata.flags[4];
-	flagconfeti.checked = jsondata.flags[5];
-	
-	if(jsondata.flags[6]){
-		urltapa.value = jsondata.img;
-		addtapa();
-	}
-	
-	rellenoInicial(2);
-	
 }
 
 function editar(){
