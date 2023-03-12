@@ -306,11 +306,10 @@ function winnershow(winnerelem){
 }
 
 function winnerunshow(){
+	flag = 1;
 	winnercontainer.style.transform = "scale(0)";
 	winnercontainer.firstElementChild.remove();
 	confetticontainer.style.display = "none";
-	
-	flag = 1;
 
 }
 
@@ -781,7 +780,7 @@ function importar(jsondata){
 		
 		thereallimpiar();
 	
-		custom = jsondata.custom;
+		custom =  Object.create(jsondata.custom);
 		jsondata.custom.forEach((item) => {
 			var trelem = document.createElement("tr");
 			var tdelem = document.createElement("td");
