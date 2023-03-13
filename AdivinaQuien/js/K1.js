@@ -312,44 +312,49 @@ function deshacer(){
 	
 }
 
+	var contatotal = 0;
+	var contaanimado = 0;
+
 function animate(){
+
 	for(var i = 1; i < pokelist.length; i++){
 		for(var k = 0; k < pokelist[i].length; k++){
+			contatotal++;
 			var complemento = "";
 			if(pokelist[i][k].title == "hembra"){
 				complemento = "_hembra";
 			}
 			if(pokelist[i][k].img.otros != null){
 				for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-					if(pokelist[i][k].img.otros[j].endsWith("EP" + complemento + ".gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+					if(pokelist[i][k].img.otros[j].endsWith("EP" + complemento + ".gif")){contaanimado++;pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
 				}   
 				if(!pokelist[i][k].front.endsWith("EP" + complemento + ".gif")){
 					for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-						if(pokelist[i][k].img.otros[j].endsWith("Ec" + complemento + ".gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+						if(pokelist[i][k].img.otros[j].endsWith("Ec" + complemento + ".gif")){contaanimado++;pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
 					}
 					if(!pokelist[i][k].front.endsWith("Ec" + complemento + ".gif")){
 						for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-							if(pokelist[i][k].img.otros[j].endsWith("PE" + complemento + ".gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+							if(pokelist[i][k].img.otros[j].endsWith("PE" + complemento + ".gif")){contaanimado++;pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
 						}
 						if(!pokelist[i][k].front.endsWith("PE" + complemento + ".gif")){
 							for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-								if(pokelist[i][k].img.otros[j].endsWith("Ep" + complemento + ".gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+								if(pokelist[i][k].img.otros[j].endsWith("Ep" + complemento + ".gif")){contaanimado++;pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
 							}
 							if(!pokelist[i][k].front.endsWith("Ep" + complemento + ".gif")){
 								for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-									if(pokelist[i][k].img.otros[j].endsWith("UL" + complemento + ".gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+									if(pokelist[i][k].img.otros[j].endsWith("UL" + complemento + ".gif")){contaanimado++;pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
 								}
 								if(!pokelist[i][k].front.endsWith("UL" + complemento + ".gif")){
 									for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-										if(pokelist[i][k].img.otros[j].endsWith("SL" + complemento + ".gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
+										if(pokelist[i][k].img.otros[j].endsWith("SL" + complemento + ".gif")){contaanimado++;pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
 									}
 									if(!pokelist[i][k].front.endsWith("SL" + complemento + ".gif")){
 										for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-											if(pokelist[i][k].img.otros[j].endsWith("ZA" + complemento + ".gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
+											if(pokelist[i][k].img.otros[j].endsWith("ZA" + complemento + ".gif")){contaanimado++;pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
 										}
 										if(!pokelist[i][k].front.endsWith("ZA" + complemento + ".gif")){
 											for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-												if(pokelist[i][k].img.otros[j].endsWith("XY" + complemento + ".gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
+												if(pokelist[i][k].img.otros[j].endsWith("XY" + complemento + ".gif")){contaanimado++;pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
 											}
 										}
 									}
