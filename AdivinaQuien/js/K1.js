@@ -315,33 +315,42 @@ function deshacer(){
 function animate(){
 	for(var i = 1; i < pokelist.length; i++){
 		for(var k = 0; k < pokelist[i].length; k++){
+			var complemento = "";
+			if(pokelist[i][k].title == "hembra"){
+				complemento = "_hembra";
+			}
 			if(pokelist[i][k].img.otros != null){
 				for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-					if(pokelist[i][k].img.otros[j].endsWith("EP.gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+					if(pokelist[i][k].img.otros[j].endsWith("EP" + complemento + ".gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
 				}   
-				if(!pokelist[i][k].front.endsWith("EP.gif")){
+				if(!pokelist[i][k].front.endsWith("EP" + complemento + ".gif")){
 					for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-						if(pokelist[i][k].img.otros[j].endsWith("Ec.gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+						if(pokelist[i][k].img.otros[j].endsWith("Ec" + complemento + ".gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
 					}
-					if(!pokelist[i][k].front.endsWith("Ec.gif")){
+					if(!pokelist[i][k].front.endsWith("Ec" + complemento + ".gif")){
 						for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-							if(pokelist[i][k].img.otros[j].endsWith("PE.gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+							if(pokelist[i][k].img.otros[j].endsWith("PE" + complemento + ".gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
 						}
-						if(!pokelist[i][k].front.endsWith("PE.gif")){
+						if(!pokelist[i][k].front.endsWith("PE" + complemento + ".gif")){
 							for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-								if(pokelist[i][k].img.otros[j].endsWith("UL.gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+								if(pokelist[i][k].img.otros[j].endsWith("Ep" + complemento + ".gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
 							}
-							if(!pokelist[i][k].front.endsWith("UL.gif")){
+							if(!pokelist[i][k].front.endsWith("Ep" + complemento + ".gif")){
 								for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-									if(pokelist[i][k].img.otros[j].endsWith("SL.gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
+									if(pokelist[i][k].img.otros[j].endsWith("UL" + complemento + ".gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
 								}
-								if(!pokelist[i][k].front.endsWith("SL.gif")){
+								if(!pokelist[i][k].front.endsWith("UL" + complemento + ".gif")){
 									for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-										if(pokelist[i][k].img.otros[j].endsWith("ZA.gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
+										if(pokelist[i][k].img.otros[j].endsWith("SL" + complemento + ".gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
 									}
-									if(!pokelist[i][k].front.endsWith("ZA.gif")){
+									if(!pokelist[i][k].front.endsWith("SL" + complemento + ".gif")){
 										for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-											if(pokelist[i][k].img.otros[j].endsWith("XY.gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
+											if(pokelist[i][k].img.otros[j].endsWith("ZA" + complemento + ".gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
+										}
+										if(!pokelist[i][k].front.endsWith("ZA" + complemento + ".gif")){
+											for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
+												if(pokelist[i][k].img.otros[j].endsWith("XY" + complemento + ".gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
+											}
 										}
 									}
 								}
@@ -373,6 +382,8 @@ function creaficha(poke, forma){
 	divinterno.classList.add("imgcontainer");
 	var imginterno = document.createElement("img");
 	imginterno.src = poke.front;
+	imginterno.height = 100;
+	imginterno.width = 100;
 	
 	divinterno.appendChild(imginterno);
 	opcion.appendChild(divinterno);
