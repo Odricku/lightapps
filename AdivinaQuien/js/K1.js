@@ -312,6 +312,48 @@ function deshacer(){
 	
 }
 
+function animate(){
+	for(var i = 1; i < pokelist.length; i++){
+		for(var k = 0; k < pokelist[i].length; k++){
+			if(pokelist[i][k].img.otros != null){
+				for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
+					if(pokelist[i][k].img.otros[j].endsWith("EP.gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+				}   
+				if(!pokelist[i][k].front.endsWith("EP.gif")){
+					for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
+						if(pokelist[i][k].img.otros[j].endsWith("Ec.gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+					}
+					if(!pokelist[i][k].front.endsWith("Ec.gif")){
+						for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
+							if(pokelist[i][k].img.otros[j].endsWith("PE.gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+						}
+						if(!pokelist[i][k].front.endsWith("PE.gif")){
+							for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
+								if(pokelist[i][k].img.otros[j].endsWith("UL.gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+							}
+							if(!pokelist[i][k].front.endsWith("UL.gif")){
+								for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
+									if(pokelist[i][k].img.otros[j].endsWith("SL.gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
+								}
+								if(!pokelist[i][k].front.endsWith("SL.gif")){
+									for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
+										if(pokelist[i][k].img.otros[j].endsWith("ZA.gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
+									}
+									if(!pokelist[i][k].front.endsWith("ZA.gif")){
+										for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
+											if(pokelist[i][k].img.otros[j].endsWith("XY.gif")){pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
+										}
+									}
+								}
+							}
+						}
+					} 
+				}
+			}
+		}
+	}
+}
+
 function creaficha(poke, forma){
 	
 	var opcion = document.createElement("a");
@@ -320,36 +362,97 @@ function creaficha(poke, forma){
 	opcion.name = poke["name"];
 	opcion.setAttribute("class", "pokevista");
 	opcion.addEventListener("click", seleccion, false);
-	var complem = "<br>";
-
-	for(var k = 0; k < poke["tipo"].length; k++)
-		complem = complem + "<img width='50px' src='" + pokelist[0]["tipos"][poke["tipo"][k]]["image"] + "'/>";
 	
-	if(poke["habs"]["normal"].length > 0){
-		complem = complem + "<br><br><b>Habilidades:</b><br><i>"
-		for(var k = 0; k < poke["habs"]["normal"].length; k++){
+	var nombre = poke.name.replaceAll("_", "");
+	
+	if(poke.title != "normal" && forma){
+		nombre =  poke.name.replaceAll("_", "") + " " + poke.title;
+	}
+	
+	var divinterno = document.createElement("div");
+	divinterno.classList.add("imgcontainer");
+	var imginterno = document.createElement("img");
+	imginterno.src = poke.front;
+	
+	divinterno.appendChild(imginterno);
+	opcion.appendChild(divinterno);
+	opcion.appendChild(document.createTextNode(nombre));
+	opcion.appendChild(document.createElement("br"));
+	
+	for(var k = 0; k < poke.tipo.length; k++){
+		var imgtipo = document.createElement("img");
+		imgtipo.src = pokelist[0].tipos[poke.tipo[k]].image;
+		imgtipo.width = 50;
+		
+		opcion.appendChild(imgtipo);
+	}
+
+	if(poke.habs.normal.length > 0){
+		opcion.appendChild(document.createElement("br"));
+		opcion.appendChild(document.createElement("br"));
+		var habblabel = document.createElement("b");
+		habblabel.innerText = "Habilidades";
+		opcion.appendChild(habblabel);
+		opcion.appendChild(document.createElement("br"));
+		var habb = document.createElement("i");
+		
+		var complem = "";
+		for(var k = 0; k < poke.habs.normal.length; k++){
 			if (k == 0)
-				complem = complem + pokelist[0]["habs"][poke["habs"]["normal"][k]]["name"];
+				complem = pokelist[0].habs[poke.habs.normal[k]].name;
 			else
-				complem = complem + ", " + pokelist[0]["habs"][poke["habs"]["normal"][k]]["name"];
+				complem = complem + ", " + pokelist[0].habs[poke.habs.normal[k]].name;
 		}
-		complem = complem + "</i>"
+		habb.innerText = complem;
+		opcion.appendChild(habb);
 	}
 	
 	if(poke["habs"]["oculta"].length > 0){
-		complem = complem + "<br><b>Oculta:</b><br><i>"
-		for(var k = 0; k < poke["habs"]["oculta"].length; k++){
-			complem = complem + pokelist[0]["habs"][poke["habs"]["oculta"][k]]["name"];
+		opcion.appendChild(document.createElement("br"));
+		var habbocullabel = document.createElement("b");
+		habbocullabel.innerText = "Oculta";
+		opcion.appendChild(habbocullabel);
+		opcion.appendChild(document.createElement("br"));
+		var habbocul = document.createElement("i");
+		
+		var complem = "";
+		for(var k = 0; k < poke.habs.oculta.length; k++){
+			if (k == 0)
+				complem = pokelist[0].habs[poke.habs.oculta[k]].name;
+			else
+				complem = complem + ", " + pokelist[0].habs[poke.habs.oculta[k]].name;
 		}
-		complem = complem + "</i>"
+		habbocul.innerText = complem;
+		opcion.appendChild(habbocul);
 	}
 	
-	if(poke.title == "normal" || !forma){
-		opcion.innerHTML = "<div><img width='100px' height='100px' src='" + poke["front"] + "'/><br>" + poke["name"].replaceAll("_", "") + complem + "<a class='equis' style='visibility:hidden'></a></div>";
-	}
-	else
-		opcion.innerHTML = "<img width='100px' height='100px' src='" + poke["front"] + "'/><br>" + poke["name"].replaceAll("_", "") + " " + poke.title + complem + "<a class='equis' style='visibility:hidden'></a></div>";
+	var ainterno = document.createElement("a");
+	ainterno.classList.add("equis");
+	ainterno.style.visibility = "hidden";
+	
+	opcion.appendChild(ainterno);
+	
 	document.getElementById("pokelist").appendChild(opcion);
+	
+	new Promise(() => {
+		imginterno.onload = () => {
+			var h = imginterno.naturalHeight;
+			var w = imginterno.naturalWidth;
+			
+			if (w < 100 && h < 100){
+				imginterno.height = h;
+				imginterno.width = w;
+			}
+			else if(h > w){
+				imginterno.height = 100;
+				imginterno.width = w * 100/h;
+			}
+			else{
+				imginterno.height = h * 100/w;
+				imginterno.width = 100;
+			}
+		}
+	});
 	
 }
 
