@@ -1,8 +1,6 @@
 var pokelist;
 
 var pokelist = [];
-
-var flaganimado = true;
 	
 var disc = "Pokémon es una marca registrada de Nintendo desde el 1995 a la fecha. Esta pagina es sin animos de lucro y no esta de ninguna manera afiliada a Nintendo ni oficialmente respaldada. Esta pagina solo tiene el objetivo de pasar un buen rato y para el disfrute gratuito de aquellas almas perdidas que se pierdan por estos rincones de internet. La intencion no es competir con la marca registrada de Nintendo.";
 	
@@ -371,7 +369,7 @@ function animate(){
 function creaficha(poke, forma){
 	
 	var opcion = document.createElement("a");
-	opcion.id = poke["id"].padStart(4, "0") + poke.title;
+	opcion.id = poke.id.padStart(4, "0") + poke.title;
 	opcion.value = 0;
 	opcion.name = poke["name"];
 	opcion.setAttribute("class", "pokevista");
@@ -385,8 +383,11 @@ function creaficha(poke, forma){
 	
 	var divinterno = document.createElement("div");
 	divinterno.classList.add("imgcontainer");
+	divinterno.dataset.poke = poke.id;
+	divinterno.dataset.nombre = poke.name;
+	divinterno.dataset.forma = poke.title;
 	var imginterno = document.createElement("img");
-	if(flaganimado == true)
+	if(flaganimado.value == true && poke.frontanim != null)
 		imginterno.src = poke.frontanim;
 	else
 		imginterno.src = poke.front;
@@ -2032,4 +2033,71 @@ function habilitacion(){
 	document.getElementById("Gen8").disabled = false;
 	document.getElementById("Gen9").disabled = false;
 	document.getElementById("Otrasformas").disabled = false;
+}
+
+function animar(){
+	
+	flaganimado.disabled = true;
+	
+	setTimeout(() => { 
+		flaganimado.disabled = false;							
+	}, (5000));
+	
+	document.querySelectorAll(".imgcontainer").forEach((poke) => {
+
+		if(flaganimado.checked){
+			pokelist[poke.dataset.poke * 1].forEach((forma) => {
+				if(poke.dataset.nombre == forma.name && poke.dataset.forma == forma.title && forma.frontanim != null){
+					poke.firstElementChild.src = forma.frontanim;
+				}
+			});
+			
+			new Promise(() => {
+				poke.firstElementChild.onload = () => {
+					var h = poke.firstElementChild.naturalHeight;
+					var w = poke.firstElementChild.naturalWidth;
+					
+					if (w < 100 && h < 100){
+						poke.firstElementChild.height = h;
+						poke.firstElementChild.width = w;
+					}
+					else if(h > w){
+						poke.firstElementChild.height = 100;
+						poke.firstElementChild.width = w * 100/h;
+					}
+					else{
+						poke.firstElementChild.height = h * 100/w;
+						poke.firstElementChild.width = 100;
+					}
+				}
+			});
+		}
+		else{
+			pokelist[poke.dataset.poke * 1].forEach((forma) => {
+				if(poke.dataset.nombre == forma.name && poke.dataset.forma == forma.title){
+					poke.firstElementChild.src = forma.front;
+				}
+			});
+			
+			new Promise(() => {
+				poke.firstElementChild.onload = () => {
+					var h = poke.firstElementChild.naturalHeight;
+					var w = poke.firstElementChild.naturalWidth;
+					
+					if (w < 100 && h < 100){
+						poke.firstElementChild.height = h;
+						poke.firstElementChild.width = w;
+					}
+					else if(h > w){
+						poke.firstElementChild.height = 100;
+						poke.firstElementChild.width = w * 100/h;
+					}
+					else{
+						poke.firstElementChild.height = h * 100/w;
+						poke.firstElementChild.width = 100;
+					}
+				}
+			});
+		}
+	});
 }

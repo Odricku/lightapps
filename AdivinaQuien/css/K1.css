@@ -26,6 +26,17 @@ textarea{
 	
 }
 
+.pokeselect .imgcontainer{
+	width: auto;
+}
+
+.pokeselect .imgcontainer img{
+	width: auto;
+	max-width: 200px;
+	height: auto;
+	max-height: 100px;
+}
+
 .xdetalle{
 	background-color:#f1f1f1; 
 	width:90%; 
