@@ -1,6 +1,8 @@
 var pokelist;
 
 var pokelist = [];
+
+var flaganimado = true;
 	
 var disc = "Pokémon es una marca registrada de Nintendo desde el 1995 a la fecha. Esta pagina es sin animos de lucro y no esta de ninguna manera afiliada a Nintendo ni oficialmente respaldada. Esta pagina solo tiene el objetivo de pasar un buen rato y para el disfrute gratuito de aquellas almas perdidas que se pierdan por estos rincones de internet. La intencion no es competir con la marca registrada de Nintendo.";
 	
@@ -312,49 +314,47 @@ function deshacer(){
 	
 }
 
-	var contatotal = 0;
-	var contaanimado = 0;
 
 function animate(){
 
 	for(var i = 1; i < pokelist.length; i++){
 		for(var k = 0; k < pokelist[i].length; k++){
-			contatotal++;
+
 			var complemento = "";
 			if(pokelist[i][k].title == "hembra"){
 				complemento = "_hembra";
 			}
-			if(pokelist[i][k].img.otros != null){
+			if(pokelist[i][k].frontanim != null){
 				for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-					if(pokelist[i][k].img.otros[j].endsWith("EP" + complemento + ".gif")){contaanimado++;pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+					if(pokelist[i][k].img.otros[j].endsWith("EP" + complemento + ".gif")){pokelist[i][k].frontanim = pokelist[i][k].img.otros[j]; break;}
 				}   
-				if(!pokelist[i][k].front.endsWith("EP" + complemento + ".gif")){
+				if(pokelist[i][k].frontanim == null){
 					for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-						if(pokelist[i][k].img.otros[j].endsWith("Ec" + complemento + ".gif")){contaanimado++;pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+						if(pokelist[i][k].img.otros[j].endsWith("Ec" + complemento + ".gif")){pokelist[i][k].frontanim = pokelist[i][k].img.otros[j]; break;}
 					}
-					if(!pokelist[i][k].front.endsWith("Ec" + complemento + ".gif")){
+					if(pokelist[i][k].frontanim == null){
 						for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-							if(pokelist[i][k].img.otros[j].endsWith("PE" + complemento + ".gif")){contaanimado++;pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+							if(pokelist[i][k].img.otros[j].endsWith("PE" + complemento + ".gif")){pokelist[i][k].frontanim = pokelist[i][k].img.otros[j]; break;}
 						}
-						if(!pokelist[i][k].front.endsWith("PE" + complemento + ".gif")){
+						if(pokelist[i][k].frontanim == null){
 							for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-								if(pokelist[i][k].img.otros[j].endsWith("Ep" + complemento + ".gif")){contaanimado++;pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+								if(pokelist[i][k].img.otros[j].endsWith("Ep" + complemento + ".gif")){pokelist[i][k].frontanim = pokelist[i][k].img.otros[j]; break;}
 							}
-							if(!pokelist[i][k].front.endsWith("Ep" + complemento + ".gif")){
+							if(pokelist[i][k].frontanim == null){
 								for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-									if(pokelist[i][k].img.otros[j].endsWith("UL" + complemento + ".gif")){contaanimado++;pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}
+									if(pokelist[i][k].img.otros[j].endsWith("UL" + complemento + ".gif")){pokelist[i][k].frontanim = pokelist[i][k].img.otros[j]; break;}
 								}
-								if(!pokelist[i][k].front.endsWith("UL" + complemento + ".gif")){
+								if(pokelist[i][k].frontanim == null){
 									for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-										if(pokelist[i][k].img.otros[j].endsWith("SL" + complemento + ".gif")){contaanimado++;pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
+										if(pokelist[i][k].img.otros[j].endsWith("SL" + complemento + ".gif")){pokelist[i][k].frontanim = pokelist[i][k].img.otros[j]; break;}  
 									}
-									if(!pokelist[i][k].front.endsWith("SL" + complemento + ".gif")){
+									if(pokelist[i][k].frontanim == null){
 										for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-											if(pokelist[i][k].img.otros[j].endsWith("ZA" + complemento + ".gif")){contaanimado++;pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
+											if(pokelist[i][k].img.otros[j].endsWith("ZA" + complemento + ".gif")){pokelist[i][k].frontanim = pokelist[i][k].img.otros[j]; break;}  
 										}
-										if(!pokelist[i][k].front.endsWith("ZA" + complemento + ".gif")){
+										if(pokelist[i][k].frontanim == null){
 											for(var j = 0; j < pokelist[i][k].img.otros.length; j++){
-												if(pokelist[i][k].img.otros[j].endsWith("XY" + complemento + ".gif")){contaanimado++;pokelist[i][k].front = pokelist[i][k].img.otros[j]; break;}  
+												if(pokelist[i][k].img.otros[j].endsWith("XY" + complemento + ".gif")){pokelist[i][k].frontanim = pokelist[i][k].img.otros[j]; break;}  
 											}
 										}
 									}
@@ -386,7 +386,10 @@ function creaficha(poke, forma){
 	var divinterno = document.createElement("div");
 	divinterno.classList.add("imgcontainer");
 	var imginterno = document.createElement("img");
-	imginterno.src = poke.front;
+	if(flaganimado == true)
+		imginterno.src = poke.frontanim;
+	else
+		imginterno.src = poke.front;
 	imginterno.height = 100;
 	imginterno.width = 100;
 	
