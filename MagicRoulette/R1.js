@@ -1,6 +1,6 @@
 var pc = {"flags":[false, true, true, false, true, true, false],"img": "","custom":["https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20DG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20DRAW.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20FG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20GB.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20GMOD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta GTA.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20HFF.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20HS.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMC.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20LL.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20MOD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20OC2.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PA.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PU.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20RL.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20SR.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20UCH.png"]};
 var cel ={"flags":[true, true, true, false, true, true, false],"img": "","custom":["https://www.odricku.cl/resources/img/tarjetas/Tarjeta JMD.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20JMP.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PU.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20SG.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20BF.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20UNO.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20DRAW.png","https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20PS.png", "https://www.odricku.cl/resources/img/tarjetas/Tarjeta%20G.png"]};
-var ruletaclasica ={"flags":[true, false, false, true, false, false, true],"img": "http://www.odricku.cl/resources/img/utils/roulettetable2.png","custom":['text:9;#ffffff;#ff0000','text:22;#ffffff;#000000', 'text:18;#ffffff;#ff0000', 'text:29;#ffffff;#000000', 'text:7;#ffffff;#ff0000', 'text:28;#ffffff;#000000', 'text:12;#ffffff;#ff0000', 'text:35;#ffffff;#000000', 'text:3;#ffffff;#ff0000', 'text:26;#ffffff;#000000', 'text:0;#ffffff;#008f18', 'text:32;#ffffff;#ff0000', 'text:15;#ffffff;#000000', 'text:19;#ffffff;#ff0000', 'text:4;#ffffff;#000000','text:21;#ffffff;#ff0000', 'text:2;#ffffff;#000000', 'text:25;#ffffff;#ff0000', 'text:17;#ffffff;#000000', 'text:34;#ffffff;#ff0000', 'text:6;#ffffff;#000000', 'text:27;#ffffff;#ff0000', 'text:13;#ffffff;#000000', 'text:36;#ffffff;#ff0000', 'text:11;#ffffff;#000000', 'text:30;#ffffff;#ff0000', 'text:8;#ffffff;#000000', 'text:23;#ffffff;#ff0000', 'text:10;#ffffff;#000000','text:5;#ffffff;#ff0000', 'text:24;#ffffff;#000000', 'text:16;#ffffff;#ff0000', 'text:33;#ffffff;#000000', 'text:1;#ffffff;#ff0000', 'text:20;#ffffff;#000000', 'text:14;#ffffff;#ff0000',            'text:31;#ffffff;#000000']};
+var ruletaclasica ={"flags":[true, false, null, true, false, false, true],"img": "http://www.odricku.cl/resources/img/utils/roulettetable2.png","custom":['text:9;#ffffff;#ff0000','text:22;#ffffff;#000000', 'text:18;#ffffff;#ff0000', 'text:29;#ffffff;#000000', 'text:7;#ffffff;#ff0000', 'text:28;#ffffff;#000000', 'text:12;#ffffff;#ff0000', 'text:35;#ffffff;#000000', 'text:3;#ffffff;#ff0000', 'text:26;#ffffff;#000000', 'text:0;#ffffff;#008f18', 'text:32;#ffffff;#ff0000', 'text:15;#ffffff;#000000', 'text:19;#ffffff;#ff0000', 'text:4;#ffffff;#000000','text:21;#ffffff;#ff0000', 'text:2;#ffffff;#000000', 'text:25;#ffffff;#ff0000', 'text:17;#ffffff;#000000', 'text:34;#ffffff;#ff0000', 'text:6;#ffffff;#000000', 'text:27;#ffffff;#ff0000', 'text:13;#ffffff;#000000', 'text:36;#ffffff;#ff0000', 'text:11;#ffffff;#000000', 'text:30;#ffffff;#ff0000', 'text:8;#ffffff;#000000', 'text:23;#ffffff;#ff0000', 'text:10;#ffffff;#000000','text:5;#ffffff;#ff0000', 'text:24;#ffffff;#000000', 'text:16;#ffffff;#ff0000', 'text:33;#ffffff;#000000', 'text:1;#ffffff;#ff0000', 'text:20;#ffffff;#000000', 'text:14;#ffffff;#ff0000',            'text:31;#ffffff;#000000']};
 var colores = {"flags":[true, true, true, false, true, true, false], "img":"", "custom": ['text:;#ffffff;#ffffff', 'text:;#ffffff;#804a00', 'text:;#ffffff;#ff0000', 'text:;#ffffff;#ff9500', 'text:;#ffffff;#fff700', 'text:;#ffffff;#659a60', 'text:;#ffffff;#009dff', 'text:;#ffffff;#0008ff', 'text:;#ffffff;#e100ff', 'text:;#ffffff;#ff8080', 'text:;#ffffff;#000000']}
 var custom = []
 var names = [];
@@ -12,6 +12,7 @@ var regex = /\-{0,1}(\d+)/g;
 let timerId;
 var flag = 1;
 var flaggirointerno = true;
+var flaggiroexterno = false;
 
 var audioLoop = new Audio('https://www.odricku.cl/resources/media/audio/Item roulette Loop.mp3');
 audioLoop.loop = true;
@@ -211,74 +212,109 @@ function girar(velGiro){
 			else if(pizza.parentElement.style.display != 'none'){
 				
 				var listTarj = pizza.querySelectorAll(".slice-cont");
-
-				var angulo = 360/listTarj.length * (Math.floor(Math.random() * (10 * listTarj.length + 1)) + listTarj.length * velGiro);
 				
-				var finalactual = Math.floor(Math.random() * finales.length);
-				
-				var angulofinal = parseFloat(pizza.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg","")) + angulo;
-				
-				cono.style.transition = "transform 5s cubic-bezier" + finales[1];
-				cono.style.transform = cono.style.transform.replace(/-*[0-9\.]*deg/, "3600deg");
-				if(flaggirointerno){
-					pizza.style.transition = "transform " + velGiro + "s cubic-bezier" + finales[finalactual];
-					pizza.style.transform = pizza.style.transform.replace(/-*[0-9\.]*deg/, angulofinal + "deg");
-				}
-				else{
-					bolacontainer.style.transition = "transform " + velGiro + "s cubic-bezier" + finales[finalactual];
-					arrowcontainer.style.transition = "transform " + velGiro + "s cubic-bezier" + finales[finalactual];
+				if(flaggirointerno && flaggiroexterno){
+					
+					var velocidad1 = velGiro + 5;
+					var girosiniciales= Math.floor(Math.random() * 3) + 9;
+					
+					var angulo1 =  360 * 5 + 360/listTarj.length * (Math.floor(Math.random() * (listTarj.length)));
+					var angulo2 = 360/listTarj.length * (Math.floor(Math.random() * (listTarj.length/2)) + listTarj.length * velGiro);
+					
+					var finalactual1 = Math.floor(Math.random() * finales.length);
+					var finalactual2 = Math.floor(Math.random() * finales.length);
+					
+					var angulofinal1 = parseFloat(pizza.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg","")) + angulo1;
+					var angulofinal2 = parseFloat(bolacontainer.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg","")) - angulo2;
+					
+					pizza.style.transition = "transform " + velocidad1 + "s linear";
+					pizza.style.transform = pizza.style.transform.replace(/-*[0-9\.]*deg/, angulofinal1 + "deg");
+					
+					bolacontainer.style.transition = "transform " + velGiro + "s cubic-bezier" + finales[finalactual2];
+					arrowcontainer.style.transition = "transform " + velGiro + "s cubic-bezier" + finales[finalactual2];
 					bolacontainer.style.transform = bolacontainer.style.transform.replace(/-*[0-9\.]*deg/, angulofinal + "deg");	
 					arrowcontainer.style.transform = arrowcontainer.style.transform.replace(/-*[0-9\.]*deg/, angulofinal + "deg");
-				}				
-				setTimeout(() => { 
-					clearInterval(timerId);
-					var minerror = 360;
-					ganador = -1;
-					anguloganador = 360;
-					
-					listTarj.forEach(elem => {
-						
-						angulofinal = angulofinal % 360;
-						if(flaggirointerno)
-							var anguloactual = 360 - parseFloat(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg",""));
-						else
-							var anguloactual = parseFloat(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg",""));
-						if(Math.abs(anguloactual - angulofinal) < minerror){
-							minerror = Math.abs(anguloactual - angulofinal);
-							ganador = elem.firstElementChild.firstElementChild.dataset.id;
-							anguloganador = anguloactual;
-						}
-					});
-					
-					console.log(ganador);
-
-					winnershow(ganador);
 					
 					setTimeout(() => {
-						if(flaggirointerno){
-							pizza.style.transition = "transform 0s linear";
-							pizza.style.transform = pizza.style.transform.replace(/-*[0-9\.]*deg/, anguloganador + "deg");
-						}
-						else{
-							bolacontainer.style.transition = "transform 0s linear";							
-							arrowcontainer.style.transition = "transform 0s linear";
-							bolacontainer.style.transform = bolacontainer.style.transform.replace(/-*[0-9\.]*deg/, anguloganador + "deg");
-							arrowcontainer.style.transform = arrowcontainer.style.transform.replace(/-*[0-9\.]*deg/, anguloganador + "deg");
-						}
-						cono.style.transition = "transform 0s linear";
-						cono.style.transform = cono.style.transform.replace(/-*[0-9\.]*deg/, "0deg");
-					}, (200));
-
-					setTimeout(() => { 
-					if (flag != 1)
-						winnerunshow();
+						pizza.style.transition = "transform " + velocidad1/3 + "s cubic-bezier(0.37, 0.62, 0.35, 0.9) 0s";
+						var anguloextra = parseFloat(pizza.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg","")) + 360;
+						pizza.style.transform = pizza.style.transform.replace(/-*[0-9\.]*deg/, anguloextra + "deg");
 						
-					}, (5000));
+					}, (velocidad1 * 1000));
 					
-					audioLoop.pause();
-					audioEnd.play();
-										
-				}, (1000 * velGiro));
+				}
+				else{
+
+					var angulo = 360/listTarj.length * (Math.floor(Math.random() * (10 * listTarj.length + 1)) + listTarj.length * velGiro);
+					
+					var finalactual = Math.floor(Math.random() * finales.length);
+					
+					var angulofinal = parseFloat(pizza.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg","")) + angulo;
+					
+					cono.style.transition = "transform 5s cubic-bezier" + finales[1];
+					cono.style.transform = cono.style.transform.replace(/-*[0-9\.]*deg/, "3600deg");
+				
+					if(flaggirointerno){
+						pizza.style.transition = "transform " + velGiro + "s cubic-bezier" + finales[finalactual];
+						pizza.style.transform = pizza.style.transform.replace(/-*[0-9\.]*deg/, angulofinal + "deg");
+					}
+					if(flaggiroexterno){
+						bolacontainer.style.transition = "transform " + velGiro + "s cubic-bezier" + finales[finalactual];
+						arrowcontainer.style.transition = "transform " + velGiro + "s cubic-bezier" + finales[finalactual];
+						bolacontainer.style.transform = bolacontainer.style.transform.replace(/-*[0-9\.]*deg/, angulofinal + "deg");	
+						arrowcontainer.style.transform = arrowcontainer.style.transform.replace(/-*[0-9\.]*deg/, angulofinal + "deg");
+					}
+					
+					setTimeout(() => { 
+						clearInterval(timerId);
+						var minerror = 360;
+						ganador = -1;
+						anguloganador = 360;
+						
+						listTarj.forEach(elem => {
+							
+							angulofinal = angulofinal % 360;
+							if(flaggirointerno)
+								var anguloactual = 360 - parseFloat(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg",""));
+							else
+								var anguloactual = parseFloat(elem.style.transform.match(/-*[0-9\.]*deg/)[0].replace("deg",""));
+							if(Math.abs(anguloactual - angulofinal) < minerror){
+								minerror = Math.abs(anguloactual - angulofinal);
+								ganador = elem.firstElementChild.firstElementChild.dataset.id;
+								anguloganador = anguloactual;
+							}
+						});
+						
+						console.log(ganador);
+
+						winnershow(ganador);
+						
+						setTimeout(() => {
+							if(flaggirointerno){
+								pizza.style.transition = "transform 0s linear";
+								pizza.style.transform = pizza.style.transform.replace(/-*[0-9\.]*deg/, anguloganador + "deg");
+							}
+							else{
+								bolacontainer.style.transition = "transform 0s linear";							
+								arrowcontainer.style.transition = "transform 0s linear";
+								bolacontainer.style.transform = bolacontainer.style.transform.replace(/-*[0-9\.]*deg/, anguloganador + "deg");
+								arrowcontainer.style.transform = arrowcontainer.style.transform.replace(/-*[0-9\.]*deg/, anguloganador + "deg");
+							}
+							cono.style.transition = "transform 0s linear";
+							cono.style.transform = cono.style.transform.replace(/-*[0-9\.]*deg/, "0deg");
+						}, (200));
+
+						setTimeout(() => { 
+						if (flag != 1)
+							winnerunshow();
+							
+						}, (5000));
+						
+						audioLoop.pause();
+						audioEnd.play();
+											
+					}, (1000 * velGiro));
+				}
 			}
 		}
 	}
@@ -870,13 +906,24 @@ function importar(jsondata){
 			bolacontainer.style.display = "block";
 		}
 		
-		flaginterior.checked = jsondata.flags[2];
-		flagexterior.checked = !jsondata.flags[2];
-		
-		if(jsondata.flags[2])		
+		if(jsondata.flags[2] != null){
+			flaginterior.checked = jsondata.flags[2];
+			flagexterior.checked = !jsondata.flags[2];
+	
+			if(jsondata.flags[2]){		
+				flaggirointerno = true;
+				flaggiroexterno = false;
+			}
+			else{
+				flaggirointerno = false;
+				flaggiroexterno = true;
+			}
+		}
+		else{
+			flaggirodoble.checked =  true;;
 			flaggirointerno = true;
-		else
-			flaggirointerno = false;
+			flaggiroexterno = true;
+		}
 
 		flagletras.checked = jsondata.flags[3];
 		
@@ -984,9 +1031,15 @@ function editformagiro(){
 	if(flag == 1){
 		if (flaginterior.checked){
 			flaggirointerno = true;
+			flaggiroexterno = false;
+		}
+		else if(flagexterior.checked){
+			flaggirointerno = false;
+			flaggiroexterno = true;
 		}
 		else{
-			flaggirointerno = false;
+			flaggirointerno = true;
+			flaggiroexterno = true;
 		}
 		
 		bolacontainer.style.transform = bolacontainer.style.transform.replace(/-*[0-9\.]*deg/, "0deg");

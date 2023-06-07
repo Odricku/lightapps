@@ -3,35 +3,131 @@
 <title>Ha hablado la Ruleta Magica!</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="./R1.css" />
+<script src="nouislider.min.js"></script>
 <script src="./R1.js"></script>
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<style>
-		.pedazo{
-			position:absolute;
-			top:50vh; 
-			left:50vw;
-			width:400px;
-			height:400px;
-			transform-origin:120% 50%;
-		}
-		
-		.pedazoint{
-			transform-origin:80% 50%;
-			transform: perspective(50em) rotateY(71deg);
-		}
-	</style>
+	<link href="nouislider.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="./R1.css" />
 </head>
-	<body id="cuerpo">
-		<div>
-			<div class="pedazo" style="transform:rotate(0deg)"><img class="pedazoint" width="400" height="400" src="https://www.perfectly-nintendo.com/wp-content/uploads/2016/12/Pokemon-2.png"/></div>
-			<div class="pedazo" style="transform:rotate(60deg)"><img class="pedazoint" width="400" height="400" src="https://www.pokemon.com/static-assets/content-assets/cms2/img/watch-pokemon-tv/_tiles/2023/new-animated-series-169.png"/></div>
-			<div class="pedazo" style="transform:rotate(120deg)"><img class="pedazoint" width="400" height="400" src="https://www.perfectly-nintendo.com/wp-content/uploads/2016/12/Pokemon-2.png"/></div>
-			<div class="pedazo" style="transform:rotate(180deg)"><img class="pedazoint" width="400" height="400" src="https://www.pokemon.com/static-assets/content-assets/cms2/img/watch-pokemon-tv/_tiles/2023/new-animated-series-169.png"/></div>
-			<div class="pedazo" style="transform:rotate(240deg)"><img class="pedazoint" width="400" height="400" src="https://www.perfectly-nintendo.com/wp-content/uploads/2016/12/Pokemon-2.png"/></div>
-			<div class="pedazo" style="transform:rotate(300deg)"><img class="pedazoint" width="400" height="400" src="https://www.pokemon.com/static-assets/content-assets/cms2/img/watch-pokemon-tv/_tiles/2023/new-animated-series-169.png"/></div>
+<body id="cuerpo" onload="init()">
+	<div id="stream" class="streamsign streamoff" onclick="streammode()">
+		<b>Stream Mode</b>
+	</div>
+	<div class="wrapper">
+		<div id="tombola" style="width:100%; min-height:600px;text-align: center;" onclick="edit.style.display = 'none'">
+			<img src="https://www.odricku.cl/resources/img/fondos/fondoBE.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
+			<img src="https://www.odricku.cl/resources/img/utils/palillo.png" id="palillo" style="transform-origin: 50% 100%;transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(480px, 30px);top:45px; position:absolute">
+			<div id="slot1" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(60deg)"></div>
+			<div id="slot2" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(0deg)"></div>
+			<div id="slot3" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(-60deg)"></div>
+			<div id="slot4" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(-120deg)"></div>
+			<div id="slot5" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(-180deg)"></div>
+			<div id="slot6" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(-240deg)"></div>
+			<img src="https://www.odricku.cl/resources/img/utils/ruleta magica.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
+			<svg id="perilla" style="perilla" onclick="palanca();girar(10)"></svg>		
 		</div>
-	</body>
+		
+		<div style="display:none; width:100%;min-height:600px;text-align: center;overflow:hidden" onclick="edit.style.display = 'none'">
+			<div class="borde borde-back"></div>
+			<div id= "pizza" class="pizza-cont" style="transform:rotate(0deg) translate(19px, 4px) scale(0.33);"></div>
+			<div class="borde borde-top"></div>
+			<div id="tapacontainer">
+				<img id="tapa" src="https://www.odricku.cl/resources/img/utils/roulettetable2.png"/>
+				<div id="cono" onclick="girar(10)" style="transform:rotate(0deg)"></div>
+			</div>
+			<div id="arrowcontainer" style="transform: translate(-310px,0px) rotate(0deg)">
+				<div class="arrow" style="border-left: 70px solid #b70000; transform: translate(10px,0px);"></div>
+				<div class="arrow"></div>
+			</div>
+			<div id="bolacontainer" style="transform: translate(-174px,0px) rotate(0deg);">
+				<div class="bola"></div>
+			</div>
+		
+		</div>
+		
+		<div id="adicional" style="position: relative;text-align:center;max-width:100vw; margin-left:auto; margin-right:auto;">
+			<table style="width:100%">
+				<tbody>
+					<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+					<tr>
+						<td>
+							<input type="button" name="boton" value="TIRA LA RULETA" class="btn btn lg btn-primary btn-block" onclick="girar(10)">
+						</td>
+						<td>
+							<input type="button" name="boton" value="CON MAS SUSPENSO" class="btn btn lg btn-primary btn-block" onclick="girar(20)">
+						</td>
+						<td>
+							<input type="button" name="boton" value="AUN MAS SUSPENSO 😱" class="btn btn lg btn-primary btn-block" onclick="girar(30)">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="button" name="boton" value="PERSONALIZAR" class="btn btn lg btn-primary btn-block" onclick="editar()">
+						</td>
+						<td>
+							<input type="button" name="boton" value="LIMPIAR" class="btn btn lg btn-primary btn-block" onclick="limpiar()">
+						</td>
+						<td>
+							<input type="button" name="boton" value="CAMBIAR RULETA" class="btn btn lg btn-primary btn-block" onclick="cambio()">
+						</td>
+						
+					</tr>
+				</tbody>
+			</table>
+			<div class="acciones">
+				<table style="width:100%">
+					<tbody id="tarjetacontainer">
+						<tr id="customT1">
+							<td>
+								TARJETA
+							</td>
+							<td>
+								ACCIONES
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div>
+					<input type="text" id="urltarj" placeholder="Arrastra, pega imagen o escribe su URL (Se reescalara a 500x200)" class="btn btn lg btn-dark btn-block" onfocus="edit.style.display = 'none'"><input type="button" name="boton" value="AGREGAR TARJETA" class="btn btn lg btn-primary btn-block" onclick="addTarjeta()">
+				</div>
+			</div>
+			
+		</div>
+		
+	</div>
+	<div id="edit">
+		<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Configuraciones</b><br>
+		<b>─═─═─═─═─═─═─═─═─═─</b><br>
+		<b>Tipo Ruleta:</b><br>
+		<input type="radio" onclick="refreshsettings()" checked="checked" id="flagclasic" name="tiporuleta">&nbsp;Clasica<br>
+		<input type="radio" checked="checked" onclick="refreshsettings()" id="flagtombola" name="tiporuleta">&nbsp;Tombola<br>
+		<b>─═─═─═─═─═─═─═─═─═─</b><br>
+		<div id="editruleta">
+			<b>Tipo Flecha:</b><br>
+			<input onclick="editflecha()" type="radio" checked="checked" id="flagflecha" name="tipoflecha">&nbsp;Flecha<br>
+			<input onclick="editflecha()" type="radio" id="flagbolita" name="tipoflecha">&nbsp;Bolita<br>
+			<b>Tipo Giro:</b><br>
+			<input type="radio" onclick="editformagiro()" checked="checked" id="flaginterior" name="tipogiro">&nbsp;Interior<br>
+			<input type="radio" onclick="editformagiro()" id="flagexterior" name="tipogiro">&nbsp;Exterior<br>
+			<b>─═─═─═─═─═─═─═─═─═─</b><br>
+			<b>Tapa Perzonaliz:</b><br>
+			<input type="text" style="width:70%" id="urltapa" placeholder="URL IMAGEN" value="" onchange="addtapa()">
+			<button type="button" style="width:27%" id="changesbutton" onclick="deleteTapa();"><img style="filter:invert(100%)" src="https://odricku.cl/resources/img/icons/trash.png" width="12px"/></button>
+			<b>─═─═─═─═─═─═─═─═─═─</b><br>
+			<input type="checkbox" onclick="rotaletras()" id="flagletras" name="giroletra">&nbsp;Girar Letras:<br>
+		</div>
+		<input type="checkbox" onclick="rellenoInicial(2)" id="flagrandom" name="orden">&nbsp;Orden Random<br>
+		<input type="checkbox" id="flagconfeti" name="confeticheck">&nbsp;Confetti<br>
+		<b>─═─═─═─═─═─═─═─═─═─</b><br>
+		<b>Set precargados</b><br>
+		<a onclick="importar(ruletaclasica)">&nbsp;Ruleta</a><br>
+		<a onclick="importar(colores)">&nbsp;Colores</a><br>
+		<a onclick="importar(pc)">&nbsp;Juegos PC</a><br>
+		<a onclick="importal(cel)">&nbsp;Juegos Cel.</a><br>
+	</div>  
+	<canvas width="100%" id="confetticontainer" class="confetti"></canvas>
+	<div id="winnercontainer" style="transform: scale(0)" onclick="winnerunshow()"></div>
+</body>
 </html>

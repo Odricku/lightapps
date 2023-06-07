@@ -12,11 +12,8 @@
 	<link rel="stylesheet" href="./R1.css" />
 </head>
 <body id="cuerpo" onload="init()">
-	<div id="stream" class="streamsign streamoff" onclick="streammode()">
-		<b>Stream Mode</b>
-	</div>
 	<div class="wrapper">
-		<div id="tombola" style="width:100%; min-height:600px;text-align: center;" onclick="edit.style.display = 'none'">
+		<div id="tombola" style="width:100%; height:569px;text-align: center;" onclick="edit.style.display = 'none'">
 			<img src="https://www.odricku.cl/resources/img/fondos/fondoBE.png" style="transform: translate(-50%, 0%);top:45px; position:absolute">
 			<img src="https://www.odricku.cl/resources/img/utils/palillo.png" id="palillo" style="transform-origin: 50% 100%;transition: all 0.5s;-webkit-transition: all 0.5s;transform: translate(480px, 30px);top:45px; position:absolute">
 			<div id="slot1" class="divcontainer" style="transform: translate(-50%, 0%) perspective(50em) rotateX(60deg)"></div>
@@ -29,7 +26,7 @@
 			<svg id="perilla" style="perilla" onclick="palanca();girar(10)"></svg>		
 		</div>
 		
-		<div style="display:none; width:100%;min-height:600px;text-align: center;overflow:hidden" onclick="edit.style.display = 'none'">
+		<div id="ruletacontainer" style="display:none; transform: rotate(0deg)" onclick="edit.style.display = 'none'">
 			<div class="borde borde-back"></div>
 			<div id= "pizza" class="pizza-cont" style="transform:rotate(0deg) translate(19px, 4px) scale(0.33);"></div>
 			<div class="borde borde-top"></div>
@@ -42,9 +39,13 @@
 				<div class="arrow"></div>
 			</div>
 			<div id="bolacontainer" style="transform: translate(-174px,0px) rotate(0deg);">
-				<div class="bola"></div>
+				<div class="bola" style="transform: translate(-360%,0%);"></div>
 			</div>
 		
+		</div>
+		
+		<div id="stream" class="streamsign streamoff" onclick="streammode()">
+			<b>Stream Mode</b>
 		</div>
 		
 		<div id="adicional" style="position: relative;text-align:center;max-width:100vw; margin-left:auto; margin-right:auto;">
@@ -111,10 +112,11 @@
 			<b>Tipo Giro:</b><br>
 			<input type="radio" onclick="editformagiro()" checked="checked" id="flaginterior" name="tipogiro">&nbsp;Interior<br>
 			<input type="radio" onclick="editformagiro()" id="flagexterior" name="tipogiro">&nbsp;Exterior<br>
+			<input type="radio" onclick="editformagiro()" id="flaggirodoble" name="tipogiro">&nbsp;Ambos<br>
 			<b>─═─═─═─═─═─═─═─═─═─</b><br>
 			<b>Tapa Perzonaliz:</b><br>
 			<input type="text" style="width:70%" id="urltapa" placeholder="URL IMAGEN" value="" onchange="addtapa()">
-			<button type="button" style="width:27%" id="changesbutton" onclick="deleteTapa();"><img style="filter:invert(100%)" src="https://odricku.cl/resources/img/icons/trash.png" width="12px"/></button>
+			<button type="button" style="width:27%" id="changesbutton" onclick="deletetapa();"><img style="filter:invert(100%)" src="https://odricku.cl/resources/img/icons/trash.png" width="12px"/></button>
 			<b>─═─═─═─═─═─═─═─═─═─</b><br>
 			<input type="checkbox" onclick="rotaletras()" id="flagletras" name="giroletra">&nbsp;Girar Letras:<br>
 		</div>
