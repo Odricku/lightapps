@@ -1315,7 +1315,7 @@ function cargapoke(id, variacion ,titulo, sprite, salto){
 					var intmov = intataq(movarray[i].substring(posini, posfin));
 					
 					if(intmov == -1)
-						console.log(pokelist[id][variacion].name + " " + movarray[i].substring(posini, posfin));
+						console.log(pokelist[id][variacion].name + " " + movarray[i].substring(posini, posfin) + " " + posini + " " + posfin);
 					
 					if(!pokelist[id][variacion].movs.mt.includes(intmov)){
 						pokelist[id][variacion].movs.mt.push(intmov);
@@ -1966,7 +1966,6 @@ function intpoke(name){
 	return -1;
 
 }
-
 
 function validaname(nombre){
 
