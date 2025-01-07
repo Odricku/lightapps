@@ -6,7 +6,7 @@ var disc = "Pokémon es una marca registrada de Nintendo desde el 1995 a la fech
 	
 var tipos = ["acero","agua","bicho","dragón","eléctrico","fantasma","fuego","hada","hielo","lucha","normal","planta","psíquico","roca","siniestro","tierra","veneno","volador"];
 var alola = ["Rattata","Raticate","Raichu","Sandshrew","Sandslash","Vulpix","Ninetales","Diglett","Dugtrio","Meowth","Persian","Geodude","Graveler","Golem","Grimer","Muk","Exeggutor","Marowak"];
-var galar = ["Meowth","Ponyta","Rapidash","Slowpoke","Farfetch'd","Weezing","Mr. Mime","Corsola","Zigzagoon","Linoone","Darumaka","Darmanitan","Yamask","Stunfisk"];
+var galar = ["Meowth","Ponyta","Rapidash","Slowpoke","Slowbro","Farfetch'd","Weezing","Mr. Mime","Articuno","Zapdos","Moltres","Slowking","Corsola","Zigzagoon","Linoone","Darumaka","Darmanitan","Yamask","Stunfisk"];
 var hisui = ["Growlithe", "Arcanine", "Voltorb", "Electrode", "Typhlosion", "Qwilfish", "Sneasel", "Samurott", "Lilligant", "Zorua", "Zoroark", "Braviary", "Sliggoo", "Goodra", "Avalugg", "Decidueye"];
 var paldea = ["Tauros", "Wooper"];
 var mega = ["Mega-Venusaur","Mega-Charizard X","Mega-Charizard Y","Mega-Blastoise","Mega-Alakazam","Mega-Gengar","Mega-Kangaskhan","Mega-Pinsir","Mega-Gyarados","Mega-Aerodactyl","Mega-Mewtwo X","Mega-Mewtwo Y","Mega-Ampharos","Mega-Scizor","Mega-Heracross","Mega-Houndoom","Mega-Tyranitar","Mega-Blaziken","Mega-Gardevoir","Mega-Mawile","Mega-Aggron","Mega-Medicham","Mega-Manectric","Mega-Banette","Mega-Absol","Mega-Garchomp","Mega-Lucario","Mega-Abomasnow","Mega-Beedrill","Mega-Pidgeot","Mega-Slowbro","Mega-Steelix","Mega-Sceptile","Mega-Swampert","Mega-Sableye","Mega-Sharpedo","Mega-Camerupt","Mega-Altaria","Mega-Glalie","Mega-Salamence","Mega-Metagross","Mega-Latias","Mega-Latios","Mega-Rayquaza","Mega-Lopunny","Mega-Gallade","Mega-Audino","Mega-Diancie"];
@@ -60,7 +60,7 @@ function cargajson(){
 	
 	var bandera = 0;
 	
-	var pokejsonurl = encodeURI("https://www.odricku.cl/AdivinaQuien/base/pokelist.json");
+	var pokejsonurl = encodeURI("./base/pokelist.json");
 	request = new XMLHttpRequest();	
 	request.open('GET', pokejsonurl);
 	request.responseType = 'json';
@@ -311,7 +311,6 @@ function deshacer(){
 	accion--;
 	
 }
-
 
 function animate(){
 
@@ -633,7 +632,7 @@ function exportar(){
 		bytearr.pop();
 	}
 	
-	document.getElementById("detatipo").value = "http://www.odricku.cl/AdivinaQuien?" + encode(bytearr);
+	document.getElementById("detatipo").value = encodeURI("./") + "?" + encode(bytearr);
 
 	veracciones();
 }
